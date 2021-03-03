@@ -9,6 +9,7 @@ router.get('/users', userController.allUsers);
 router.get('/members', userController.allMembers);
 router.get('/members/:id(\\d+)', userController.oneMember);
 router.get('/workouts', userController.allWorkoutsByMember);
+router.get('/coachs', userController.allCoachs);
 
 
 

@@ -28,6 +28,13 @@ const userController = {
         const workouts = await userMapper.findAllWorkoutsByMember();
 
         res.json(workouts)
+    },
+
+    allCoachs : async (req, res) => {
+
+        const coachs = await userMapper.findAllCoachs();
+
+        res.json(coachs)
     }
 
 };

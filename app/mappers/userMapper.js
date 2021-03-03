@@ -21,6 +21,15 @@ const userMapper = {
 
         return new User(result.rows[0])
     },
+
+    findAllCoachs : async ()=>{
+
+        const result = await db.query(`SELECT * FROM "user" WHERE "role" = 'COACH';`)
+
+        return result.rows.map(coach => new User(coach));
+
+    },
+    
     //modifier pour un user
     findAllWorkoutsByMember: async () => {
         const result = await db.query(`

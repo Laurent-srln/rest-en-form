@@ -11,3 +11,6 @@ GET {{baseUrl}}/members
 
 ### Route GET /members/{id}
 GET {{baseUrl}}/members/1
+
+### Route GET /coachs
+GET {{baseUrl}}/coachs
