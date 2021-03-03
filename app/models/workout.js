@@ -2,10 +2,20 @@ class Workout {
     id;
     date;
     content;
-    userId;
+    memberId;
+    createdAt;
+    updatedAt
 
     set user_id(val){
-        this.userId = val;
+        this.memberId = val;
+    }
+
+    set created_at(val){
+        this.createdAt = val;
+    }
+
+    set updated_at(val){
+        this.updatedAt = val;
     }
     
     constructor(data) {

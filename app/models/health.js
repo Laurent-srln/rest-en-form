@@ -6,6 +6,8 @@ class Health {
     boneMass;
     bodyWater;
     workoutId;
+    createdAt;
+    updatedAt
 
     set muscle_mass(val) {
         this.muscleMass = val
@@ -23,6 +25,14 @@ class Health {
 
     set workout_id(val) {
         this.workoutId = val;
+    }
+
+    set created_at(val){
+        this.createdAt = val;
+    }
+
+    set updated_at(val){
+        this.updatedAt = val;
     }
     
     constructor(data) {

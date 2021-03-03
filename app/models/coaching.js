@@ -2,8 +2,10 @@ class Coaching {
     id;
     startTime;
     endTime;
-    coachUserId;
-    memberUserId;
+    coachId;
+    memberId;
+    createdAt;
+    updatedAt
 
     set start_time(val) {
         this.startTime = val;
@@ -13,12 +15,20 @@ class Coaching {
         this.endTime = val;
     }
 
-    set coach_user_id(val){
-        this.coachUserId;
+    set coach_id(val){
+        this.coachId = val;
     }
 
-    set member_user_id(val){
-        this.memberUserId;
+    set member_id(val){
+        this.memberId = val;
+    }
+
+    set created_at(val){
+        this.createdAt = val;
+    }
+
+    set updated_at(val){
+        this.updatedAt = val;
     }
 
 

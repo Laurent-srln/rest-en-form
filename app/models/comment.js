@@ -1,14 +1,24 @@
 class Comment {
     id;
     content;
-    authorId;
+    coachId;
     workoutId;
+    createdAt;
+    updatedAt
 
-    set author_id(val) {
-        this.authorId = val;
+    set coach_id(val) {
+        this.coachId = val;
     }
     set workout_id(val) {
         this.workoutId = val;
+    }
+
+    set created_at(val){
+        this.createdAt = val;
+    }
+
+    set updated_at(val){
+        this.updatedAt = val;
     }
     
     constructor(data) {

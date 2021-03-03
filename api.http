@@ -1,0 +1,7 @@
+@protocol= http
+@domainname= localhost
+@port= {{$dotenv PORT}}
+@baseUrl = {{protocol}}://{{domainname}}:{{port}}
+
+### Route GET /users
+GET {{baseUrl}}/users
