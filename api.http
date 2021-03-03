@@ -5,3 +5,9 @@
 
 ### Route GET /users
 GET {{baseUrl}}/users
+
+### Route GET /members
+GET {{baseUrl}}/members
+
+### Route GET /members/{id}
+GET {{baseUrl}}/members/1

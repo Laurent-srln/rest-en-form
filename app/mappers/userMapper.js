@@ -15,8 +15,14 @@ const userMapper = {
 
         return result.rows.map(member => new User(member));
     },
-//modifier pour un user
-    findAllWorkouts: async () => {
+
+    findOneMember: async (id) => {
+        const result = await db.query(`SELECT * FROM "user" WHERE "id" = $1`, [id])
+
+        return new User(result.rows[0])
+    },
+    //modifier pour un user
+    findAllWorkoutsByMember: async () => {
         const result = await db.query(`
         SELECT u.firstname, w.date, w.content, uc.firstname as coach, "c".created_at, "c".content
         FROM workout w

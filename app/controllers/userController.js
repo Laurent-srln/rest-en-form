@@ -13,9 +13,19 @@ const userController = {
         res.json(members)
     },
 
+    oneMember : async (req, res) => {
+
+        const { id } = req.params;
+
+        const member = await userMapper.findOneMember(id);
+
+        res.json(member);
+
+    },
+
     //a modifier pour un member
-    allWorkouts: async (req, res) => {
-        const workouts = await userMapper.findAllWorkouts();
+    allWorkoutsByMember: async (req, res) => {
+        const workouts = await userMapper.findAllWorkoutsByMember();
 
         res.json(workouts)
     }

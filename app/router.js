@@ -4,16 +4,13 @@ const router = express.Router();
 
 const userController = require('./controllers/userController');
 
-router.get('/', (req,res) => {
-    res.send('coucou');
-    console.log('coucou');
-});
 
 router.get('/users', userController.allUsers);
-
 router.get('/members', userController.allMembers);
+router.get('/members/:id(\\d+)', userController.oneMember);
+router.get('/workouts', userController.allWorkoutsByMember);
 
-router.get('/workouts', userController.allWorkouts);
+
 
 
 
