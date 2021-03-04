@@ -15,11 +15,17 @@ GET {{baseUrl}}/members/1
 ### Route GET /coachs
 GET {{baseUrl}}/coachs
 
+### Route GET /member/{id}/workouts
+GET {{baseUrl}}/members/3/workouts
+
+### Route GET /coach/{id}+specialty
+GET {{baseUrl}}/coachs/6
+
 ### Route GET /coach/{id}/bookings
-GET {{baseUrl}}/coach/7/bookings
+GET {{baseUrl}}/coachs/7/bookings
 
 ### Route GET /coach/{id}/next-bookings
-GET {{baseUrl}}/coach/7/next-bookings
+GET {{baseUrl}}/coachs/7/next-bookings
 
 ### Route GET /coach/{id}/last-bookings
-GET {{baseUrl}}/coach/7/last-bookings
+GET {{baseUrl}}/coachs/7/last-bookings

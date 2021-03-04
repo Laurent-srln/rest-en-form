@@ -4,9 +4,11 @@ const coachingController = {
     coachAllBookings: async (req, res) => {
 
         const { id } = req.params;
+
         const bookings = await coachingMapper.findAllBookings(id);
 
         res.json(bookings)
+       
     },
 
     coachNextBookings: async (req, res) => {
