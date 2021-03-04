@@ -15,7 +15,7 @@ router.get('/coach/:id(\\d+)/bookings', coachingController.coachAllBookings);
 router.get('/coach/:id(\\d+)/next-bookings', coachingController.coachNextBookings);
 router.get('/coach/:id(\\d+)/last-bookings', coachingController.coachLastBookings);
 
-router.post('/new-coaching', coachingController.newCoaching);
+router.post('/new-coachings', coachingController.newCoachings);
 
 
 

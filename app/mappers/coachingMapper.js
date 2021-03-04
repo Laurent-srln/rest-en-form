@@ -1,6 +1,7 @@
 const Coaching = require('../models/coaching');
 
 const db = require('../database');
+const { time } = require('console');
 
 const coachingMapper = {
 
@@ -47,6 +48,42 @@ const coachingMapper = {
 
         return result.rows;
     },
+
+    save: async (newCoachings) => {
+
+        for (i = newCoachings.startTime; newCoachings.endTime > i; i += interval '15 minutes' )
+        // toutes les données en commun sont préparées
+        const data = [
+            thePost.slug,
+            thePost.title,
+            thePost.excerpt,
+            thePost.content
+        ];
+
+        const query = `
+                INSERT INTO "coaching" ("start_time", "end_time", "coach_id", "member_id")
+                SELECT $1, $2, $3, $4, id
+                FROM category
+                WHERE label = $5
+                RETURNING id;
+            `;
+
+            data.push(thePost.category);
+        }
+
+        // je ne pioche que les données parmi l'objet result qui m'est retourné
+        try {
+            // insérer le post et récupérer son id
+            const { rows } = await db.query(query, data);
+
+            // l'affecter au post
+            thePost.id = rows[0].id;
+
+            // pas besoin de le retourner car il est passé par référence, donc l'objet d'origine est modifié
+        } catch (err) {
+            throw new Error("Un article avec ce slug existe déjà");
+        }
+    }
     
 };
 
