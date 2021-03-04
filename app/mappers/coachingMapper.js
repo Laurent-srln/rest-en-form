@@ -16,6 +16,10 @@ const coachingMapper = {
         ORDER BY start_time;`,
         [coachId])
 
+        if(!result.rows){
+            throw new Error("Pas de RDV pour ce coach"+coachId)
+        }
+
         return result.rows;
     },
 
@@ -31,6 +35,10 @@ const coachingMapper = {
         ORDER BY start_time;`,
         [coachId])
 
+        if(!result.rows){
+            throw new Error("Pas de RDV pour ce coach"+coachId)
+        }
+
         return result.rows;
     },
 
@@ -45,6 +53,10 @@ const coachingMapper = {
         AND c.coach_id=$1
         ORDER BY start_time;`,
         [coachId])
+
+        if(!result.rows){
+            throw new Error("Pas de RDV pour ce coach"+coachId)
+        }
 
         return result.rows;
     },
