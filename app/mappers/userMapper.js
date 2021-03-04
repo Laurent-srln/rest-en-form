@@ -31,7 +31,7 @@ const userMapper = {
     },
     
     //modifier pour un user
-    findAllWorkoutsByMember: async () => {
+    findAllWorkoutsByMember: async (m) => {
         const result = await db.query(`
         SELECT u.firstname, w.date, w.content, uc.firstname as coach, "c".created_at, "c".content
         FROM workout w
@@ -42,6 +42,8 @@ const userMapper = {
 
         return result.rows;
     },
+
+
 
 
 };
