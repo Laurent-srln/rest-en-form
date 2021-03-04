@@ -23,6 +23,17 @@ const coachingController = {
         const bookings = await coachingMapper.findLastBookings(id);
 
         res.json(bookings)
+    },
+
+    newCoachings: async (req, res) => {
+        const newCoachings = request.body;
+
+        try {
+            await coachingMapper.save(newCoachings);
+            res.json(newCoachings);
+        } catch(err) {
+            res.satus(403).json(err.message);
+        }
     }
 
 };

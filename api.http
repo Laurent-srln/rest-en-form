@@ -3,23 +3,35 @@
 @port= {{$dotenv PORT}}
 @baseUrl = {{protocol}}://{{domainname}}:{{port}}
 
-### Route GET /users
+### Récupérer tous le users
 GET {{baseUrl}}/users
 
-### Route GET /members
+### Récupérer tous les adhérents
 GET {{baseUrl}}/members
 
-### Route GET /members/{id}
+### Récupérer un adhérent
 GET {{baseUrl}}/members/1
 
-### Route GET /coachs
+### Récupérer tous les coachs
 GET {{baseUrl}}/coachs
 
-### Route GET /coach/{id}/bookings
+### Récupérer toutes les résevations d'un coach
 GET {{baseUrl}}/coach/7/bookings
 
-### Route GET /coach/{id}/next-bookings
+### Récupérer toutes les prochaines réservations d'un coach
 GET {{baseUrl}}/coach/7/next-bookings
 
-### Route GET /coach/{id}/last-bookings
+### Récupérer toutes les réservations passées d'un coach
 GET {{baseUrl}}/coach/7/last-bookings
+
+### Ajouter des créneaux coaching 
+
+POST {{baseUrl}}/new-coachings
+Content-Type: application/json
+
+{
+    "date": "2021-04-01",
+    "startTime": "10:00:00",
+    "endTime": "11:00:00",
+    "coachId": 7
+}
