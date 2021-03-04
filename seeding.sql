@@ -10,20 +10,24 @@ TRUNCATE TABLE "workout" CASCADE;
 
 TRUNCATE TABLE "comment" CASCADE;
 
+TRUNCATE TABLE "health" CASCADE;
+
+TRUNCATE TABLE "coaching" CASCADE;
+
 
 
 INSERT INTO "user" ("firstname", "lastname", "email", "role")
 VALUES
-('Sountid', 'Ly', 'sountidly@gmail.com', 'MEMBER'),
-('Julien', 'Blotière', 'julienblotiere@live.fr', 'MEMBER'),
-('Mathilde', 'Frère', 'mathilde.frere1@gmail.com', 'MEMBER'),
-('Gwenaël', 'Cotton', 'gcotton.oclock@gmail.com', 'MEMBER'),
-('Laurent', 'Séraline', 'l.seraline@gmail.com', 'MEMBER'),
-('Jean', 'Prulière', 'j.pruliere@oclock.io', 'COACH'),
-('Albus', 'Dumbledore', 'contact@hogwarts.com', 'COACH'),
-('Professeur', 'Chen', 'p.chen@gmail.com', 'COACH'),
-('Arnold', 'Schwarzenegger', 't800@wanadoo.com', 'COACH'),
-('Dario', 'Spagnolo', 'dario@oclock.io', 'OWNER')
+('Sountid', 'Ly', 'sountidly@gmail.com', 'sountid', 'MEMBER'),
+('Julien', 'Blotière', 'julienblotiere@live.fr', 'julien', 'MEMBER'),
+('Mathilde', 'Frère', 'mathilde.frere1@gmail.com', 'mathilde', 'MEMBER'),
+('Gwenaël', 'Cotton', 'gcotton.oclock@gmail.com', 'gwenael', 'MEMBER'),
+('Laurent', 'Séraline', 'l.seraline@gmail.com', NULL, 'MEMBER'),
+('Jean', 'Prulière', 'j.pruliere@oclock.io', 'jean', 'COACH'),
+('Albus', 'Dumbledore', 'contact@hogwarts.com', 'albus', 'COACH'),
+('Professeur', 'Chen', 'p.chen@gmail.com', 'professeur', 'COACH'),
+('Arnold', 'Schwarzenegger', 't800@wanadoo.com', NULL, 'COACH'),
+('Dario', 'Spagnolo', 'dario@oclock.io', 'dario', 'OWNER')
 ;
 
 INSERT INTO "specialty" ("name")
@@ -63,4 +67,26 @@ VALUES
 ('Super Mathilde. Avant notre RDV coaching essaies de faire du travail en fractionné.', 7, 3)
 ;
 
+
+INSERT INTO "health" ("weight", "muscle_mass", "fat_mass", "bone_mass", "body_water", "workout_id")
+VALUES
+(85, 80, 10, 10, 50, 1),
+(80, 83, 12, 5, 56, 2),
+(55, 86, 9, 5, 60, 3);
+
+INSERT INTO "coaching" ("start_time", "end_time", "coach_id", "member_id")
+VALUES
+('2021-04-05 09:00:00.000000+01', '2021-04-05 09:15:00.000000+01', 8, NULL),
+('2021-03-05 09:15:00.000000+01', '2021-03-05 09:30:00.000000+01', 8, NULL),
+('2021-04-05 09:30:00.000000+01', '2021-04-05 09:45:00.000000+01', 6, NULL),
+('2021-04-05 09:45:00.000000+01', '2021-04-05 10:00:00.000000+01', 6, NULL),
+('2021-02-05 09:45:00.000000+01', '2021-02-05 10:00:00.000000+01', 7, 3),
+('2021-02-05 09:30:00.000000+01', '2021-02-05 09:45:00.000000+01', 7, 2),
+('2021-04-05 09:00:00.000000+01', '2021-04-05 09:15:00.000000+01', 6, NULL),
+('2021-03-05 09:15:00.000000+01', '2021-03-05 09:30:00.000000+01', 6, 4),
+('2021-04-05 09:30:00.000000+01', '2021-04-05 09:45:00.000000+01', 6, NULL),
+('2021-04-05 09:45:00.000000+01', '2021-04-05 10:00:00.000000+01', 6, 5),
+('2021-04-05 09:00:00.000000+01', '2021-04-05 09:15:00.000000+01', 7, 1);
+
 COMMIT;
+
