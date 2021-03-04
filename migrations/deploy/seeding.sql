@@ -1,15 +1,6 @@
+-- Deploy osport:seeding to pg
+
 BEGIN;
-
-TRUNCATE TABLE "coach_has_specialty" CASCADE;
-
-TRUNCATE TABLE "user" CASCADE;
-
-TRUNCATE TABLE "specialty" CASCADE;
-
-TRUNCATE TABLE "workout" CASCADE;
-
-TRUNCATE TABLE "comment" CASCADE;
-
 
 
 INSERT INTO "user" ("firstname", "lastname", "email", "role")
