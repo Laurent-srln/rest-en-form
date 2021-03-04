@@ -23,7 +23,7 @@ VALUES
 ('Nutrition')
 ;
 
-INSERT INTO "coach_has_specialty" ("coach_user_id", "specialty_id")
+INSERT INTO "coach_has_specialty" ("coach_id", "specialty_id")
 VALUES
 (6, 4),
 (6, 1),
@@ -36,14 +36,14 @@ VALUES
 (9, 3)
 ;
 
-INSERT INTO "workout" ("date", "content", "user_id")
+INSERT INTO "workout" ("date", "content", "member_id")
 VALUES
 ('2021-02-06', '5 séries de 8 répétitions à 120kg au dév couché. 100 tractions et un Murph pour terminer', 1),
 ('2021-01-23', '1000 abdos lesté (20kg)', 2),
 ('2021-02-06', '5km de course sur tapis (24 minutes). abdos/gainage', 3)
 ;
 
-INSERT INTO "comment" ("content", "author", "workout")
+INSERT INTO "comment" ("content", "coach_id", "workout_id")
 VALUES
 ('Hum... Je faisais mieux à 15 ans...', 9, 1),
 ('Super Mathilde. Avant notre RDV coaching essaies de faire du travail en fractionné.', 7, 3)

@@ -1,0 +1,32 @@
+{
+  "name": "projet-sport-back",
+  "version": "1.0.0",
+  "description": "api osport",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/O-clock-Nautilus/projet-sport-back.git"
+  },
+  "keywords": [
+    "sport",
+    "coaching",
+    "training",
+    "booking"
+  ],
+  "author": "Julien Blotière, Gwenaël Cotton, Mathilde Frère, Sountid Ly, Laurent Séraline",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/O-clock-Nautilus/projet-sport-back/issues"
+  },
+  "homepage": "https://github.com/O-clock-Nautilus/projet-sport-back#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "joi": "^17.4.0",
+    "pg": "^8.5.1"
+  }
+}
