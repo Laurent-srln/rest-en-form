@@ -18,6 +18,10 @@ router.get('/coachs/:id(\\d+)/last-bookings', coachingController.coachLastBookin
 
 // router.post('/new-coachings', coachingController.newCoachings);
 
+router.post('/new-user', userController.NewUser);
+router.post('/new-password', userController.newPassword);
+router.post('/login', userController.checkConnexion);
+
 
 
 
