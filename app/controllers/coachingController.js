@@ -26,13 +26,13 @@ const coachingController = {
     },
 
     newCoachings: async (req, res) => {
-        const newCoachings = request.body;
+        const newCoachings = req.body;
 
         try {
             await coachingMapper.save(newCoachings);
             res.json(newCoachings);
         } catch(err) {
-            res.satus(403).json(err.message);
+            res.status(403).json(err.message);
         }
     }
 
