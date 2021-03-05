@@ -24,6 +24,7 @@
   },
   "homepage": "https://github.com/O-clock-Nautilus/projet-sport-back#readme",
   "dependencies": {
+    "bcrypt": "^5.0.1",
     "cors": "^2.8.5",
     "dayjs": "^1.10.4",
     "dotenv": "^8.2.0",
