@@ -23,8 +23,8 @@ const userController = {
 
     oneMember : async (req, res) => {
 
-        const { id } = req.params;
-
+        const {id} = req.params;
+        
         try{
         const member = await userMapper.findOneMember(id);
 

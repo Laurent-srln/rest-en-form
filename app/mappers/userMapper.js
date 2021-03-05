@@ -70,9 +70,11 @@ const userMapper = {
         LEFT JOIN workout w ON w.member_id = u.id
         LEFT JOIN "comment" "c" ON w.id = "c".workout_id
         LEFT JOIN "user" uc ON "c".coach_id = uc.id
-        WHERE u.id = $1;`, [id])
+        WHERE u.role = 'MEMBER'
+        AND u.id = $1;`
+        , [id])
 
-        if(!result.rows){
+        if(!result.rows.length){
             throw new Error("pas de workout pour le membre avec l'id" + id)
         }
 
@@ -113,9 +115,20 @@ const userMapper = {
         )
 
         return password.rows[0];
+    },
+
+    findUserByEmail : async (email) => {
+        const result = await db.query(`
+        SELECT * FROM "user" u
+        WHERE u.email = $1
+        `, [email])
+
+        if(!result.rows.length){
+            throw new Error(`l'email ${email} ne correspond à aucun user`)
+        }
+
+        return result.rows[0]
     }
-
-
 
 
 };
