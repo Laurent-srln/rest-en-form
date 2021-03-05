@@ -10,7 +10,7 @@ GET {{baseUrl}}/users
 GET {{baseUrl}}/members
 
 ### Récupérer un adhérent
-GET {{baseUrl}}/members/1
+GET {{baseUrl}}/members/100
 
 ### Récupérer tous les coachs
 GET {{baseUrl}}/coachs
@@ -29,3 +29,33 @@ GET {{baseUrl}}/coachs/7/next-bookings
 
 ### Route GET /coach/{id}/last-bookings
 GET {{baseUrl}}/coachs/7/last-bookings
+
+### Ajouter new User
+POST {{baseUrl}}/new-user
+Content-Type: application/json
+
+{
+    "firstname": "Nouveau",
+    "lastname": "User",
+    "email": "nouveau@gmail.com",
+    "role": "MEMBER"
+}
+
+### Set new UPassword
+POST {{baseUrl}}/new-password
+Content-Type: application/json
+
+{
+    "email": "nouveau@gmail.com",
+    "password": "test",
+    "confirm": "test"
+}
+
+### Connexion
+POST {{baseUrl}}/login
+Content-Type: application/json
+
+{
+    "email": "nouveau@gmail.com",
+    "password": "test"
+}

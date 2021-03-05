@@ -6,10 +6,11 @@ const { Pool } = require('pg');
 // mais en fait, Pool se débrouille tout seul comme un grand
 
 const db = new Pool({
-    connectionString: process.env.DATABASE_URL,
-    ssl: {
-      rejectUnauthorized: false
-    }
+    connectionString: process.env.DATABASE_URL
+    // ,
+    // ssl: {
+    //   rejectUnauthorized: false
+    // }
 });  
 
 

@@ -51,11 +51,12 @@ const userMapper = {
         FROM "user" u 
         LEFT JOIN coach_has_specialty chs ON u.id = chs.coach_id
         LEFT JOIN specialty s ON chs.specialty_id = s.id
-        WHERE u.id = $1
+        WHERE u.role = 'COACH'
+        AND u.id = $1
         `, [coachId])
 
-        if(!result.rows){
-            throw new Error ("Pas de coach avec cet id"+ coachId)
+        if(!result.rows.length){
+            throw new Error ("Pas de coach avec l'user_id : "+ coachId)
         }
         return result.rows
     },
@@ -77,6 +78,42 @@ const userMapper = {
 
         return result.rows;
     },
+
+    addUser: async (user) => {
+
+        const result = await db.query(`
+        INSERT INTO "user" ("firstname", "lastname", "email", "role")
+        VALUES ($1, $2, $3, $4) RETURNING id;`, [user.firstname, user.lastname, user.email, user.role] 
+        );
+
+        user.id = result.rows[0].id;
+
+        return user;
+
+
+    },
+
+    addPassword : async (email, password) => {
+
+        await db.query(`
+        UPDATE "user"
+        SET password = $1
+        WHERE "email" = $2;`,
+        [password, email]
+        )
+    },
+
+    checkConnexion : async (email) => {
+
+        const password = await db.query(`
+        SELECT "password"
+        FROM "user"
+        WHERE "email" = $1;`,
+        [email]
+        )
+
+        return password.rows[0];
+    }
 
 
 
