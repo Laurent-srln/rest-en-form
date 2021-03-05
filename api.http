@@ -15,19 +15,19 @@ GET {{baseUrl}}/members/100
 ### Récupérer tous les coachs
 GET {{baseUrl}}/coachs
 
-### Route GET /member/{id}/workouts
+### Récupérer tous les Workouts d'un adhérent
 GET {{baseUrl}}/members/4/workouts
 
-### Route GET /coach/{id}+specialty
+### Récupérer le profil d'un coach avec les spécialités
 GET {{baseUrl}}/coachs/1
 
-### Route GET /coach/{id}/bookings
-GET {{baseUrl}}/coachs/1/bookings
+### Récupérer les RDV d'un coach
+GET {{baseUrl}}/coachs/6/bookings
 
-### Route GET /coach/{id}/next-bookings
+### Récupérer les prochains RDV d'un coach
 GET {{baseUrl}}/coachs/7/next-bookings
 
-### Route GET /coach/{id}/last-bookings
+### Récuperer les RDv passés d'un coach
 GET {{baseUrl}}/coachs/7/last-bookings
 
 ### Ajouter new User

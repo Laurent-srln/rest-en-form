@@ -19,9 +19,9 @@ router.get('/coachs/:id(\\d+)/last-bookings', coachingController.coachLastBookin
 
 // router.post('/new-coachings', coachingController.newCoachings);
 
-router.post('/new-user', userController.NewUser);
-router.post('/new-password', userController.newPassword);
-router.post('/login-password', userController.checkConnexion);
+router.post('/new-user', userController.newUser);
+router.post('/new-password', authController.newPassword);
+router.post('/login-password', authController.checkConnexion);
 router.post('/login-email', authController.submitLogin)
 
 

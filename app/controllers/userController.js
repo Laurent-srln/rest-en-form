@@ -1,7 +1,6 @@
 const { config } = require('process');
 const userMapper = require('../mappers/userMapper');
-const bcrypt = require('bcrypt');
-const saltRounds = 10;
+
 
 const userController = {
     allUsers: async (req, res) => {
@@ -69,7 +68,7 @@ const userController = {
         }
     },
 
-    NewUser : async (req, res) => {
+    newUser : async (req, res) => {
         user = req.body
 
         try {
