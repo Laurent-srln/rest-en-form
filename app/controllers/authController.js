@@ -1,78 +1,40 @@
-const { config } = require('process');
-const userMapper = require('../mappers/userMapper');
+const emailValidator = require('email-validator');
+const authMapper = require('../mappers/authMapper');
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
 
+const authController = {
 
-const userController = {
-    allUsers: async (req, res) => {
-        const users = await userMapper.findAll();
-
-        res.json(users)
-    },
-
-    allMembers: async (req, res) => {
+    submitLogin : async (req, res) => {
 
         try{
-        const members = await userMapper.findAllMembers();
+        const validEmail = emailValidator.validate(req.body.email);
 
-        res.json(members)
-        }catch(err){
-            res.json(err.message)
+        if (!validEmail){
+
+            res.status(400).json({"message": `email non valide`})
         }
-    },
 
-    oneMember : async (req, res) => {
-
-        const {id} = req.params;
+        else{
+        const email = req.body.email
+            
+        const result = await authMapper.findUserByEmail(email);
         
-        try{
-        const member = await userMapper.findOneMember(id);
-
-        res.json(member);
-        }catch(err){
-            res.status(400).json(err.message);
+        if (result){
+            res.status(200).json({"message":`email valide pour ${result.firstname}`});
         }
-    },
-
-    //a modifier pour un member
-    allWorkoutsByMember: async (req, res) => {
-
-        const {id} = req.params //Ici, c'est l'id d'un user/member
-        try{
-        const workouts = await userMapper.findAllWorkoutsByMember(id);
-
-        res.json(workouts)
+        }   
         }catch(err){
-            res.status(400).json(err.message);
+            res.status(400).json(err.message)
         }
+
     },
-
-    allCoachs : async (req, res) => {
-
-        const coachs = await userMapper.findAllCoachs();
-
-        res.json(coachs)
-    },
-
-    oneCoach : async (req, res) => {
-
-        const {id} = req.params
-
-        try{
-        const coach = await userMapper.findOneCoach(id);
-
-        console.log(coach);
-
-        res.json(coach)
-        }catch(err){
-            res.status(400).json(err.message);
-        }
-    },
-
+    
     newUser : async (req, res) => {
         user = req.body
 
         try {
-            const newUser = await userMapper.addUser(user);
+            const newUser = await authMapper.addUser(user);
 
             res.json(newUser)
         } catch (err) {
@@ -95,7 +57,7 @@ const userController = {
         console.log(hashPassword);
 
         try {
-            await userMapper.addPassword(config.email, hashPassword);
+            await authMapper.addPassword(config.email, hashPassword);
             res.json({"message": "Le nouveau mot de passe a bien été enregistré"})
 
         } catch (err) {
@@ -112,7 +74,7 @@ const userController = {
         }
 
         try {
-            const hashPassword = await userMapper.checkConnexion(req.body.email);
+            const hashPassword = await authMapper.checkConnexion(req.body.email);
 
            await bcrypt.compare(req.body.password, hashPassword.password, function (err, isPasswordCorrect) {
                console.log(req.body.password);
@@ -129,6 +91,7 @@ const userController = {
         }
 
        }   
-    }
+    
+}
 
-module.exports = userController;
+module.exports = authController;

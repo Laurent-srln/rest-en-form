@@ -1,4 +1,5 @@
 const express = require('express');
+const authController = require('./controllers/authController');
 const coachingController = require('./controllers/coachingController');
 
 const router = express.Router();
@@ -18,9 +19,11 @@ router.get('/coachs/:id(\\d+)/last-bookings', coachingController.coachLastBookin
 
 // router.post('/new-coachings', coachingController.newCoachings);
 
-router.post('/new-user', userController.NewUser);
-router.post('/new-password', userController.newPassword);
-router.post('/login', userController.checkConnexion);
+router.post('/new-user', userController.newUser);
+router.post('/new-password', authController.newPassword);
+router.post('/login-password', authController.checkConnexion);
+router.post('/login-email', authController.submitLogin)
+
 
 
 

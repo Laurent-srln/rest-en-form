@@ -15,19 +15,19 @@ GET {{baseUrl}}/members/100
 ### Récupérer tous les coachs
 GET {{baseUrl}}/coachs
 
-### Route GET /member/{id}/workouts
-GET {{baseUrl}}/members/3/workouts
+### Récupérer tous les Workouts d'un adhérent
+GET {{baseUrl}}/members/4/workouts
 
-### Route GET /coach/{id}+specialty
-GET {{baseUrl}}/coachs/6
+### Récupérer le profil d'un coach avec les spécialités
+GET {{baseUrl}}/coachs/1
 
-### Route GET /coach/{id}/bookings
-GET {{baseUrl}}/coachs/7/bookings
+### Récupérer les RDV d'un coach
+GET {{baseUrl}}/coachs/6/bookings
 
-### Route GET /coach/{id}/next-bookings
+### Récupérer les prochains RDV d'un coach
 GET {{baseUrl}}/coachs/7/next-bookings
 
-### Route GET /coach/{id}/last-bookings
+### Récuperer les RDv passés d'un coach
 GET {{baseUrl}}/coachs/7/last-bookings
 
 ### Ajouter new User
@@ -35,9 +35,9 @@ POST {{baseUrl}}/new-user
 Content-Type: application/json
 
 {
-    "firstname": "Nouveau",
-    "lastname": "User",
-    "email": "nouveau@gmail.com",
+    "firstname": "Nouvelle",
+    "lastname": "Utilisatrice",
+    "email": "nouvelle@gmail.com",
     "role": "MEMBER"
 }
 
@@ -46,16 +46,25 @@ POST {{baseUrl}}/new-password
 Content-Type: application/json
 
 {
-    "email": "nouveau@gmail.com",
-    "password": "test",
-    "confirm": "test"
+    "email": "nouvelle@gmail.com",
+    "password": "tata",
+    "confirm": "tata"
 }
 
 ### Connexion
-POST {{baseUrl}}/login
+POST {{baseUrl}}/login-password
 Content-Type: application/json
 
 {
-    "email": "nouveau@gmail.com",
-    "password": "test"
+    "email": "nouvelle@gmail.com",
+    "password": "tata"
+}
+
+### Connexion 
+POST {{baseUrl}}/login-email
+Content-Type: application/json
+
+{
+    "email": "nouvelle@gmail.com"
+   
 }

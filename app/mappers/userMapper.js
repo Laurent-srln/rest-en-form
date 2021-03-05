@@ -70,9 +70,11 @@ const userMapper = {
         LEFT JOIN workout w ON w.member_id = u.id
         LEFT JOIN "comment" "c" ON w.id = "c".workout_id
         LEFT JOIN "user" uc ON "c".coach_id = uc.id
-        WHERE u.id = $1;`, [id])
+        WHERE u.role = 'MEMBER'
+        AND u.id = $1;`
+        , [id])
 
-        if(!result.rows){
+        if(!result.rows.length){
             throw new Error("pas de workout pour le membre avec l'id" + id)
         }
 
@@ -93,31 +95,7 @@ const userMapper = {
 
     },
 
-    addPassword : async (email, password) => {
-
-        await db.query(`
-        UPDATE "user"
-        SET password = $1
-        WHERE "email" = $2;`,
-        [password, email]
-        )
-    },
-
-    checkConnexion : async (email) => {
-
-        const password = await db.query(`
-        SELECT "password"
-        FROM "user"
-        WHERE "email" = $1;`,
-        [email]
-        )
-
-        return password.rows[0];
-    }
-
-
-
-
+    
 };
 
 module.exports = userMapper;
