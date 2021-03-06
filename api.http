@@ -86,3 +86,15 @@ Content-Type: application/json
     "email": "nouvelle@gmail.com"
    
 }
+
+### Ajouter des créneaux coaching 
+POST {{baseUrl}}/new-coachings
+Content-Type: application/json
+
+{
+    "date": "2021-03-11",
+    "start": "12:15",
+    "end": "15:00",
+    "coach_id": 8
+   
+}

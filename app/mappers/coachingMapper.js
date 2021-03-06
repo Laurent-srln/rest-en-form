@@ -1,5 +1,14 @@
 const dayjs = require('dayjs');
-dayjs().format();
+// Pour les timezones
+const utc = require('dayjs/plugin/utc'); // dependent on utc plugin
+const timezone = require('dayjs/plugin/timezone');
+const isSameOrBefore = require('dayjs/plugin/isSameOrBefore');
+dayjs.extend(utc);
+dayjs.extend(timezone);
+dayjs.extend(isSameOrBefore);
+// On défini les locales
+require('dayjs/locale/fr');
+dayjs.locale('fr');
 
 const Coaching = require('../models/coaching');
 
@@ -63,6 +72,38 @@ const coachingMapper = {
 
         return result.rows;
     },
+
+    addCoachings: async (params) => {
+
+        const { date, start, end, coach_id} = params;
+
+        let movingStart = dayjs(date + start);
+        let lastEnd = dayjs(date + end);
+
+        let coachings = []
+
+       
+            do {
+            const result = await db.query(`
+            INSERT INTO coaching (start_time, end_time, coach_id)
+            VALUES ($1, $2, $3) RETURNING * ;`, 
+            [ movingStart, movingStart.add(15, 'minute'), coach_id
+            ]
+);
+            movingStart = movingStart.add(15, 'minute');
+            coachings.push(result.rows[0])
+
+        }  while(movingStart.isBefore(lastEnd, 'second')) 
+        ;
+
+        return coachings;
+
+
+        console.log(firstStart);
+
+    }
+
+
 
     
     

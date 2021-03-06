@@ -19,7 +19,7 @@ router.get('/coachs/:id(\\d+)/bookings', coachingController.coachAllBookings);
 router.get('/coachs/:id(\\d+)/next-bookings', coachingController.coachNextBookings);
 router.get('/coachs/:id(\\d+)/last-bookings', coachingController.coachLastBookings);
 
-// router.post('/new-coachings', coachingController.newCoachings);
+router.post('/new-coachings', coachingController.addCoachings);
 
 router.post('/new-user', userController.newUser);
 router.post('/new-password', authController.newPassword);

@@ -1,5 +1,7 @@
 const coachingMapper = require('../mappers/coachingMapper');
 
+
+
 const coachingController = {
     coachAllBookings: async (req, res) => {
 
@@ -36,7 +38,21 @@ const coachingController = {
         }catch(err){
             res.status(404).json(err.message)
         }
-    }
+    },
+
+    addCoachings : async (req, res) => {
+
+        const params = req.body;
+
+        try {
+            const coachings = await coachingMapper.addCoachings(params);
+
+        res.json(coachings)
+        } catch(err){
+            res.status(404).json(err.message)
+        }
+
+        }
 
 };
 

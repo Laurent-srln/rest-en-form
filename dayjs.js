@@ -17,7 +17,18 @@ dayjs.locale('fr');
     //     tz: "Europe/Paris"
     // }
 
-console.log(dayjs('2021-02-06').tz("Europe/Paris").format('YYYY-MM-DD'));
+// console.log(dayjs('2021-02-06 18:30').tz("Europe/Paris"));
 
 
-console.log(dayjs('2021-03-03').isSameOrBefore(dayjs(), 'day'));
+// console.log(dayjs('2021-03-03 20:30').isBefore(dayjs('2021-03-03 19:30'), 'second'));
+
+// let movingStart = dayjs(`2021-03-03 09:30`);
+
+// console.log(movingStart.add(15, 'minute'));
+
+let x = 1;
+
+while (x < 10) {
+    console.log(x);
+    x++
+}
