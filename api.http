@@ -20,8 +20,23 @@ GET {{baseUrl}}/coachs
 ### Récupérer tous les Workouts d'un adhérent
 GET {{baseUrl}}/members/4/workouts
 
+### Ajouter un workout
+POST {{baseUrl}}/members/4/new-workout
+Content-Type: application/json
+
+{
+    "date": "2020-12-02",
+    "content": "blab bla bla bla bla",
+    "weight": 51,
+    "muscleMass": 87,
+    "fatMass": 8,
+    "boneMass": 5,
+    "bodyWater": 59
+
+}
+
 ### Récupérer le profil d'un coach avec les spécialités
-GET {{baseUrl}}/coachs/1
+GET {{baseUrl}}/coachs/14
 
 ### Récupérer les RDV d'un coach
 GET {{baseUrl}}/coachs/6/bookings
