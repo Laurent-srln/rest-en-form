@@ -3,6 +3,8 @@
 @port= {{$dotenv PORT}}
 @baseUrl = {{protocol}}://{{domainname}}:{{port}}
 
+
+
 ### Récupérer tous le users
 GET {{baseUrl}}/users
 
@@ -35,10 +37,11 @@ POST {{baseUrl}}/new-user
 Content-Type: application/json
 
 {
-    "firstname": "Nouvelle",
-    "lastname": "Utilisatrice",
-    "email": "nouvelle@gmail.com",
-    "role": "MEMBER"
+    "firstname": "Fabien",
+    "lastname": "Galthier",
+    "email": "fabien@edf.com",
+    "role": "COACH",
+    "specialities": [2,3,4]
 }
 
 ### Set new UPassword

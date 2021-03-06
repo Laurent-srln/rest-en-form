@@ -84,6 +84,13 @@ const userMapper = {
 
     addUser: async (user) => {
 
+        const check = await db.query(`
+        SELECT id FROM "user" WHERE email = $1;`, [user.email]);
+
+        if (check.rows.length) {
+            throw new Error(`Un utilisateur avec cette adresse email existe déjà. id : ${check.rows[0].id}`)
+        }
+
         const result = await db.query(`
         INSERT INTO "user" ("firstname", "lastname", "email", "role")
         VALUES ($1, $2, $3, $4) RETURNING id;`, [user.firstname, user.lastname, user.email, user.role] 
@@ -91,10 +98,22 @@ const userMapper = {
 
         user.id = result.rows[0].id;
 
+        if (user.role === "COACH") {
+
+        for (const specialtyId of user.specialities) {
+            await db.query(`
+        INSERT INTO "coach_has_specialty" (coach_id, specialty_id)
+        VALUES ($1, $2);`, [user.id, specialtyId] )
+         } ;
+
+        }
+
         return user;
 
 
-    },
+    }
+
+    
 
     
 };
