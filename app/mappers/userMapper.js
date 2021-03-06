@@ -37,7 +37,7 @@ const userMapper = {
         LEFT JOIN coach_has_specialty chs ON u.id = chs.coach_id
         LEFT JOIN specialty s ON chs.specialty_id = s.id
         WHERE u.role = 'COACH'
-        GROUP BY u.firstname, u.lastname, u.email
+        GROUP BY u.firstname, u.lastname, u.email, user_id
         ORDER BY u.firstname;
         `)
 
@@ -48,13 +48,13 @@ const userMapper = {
     findOneCoach : async (coachId)=> {
 
         const result = await db.query(`
-        SELECT u.firstname, u.lastname, u.email, string_agg(s.name, ',') as specialities
+        SELECT u.id as user_id, u.firstname, u.lastname, u.email, string_agg(s.name, ',') as specialities
         FROM "user" u 
         LEFT JOIN coach_has_specialty chs ON u.id = chs.coach_id
         LEFT JOIN specialty s ON chs.specialty_id = s.id
         WHERE u.role = 'COACH'
         AND u.id = $1
-        GROUP BY u.firstname, u.lastname, u.email;
+        GROUP BY u.firstname, u.lastname, u.email; user_id
         `, [coachId])
 
         if(!result.rows.length){
