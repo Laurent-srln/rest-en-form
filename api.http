@@ -25,9 +25,9 @@ POST {{baseUrl}}/members/4/new-workout
 Content-Type: application/json
 
 {
-    "date": "2020-12-02",
-    "content": "blab bla bla bla bla",
-    "weight": 51,
+    "date": "2021-03-06",
+    "content": "bli bli bli bli bli",
+    "weight": 45,
     "muscleMass": 87,
     "fatMass": 8,
     "boneMass": 5,
