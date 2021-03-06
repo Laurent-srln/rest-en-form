@@ -32,7 +32,7 @@ const userMapper = {
     findAllCoachs : async ()=>{
 
         const result = await db.query(`
-        SELECT u.firstname, u.lastname, u.email, string_agg(s.name, ' - ') as specialities
+        SELECT u.firstname, u.lastname, u.email, string_agg(s.name, ',') as specialities
         FROM "user" u 
         LEFT JOIN coach_has_specialty chs ON u.id = chs.coach_id
         LEFT JOIN specialty s ON chs.specialty_id = s.id
@@ -40,25 +40,26 @@ const userMapper = {
         GROUP BY u.firstname, u.lastname, u.email;
         `)
 
-        return result.rows.map(coach => new User(coach));
+        return result.rows;
 
     },
 
     findOneCoach : async (coachId)=> {
 
         const result = await db.query(`
-        SELECT u.firstname, u.lastname, u.email, s.name as specialities
+        SELECT u.firstname, u.lastname, u.email, string_agg(s.name, ',') as specialities
         FROM "user" u 
         LEFT JOIN coach_has_specialty chs ON u.id = chs.coach_id
         LEFT JOIN specialty s ON chs.specialty_id = s.id
         WHERE u.role = 'COACH'
         AND u.id = $1
+        GROUP BY u.firstname, u.lastname, u.email;
         `, [coachId])
 
         if(!result.rows.length){
             throw new Error ("Pas de coach avec l'user_id : "+ coachId)
         }
-        return result.rows
+        return result.rows[0];
     },
     
     //modifier pour un user
