@@ -75,7 +75,36 @@ const coachingMapper = {
 
     addCoachings: async (params) => {
 
-        const { date, start, end, coach_id} = params;
+        const { date, start, end, coachId} = params;
+        const startTs = dayjs(params.date + params.start);
+        const endTs = dayjs(params.date + params.end);
+
+        console.log(coachId);
+
+        const checkCoach = await db.query(`
+        SELECT id FROM "user" 
+        WHERE id = $1
+        AND role = 'COACH';`, [coachId]);
+
+        if (!checkCoach.rows.length) {
+            throw new Error(`Il n'y a pas de coach avec le user_id : ${coachId}`)
+        };
+
+        const checkCoachings = await db.query(`
+        SELECT * FROM "coaching" 
+        WHERE coach_id = $1
+        AND (start_time >= $2 AND start_time < $3);`, [coachId, startTs, endTs]);
+
+        console.log(checkCoachings.rows.length);
+        console.log(startTs);
+        console.log(endTs);
+
+        if (checkCoachings.rows.length) {
+
+            throw new Error(`Il y a déjà des créneaux coaching existant pour ce coach dans cet interval de temps.`)
+        };
+        
+
 
         let movingStart = dayjs(date + start);
         let lastEnd = dayjs(date + end);
@@ -87,7 +116,7 @@ const coachingMapper = {
             const result = await db.query(`
             INSERT INTO coaching (start_time, end_time, coach_id)
             VALUES ($1, $2, $3) RETURNING * ;`, 
-            [ movingStart, movingStart.add(15, 'minute'), coach_id
+            [ movingStart, movingStart.add(15, 'minute'), coachId
             ]
 );
             movingStart = movingStart.add(15, 'minute');

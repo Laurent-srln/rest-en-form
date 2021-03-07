@@ -26,9 +26,4 @@ dayjs.locale('fr');
 
 // console.log(movingStart.add(15, 'minute'));
 
-let x = 1;
-
-while (x < 10) {
-    console.log(x);
-    x++
-}
+console.log(dayjs('2021-02-01 18:45').format('mm'));

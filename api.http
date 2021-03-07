@@ -92,9 +92,9 @@ POST {{baseUrl}}/new-coachings
 Content-Type: application/json
 
 {
-    "date": "2021-03-11",
-    "start": "12:15",
-    "end": "15:00",
-    "coach_id": 8
+    "date": "2021-04-05",
+    "start": "09:30",
+    "end": "10:00",
+    "coachId": 6
    
 }
