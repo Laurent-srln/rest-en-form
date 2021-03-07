@@ -32,33 +32,35 @@ const userMapper = {
     findAllCoachs : async ()=>{
 
         const result = await db.query(`
-        SELECT u.firstname, u.lastname, u.email, string_agg(s.name, ' - ') as specialities
+        SELECT u.id as user_id, u.firstname, u.lastname, u.email, string_agg(s.name, ',') as specialities
         FROM "user" u 
         LEFT JOIN coach_has_specialty chs ON u.id = chs.coach_id
         LEFT JOIN specialty s ON chs.specialty_id = s.id
         WHERE u.role = 'COACH'
-        GROUP BY u.firstname, u.lastname, u.email;
+        GROUP BY u.firstname, u.lastname, u.email, user_id
+        ORDER BY u.firstname;
         `)
 
-        return result.rows.map(coach => new User(coach));
+        return result.rows;
 
     },
 
     findOneCoach : async (coachId)=> {
 
         const result = await db.query(`
-        SELECT u.firstname, u.lastname, u.email, s.name as specialities
+        SELECT u.id as user_id, u.firstname, u.lastname, u.email, string_agg(s.name, ',') as specialities
         FROM "user" u 
         LEFT JOIN coach_has_specialty chs ON u.id = chs.coach_id
         LEFT JOIN specialty s ON chs.specialty_id = s.id
         WHERE u.role = 'COACH'
         AND u.id = $1
+        GROUP BY u.firstname, u.lastname, u.email; user_id
         `, [coachId])
 
         if(!result.rows.length){
             throw new Error ("Pas de coach avec l'user_id : "+ coachId)
         }
-        return result.rows
+        return result.rows[0];
     },
     
     //modifier pour un user
@@ -83,6 +85,15 @@ const userMapper = {
 
     addUser: async (user) => {
 
+        //! Voir pour modifier pour éviter que le user soit ajouté sans ses spécialité (INSERT INTO user OK mais INSERT INTO coach_has_specialty NOT OK)
+
+        const check = await db.query(`
+        SELECT id FROM "user" WHERE email = $1;`, [user.email]);
+
+        if (check.rows.length) {
+            throw new Error(`Un utilisateur avec cette adresse email existe déjà. id : ${check.rows[0].id}`)
+        }
+
         const result = await db.query(`
         INSERT INTO "user" ("firstname", "lastname", "email", "role")
         VALUES ($1, $2, $3, $4) RETURNING id;`, [user.firstname, user.lastname, user.email, user.role] 
@@ -90,10 +101,22 @@ const userMapper = {
 
         user.id = result.rows[0].id;
 
+        if (user.role === "COACH") {
+
+        for (const specialtyId of user.specialities) {
+            await db.query(`
+        INSERT INTO "coach_has_specialty" (coach_id, specialty_id)
+        VALUES ($1, $2);`, [user.id, specialtyId] )
+         } ;
+
+        }
+
         return user;
 
 
-    },
+    }
+
+    
 
     
 };

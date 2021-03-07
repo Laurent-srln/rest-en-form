@@ -3,6 +3,8 @@
 @port= {{$dotenv PORT}}
 @baseUrl = {{protocol}}://{{domainname}}:{{port}}
 
+
+
 ### Récupérer tous le users
 GET {{baseUrl}}/users
 
@@ -18,8 +20,23 @@ GET {{baseUrl}}/coachs
 ### Récupérer tous les Workouts d'un adhérent
 GET {{baseUrl}}/members/4/workouts
 
+### Ajouter un workout
+POST {{baseUrl}}/members/4/new-workout
+Content-Type: application/json
+
+{
+    "date": "2021-03-06",
+    "content": "bli bli bli bli bli",
+    "weight": 45,
+    "muscleMass": 87,
+    "fatMass": 8,
+    "boneMass": 5,
+    "bodyWater": 59
+
+}
+
 ### Récupérer le profil d'un coach avec les spécialités
-GET {{baseUrl}}/coachs/1
+GET {{baseUrl}}/coachs/14
 
 ### Récupérer les RDV d'un coach
 GET {{baseUrl}}/coachs/6/bookings
@@ -35,10 +52,11 @@ POST {{baseUrl}}/new-user
 Content-Type: application/json
 
 {
-    "firstname": "Nouvelle",
-    "lastname": "Utilisatrice",
-    "email": "nouvelle@gmail.com",
-    "role": "MEMBER"
+    "firstname": "Fabien",
+    "lastname": "Galthier",
+    "email": "fabien@edf.com",
+    "role": "COACH",
+    "specialities": [2,3,4]
 }
 
 ### Set new UPassword
@@ -68,3 +86,25 @@ Content-Type: application/json
     "email": "nouvelle@gmail.com"
    
 }
+
+### Ajouter des créneaux coaching 
+POST {{baseUrl}}/new-coachings
+Content-Type: application/json
+
+{
+    "date": "2021-04-05",
+    "start": "09:30",
+    "end": "10:00",
+    "coachId": 6
+   
+}
+
+
+### Récupérer coachings disponibles a une date
+POST {{baseUrl}}/book-coaching
+Content-Type: application/json
+
+{
+    "date": "2021-04-05"
+}
+
