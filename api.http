@@ -98,3 +98,13 @@ Content-Type: application/json
     "coachId": 6
    
 }
+
+
+### Récupérer coachings disponibles a une date
+POST {{baseUrl}}/book-coaching
+Content-Type: application/json
+
+{
+    "date": "2021-04-05"
+}
+

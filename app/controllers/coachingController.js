@@ -85,6 +85,26 @@ const coachingController = {
             res.status(404).json(err.message)
         }
 
+        },
+
+        findAvailableCoachings: async (req,res) => {
+            const { date } = req.body;
+
+            if (dayjs(date).isSameOrBefore(dayjs(), 'day')) {
+
+                res.status(400).json({"message": `La date sélectionnée doit être ultérieure à aujourd'hui.`})
+                return;
+            };
+
+            try {
+                const AvailableCoachings = await coachingMapper.findAvailableCoachings(date);
+    
+            res.json(AvailableCoachings)
+
+            } catch(err){
+                res.status(404).json(err.message)
+            }
+
         }
 
 };

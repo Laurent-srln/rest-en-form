@@ -24,7 +24,9 @@ router.post('/new-coachings', coachingController.addCoachings);
 router.post('/new-user', userController.newUser);
 router.post('/new-password', authController.newPassword);
 router.post('/login-password', authController.checkConnexion);
-router.post('/login-email', authController.submitLogin)
+router.post('/login-email', authController.submitLogin);
+
+router.post('/book-coaching', coachingController.findAvailableCoachings);
 
 
 

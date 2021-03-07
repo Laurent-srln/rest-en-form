@@ -130,10 +130,22 @@ const coachingMapper = {
 
         console.log(firstStart);
 
+    },
+
+    findAvailableCoachings: async (date) => {
+
+        const availableCoachings = await db.query(`
+        SELECT c.id, u.firstname, u.lastname, c.start_time::time, c.end_time::time 
+        FROM "coaching" c
+        LEFT JOIN "user" u ON c.coach_id = u.id
+        WHERE start_time::date = $1
+        AND member_id IS NULL;`, [date]);
+    
+
+    return availableCoachings.rows;
+
+
     }
-
-
-
     
     
 };
