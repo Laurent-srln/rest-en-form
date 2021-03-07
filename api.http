@@ -3,7 +3,8 @@
 @port= {{$dotenv PORT}}
 @baseUrl = {{protocol}}://{{domainname}}:{{port}}
 
-
+# https://app-osport.herokuapp.com
+//snkcmuclyjjrag:e460879da3dc3d10454bd6031a1f3887e8c2be23ad5911e352e49feca6da5fd8@ec2-176-34-222-188.eu-west-1.compute.amazonaws.com:5432/daindlp1mpsoct
 
 ### Récupérer tous le users
 GET {{baseUrl}}/users
