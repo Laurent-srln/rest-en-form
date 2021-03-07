@@ -23,18 +23,10 @@ GET {{baseUrl}}/members/4/workouts
 
 ### Ajouter un workout
 POST {{baseUrl}}/members/4/new-workout
-Content-Type: application/json
+Content-Type: application/x-www-form-urlencoded
 
-{
-    "date": "2021-03-06",
-    "content": "bli bli bli bli bli",
-    "weight": 45,
-    "muscleMass": 87,
-    "fatMass": 8,
-    "boneMass": 5,
-    "bodyWater": 59
+date=2021-02-16&content=bli+blo+blo+blo+blo&weight=45&muscleMass=87&fatMass=8&boneMass=5&bodyWater=59
 
-}
 
 ### Récupérer le profil d'un coach avec les spécialités
 GET {{baseUrl}}/coachs/14
@@ -48,64 +40,52 @@ GET {{baseUrl}}/coachs/7/next-bookings
 ### Récuperer les RDv passés d'un coach
 GET {{baseUrl}}/coachs/7/last-bookings
 
-### Ajouter new User
+### Ajouter new Coach
 POST {{baseUrl}}/new-user
-Content-Type: application/json
+Content-Type: application/x-www-form-urlencoded
 
-{
-    "firstname": "Fabien",
-    "lastname": "Galthier",
-    "email": "fabien@edf.com",
-    "role": "COACH",
-    "specialities": [2,3,4]
-}
+firstname=Bernard&lastname=Laporte&email=bernard@edf.com&role=COACH&specialities[0]=2&specialities[1]=4
 
-### Set new UPassword
-POST {{baseUrl}}/new-password
-Content-Type: application/json
 
-{
-    "email": "nouvelle@gmail.com",
-    "password": "tata",
-    "confirm": "tata"
-}
+### Ajouter new Member
+POST {{baseUrl}}/new-user
+Content-Type: application/x-www-form-urlencoded
 
-### Connexion
-POST {{baseUrl}}/login-password
-Content-Type: application/json
+firstname=Nouvelle&lastname=Adhérente&email=nouvelle@gmail.com&role=MEMBER
 
-{
-    "email": "nouvelle@gmail.com",
-    "password": "tata"
-}
 
-### Connexion 
+### Connexion check email
 POST {{baseUrl}}/login-email
-Content-Type: application/json
+Content-Type: application/x-www-form-urlencoded
 
-{
-    "email": "nouvelle@gmail.com"
-   
-}
+email=nouvelle@gmail.com
+
+### Set new Password
+POST {{baseUrl}}/new-password
+Content-Type: application/x-www-form-urlencoded
+
+email=nouvelle@gmail.com&password=tata&confirm=tata
+
+### Connexion check password
+POST {{baseUrl}}/login-password
+Content-Type: application/x-www-form-urlencoded
+
+email=nouvelle@gmail.com&password=tata
+
+
 
 ### Ajouter des créneaux coaching 
 POST {{baseUrl}}/new-coachings
-Content-Type: application/json
+Content-Type: application/x-www-form-urlencoded
 
-{
-    "date": "2021-04-05",
-    "start": "09:30",
-    "end": "10:00",
-    "coachId": 6
-   
-}
+date=2021-04-15&start=09:30&end=10:00&coachId=6
+
 
 
 ### Récupérer coachings disponibles a une date
 POST {{baseUrl}}/book-coaching
-Content-Type: application/json
+Content-Type: application/x-www-form-urlencoded
 
-{
-    "date": "2021-04-05"
-}
+date=2021-04-05
+
 
