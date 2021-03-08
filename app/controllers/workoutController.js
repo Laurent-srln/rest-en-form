@@ -41,11 +41,15 @@ const workoutController = {
         const workout = await workoutMapper.addWorkout(newWorkout, memberId);
 
         res.json(workout)
-    }
- catch (err) {
-    res.status(400).json(err.message);
+        }
+        catch (err) {
+        res.status(400).json(err.message);
 
-};
-}}
+        };
+    }
+
+
+
+}
 
 module.exports = workoutController;

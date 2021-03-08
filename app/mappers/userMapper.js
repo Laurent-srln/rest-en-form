@@ -19,7 +19,6 @@ const userMapper = {
 
         return result.rows.map(member => new User(member));
 
-        
     },
 
     findOneMember: async (id) => {
@@ -130,7 +129,7 @@ const userMapper = {
         SELECT * 
         FROM "user"
         WHERE id = $1`, [id])
-
+        
         return result.rows[0]
     },
 

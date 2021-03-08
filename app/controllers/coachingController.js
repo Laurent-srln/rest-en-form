@@ -87,25 +87,58 @@ const coachingController = {
 
         },
 
-        findAvailableCoachings: async (req,res) => {
-            const { date } = req.body;
+    findAvailableCoachings: async (req,res) => {
+        const { date } = req.body;
 
-            if (dayjs(date).isSameOrBefore(dayjs(), 'day')) {
+        if (dayjs(date).isSameOrBefore(dayjs(), 'day')) {
 
                 res.status(400).json({"message": `La date sélectionnée doit être ultérieure à aujourd'hui.`})
                 return;
-            };
+        };
 
-            try {
+        try {
                 const AvailableCoachings = await coachingMapper.findAvailableCoachings(date);
     
-            res.json(AvailableCoachings)
+        res.json(AvailableCoachings)
 
-            } catch(err){
+        } catch(err){
                 res.status(404).json(err.message)
-            }
-
         }
+
+    },
+
+    findACoachingById : async (req, res) => {
+
+        const {id} = req.params;
+
+        try{
+        const result = await coachingMapper.findOneBooking(id);
+        
+        console.log(result);
+       
+        }catch(err){
+            res.status(400).json(err.message)
+        }
+
+    },
+
+    deleteACoaching : async (req, res) => {
+
+        try{
+        const {id} = req.params;
+        
+        const isCoaching = await coachingMapper.findOneBooking(id);
+        
+            await coachingMapper.deleteOneCoaching(isCoaching.id);
+
+            res.json("Coaching supprimé");
+
+        }catch(err){
+            res.status(400).json("id déjà supprimé");
+        }
+        
+             
+    }
 
 };
 

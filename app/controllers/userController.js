@@ -111,15 +111,16 @@ console.log(process.env.DATABASE_URL);
 
         const {id} = req.params;
         
-            const isUser = await userMapper.findOneUser(id);
-            if(!isUser) {
-                res.status(400).json("Pas de user à cet id, veuillez en entrer un valide")
-            }
-            else {
-            await userMapper.deleteOneUser(isUser.id)
+        const isUser = await userMapper.findOneUser(id);
+        
+        if(!isUser) {
+            res.status(400).json("Pas de user à cet id, veuillez en entrer un valide")
+        }
+        else {
+            await userMapper.deleteOneUser(isUser.id);
 
             res.json("cet user a bien été supprimé")
-            }   
+        }   
         
     }
  

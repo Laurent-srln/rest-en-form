@@ -69,7 +69,7 @@ Content-Type: application/json
 }
 
 ### suppression d'un user
-DELETE {{baseUrl}}/users/11
+DELETE {{baseUrl}}/users/15
 
 ### Ajouter new Member
 POST {{baseUrl}}/new-user
@@ -149,4 +149,8 @@ Content-Type: application/json
     "date": "2021-04-05"
 }
 
+### Récupérer un coaching avec le coach et le membre qui y participe
+GET {{baseUrl}}/coaching/5
 
+### suppression d'un coaching
+DELETE {{baseUrl}}/coaching/5
