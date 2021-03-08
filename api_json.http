@@ -14,19 +14,28 @@
 POST {{baseUrl}}/login-email
 Content-Type: application/json
 
-email=sountidly@gmail.com
+{
+    "email": "sountidly@gmail.com"
+}
 
 ### Set new Password
 POST {{baseUrl}}/new-password
 Content-Type: application/json
 
-email=sountidly@gmail.com&password=tata&confirm=tata
+{
+    "email": "sountidly@gmail.com",
+    "password": "tata",
+    "confirm": "tata"
+}
 
 ### Connexion check password
 POST {{baseUrl}}/login-password
 Content-Type: application/json
 
-email=nouvelle@gmail.com&password=tata
+{
+    "email": "nouvelle@gmail.com",
+    "password": "tata"
+}
 
 
 ############################## MEMBERS #############################
@@ -45,16 +54,43 @@ GET {{baseUrl}}/members/6
 GET {{baseUrl}}/members/3/workouts
 
 ### Ajouter un workout
-POST {{baseUrl}}/members/100/new-workout
+POST {{baseUrl}}/members/11/new-workout
 Content-Type: application/json
 
-date=2021-02-16&content=bli+blo+blo+blo+blo&weight=45&muscleMass=87&fatMass=8&boneMass=5&bodyWater=59
+{
+    "date": "2021-02-16",
+    "content": "bla bla bla",
+    "weight": 45,
+    "muscleMass": 87,
+    "fatMass": 8,
+    "boneMass": 5,
+    "bodyWater": 59
+}
+
 
 ### Ajouter new Member
 POST {{baseUrl}}/new-user
 Content-Type: application/json
 
-firstname=Nouvelle&lastname=Adhérente&email=nouvelle@gmail.com&role=MEMBER
+{
+    "firstname": "Robert",
+    "lastname": "Martin",
+    "email": "rm@gmail.com",
+    "role": "MEMBER"
+}
+
+### Ajouter new Coach (même route avec array specialities en plus)
+POST {{baseUrl}}/new-user
+Content-Type: application/json
+
+{
+    "firstname": "Jean",
+    "lastname": "Dupont",
+    "email": "jean@edf.com",
+    "role": "COACH",
+    "specialities": [2, 5, 7]
+}
+
 
 ############################## COACHS #############################
 
@@ -74,11 +110,17 @@ GET {{baseUrl}}/coachs/7/next-bookings
 ### Récuperer les RDv passés d'un coach
 GET {{baseUrl}}/coachs/7/last-bookings
 
-### Ajouter new Coach
+### Ajouter new Coach (même route avec array specialities en plus)
 POST {{baseUrl}}/new-user
 Content-Type: application/json
 
-firstname=Bernard&lastname=Laporte&email=bernard@edf.com&role=COACH&specialities[0]=2&specialities[1]=4
+{
+    "firstname": "Jean",
+    "lastname": "Dupont",
+    "email": "jean@edf.com",
+    "role": "COACH",
+    "specialities": [2, 5, 7]
+}
 
 
 ############################## COACHING #############################
@@ -87,13 +129,20 @@ firstname=Bernard&lastname=Laporte&email=bernard@edf.com&role=COACH&specialities
 POST {{baseUrl}}/new-coachings
 Content-Type: application/json
 
-date=2021-04-15&start=09:30&end=10:00&coachId=6
+{
+    "date": "2021-04-15",
+    "start": "09:30",
+    "end": "10:00",
+    "coachId": 16
+}
 
 
 ### Récupérer coachings disponibles a une date
 POST {{baseUrl}}/book-coaching
 Content-Type: application/json
 
-date=2021-04-05
+{
+    "date": "2021-04-05"
+}
 
 
