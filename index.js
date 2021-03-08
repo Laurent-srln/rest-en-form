@@ -10,8 +10,6 @@ const port = process.env.PORT || 5478;
 
 const router = require('./app/router');
 
-console.log(process.env.DATABASE_URL);
-
 app.use(cors());
 
 app.use(express.urlencoded({extended: true}));
