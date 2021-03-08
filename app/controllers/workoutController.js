@@ -21,6 +21,8 @@ const workoutController = {
         const newWorkout = req.body;
         const memberId = req.params.id;
 
+        try {
+
         if (!newWorkout.weight || !newWorkout.muscleMass || !newWorkout.fatMass || !newWorkout.boneMass || !newWorkout.bodyWater) {
 
             res.status(400).json({"message": `Tous les champs obligatoires doivent être remplis`})
@@ -35,12 +37,15 @@ const workoutController = {
             return;
         };
 
+
         const workout = await workoutMapper.addWorkout(newWorkout, memberId);
 
         res.json(workout)
     }
+ catch (err) {
+    res.status(400).json(err.message);
 
 };
+}}
 
 module.exports = workoutController;
-

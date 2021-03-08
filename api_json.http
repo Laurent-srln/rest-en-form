@@ -12,19 +12,19 @@
 
 ### Connexion check email
 POST {{baseUrl}}/login-email
-Content-Type: application/x-www-form-urlencoded
+Content-Type: application/json
 
 email=sountidly@gmail.com
 
 ### Set new Password
 POST {{baseUrl}}/new-password
-Content-Type: application/x-www-form-urlencoded
+Content-Type: application/json
 
 email=sountidly@gmail.com&password=tata&confirm=tata
 
 ### Connexion check password
 POST {{baseUrl}}/login-password
-Content-Type: application/x-www-form-urlencoded
+Content-Type: application/json
 
 email=nouvelle@gmail.com&password=tata
 
@@ -46,13 +46,13 @@ GET {{baseUrl}}/members/3/workouts
 
 ### Ajouter un workout
 POST {{baseUrl}}/members/100/new-workout
-Content-Type: application/x-www-form-urlencoded
+Content-Type: application/json
 
 date=2021-02-16&content=bli+blo+blo+blo+blo&weight=45&muscleMass=87&fatMass=8&boneMass=5&bodyWater=59
 
 ### Ajouter new Member
 POST {{baseUrl}}/new-user
-Content-Type: application/x-www-form-urlencoded
+Content-Type: application/json
 
 firstname=Nouvelle&lastname=Adhérente&email=nouvelle@gmail.com&role=MEMBER
 
@@ -76,7 +76,7 @@ GET {{baseUrl}}/coachs/7/last-bookings
 
 ### Ajouter new Coach
 POST {{baseUrl}}/new-user
-Content-Type: application/x-www-form-urlencoded
+Content-Type: application/json
 
 firstname=Bernard&lastname=Laporte&email=bernard@edf.com&role=COACH&specialities[0]=2&specialities[1]=4
 
@@ -85,14 +85,14 @@ firstname=Bernard&lastname=Laporte&email=bernard@edf.com&role=COACH&specialities
 
 ### Ajouter des créneaux coaching 
 POST {{baseUrl}}/new-coachings
-Content-Type: application/x-www-form-urlencoded
+Content-Type: application/json
 
 date=2021-04-15&start=09:30&end=10:00&coachId=6
 
 
 ### Récupérer coachings disponibles a une date
 POST {{baseUrl}}/book-coaching
-Content-Type: application/x-www-form-urlencoded
+Content-Type: application/json
 
 date=2021-04-05
 

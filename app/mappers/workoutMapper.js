@@ -6,6 +6,18 @@ const workoutMapper = {
 
     addWorkout : async (workout, memberId) => {
 
+        const check = await db.query(`
+        SELECT u.id
+        FROM "user" u
+        WHERE u.role = 'MEMBER'
+        AND u.id = $1;`
+        , [memberId])
+
+        if(!check.rows[0]) {
+
+            throw new Error(`Cet id ${memberId} ne correspond pas à un Member`);
+        }
+
         const newWorkout = await db.query(`
         
         with new_workout_id as (
