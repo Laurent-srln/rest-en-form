@@ -21,7 +21,7 @@ const authController = {
         const result = await authMapper.findUserByEmail(email);
         
         if (result){
-            res.status(200).json({"message":`email valide pour ${result.firstname}`});
+            res.status(200).json(result);
         }
         }   
         }catch(err){
@@ -30,18 +30,6 @@ const authController = {
 
     },
     
-    newUser : async (req, res) => {
-        user = req.body
-
-        try {
-            const newUser = await authMapper.addUser(user);
-
-            res.json(newUser)
-        } catch (err) {
-            res.status(400).json(err.message);
-        }
-    },
-
     newPassword : async (req, res) => {
         let config = req.body
 

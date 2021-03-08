@@ -6,6 +6,32 @@
 # https://app-osport.herokuapp.com
 //snkcmuclyjjrag:e460879da3dc3d10454bd6031a1f3887e8c2be23ad5911e352e49feca6da5fd8@ec2-176-34-222-188.eu-west-1.compute.amazonaws.com:5432/daindlp1mpsoct
 
+
+
+############################## CONNEXION #############################
+
+### Connexion check email
+POST {{baseUrl}}/login-email
+Content-Type: application/x-www-form-urlencoded
+
+email=sountidly@gmail.com
+
+### Set new Password
+POST {{baseUrl}}/new-password
+Content-Type: application/x-www-form-urlencoded
+
+email=sountidly@gmail.com&password=tata&confirm=tata
+
+### Connexion check password
+POST {{baseUrl}}/login-password
+Content-Type: application/x-www-form-urlencoded
+
+email=nouvelle@gmail.com&password=tata
+
+
+############################## MEMBERS #############################
+
+
 ### Récupérer tous le users
 GET {{baseUrl}}/users
 
@@ -13,23 +39,31 @@ GET {{baseUrl}}/users
 GET {{baseUrl}}/members
 
 ### Récupérer un adhérent
-GET {{baseUrl}}/members/100
-
-### Récupérer tous les coachs
-GET {{baseUrl}}/coachs
+GET {{baseUrl}}/members/6
 
 ### Récupérer tous les Workouts d'un adhérent
-GET {{baseUrl}}/members/4/workouts
+GET {{baseUrl}}/members/1/workouts
 
 ### Ajouter un workout
-POST {{baseUrl}}/members/4/new-workout
+POST {{baseUrl}}/members/1/new-workout
 Content-Type: application/x-www-form-urlencoded
 
 date=2021-02-16&content=bli+blo+blo+blo+blo&weight=45&muscleMass=87&fatMass=8&boneMass=5&bodyWater=59
 
+### Ajouter new Member
+POST {{baseUrl}}/new-user
+Content-Type: application/x-www-form-urlencoded
+
+firstname=Nouvelle&lastname=Adhérente&email=nouvelle@gmail.com&role=MEMBER
+
+############################## COACHS #############################
+
+
+### Récupérer tous les coachs
+GET {{baseUrl}}/coachs
 
 ### Récupérer le profil d'un coach avec les spécialités
-GET {{baseUrl}}/coachs/14
+GET {{baseUrl}}/coachs/6
 
 ### Récupérer les RDV d'un coach
 GET {{baseUrl}}/coachs/6/bookings
@@ -47,39 +81,13 @@ Content-Type: application/x-www-form-urlencoded
 firstname=Bernard&lastname=Laporte&email=bernard@edf.com&role=COACH&specialities[0]=2&specialities[1]=4
 
 
-### Ajouter new Member
-POST {{baseUrl}}/new-user
-Content-Type: application/x-www-form-urlencoded
-
-firstname=Nouvelle&lastname=Adhérente&email=nouvelle@gmail.com&role=MEMBER
-
-
-### Connexion check email
-POST {{baseUrl}}/login-email
-Content-Type: application/x-www-form-urlencoded
-
-email=nouvelle@gmail.com
-
-### Set new Password
-POST {{baseUrl}}/new-password
-Content-Type: application/x-www-form-urlencoded
-
-email=nouvelle@gmail.com&password=tata&confirm=tata
-
-### Connexion check password
-POST {{baseUrl}}/login-password
-Content-Type: application/x-www-form-urlencoded
-
-email=nouvelle@gmail.com&password=tata
-
-
+############################## COACHING #############################
 
 ### Ajouter des créneaux coaching 
 POST {{baseUrl}}/new-coachings
 Content-Type: application/x-www-form-urlencoded
 
 date=2021-04-15&start=09:30&end=10:00&coachId=6
-
 
 
 ### Récupérer coachings disponibles a une date

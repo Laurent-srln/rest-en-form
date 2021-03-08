@@ -11,7 +11,10 @@ const userMapper = {
     },
 
     findAllMembers: async () => {
-        const result = await db.query(`SELECT * FROM "user" WHERE "role" = 'MEMBER';`)
+        const result = await db.query(`
+        SELECT u.id, u.firstname, u.lastname, u.email
+        FROM "user" u
+        WHERE u.role = 'MEMBER'`)
 
         return result.rows.map(member => new User(member));
 
@@ -19,11 +22,16 @@ const userMapper = {
     },
 
     findOneMember: async (id) => {
-        const result = await db.query(`SELECT * FROM "user" WHERE "id" = $1`, [id])
+        const result = await db.query(`
+        SELECT u.id, u.firstname, u.lastname, u.email
+        FROM "user" u
+        WHERE u.role = 'MEMBER'
+        AND u.id = $1;`
+        , [id])
 
         if(!result.rows[0]) {
 
-            throw new Error("Pas de Member avec l'id " + id);
+            throw new Error(`Cet id ${id} ne correspond pas à un Member`);
         }
 
         return new User(result.rows[0])
@@ -54,7 +62,7 @@ const userMapper = {
         LEFT JOIN specialty s ON chs.specialty_id = s.id
         WHERE u.role = 'COACH'
         AND u.id = $1
-        GROUP BY u.firstname, u.lastname, u.email; user_id
+        GROUP BY u.firstname, u.lastname, u.email, user_id;
         `, [coachId])
 
         if(!result.rows.length){
@@ -115,10 +123,7 @@ const userMapper = {
 
 
     }
-
-    
-
-    
+  
 };
 
 module.exports = userMapper;

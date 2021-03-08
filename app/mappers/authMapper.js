@@ -25,7 +25,13 @@ const authMapper = {
 
     findUserByEmail : async (email) => {
         const result = await db.query(`
-        SELECT * FROM "user" u
+        SELECT u.id, u.email, u.role,
+        CASE
+        WHEN u.password IS NULL THEN false
+        WHEN u.password IS NOT NULL THEN true 
+        END
+        AS password
+        FROM "user" u
         WHERE u.email = $1
         `, [email])
 
