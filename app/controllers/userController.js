@@ -2,6 +2,9 @@ const { config } = require('process');
 const userMapper = require('../mappers/userMapper');
 const emailValidator = require('email-validator');
 
+const jsonwebtoken = require('jsonwebtoken');
+const jwtSecret = require('../jwt/jwtSecret');
+
 
 const userController = {
     allUsers: async (req, res) => {
@@ -37,9 +40,9 @@ console.log(process.env.DATABASE_URL);
     //a modifier pour un member
     allWorkoutsByMember: async (req, res) => {
 
-        const {id} = req.params //Ici, c'est l'id d'un user/member
+        const {userId} = jsonwebtoken.decode(req.headers.authorization.substring(7)) //Ici, c'est l'id d'un user/member
         try{
-        const workouts = await userMapper.findAllWorkoutsByMember(id);
+        const workouts = await userMapper.findAllWorkoutsByMember(userId);
 
         res.json(workouts)
         }catch(err){
@@ -48,6 +51,8 @@ console.log(process.env.DATABASE_URL);
     },
 
     allCoachs : async (req, res) => {
+
+        console.log(jsonwebtoken.decode(req.headers.authorization.substring(7)));
 
         try {
             const coachs = await userMapper.findAllCoachs();

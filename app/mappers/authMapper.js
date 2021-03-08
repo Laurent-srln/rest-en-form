@@ -13,14 +13,14 @@ const authMapper = {
 
     checkConnexion : async (email) => {
 
-        const password = await db.query(`
-        SELECT "password"
-        FROM "user"
+        const result = await db.query(`
+        SELECT u.id, u.email, u.password, u.role
+        FROM "user" u
         WHERE "email" = $1;`,
         [email]
         )
 
-        return password.rows[0];
+        return result.rows[0];
     },
 
     findUserByEmail : async (email) => {

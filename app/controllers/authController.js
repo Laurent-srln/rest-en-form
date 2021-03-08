@@ -1,7 +1,13 @@
 const emailValidator = require('email-validator');
+
+
 const authMapper = require('../mappers/authMapper');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
+
+const jwt = require('express-jwt');
+const jsonwebtoken = require('jsonwebtoken');
+const jwtSecret = require('../jwt/jwtSecret');
 
 const authController = {
 
@@ -21,6 +27,7 @@ const authController = {
         const result = await authMapper.findUserByEmail(email);
         
         if (result){
+
             res.status(200).json(result);
         }
         }   
@@ -62,17 +69,27 @@ const authController = {
         }
 
         try {
-            const hashPassword = await authMapper.checkConnexion(req.body.email);
+            const result = await authMapper.checkConnexion(req.body.email);
 
-           await bcrypt.compare(req.body.password, hashPassword.password, function (err, isPasswordCorrect) {
-               console.log(req.body.password);
-               console.log(hashPassword.password);
+           await bcrypt.compare(req.body.password, result.password, function (err, isPasswordCorrect) {
+
 
                 if (!isPasswordCorrect) {
                     res.json({ "message": "Impossible de vous connecter, veuillez réessayer" });
                     return;
                 }
-                res.status(200).json({ "message": "Connexion réussie" });
+
+                if (isPasswordCorrect) {
+                    const jwtContent = { userId: result.id, email: result.email, role: result.role }
+                    const jwtOptions = {
+                        algorithm: 'HS256',
+                        expiresIn: '10h'
+                    };
+                
+                res.status(200).json({ 
+                    logged: true,
+                    token: jsonwebtoken.sign(jwtContent, jwtSecret, jwtOptions)});
+                }
 
         })} catch (err) {
             res.status(400).json(err.message);
