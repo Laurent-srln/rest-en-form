@@ -51,10 +51,10 @@ GET {{baseUrl}}/members
 GET {{baseUrl}}/members/6
 
 ### Récupérer tous les Workouts d'un adhérent
-GET {{baseUrl}}/members/3/workouts
+GET {{baseUrl}}/members/1/workouts
 
 ### Ajouter un workout
-POST {{baseUrl}}/members/11/new-workout
+POST {{baseUrl}}/members/1/new-workout
 Content-Type: application/json
 
 {
@@ -126,19 +126,19 @@ Content-Type: application/json
 ############################## COACHING #############################
 
 ### Ajouter des créneaux coaching 
-POST {{baseUrl}}/new-coachings
+POST https://app-osport.herokuapp.com/new-coachings
 Content-Type: application/json
 
 {
     "date": "2021-04-15",
     "start": "09:30",
     "end": "10:00",
-    "coachId": 16
+    "coachId": 6
 }
 
 
 ### Récupérer coachings disponibles a une date
-POST {{baseUrl}}/book-coaching
+POST https://app-osport.herokuapp.com/book-coaching
 Content-Type: application/json
 
 {
