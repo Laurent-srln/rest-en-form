@@ -2,6 +2,7 @@ const User = require('../models/user');
 const Workout = require('../models/workout');
 
 const db = require('../database');
+const { codePointAt } = require('../jwt/jwtSecret');
 
 const userMapper = {
     findAll: async () => {
@@ -77,7 +78,7 @@ const userMapper = {
         const result = await db.query(`
         SELECT u.firstname as member_firtname, w.date as workout_date, w.content as description, uc.firstname as coach_firstname, "c".created_at as comment_date, "c".content as comment
         FROM "user" u
-        LEFT JOIN workout w ON w.member_id = u.id
+        JOIN workout w ON w.member_id = u.id
         LEFT JOIN "comment" "c" ON w.id = "c".workout_id
         LEFT JOIN "user" uc ON "c".coach_id = uc.id
         WHERE u.role = 'MEMBER'
@@ -122,6 +123,25 @@ const userMapper = {
         return user;
 
 
+    },
+
+    findOneUser : async (id) => {
+        const result = await db.query(`
+        SELECT * 
+        FROM "user"
+        WHERE id = $1`, [id])
+
+        return result.rows[0]
+    },
+
+    deleteOneUser : async (id) =>{
+
+        const result = await db.query(`
+            DELETE FROM "user" 
+            WHERE id = $1
+        `, [id])
+
+        return result
     }
   
 };

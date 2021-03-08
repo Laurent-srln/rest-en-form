@@ -2,6 +2,10 @@ const { config } = require('process');
 const userMapper = require('../mappers/userMapper');
 const emailValidator = require('email-validator');
 
+const jsonwebtoken = require('jsonwebtoken');
+const jwtSecret = require('../jwt/jwtSecret');
+const { deleteUser } = require('../mappers/userMapper');
+
 
 const userController = {
     allUsers: async (req, res) => {
@@ -37,9 +41,9 @@ console.log(process.env.DATABASE_URL);
     //a modifier pour un member
     allWorkoutsByMember: async (req, res) => {
 
-        const {id} = req.params //Ici, c'est l'id d'un user/member
+        const {userId} = jsonwebtoken.decode(req.headers.authorization.substring(7)) //Ici, c'est l'id d'un user/member
         try{
-        const workouts = await userMapper.findAllWorkoutsByMember(id);
+        const workouts = await userMapper.findAllWorkoutsByMember(userId);
 
         res.json(workouts)
         }catch(err){
@@ -48,6 +52,8 @@ console.log(process.env.DATABASE_URL);
     },
 
     allCoachs : async (req, res) => {
+
+        console.log(jsonwebtoken.decode(req.headers.authorization.substring(7)));
 
         try {
             const coachs = await userMapper.findAllCoachs();
@@ -66,8 +72,7 @@ console.log(process.env.DATABASE_URL);
 
         try{
         const coach = await userMapper.findOneCoach(id);
-        console.log(coach);
-
+        
         coach.specialities = coach.specialities.split(",");
 
         res.json(coach)
@@ -101,6 +106,22 @@ console.log(process.env.DATABASE_URL);
             res.status(400).json(err.message);
         };
     },
+
+    deleteUser : async (req, res) => {
+
+        const {id} = req.params;
+        
+            const isUser = await userMapper.findOneUser(id);
+            if(!isUser) {
+                res.status(400).json("Pas de user à cet id, veuillez en entrer un valide")
+            }
+            else {
+            await userMapper.deleteOneUser(isUser.id)
+
+            res.json("cet user a bien été supprimé")
+            }   
+        
+    }
  
 }
 
