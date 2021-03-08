@@ -23,9 +23,9 @@ POST {{baseUrl}}/new-password
 Content-Type: application/json
 
 {
-    "email": "sountidly@gmail.com",
-    "password": "tata",
-    "confirm": "tata"
+    "email": "mathilde.frere1@gmail.com",
+    "password": "toto",
+    "confirm": "toto"
 }
 
 ### Connexion check password
@@ -33,8 +33,8 @@ POST {{baseUrl}}/login-password
 Content-Type: application/json
 
 {
-    "email": "nouvelle@gmail.com",
-    "password": "tata"
+    "email": "mathilde.frere1@gmail.com",
+    "password": "toto"
 }
 
 
@@ -51,7 +51,8 @@ GET {{baseUrl}}/members
 GET {{baseUrl}}/members/6
 
 ### Récupérer tous les Workouts d'un adhérent
-GET {{baseUrl}}/members/3/workouts
+GET {{baseUrl}}/workouts
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMsImVtYWlsIjoibWF0aGlsZGUuZnJlcmUxQGdtYWlsLmNvbSIsInJvbGUiOiJNRU1CRVIiLCJpYXQiOjE2MTUyMTEwMTcsImV4cCI6MTYxNTIxNDYxN30.kIaeEWHQtMmqXG_k8dFVnmw7SukJlm6g9_wpN4HsjXA
 
 ### Ajouter un workout
 POST {{baseUrl}}/members/11/new-workout
@@ -97,6 +98,7 @@ Content-Type: application/json
 
 ### Récupérer tous les coachs
 GET {{baseUrl}}/coachs
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjE1LCJlbWFpbCI6Im5vdXZlbGxlQGdtYWlsLmNvbSIsInJvbGUiOiJNRU1CRVIiLCJpYXQiOjE2MTUyMTAxNTcsImV4cCI6MTYxNTIxMzc1N30.zMg4MWa_UkvqkgD__0SX7a71XKhVnJIkhD9nkYjiUs8
 
 ### Récupérer le profil d'un coach avec les spécialités
 GET {{baseUrl}}/coachs/6
