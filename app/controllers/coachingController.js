@@ -13,24 +13,11 @@ require('dayjs/locale/fr');
 dayjs.locale('fr');
 
 const coachingController = {
-    coachAllBookings: async (req, res) => {
-
-        const { id } = req.params;
-        try{
-        const bookings = await coachingMapper.findAllBookings(id);
-
-        res.json(bookings)
-        }catch(err){
-        res.status(404).json(err.message)
-    }
-       
-    },
-
     coachNextBookings: async (req, res) => {
 
-        const { id } = req.params;
+        const {coachId} = jsonwebtoken.decode(req.headers.authorization.substring(7));
         try{
-        const bookings = await coachingMapper.findNextBookings(id);
+        const bookings = await coachingMapper.findNextBookings(coachId);
         
         res.json(bookings)
         }catch(err){
@@ -40,9 +27,9 @@ const coachingController = {
 
     coachLastBookings: async (req, res) => {
 
-        const { id } = req.params;
+        const {coachId} = jsonwebtoken.decode(req.headers.authorization.substring(7));
         try{
-        const bookings = await coachingMapper.findLastBookings(id);
+        const bookings = await coachingMapper.findLastBookings(coachId);
 
         res.json(bookings)
         }catch(err){

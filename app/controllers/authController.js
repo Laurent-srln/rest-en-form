@@ -41,7 +41,7 @@ const authController = {
         let config = req.body
 
         if(!config.password || !config.confirm) {
-            res.json({"message": "Merci de remplir tous les champs"})
+            res.json({"message": "Tous les champs doivent être remplis."})
         }
 
         if(config.password !== config.confirm) {
@@ -75,7 +75,7 @@ const authController = {
 
 
                 if (!isPasswordCorrect) {
-                    res.json({ "message": "Impossible de vous connecter, veuillez réessayer" });
+                    res.json({logged: false});
                     return;
                 }
 

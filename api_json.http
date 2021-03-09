@@ -41,18 +41,19 @@ Content-Type: application/json
 ############################## MEMBERS #############################
 
 
-### Récupérer tous le users
-GET {{baseUrl}}/users
-
 ### Récupérer tous les adhérents
 GET {{baseUrl}}/members
 
 ### Récupérer un adhérent
-GET {{baseUrl}}/members/6
+GET {{baseUrl}}/members/3
 
 ### Récupérer tous les Workouts d'un adhérent
 GET {{baseUrl}}/workouts
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMsImVtYWlsIjoibWF0aGlsZGUuZnJlcmUxQGdtYWlsLmNvbSIsInJvbGUiOiJNRU1CRVIiLCJpYXQiOjE2MTUyMTEwMTcsImV4cCI6MTYxNTIxNDYxN30.kIaeEWHQtMmqXG_k8dFVnmw7SukJlm6g9_wpN4HsjXA
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMsImVtYWlsIjoibWF0aGlsZGUuZnJlcmUxQGdtYWlsLmNvbSIsInJvbGUiOiJNRU1CRVIiLCJpYXQiOjE2MTUzMDA5MDksImV4cCI6MTYxNTMzNjkwOX0.-yDYsGHd8ia95umArcO7QeL2pCx6VKTQjyFlZcImiPo
+
+### Récupérer tous les healthRecords d'un adhérent
+GET {{baseUrl}}/health
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMsImVtYWlsIjoibWF0aGlsZGUuZnJlcmUxQGdtYWlsLmNvbSIsInJvbGUiOiJNRU1CRVIiLCJpYXQiOjE2MTUzMDA5MDksImV4cCI6MTYxNTMzNjkwOX0.-yDYsGHd8ia95umArcO7QeL2pCx6VKTQjyFlZcImiPo
 
 ### Ajouter un workout
 POST {{baseUrl}}/members/11/new-workout
@@ -98,13 +99,10 @@ Content-Type: application/json
 
 ### Récupérer tous les coachs
 GET {{baseUrl}}/coachs
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjE1LCJlbWFpbCI6Im5vdXZlbGxlQGdtYWlsLmNvbSIsInJvbGUiOiJNRU1CRVIiLCJpYXQiOjE2MTUyMTAxNTcsImV4cCI6MTYxNTIxMzc1N30.zMg4MWa_UkvqkgD__0SX7a71XKhVnJIkhD9nkYjiUs8
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMsImVtYWlsIjoibWF0aGlsZGUuZnJlcmUxQGdtYWlsLmNvbSIsInJvbGUiOiJNRU1CRVIiLCJpYXQiOjE2MTUyOTUxNzMsImV4cCI6MTYxNTMzMTE3M30.-k1wWTA7q344WltcXNMx8GidMJsuhHzm_MRjgWYpANo
 
 ### Récupérer le profil d'un coach avec les spécialités
 GET {{baseUrl}}/coachs/6
-
-### Récupérer les RDV d'un coach
-GET {{baseUrl}}/coachs/6/bookings
 
 ### Récupérer les prochains RDV d'un coach
 GET {{baseUrl}}/coachs/7/next-bookings

@@ -1,22 +1,21 @@
 const express = require('express');
-const authController = require('./controllers/authController');
-const coachingController = require('./controllers/coachingController');
-const authorizationMiddleware = require('./jwt/authorizationMiddleware');
-
 const router = express.Router();
+
+const authorizationMiddleware = require('./jwt/authorizationMiddleware');
 
 const userController = require('./controllers/userController');
 const workoutController = require('./controllers/workoutController');
+const coachingController = require('./controllers/coachingController');
+const authController = require('./controllers/authController');
+const healthController = require('./controllers/healthController');
 
-
-router.get('/users', userController.allUsers);
 router.get('/members', userController.allMembers);
 router.get('/members/:id(\\d+)', userController.oneMember);
-router.get('/workouts', userController.allWorkoutsByMember);
+router.get('/workouts', authorizationMiddleware, workoutController.allWorkoutsByMember);
+router.get('/health', authorizationMiddleware, healthController.allHealthRecordsByMember);
 router.post('/members/:id(\\d+)/new-workout', workoutController.addWorkout);
 router.get('/coachs',authorizationMiddleware, userController.allCoachs);
 router.get('/coachs/:id(\\d+)', userController.oneCoach);
-router.get('/coachs/:id(\\d+)/bookings', coachingController.coachAllBookings);
 router.get('/coachs/:id(\\d+)/next-bookings', coachingController.coachNextBookings);
 router.get('/coachs/:id(\\d+)/last-bookings', coachingController.coachLastBookings);
 

@@ -4,15 +4,9 @@ const Workout = require('../models/workout');
 const db = require('../database');
 
 const userMapper = {
-    findAll: async () => {
-        const result = await db.query('SELECT * FROM "user";')
-
-        return result.rows.map(user => new User(user));
-    },
-
     findAllMembers: async () => {
         const result = await db.query(`
-        SELECT u.id, u.firstname, u.lastname, u.email
+        SELECT u.id, u.firstname, u.lastname, u.email, u.created_at, u.updated_at
         FROM "user" u
         WHERE u.role = 'MEMBER'`)
 
@@ -23,7 +17,7 @@ const userMapper = {
 
     findOneMember: async (id) => {
         const result = await db.query(`
-        SELECT u.id, u.firstname, u.lastname, u.email
+        SELECT u.id, u.firstname, u.lastname, u.email, u.created_at, u.updated_at
         FROM "user" u
         WHERE u.role = 'MEMBER'
         AND u.id = $1;`
@@ -40,56 +34,40 @@ const userMapper = {
     findAllCoachs : async ()=>{
 
         const result = await db.query(`
-        SELECT u.id as user_id, u.firstname, u.lastname, u.email, string_agg(s.name, ',') as specialities
+        SELECT u.id, u.firstname, u.lastname, u.email, string_agg(s.name, ',') as specialities, u.created_at, u.updated_at
         FROM "user" u 
         LEFT JOIN coach_has_specialty chs ON u.id = chs.coach_id
         LEFT JOIN specialty s ON chs.specialty_id = s.id
         WHERE u.role = 'COACH'
-        GROUP BY u.firstname, u.lastname, u.email, user_id
+        GROUP BY u.firstname, u.lastname, u.email, u.id
         ORDER BY u.firstname;
         `)
+        result.rows.forEach( coach => coach.specialities = coach.specialities.split(","))
 
-        return result.rows;
+        return result.rows.map(coach => new User(coach));
 
     },
 
     findOneCoach : async (coachId)=> {
 
         const result = await db.query(`
-        SELECT u.id as user_id, u.firstname, u.lastname, u.email, string_agg(s.name, ',') as specialities
+        SELECT u.id, u.firstname, u.lastname, u.email, string_agg(s.name, ',') as specialities, u.created_at, u.updated_at
         FROM "user" u 
         LEFT JOIN coach_has_specialty chs ON u.id = chs.coach_id
         LEFT JOIN specialty s ON chs.specialty_id = s.id
         WHERE u.role = 'COACH'
         AND u.id = $1
-        GROUP BY u.firstname, u.lastname, u.email, user_id;
+        GROUP BY u.firstname, u.lastname, u.email, u.id;
         `, [coachId])
 
         if(!result.rows.length){
             throw new Error ("Pas de coach avec l'user_id : "+ coachId)
         }
-        return result.rows[0];
+
+        result.rows[0].specialities = result.rows[0].specialities.split(",");
+        return new User (result.rows[0]);
     },
     
-    //modifier pour un user
-    findAllWorkoutsByMember: async (id) => {
-
-        const result = await db.query(`
-        SELECT u.firstname as member_firtname, w.date as workout_date, w.content as description, uc.firstname as coach_firstname, "c".created_at as comment_date, "c".content as comment
-        FROM "user" u
-        JOIN workout w ON w.member_id = u.id
-        LEFT JOIN "comment" "c" ON w.id = "c".workout_id
-        LEFT JOIN "user" uc ON "c".coach_id = uc.id
-        WHERE u.role = 'MEMBER'
-        AND u.id = $1;`
-        , [id])
-
-        if(!result.rows.length){
-            throw new Error("pas de workout pour le membre avec l'id" + id)
-        }
-
-        return result.rows;
-    },
 
     addUser: async (user) => {
 
