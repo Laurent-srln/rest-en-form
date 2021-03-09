@@ -1,6 +1,8 @@
 const { config } = require('process');
 const workoutMapper = require('../mappers/workoutMapper');
 
+const jsonwebtoken = require('jsonwebtoken');
+
 const dayjs = require('dayjs');
 // Pour les timezones
 const utc = require('dayjs/plugin/utc'); // dependent on utc plugin
@@ -15,6 +17,19 @@ dayjs.locale('fr');
 
 
 const workoutController = {
+
+    allWorkoutsByMember: async (req, res) => {
+
+        const {userId} = jsonwebtoken.decode(req.headers.authorization.substring(7))
+        try{
+        const workouts = await workoutMapper.findAllWorkoutsByMember(userId);
+
+        res.json(workouts)
+        }catch(err){
+            res.status(400).json(err.message);
+        }
+    },
+
     addWorkout: async (req, res) => {
 
     

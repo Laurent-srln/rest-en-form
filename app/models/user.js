@@ -3,8 +3,7 @@ class User {
     firstname;
     lastname;
     email;
-    password;
-    role;
+    specialities;
     createdAt;
     updatedAt
 

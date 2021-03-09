@@ -12,12 +12,6 @@ const coachingController = require('./coachingController');
 
 
 const userController = {
-    allUsers: async (req, res) => {
-        const users = await userMapper.findAll();
-console.log(process.env.DATABASE_URL);
-        res.json(users)
-    },
-
     allMembers: async (req, res) => {
 
         try{
@@ -42,28 +36,12 @@ console.log(process.env.DATABASE_URL);
         }
     },
 
-    //a modifier pour un member
-    allWorkoutsByMember: async (req, res) => {
-
-        const {userId} = jsonwebtoken.decode(req.headers.authorization.substring(7)) //Ici, c'est l'id d'un user/member
-        try{
-        const workouts = await userMapper.findAllWorkoutsByMember(userId);
-
-        res.json(workouts)
-        }catch(err){
-            res.status(400).json(err.message);
-        }
-    },
-
     allCoachs : async (req, res) => {
-
-        console.log(jsonwebtoken.decode(req.headers.authorization.substring(7)));
 
         try {
             const coachs = await userMapper.findAllCoachs();
-        
-        coachs.forEach( coach => coach.specialities = coach.specialities.split(","));
-        
+    
+    
         res.json(coachs)
         } catch(err){
             res.status(400).json(err.message);
@@ -76,8 +54,12 @@ console.log(process.env.DATABASE_URL);
 
         try{
         const coach = await userMapper.findOneCoach(id);
+<<<<<<< HEAD
         
         coach.specialities = coach.specialities.split(",");
+=======
+        console.log(coach);
+>>>>>>> tokenLaurent
 
         res.json(coach)
         }catch(err){

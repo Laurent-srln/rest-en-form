@@ -1,31 +1,18 @@
 class Health {
     id;
+    createdAt;
+    updatedAt;
+    workoutId;
+    workoutDate;
     weight;
     muscleMass;
     fatMass;
     boneMass;
     bodyWater;
-    workoutId;
-    createdAt;
-    updatedAt
+    memberId;
+    memberFirstname;
+    memberLastname
 
-    set muscle_mass(val) {
-        this.muscleMass = val
-    }
-
-    set fat_mass(val) {
-        this.minPlayers = val;
-    }
-    set bone_mass(val) {
-        this.minPlayers = val;
-    }
-    set body_water(val) {
-        this.minPlayers = val;
-    }
-
-    set workout_id(val) {
-        this.workoutId = val;
-    }
 
     set created_at(val){
         this.createdAt = val;
@@ -34,6 +21,43 @@ class Health {
     set updated_at(val){
         this.updatedAt = val;
     }
+
+    set workout_id(val) {
+        this.workoutId = val;
+    }
+
+    set workout_date(val) {
+        this.workoutDate = val;
+    }
+
+    set muscle_mass(val) {
+        this.muscleMass = val
+    }
+
+    set fat_mass(val) {
+        this.fatMass = val;
+    }
+
+    set bone_mass(val) {
+        this.boneMass = val;
+    }
+
+    set body_water(val) {
+        this.bodyWater= val;
+    }
+
+    set member_id(val) {
+        this.memberId = val;
+    }
+
+    set member_firstname(val) {
+        this.memberFirstname = val;
+    }
+
+    set member_lastname(val) {
+        this.memberLastname = val;
+    }
+
     
     constructor(data) {
         for (const prop in data) {

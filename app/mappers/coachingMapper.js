@@ -17,6 +17,7 @@ const { time } = require('console');
 
 const coachingMapper = {
 
+<<<<<<< HEAD
     findAllBookings: async (coachId) => {
         const result = await db.query(`
         SELECT to_char(start_time, 'YYYY-MM-DD') as date, start_time::time, end_time::time, concat(member.firstname,' ', member.lastname)
@@ -36,6 +37,8 @@ const coachingMapper = {
     },
 
 
+=======
+>>>>>>> tokenLaurent
     findNextBookings: async (coachId) => {
         const result = await db.query(`
         SELECT to_char(start_time, 'YYYY-MM-DD') as date, start_time::time, end_time::time, concat(member.firstname,' ', member.lastname)

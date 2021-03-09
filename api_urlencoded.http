@@ -32,9 +32,6 @@ email=nouvelle@gmail.com&password=tata
 ############################## MEMBERS #############################
 
 
-### Récupérer tous le users
-GET {{baseUrl}}/users
-
 ### Récupérer tous les adhérents
 GET {{baseUrl}}/members
 
@@ -64,9 +61,6 @@ GET {{baseUrl}}/coachs
 
 ### Récupérer le profil d'un coach avec les spécialités
 GET {{baseUrl}}/coachs/6
-
-### Récupérer les RDV d'un coach
-GET {{baseUrl}}/coachs/6/bookings
 
 ### Récupérer les prochains RDV d'un coach
 GET {{baseUrl}}/coachs/7/next-bookings
