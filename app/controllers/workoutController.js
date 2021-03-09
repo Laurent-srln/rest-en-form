@@ -34,7 +34,7 @@ const workoutController = {
 
     
         const newWorkout = req.body;
-        const memberId = req.params.id;
+        const {userId} = jsonwebtoken.decode(req.headers.authorization.substring(7))
 
         try {
 
@@ -53,7 +53,7 @@ const workoutController = {
         };
 
 
-        const workout = await workoutMapper.addWorkout(newWorkout, memberId);
+        const workout = await workoutMapper.addWorkout(newWorkout, userId);
 
         res.json(workout)
         }

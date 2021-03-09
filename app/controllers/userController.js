@@ -1,9 +1,9 @@
-const { config } = require('process');
+
 const userMapper = require('../mappers/userMapper');
+const passwordMail = require('../services/passwordMail');
 const emailValidator = require('email-validator');
 
-const jsonwebtoken = require('jsonwebtoken');
-const jwtSecret = require('../jwt/jwtSecret');
+const { v4: uuidv4 } = require('uuid');
 
 
 const userController = {
@@ -75,7 +75,10 @@ const userController = {
 
 
         try {
+            user.token = uuidv4();
             const newUser = await userMapper.addUser(user);
+
+            passwordMail(user.token, user.email);
 
             res.json(newUser)
         } catch (err) {
