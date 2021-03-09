@@ -4,11 +4,6 @@ const emailValidator = require('email-validator');
 
 const jsonwebtoken = require('jsonwebtoken');
 const jwtSecret = require('../jwt/jwtSecret');
-<<<<<<< HEAD
-const { deleteUser } = require('../mappers/userMapper');
-const coachingController = require('./coachingController');
-=======
->>>>>>> 71a4520903e6f3e67f8b506fe0db810433788e89
 
 
 const userController = {
@@ -54,12 +49,7 @@ const userController = {
 
         try{
         const coach = await userMapper.findOneCoach(id);
-<<<<<<< HEAD
-        
-        coach.specialities = coach.specialities.split(",");
-=======
         console.log(coach);
->>>>>>> tokenLaurent
 
         res.json(coach)
         }catch(err){

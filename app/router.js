@@ -1,17 +1,4 @@
 const express = require('express');
-<<<<<<< HEAD
-const authController = require('./controllers/authController');
-const coachingController = require('./controllers/coachingController');
-const authorizationMiddleware = require('./jwt/authorizationMiddleware');
-<<<<<<< HEAD
-const userController = require('./controllers/userController');
-const workoutController = require('./controllers/workoutController');
-=======
->>>>>>> 71a4520903e6f3e67f8b506fe0db810433788e89
-
-const router = express.Router();
-
-=======
 const router = express.Router();
 
 const authorizationMiddleware = require('./jwt/authorizationMiddleware');
@@ -21,7 +8,6 @@ const workoutController = require('./controllers/workoutController');
 const coachingController = require('./controllers/coachingController');
 const authController = require('./controllers/authController');
 const healthController = require('./controllers/healthController');
->>>>>>> tokenLaurent
 
 router.get('/members', userController.allMembers);
 router.get('/members/:id(\\d+)', userController.oneMember);
