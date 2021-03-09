@@ -52,7 +52,7 @@ GET {{baseUrl}}/members/6
 
 ### Récupérer tous les Workouts d'un adhérent
 GET {{baseUrl}}/workouts
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMsImVtYWlsIjoibWF0aGlsZGUuZnJlcmUxQGdtYWlsLmNvbSIsInJvbGUiOiJNRU1CRVIiLCJpYXQiOjE2MTUyMTEwMTcsImV4cCI6MTYxNTIxNDYxN30.kIaeEWHQtMmqXG_k8dFVnmw7SukJlm6g9_wpN4HsjXA
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMsImVtYWlsIjoibWF0aGlsZGUuZnJlcmUxQGdtYWlsLmNvbSIsInJvbGUiOiJNRU1CRVIiLCJpYXQiOjE2MTUyOTA4MTMsImV4cCI6MTYxNTMyNjgxM30.59wM8FQY53H-VN69MfuFYNAHVyC2z7uAeBIBwsUORK0
 
 ### Ajouter un workout par un member
 POST {{baseUrl}}/members/1/new-workout
@@ -69,7 +69,7 @@ Content-Type: application/json
 }
 
 ### suppression d'un user
-DELETE {{baseUrl}}/users/15
+DELETE {{baseUrl}}/users/7
 
 ### Ajouter new Member
 POST {{baseUrl}}/new-user

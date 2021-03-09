@@ -35,28 +35,6 @@ const coachingMapper = {
         return result.rows;
     },
 
-    // findOneBooking : async (id) => {
-
-    //     const result = await db.query(`
-    //     SELECT to_char(start_time, 'YYYY-MM-DD') as date, start_time::time, end_time::time,
-    //     concat(coach.firstname,' ', coach.lastname) as coach,
-    //     concat(member.firstname,' ',member.lastname) as member
-    //     FROM "coaching" c
-    //     LEFT JOIN "user" coach ON c.coach_id = coach.id
-	// 	LEFT JOIN "user" member ON c.member_id = member.id
-    //     WHERE id = $1;
-    //     `,
-    //     [id])
-
-    //     if(!result.rows[0]){
-
-    //         throw new Error("Pas de Booking pour cet id")
-    //     }
-    //     console.log(result.rows[0])
-        
-    //     return result.rows[0];
-        
-    // },
 
     findNextBookings: async (coachId) => {
         const result = await db.query(`
@@ -170,7 +148,7 @@ const coachingMapper = {
 
     },
 
-    findOneBooking : async (id) => {
+    findOneBookingToDelete : async (id) => {
 
         const result = await db.query(`
         SELECT *
@@ -193,10 +171,8 @@ const coachingMapper = {
         `, [id])
 
         return deletedCoaching;
-    }
-    
-    
-    
+    },
+
 };
 
 module.exports = coachingMapper;

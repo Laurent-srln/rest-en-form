@@ -135,12 +135,25 @@ const userMapper = {
 
     deleteOneUser : async (id) =>{
 
-        const result = await db.query(`
-            DELETE FROM "user" 
-            WHERE id = $1
-        `, [id])
+    
+        const check = await db.query(`
+        SELECT role
+        FROM "user"
+        WHERE id = $1`, [id])
 
-        return result
+        if(check.rows[0].role === "MEMBER"){
+            
+            await db.query(`
+            UPDATE "coaching"
+            SET member_id = NULL
+            WHERE member_id = $1`, [id])   
+        }
+        
+           const result = await db.query(`
+            DELETE FROM "user"
+            WHERE id =$1`,[id])
+        
+        return result;     
     }
   
 };

@@ -5,6 +5,7 @@ const emailValidator = require('email-validator');
 const jsonwebtoken = require('jsonwebtoken');
 const jwtSecret = require('../jwt/jwtSecret');
 const { deleteUser } = require('../mappers/userMapper');
+const coachingController = require('./coachingController');
 
 
 const userController = {
@@ -117,6 +118,7 @@ console.log(process.env.DATABASE_URL);
             res.status(400).json("Pas de user à cet id, veuillez en entrer un valide")
         }
         else {
+
             await userMapper.deleteOneUser(isUser.id);
 
             res.json("cet user a bien été supprimé")

@@ -29,7 +29,7 @@ router.post('/login-email', authController.submitLogin);
 router.post('/book-coaching', coachingController.findAvailableCoachings);
 
 
-router.delete('/coaching/:id(\\d+)', coachingController.deleteACoaching);
+router.delete('/coaching/:id(\\d+)', coachingController.deleteACoachingByPk);
 router.delete('/users/:id(\\d+)', userController.deleteUser);
 
 

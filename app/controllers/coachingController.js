@@ -122,7 +122,8 @@ const coachingController = {
 
     },
 
-    deleteACoaching : async (req, res) => {
+    //Delete par un manager
+    deleteACoachingByPk : async (req, res) => {
 
         try{
         const {id} = req.params;
@@ -136,8 +137,7 @@ const coachingController = {
         }catch(err){
             res.status(400).json("id déjà supprimé");
         }
-        
-             
+               
     }
 
 };
