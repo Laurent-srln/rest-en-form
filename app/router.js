@@ -17,8 +17,12 @@ router.get('/health', authorizationMiddleware, healthController.allHealthRecords
 router.post('/new-workout',authorizationMiddleware, workoutController.addWorkout);
 router.get('/coachs',authorizationMiddleware, userController.allCoachs);
 router.get('/coachs/:id(\\d+)', userController.oneCoach);
-router.get('/next-bookings',authorizationMiddleware, coachingController.coachNextBookings);
-router.get('/last-bookings',authorizationMiddleware, coachingController.coachLastBookings);
+router.get('/coach-next-bookings',authorizationMiddleware, coachingController.coachNextBookings);
+router.get('/coach-last-bookings',authorizationMiddleware, coachingController.coachLastBookings);
+
+//! Il faudra créer je pense de nouvelles routes pour qu'un coach récupère les prochaines résa d'un adhérent. Pour la query on récupèrera donc l'id via l'url et non le token.
+router.get('/member-next-bookings',authorizationMiddleware, coachingController.memberNextBookings);
+// router.get('/member-last-bookings',authorizationMiddleware, coachingController.memberLastBookings);
 router.get('/coaching/:id(\\d+)', coachingController.findACoachingById);
 router.get('/specialties', specialtyController.allspecialties);
 
@@ -26,8 +30,12 @@ router.post('/new-coachings', coachingController.addCoachings);
 router.post('/new-user', userController.newUser);
 router.post('/register', authController.newPassword);
 router.post('/login', authController.submitLogin);
-router.post('/book-coaching', coachingController.findAvailableCoachings);
+
 router.post('/specialties', specialtyController.newSpecialty);
+router.post('/available-coachings', authorizationMiddleware, coachingController.findAvailableCoachings);
+router.post('/book-coaching',authorizationMiddleware, coachingController.bookCoaching);
+
+router.patch('/bookings/:coachingId/delete',authorizationMiddleware, coachingController.deleteBooking);
 
 router.delete('/coaching/:id(\\d+)', coachingController.deleteACoachingByPk);
 router.delete('/users/:id(\\d+)', userController.deleteUser);
