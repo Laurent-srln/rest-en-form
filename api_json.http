@@ -26,8 +26,8 @@ POST {{baseUrl}}/login
 Content-Type: application/json
 
 {
-    "email": "alext@coach.com",
-    "password": "coach"
+    "email": "alaint@gmail.com",
+    "password": "password"
 }
 
 
@@ -47,6 +47,10 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMsImVtY
 ### Récupérer tous les healthRecords d'un adhérent
 GET {{baseUrl}}/health
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMsImVtYWlsIjoibWF0aGlsZGUuZnJlcmUxQGdtYWlsLmNvbSIsInJvbGUiOiJNRU1CRVIiLCJpYXQiOjE2MTUzMDA5MDksImV4cCI6MTYxNTMzNjkwOX0.-yDYsGHd8ia95umArcO7QeL2pCx6VKTQjyFlZcImiPo
+
+### Récupérer les prochains RDV d'un memeber
+GET {{baseUrl}}/member-next-bookings
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjM1LCJlbWFpbCI6ImFsYWludEBnbWFpbC5jb20iLCJyb2xlIjoiTUVNQkVSIiwiaWF0IjoxNjE1Mzc5MTY4LCJleHAiOjE2MTU0MTUxNjh9.LLxeSRK0kU_LeKxbknRHYlmua3Q8UYsLko3Csk3dRlk
 
 ### Ajouter un workout par un member
 POST {{baseUrl}}/new-workout
@@ -101,11 +105,11 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMsImVtY
 GET {{baseUrl}}/coachs/6
 
 ### Récupérer les prochains RDV d'un coach
-GET {{baseUrl}}/next-bookings
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjM0LCJlbWFpbCI6ImFsZXh0QGNvYWNoLmNvbSIsInJvbGUiOiJDT0FDSCIsImlhdCI6MTYxNTMyNTk2MSwiZXhwIjoxNjE1MzYxOTYxfQ.UeLUIlDpIYOp5DyFIGS976anhTkUkIlylZZ6fFGBBAQ
+GET {{baseUrl}}/coach-next-bookings
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjM1LCJlbWFpbCI6ImFsYWludEBnbWFpbC5jb20iLCJyb2xlIjoiTUVNQkVSIiwiaWF0IjoxNjE1Mzc5MTY4LCJleHAiOjE2MTU0MTUxNjh9.LLxeSRK0kU_LeKxbknRHYlmua3Q8UYsLko3Csk3dRlk
 
 ### Récuperer les RDv passés d'un coach
-GET {{baseUrl}}/last-bookings
+GET {{baseUrl}}/coach-last-bookings
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjM0LCJlbWFpbCI6ImFsZXh0QGNvYWNoLmNvbSIsInJvbGUiOiJDT0FDSCIsImlhdCI6MTYxNTMyNTk2MSwiZXhwIjoxNjE1MzYxOTYxfQ.UeLUIlDpIYOp5DyFIGS976anhTkUkIlylZZ6fFGBBAQ
 
 ### Ajouter new Coach (même route avec array specialities en plus)
@@ -136,7 +140,7 @@ Content-Type: application/json
 
 
 ### Récupérer coachings disponibles a une date
-POST https://app-osport.herokuapp.com/book-coaching
+POST {{baseUrl}}/available-coachings
 Content-Type: application/json
 
 {
@@ -148,3 +152,17 @@ GET {{baseUrl}}/coaching/5
 
 ### suppression d'un coaching
 DELETE {{baseUrl}}/coaching/5
+
+### Réserver un coaching
+POST {{baseUrl}}/book-coaching
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjM1LCJlbWFpbCI6ImFsYWludEBnbWFpbC5jb20iLCJyb2xlIjoiTUVNQkVSIiwiaWF0IjoxNjE1Mzc5MTY4LCJleHAiOjE2MTU0MTUxNjh9.LLxeSRK0kU_LeKxbknRHYlmua3Q8UYsLko3Csk3dRlk
+
+{
+    "coachingId": 1
+}
+
+### Supprimer une réservation
+PATCH {{baseUrl}}/bookings/3/delete
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjM1LCJlbWFpbCI6ImFsYWludEBnbWFpbC5jb20iLCJyb2xlIjoiTUVNQkVSIiwiaWF0IjoxNjE1Mzc5MTY4LCJleHAiOjE2MTU0MTUxNjh9.LLxeSRK0kU_LeKxbknRHYlmua3Q8UYsLko3Csk3dRlk

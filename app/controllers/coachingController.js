@@ -14,6 +14,18 @@ require('dayjs/locale/fr');
 dayjs.locale('fr');
 
 const coachingController = {
+    memberNextBookings: async (req, res) => {
+
+        const {userId} = jsonwebtoken.decode(req.headers.authorization.substring(7));
+        try{
+        const bookings = await coachingMapper.findNextBookingsByMember(userId);
+        
+        res.json(bookings)
+        }catch(err){
+            res.status(404).json(err.message)
+        }
+    },
+
     coachNextBookings: async (req, res) => {
 
         const {userId} = jsonwebtoken.decode(req.headers.authorization.substring(7));
@@ -100,7 +112,7 @@ const coachingController = {
         const {id} = req.params;
 
         try{
-        const result = await coachingMapper.findOneBooking(id);
+        const result = await coachingMapper.findOneCoaching(id);
         
         console.log(result);
        
@@ -116,7 +128,7 @@ const coachingController = {
         try{
         const {id} = req.params;
         
-        const isCoaching = await coachingMapper.findOneBooking(id);
+        const isCoaching = await coachingMapper.findOneCoaching(id);
         
             await coachingMapper.deleteOneCoaching(isCoaching.id);
 
@@ -126,8 +138,50 @@ const coachingController = {
             res.status(400).json("id déjà supprimé");
         }
                
-    }
+    },
 
+    bookCoaching: async (req,res) => {
+
+        try {
+
+            const { coachingId } = req.body;
+            const {userId} = jsonwebtoken.decode(req.headers.authorization.substring(7));
+
+            const check = await coachingMapper.findOneCoaching(coachingId);
+
+            if (check.member_id) {
+                return res.json("Coaching déjà réserevé.");
+            }
+
+            const coaching = await coachingMapper.bookCoaching(userId,coachingId );
+
+            res.json('Réservation bien enregistrée.');
+        } catch(err){
+            res.status(400).json(err.message);
+        } 
+    },
+
+    deleteBooking: async (req,res) => {
+
+        try {
+
+        const { coachingId } = req.params;
+        const { userId } = jsonwebtoken.decode(req.headers.authorization.substring(7));
+
+        const check = await coachingMapper.findOneCoaching(coachingId);
+
+        if (check.member_id !== userId) {
+            return res.json("Vous n'avez pas réservé ce coaching.");
+        }
+
+        await coachingMapper.deleteBooking(userId, coachingId);
+
+        res.json('Réservation annulée.')
+
+    } catch(err){
+            res.status(400).json(err.message);
+        } 
+    }
 };
 
 module.exports = coachingController;
