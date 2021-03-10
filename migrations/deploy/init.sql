@@ -65,7 +65,7 @@ CREATE TABLE coaching (
     start_time timestamptz NOT NULL,
     end_time timestamptz NOT NULL,
     coach_id int NOT NULL REFERENCES "user"(id) ON DELETE CASCADE,
-    member_id int REFERENCES "user"(id) ON DELETE CASCADE,
+    member_id int REFERENCES "user"(id),
     created_at timestamptz NOT NULL DEFAULT now(),
     updated_at timestamptz
 );

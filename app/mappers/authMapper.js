@@ -1,13 +1,28 @@
 const db = require('../database');
 const authMapper = {
 
-    addPassword : async (email, password) => {
+    findToken: async (token) => {
+        result = await db.query(`
+        
+        SELECT id
+        FROM "user"
+        WHERE "token" = $1`,
+        [token]
+        );
+
+        return result.rows[0];
+    },
+
+    addPassword : async (token, password) => {
+
+        console.log({"token": token, "password":password});
 
         await db.query(`
+
         UPDATE "user"
-        SET password = $1
-        WHERE "email" = $2;`,
-        [password, email]
+        SET password = $1, token = NULL
+        WHERE "token" = $2`,
+        [password, token]
         )
     },
 

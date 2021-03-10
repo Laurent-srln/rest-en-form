@@ -2,7 +2,6 @@ const User = require('../models/user');
 const Workout = require('../models/workout');
 
 const db = require('../database');
-const { codePointAt } = require('../jwt/jwtSecret');
 
 const userMapper = {
     findAllMembers: async () => {
@@ -81,8 +80,8 @@ const userMapper = {
         }
 
         const result = await db.query(`
-        INSERT INTO "user" ("firstname", "lastname", "email", "role")
-        VALUES ($1, $2, $3, $4) RETURNING id;`, [user.firstname, user.lastname, user.email, user.role] 
+        INSERT INTO "user" ("firstname", "lastname", "email", "role", "token")
+        VALUES ($1, $2, $3, $4, $5) RETURNING id;`, [user.firstname, user.lastname, user.email, user.role, user.token] 
         );
 
         user.id = result.rows[0].id;

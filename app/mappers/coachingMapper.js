@@ -56,6 +56,7 @@ const coachingMapper = {
     },
 
     addCoachings: async (params) => {
+        console.log(params);
 
         const { date, start, end, coachId} = params;
         const startTs = dayjs(params.date + params.start);
@@ -69,6 +70,8 @@ const coachingMapper = {
         AND role = 'COACH';`, [coachId]);
 
         if (!checkCoach.rows.length) {
+
+            console.log(checkCoach.rows[0]);
             throw new Error(`Il n'y a pas de coach avec le user_id : ${coachId}`)
         };
 

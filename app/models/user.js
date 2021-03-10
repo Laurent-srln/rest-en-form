@@ -5,7 +5,7 @@ class User {
     email;
     specialities;
     createdAt;
-    updatedAt
+    updatedAt;
 
     set created_at(val){
         this.createdAt = val;

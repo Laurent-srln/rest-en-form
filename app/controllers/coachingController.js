@@ -1,4 +1,5 @@
 const coachingMapper = require('../mappers/coachingMapper');
+const jsonwebtoken = require('jsonwebtoken');
 
 const dayjs = require('dayjs');
 // Pour les timezones
@@ -15,9 +16,9 @@ dayjs.locale('fr');
 const coachingController = {
     coachNextBookings: async (req, res) => {
 
-        const {coachId} = jsonwebtoken.decode(req.headers.authorization.substring(7));
+        const {userId} = jsonwebtoken.decode(req.headers.authorization.substring(7));
         try{
-        const bookings = await coachingMapper.findNextBookings(coachId);
+        const bookings = await coachingMapper.findNextBookings(userId);
         
         res.json(bookings)
         }catch(err){
@@ -27,9 +28,9 @@ const coachingController = {
 
     coachLastBookings: async (req, res) => {
 
-        const {coachId} = jsonwebtoken.decode(req.headers.authorization.substring(7));
+        const {userId} = jsonwebtoken.decode(req.headers.authorization.substring(7));
         try{
-        const bookings = await coachingMapper.findLastBookings(coachId);
+        const bookings = await coachingMapper.findLastBookings(userId);
 
         res.json(bookings)
         }catch(err){
