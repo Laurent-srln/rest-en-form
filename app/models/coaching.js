@@ -3,7 +3,11 @@ class Coaching {
     startTime;
     endTime;
     coachId;
+    coachFirstname;
+    coachLastname;
     memberId;
+    memeberFirstname;
+    MemberLastname;
     createdAt;
     updatedAt
 

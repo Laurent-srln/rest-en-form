@@ -17,9 +17,24 @@ const { time } = require('console');
 
 const coachingMapper = {
 
+    findNextBookingsByMember: async (memberId) => {
+
+        const result = await db.query(`
+        SELECT c.id, start_time, end_time, coach_id, coach.firstname as coach_firstname, coach.lastname as coach_lastname, member_id, member.firstname as member_firstname, member.lastname as member_lastname, c.created_at, c.updated_at
+        FROM "coaching" c
+        LEFT JOIN "user" coach ON c.coach_id = coach.id
+        LEFT join "user" member ON c.member_id = member.id
+        WHERE c.member_id = $1
+        AND c.end_time > now()
+        ORDER BY start_time;`,
+        [memberId])
+
+        return result.rows.map(coaching => new Coaching(coaching));
+    },
+
     findNextBookings: async (coachId) => {
         const result = await db.query(`
-        SELECT to_char(start_time, 'YYYY-MM-DD') as date, start_time::time, end_time::time, concat(member.firstname,' ', member.lastname)
+        SELECT c.id, start_time, end_time, coach_id, coach.firstname as coach_firstname, coach.lastname as coach_lastname, member_id, member.firstname as member_firstname, member.lastname as member_lastname, c.created_at, c.updated_at
         FROM "coaching" c
         LEFT JOIN "user" coach ON c.coach_id = coach.id
         LEFT join "user" member ON c.member_id = member.id
@@ -29,16 +44,12 @@ const coachingMapper = {
         ORDER BY start_time;`,
         [coachId])
 
-        if(!result.rows){
-            throw new Error("Pas de RDV pour ce coach"+coachId)
-        }
-
-        return result.rows;
+        return result.rows.map(coaching => new Coaching(coaching));
     },
 
     findLastBookings: async (coachId) => {
         const result = await db.query(`
-        SELECT to_char(start_time, 'YYYY-MM-DD') as date, start_time::time, end_time::time, concat(member.firstname,' ', member.lastname)
+        SELECT c.id, start_time, end_time, coach_id, coach.firstname as coach_firstname, coach.lastname as coach_lastname, member_id, member.firstname as member_firstname, member.lastname as member_lastname, c.created_at, c.updated_at
         FROM "coaching" c
         LEFT JOIN "user" coach ON c.coach_id = coach.id
         LEFT join "user" member ON c.member_id = member.id
@@ -48,11 +59,7 @@ const coachingMapper = {
         ORDER BY start_time;`,
         [coachId])
 
-        if(!result.rows){
-            throw new Error("Pas de RDV pour ce coach"+coachId)
-        }
-
-        return result.rows;
+        return result.rows.map(coaching => new Coaching(coaching));
     },
 
     addCoachings: async (params) => {
@@ -132,7 +139,7 @@ const coachingMapper = {
 
     },
 
-    findOneBooking : async (id) => {
+    findOneCoaching : async (id) => {
 
         const result = await db.query(`
         SELECT *
@@ -141,7 +148,7 @@ const coachingMapper = {
 
         if(!result.rows[0]){
            
-            throw new Error( `pas de coaching avec cet id`);
+            throw new Error( `Pas de coaching avec cet id`);
         }
         
         return result.rows[0];
@@ -156,6 +163,32 @@ const coachingMapper = {
 
         return deletedCoaching;
     },
+
+
+
+    bookCoaching: async (memberId, coachingId ) => {
+
+
+        const result = await db.query(`
+        UPDATE "coaching"
+            SET member_id = $1
+            WHERE id = $2`, [memberId, coachingId]
+        )
+
+        
+        return result.rows[0];
+    },
+
+    deleteBooking : async (memberId, coachingId) => {
+        const result = await db.query(`
+        UPDATE "coaching"
+            SET member_id = NULL
+            WHERE member_id = $1 AND id = $2`, [memberId, coachingId]
+        )
+
+        
+        return result.rows[0]; 
+    }
 
 };
 
