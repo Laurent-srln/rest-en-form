@@ -23,8 +23,24 @@ class Coaching {
         this.coachId = val;
     }
 
+    set coach_firstname(val){
+        this.coachFirstname = val;
+    }
+
+    set coach_lastname(val){
+        this.coachLastname = val;
+    }
+
     set member_id(val){
         this.memberId = val;
+    }
+
+    set member_firstname(val){
+        this.memberFirstname = val;
+    }
+
+    set member_lastname(val){
+        this.memberLastname = val;
     }
 
     set created_at(val){
