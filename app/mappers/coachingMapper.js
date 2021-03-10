@@ -56,7 +56,7 @@ const coachingMapper = {
         WHERE c.member_id IS NOT NULL
         AND c.end_time < now()
         AND c.coach_id=$1
-        ORDER BY start_time;`,
+        ORDER BY start_time DESC;`,
         [coachId])
 
         return result.rows.map(coaching => new Coaching(coaching));
