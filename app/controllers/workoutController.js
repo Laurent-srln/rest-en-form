@@ -61,6 +61,30 @@ const workoutController = {
         res.status(400).json(err.message);
 
         };
+    },
+
+    addComment: async (req,res) => {
+
+            try {
+        const { workoutId } = req.params;
+        const { content } = req.body;
+        const {userId} = jsonwebtoken.decode(req.headers.authorization.substring(7))
+
+
+        const check = await workoutMapper.findComment(workoutId);
+console.log(check);
+        if (check) {
+           return res.status(200).json("Un commentaire existe déjà pour ce workout.")
+        }
+
+        const newComment = await workoutMapper.addComment(content, userId, workoutId);
+
+        return res.status(200).json("Commentaire bien ajouté au workout");
+    } catch (err) {
+        res.status(400).json(err.message);
+
+        } 
+
     }
 
 

@@ -52,8 +52,29 @@ const workoutMapper = {
         
         return workout;
 
+    },
+
+    findComment : async (workoutId) => {
+
+        const check = await db.query(`
+        SELECT id
+        FROM comment 
+        WHERE workout_id = $1;`, [workoutId]
+)
+
+        return check.rows[0];
+
+    },
+
+    addComment : async (content, coachId, workoutId) => {
+
+        const newComment = await db.query(`
+        INSERT INTO comment ("content", coach_id, workout_id)
+        VALUES ($1, $2, $3) RETURNING *;`, [content, coachId, workoutId]
+);
+
+        return newComment.rows[0];
     }
-    
 };
 
 module.exports = workoutMapper;

@@ -26,8 +26,8 @@ POST {{baseUrl}}/login
 Content-Type: application/json
 
 {
-    "email": "alaint@gmail.com",
-    "password": "password"
+    "email": "alext@coach.com",
+    "password": "coach"
 }
 
 
@@ -109,7 +109,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjM1LCJlb
 
 ### Récuperer les RDv passés d'un coach
 GET {{baseUrl}}/coach-last-bookings
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjM0LCJlbWFpbCI6ImFsZXh0QGNvYWNoLmNvbSIsInJvbGUiOiJDT0FDSCIsImlhdCI6MTYxNTMyNTk2MSwiZXhwIjoxNjE1MzYxOTYxfQ.UeLUIlDpIYOp5DyFIGS976anhTkUkIlylZZ6fFGBBAQ
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjM0LCJlbWFpbCI6ImFsZXh0QGNvYWNoLmNvbSIsInJvbGUiOiJDT0FDSCIsImlhdCI6MTYxNTM5OTEzOCwiZXhwIjoxNjE1NDM1MTM4fQ.L6cu4ZTURk5gaZ6sqLynrX7IxPettaYHUX3npT8UPoE
 
 ### Ajouter new Coach (même route avec array specialities en plus)
 POST {{baseUrl}}/new-user
@@ -123,6 +123,14 @@ Content-Type: application/json
     "specialities": [2, 5, 7]
 }
 
+### Ajouter new Comment
+POST {{baseUrl}}/new-comment/10
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjM0LCJlbWFpbCI6ImFsZXh0QGNvYWNoLmNvbSIsInJvbGUiOiJDT0FDSCIsImlhdCI6MTYxNTM5OTEzOCwiZXhwIjoxNjE1NDM1MTM4fQ.L6cu4ZTURk5gaZ6sqLynrX7IxPettaYHUX3npT8UPoE
+
+{
+    "content": "Test comment."
+}
 
 ############################## COACHING #############################
 
