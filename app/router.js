@@ -15,6 +15,7 @@ router.get('/members/:id(\\d+)', userController.oneMember);
 router.get('/workouts', authorizationMiddleware, workoutController.allWorkoutsByMember);
 router.get('/health', authorizationMiddleware, healthController.allHealthRecordsByMember);
 router.post('/new-workout',authorizationMiddleware, workoutController.addWorkout);
+router.delete('/delete-workout/:workoutId', authorizationMiddleware, workoutController.deleteWorkout);
 router.post('/new-comment/:workoutId',authorizationMiddleware, workoutController.addComment);
 router.get('/coachs',authorizationMiddleware, userController.allCoachs);
 router.get('/coachs/:id(\\d+)', userController.oneCoach);

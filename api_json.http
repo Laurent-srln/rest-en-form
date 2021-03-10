@@ -26,8 +26,8 @@ POST {{baseUrl}}/login
 Content-Type: application/json
 
 {
-    "email": "alext@coach.com",
-    "password": "coach"
+    "email": "alaint@gmail.com",
+    "password": "password"
 }
 
 
@@ -55,17 +55,22 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjM1LCJlb
 ### Ajouter un workout par un member
 POST {{baseUrl}}/new-workout
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMsImVtYWlsIjoibWF0aGlsZGUuZnJlcmUxQGdtYWlsLmNvbSIsInJvbGUiOiJNRU1CRVIiLCJpYXQiOjE2MTUzMDA5MDksImV4cCI6MTYxNTMzNjkwOX0.-yDYsGHd8ia95umArcO7QeL2pCx6VKTQjyFlZcImiPo
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjM1LCJlbWFpbCI6ImFsYWludEBnbWFpbC5jb20iLCJyb2xlIjoiTUVNQkVSIiwiaWF0IjoxNjE1NDAxNTMwLCJleHAiOjE2MTU0Mzc1MzB9.bMiPnoLxnOf84Q7Do-eh_ut2W0CCqd2yWKwV-ki6MYI
 
 {
     "date": "2021-02-16",
-    "content": "bla bla bla",
+    "content": "workout alain terrieur ",
     "weight": 45,
     "muscleMass": 87,
     "fatMass": 8,
     "boneMass": 5,
     "bodyWater": 59
 }
+
+### Supprimer un workout par un member
+DELETE {{baseUrl}}/delete-workout/18
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjM1LCJlbWFpbCI6ImFsYWludEBnbWFpbC5jb20iLCJyb2xlIjoiTUVNQkVSIiwiaWF0IjoxNjE1NDAxNTMwLCJleHAiOjE2MTU0Mzc1MzB9.bMiPnoLxnOf84Q7Do-eh_ut2W0CCqd2yWKwV-ki6MYI
 
 ### suppression d'un user
 DELETE {{baseUrl}}/users/7
@@ -124,7 +129,7 @@ Content-Type: application/json
 }
 
 ### Ajouter new Comment
-POST {{baseUrl}}/new-comment/10
+POST {{baseUrl}}/new-comment/9
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjM0LCJlbWFpbCI6ImFsZXh0QGNvYWNoLmNvbSIsInJvbGUiOiJDT0FDSCIsImlhdCI6MTYxNTM5OTEzOCwiZXhwIjoxNjE1NDM1MTM4fQ.L6cu4ZTURk5gaZ6sqLynrX7IxPettaYHUX3npT8UPoE
 

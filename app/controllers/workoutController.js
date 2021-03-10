@@ -63,6 +63,36 @@ const workoutController = {
         };
     },
 
+    deleteWorkout: async (req,res) => {
+
+        try {
+
+        const {userId} = jsonwebtoken.decode(req.headers.authorization.substring(7));
+        const { workoutId } = req.params;
+
+        const check = await workoutMapper.findWorkout(workoutId);
+
+        if (!check) {
+            res.status(200).json("Ce workout est introuvable.");
+            return;
+        }
+
+        if (check.member_id !== userId) {
+            res.status(200).json("Cet utilisateur ne peut pas supprimer ce workout.");
+            return;
+        }
+
+        await workoutMapper.deleteWorkout(workoutId, userId);
+
+        res.status(200).json("Le workout a été supprimé.");
+        return;
+    }         catch (err) {
+        res.status(400).json(err.message);
+
+        };
+
+    },
+
     addComment: async (req,res) => {
 
             try {

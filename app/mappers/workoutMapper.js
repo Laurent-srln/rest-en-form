@@ -52,6 +52,32 @@ const workoutMapper = {
         
         return workout;
 
+    },    
+    
+    findWorkout: async (workoutId) => {
+
+        const result = await db.query(`
+        
+        SELECT id, member_id
+        FROM workout
+        WHERE id = $1;`, [workoutId]
+); 
+return result.rows[0];
+
+    },
+
+
+
+    deleteWorkout: async (workoutId, memberId) => {
+
+        await db.query(`
+        
+        DELETE FROM workout
+        WHERE id = $1
+        AND member_id = $2;`, [workoutId, memberId]
+); 
+return;
+
     },
 
     findComment : async (workoutId) => {
