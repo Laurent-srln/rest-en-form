@@ -76,6 +76,7 @@ const userMapper = {
         SELECT id FROM "user" WHERE email = $1;`, [user.email]);
 
         if (check.rows.length) {
+            
             throw new Error(`Un utilisateur avec cette adresse email existe déjà. id : ${check.rows[0].id}`)
         }
 
@@ -97,8 +98,6 @@ const userMapper = {
         }
 
         return user;
-
-
     },
 
     findOneUser : async (id) => {

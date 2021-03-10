@@ -8,7 +8,7 @@ const workoutController = require('./controllers/workoutController');
 const coachingController = require('./controllers/coachingController');
 const authController = require('./controllers/authController');
 const healthController = require('./controllers/healthController');
-const coachingMapper = require('./mappers/coachingMapper');
+const specialtyController = require('./controllers/specialtyController');
 
 router.get('/members', userController.allMembers);
 router.get('/members/:id(\\d+)', userController.oneMember);
@@ -24,18 +24,22 @@ router.get('/coach-last-bookings',authorizationMiddleware, coachingController.co
 router.get('/member-next-bookings',authorizationMiddleware, coachingController.memberNextBookings);
 // router.get('/member-last-bookings',authorizationMiddleware, coachingController.memberLastBookings);
 router.get('/coaching/:id(\\d+)', coachingController.findACoachingById);
+router.get('/specialties', specialtyController.allspecialties);
 
 router.post('/new-coachings', coachingController.addCoachings);
 router.post('/new-user', userController.newUser);
 router.post('/register', authController.newPassword);
 router.post('/login', authController.submitLogin);
-router.post('/available-coachings', coachingController.findAvailableCoachings);
+
+router.post('/specialties', specialtyController.newSpecialty);
+router.post('/available-coachings', authorizationMiddleware, coachingController.findAvailableCoachings);
 router.post('/book-coaching',authorizationMiddleware, coachingController.bookCoaching);
 
 router.patch('/bookings/:coachingId/delete',authorizationMiddleware, coachingController.deleteBooking);
 
 router.delete('/coaching/:id(\\d+)', coachingController.deleteACoachingByPk);
 router.delete('/users/:id(\\d+)', userController.deleteUser);
+router.delete('/specialties/:id(\\d+)', specialtyController.deleteSpecialty);
 
 router.use((err, req, res, next) => {
     if (err.name === 'UnauthorizedError') {
