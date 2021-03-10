@@ -13,12 +13,12 @@
 
 
 ### Set new Password
-POST {{baseUrl}}/register?token=15776eed-2d35-44cd-8f87-de1a64f233d9
+POST {{baseUrl}}/register?token=0a8c6070-1978-448d-9317-f25dcd93a312
 Content-Type: application/json
 
 {
-    "password": "coach",
-    "confirm": "coach"
+    "password": "member",
+    "confirm": "member"
 }
 
 ### Connexion
@@ -26,8 +26,8 @@ POST {{baseUrl}}/login
 Content-Type: application/json
 
 {
-    "email": "alext@coach.com",
-    "password": "coach"
+    "email": "alibaba@gmail.com",
+    "password": "member"
 }
 
 
@@ -82,9 +82,9 @@ POST {{baseUrl}}/new-user
 Content-Type: application/json
 
 {
-    "firstname": "Alex",
+    "firstname": "TOTO",
     "lastname": "Térieur",
-    "email": "alext@coach.com",
+    "email": "toto@coach.com",
     "role": "COACH",
     "specialities": [2, 5, 7]
 }
@@ -95,8 +95,7 @@ Content-Type: application/json
 
 ### Récupérer tous les coachs
 GET {{baseUrl}}/coachs
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMsImVtYWlsIjoibWF0aGlsZGUuZnJlcmUxQGdtYWlsLmNvbSIsInJvbGUiOiJNRU1CRVIiLCJpYXQiOjE2MTUyOTUxNzMsImV4cCI6MTYxNTMzMTE3M30.-k1wWTA7q344WltcXNMx8GidMJsuhHzm_MRjgWYpANo
-
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImVtYWlsIjoiYWxpYmFiYUBnbWFpbC5jb20iLCJyb2xlIjoiTUVNQkVSIiwiaWF0IjoxNjE1MzgxMzQwLCJleHAiOjE2MTU0MTczNDB9.hAdf7XVga5gvjVDmvyUGo3MnA88RE2uX4MMVc_CUiYE
 ### Récupérer le profil d'un coach avec les spécialités
 GET {{baseUrl}}/coachs/6
 
@@ -113,9 +112,9 @@ POST {{baseUrl}}/new-user
 Content-Type: application/json
 
 {
-    "firstname": "Jean",
+    "firstname": "Tean",
     "lastname": "Dupont",
-    "email": "jean@edf.com",
+    "email": "Tean@edf.com",
     "role": "COACH",
     "specialities": [2, 5, 7]
 }
@@ -148,3 +147,20 @@ GET {{baseUrl}}/coaching/5
 
 ### suppression d'un coaching
 DELETE {{baseUrl}}/coaching/5
+
+############################## SPECIALTIES #############################
+
+### Récupérer toutes les spécialités
+GET {{baseUrl}}/specialties
+
+### Ajouter une spécialité
+POST {{baseUrl}}/specialties
+Content-Type: application/json
+
+{
+    "name": "Karate"
+    
+}
+
+### Supprimer une spécialité
+DELETE  {{baseUrl}}/specialties/15
