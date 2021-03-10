@@ -53,6 +53,7 @@ const authController = {
             
             res.status(200).json({ 
                 logged: true,
+                role: result.role,
                 token: jsonwebtoken.sign(jwtContent, jwtSecret, jwtOptions)});
             }
 
