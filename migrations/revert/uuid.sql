@@ -2,11 +2,7 @@
 
 BEGIN;
 
-BEGIN;
-
 ALTER TABLE "user"
-DROP COLUMN token 
-
-COMMIT;
+DROP COLUMN token;
 
 COMMIT;

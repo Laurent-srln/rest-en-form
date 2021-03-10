@@ -78,7 +78,7 @@ const userController = {
             user.token = uuidv4();
             const newUser = await userMapper.addUser(user);
 
-            passwordMail(user.token, user.email);
+            await passwordMail(user.token, user.email);
 
             res.json(newUser)
         } catch (err) {

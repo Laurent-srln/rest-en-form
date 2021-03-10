@@ -132,7 +132,7 @@ const coachingMapper = {
 
     },
 
-    findOneBookingToDelete : async (id) => {
+    findOneBooking : async (id) => {
 
         const result = await db.query(`
         SELECT *

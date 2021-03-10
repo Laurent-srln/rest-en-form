@@ -71,9 +71,9 @@ POST {{baseUrl}}/new-user
 Content-Type: application/json
 
 {
-    "firstname": "Alain",
-    "lastname": "Proviste",
-    "email": "alainp@gmail.com",
+    "firstname": "Ali",
+    "lastname": "baba",
+    "email": "alibaba@gmail.com",
     "role": "MEMBER"
 }
 
