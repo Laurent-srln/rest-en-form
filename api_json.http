@@ -161,14 +161,11 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjM0LCJlb
     "content": "Nouveau comment modifié."
 }
 
-### Modifier Comment
+### DELETE Comment
 DELETE {{baseUrl}}/delete-comment/7
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjM0LCJlbWFpbCI6ImFsZXh0QGNvYWNoLmNvbSIsInJvbGUiOiJDT0FDSCIsImlhdCI6MTYxNTQ1MzE3NCwiZXhwIjoxNjE1NDg5MTc0fQ.T0mc25PpeR2d2CmKDOpPvJEDguLCFk5zsoSBh72dJoo
 
-{
-    "content": "Nouveau comment modifié."
-}
 
 ############################## COACHING #############################
 
