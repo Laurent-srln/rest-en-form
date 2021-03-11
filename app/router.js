@@ -15,8 +15,11 @@ router.get('/members/:id(\\d+)', userController.oneMember);
 router.get('/workouts', authorizationMiddleware, workoutController.allWorkoutsByMember);
 router.get('/health', authorizationMiddleware, healthController.allHealthRecordsByMember);
 router.post('/new-workout',authorizationMiddleware, workoutController.addWorkout);
+router.patch('/edit-workout/:workoutId', authorizationMiddleware, workoutController.editWorkout);
 router.delete('/delete-workout/:workoutId', authorizationMiddleware, workoutController.deleteWorkout);
 router.post('/new-comment/:workoutId',authorizationMiddleware, workoutController.addComment);
+router.patch('/edit-comment/:commentId',authorizationMiddleware, workoutController.editComment);
+router.delete('/delete-comment/:commentId',authorizationMiddleware, workoutController.deleteComment);
 router.get('/coachs',authorizationMiddleware, userController.allCoachs);
 router.get('/coachs/:id(\\d+)', userController.oneCoach);
 router.get('/coach-next-bookings',authorizationMiddleware, coachingController.coachNextBookings);
@@ -34,7 +37,7 @@ router.post('/register', authController.newPassword);
 router.post('/login', authController.submitLogin);
 
 router.post('/specialties', specialtyController.newSpecialty);
-router.post('/available-coachings', authorizationMiddleware, coachingController.findAvailableCoachings);
+router.get('/available-coachings', authorizationMiddleware, coachingController.findAvailableCoachings);
 router.post('/book-coaching',authorizationMiddleware, coachingController.bookCoaching);
 
 router.patch('/bookings/:coachingId/delete',authorizationMiddleware, coachingController.deleteBooking);

@@ -131,7 +131,8 @@ const coachingMapper = {
         FROM "coaching" c
         LEFT JOIN "user" u ON c.coach_id = u.id
         WHERE start_time::date = $1
-        AND member_id IS NULL;`, [date]);
+        AND member_id IS NULL
+        ORDER BY c.start_time;`, [date]);
     
 
     return availableCoachings.rows;

@@ -88,7 +88,7 @@ const coachingController = {
         },
 
     findAvailableCoachings: async (req,res) => {
-        const { date } = req.body;
+        const { date } = req.query;
 
         if (dayjs(date).isSameOrBefore(dayjs(), 'day')) {
 
