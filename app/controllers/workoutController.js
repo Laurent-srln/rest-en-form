@@ -149,6 +149,12 @@ const workoutController = {
         const { content } = req.body;
         const {userId} = jsonwebtoken.decode(req.headers.authorization.substring(7));
 
+        const checkWorkout = await workoutMapper.findWorkout(workoutId);
+
+        if (!checkWorkout) {
+            res.status(200).json("Ce workout est introuvable.");
+            return;
+        }
 
         const check = await workoutMapper.findCommentByWorkoutId(workoutId);
 
