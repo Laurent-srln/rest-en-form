@@ -26,6 +26,19 @@ const coachingController = {
         }
     },
 
+    checkMemberNextBookings : async (req, res) => {
+
+        const {id} = req.params;
+        try{
+        const bookings = await coachingMapper.findNextBookingsByMember(id);
+        
+        res.json(bookings)
+        }catch(err){
+            res.status(404).json(err.message)
+        }
+        
+    },
+
     coachNextBookings: async (req, res) => {
 
         const {userId} = jsonwebtoken.decode(req.headers.authorization.substring(7));

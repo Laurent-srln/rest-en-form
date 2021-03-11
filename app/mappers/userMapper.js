@@ -133,7 +133,40 @@ const userMapper = {
             WHERE id =$1`,[id])
         
         return result;     
-    }
+    },
+    updateOneUser : async (id, user)=> {
+
+        const updatedUser = await db.query(`
+
+        UPDATE "user"
+        SET firstname = $1,
+        lastname = $2,
+        email = $3
+        WHERE id = $4
+        ;`, [user.firstname, user.lastname, user.email, id]
+        )
+
+        if(user.role === "COACH"){
+
+        await db.query (`
+        DELETE FROM
+        "coach_has_specialty"
+        WHERE coach_id = $1`, [id]
+        )
+
+            for (const specialtyId of user.specialties) {
+
+            await db.query(`
+            INSERT INTO "coach_has_specialty" (coach_id, specialty_id)
+            VALUES ($1, $2);`, [id, specialtyId] 
+            )
+
+            } ;
+          
+        }
+        return updatedUser;
+    },
+
   
 };
 
