@@ -102,6 +102,48 @@ const userController = {
             res.json("cet user a bien été supprimé")
         }   
         
+    },
+
+    editUser : async (req, res) => {
+
+        const {id} = req.params;
+
+        const user = req.body;
+
+        if (!user.email || !user.firstname || !user.lastname ) {
+            res.status(400).json({"message": `Tous les champs obligatoires doivent être remplis`})
+            return;
+        };
+
+        if(user.email){
+
+            const validEmail = emailValidator.validate(user.email);
+            if (!validEmail){
+
+                res.status(400).json({"message": `email non valide`})
+                return;
+            };
+        }
+       
+        try {
+            
+            const userToUpdate = await userMapper.findOneUser(id)
+
+            if(!userToUpdate){
+
+                res.status(400).json("Pas de user à cet id, veuillez en entrer un valide")
+            }
+            else{
+
+                await userMapper.updateOneUser(id, user);
+
+                res.status(200).json(user);
+            }
+      
+        } catch (err) {
+            res.status(400).json(err.message);
+        };
+   
     }
  
 }

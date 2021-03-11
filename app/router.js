@@ -12,6 +12,7 @@ const specialtyController = require('./controllers/specialtyController');
 
 router.get('/members', userController.allMembers);
 router.get('/members/:id(\\d+)', userController.oneMember);
+router.get('/members/:id(\\d+)/next-bookings', coachingController.checkMemberNextBookings);
 router.get('/workouts', authorizationMiddleware, workoutController.allWorkoutsByMember);
 router.get('/health', authorizationMiddleware, healthController.allHealthRecordsByMember);
 router.post('/new-workout',authorizationMiddleware, workoutController.addWorkout);
@@ -35,12 +36,14 @@ router.post('/new-coachings', coachingController.addCoachings);
 router.post('/new-user', userController.newUser);
 router.post('/register', authController.newPassword);
 router.post('/login', authController.submitLogin);
+router.patch('/users/:id(\\d+)', userController.editUser);
 
 router.post('/specialties', specialtyController.newSpecialty);
 router.get('/available-coachings', authorizationMiddleware, coachingController.findAvailableCoachings);
 router.post('/book-coaching',authorizationMiddleware, coachingController.bookCoaching);
 
 router.patch('/bookings/:coachingId/delete',authorizationMiddleware, coachingController.deleteBooking);
+
 
 router.delete('/coaching/:id(\\d+)', coachingController.deleteACoachingByPk);
 router.delete('/users/:id(\\d+)', userController.deleteUser);

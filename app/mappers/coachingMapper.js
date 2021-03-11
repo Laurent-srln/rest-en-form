@@ -32,6 +32,7 @@ const coachingMapper = {
         return result.rows.map(coaching => new Coaching(coaching));
     },
 
+    
     findNextBookings: async (coachId) => {
         const result = await db.query(`
         SELECT c.id, start_time, end_time, coach_id, coach.firstname as coach_firstname, coach.lastname as coach_lastname, member_id, member.firstname as member_firstname, member.lastname as member_lastname, c.created_at, c.updated_at
