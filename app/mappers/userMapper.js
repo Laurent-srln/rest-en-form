@@ -41,8 +41,11 @@ const userMapper = {
         GROUP BY u.firstname, u.lastname, u.email, u.id
         ORDER BY u.firstname;
         `)
-        result.rows.forEach( coach => coach.specialities = coach.specialities.split(","))
+        result.rows.forEach( coach => {
 
+            if (coach.specialities) {
+            coach.specialities = coach.specialities.split(",")}
+        })
         return result.rows.map(coach => new User(coach));
 
     },

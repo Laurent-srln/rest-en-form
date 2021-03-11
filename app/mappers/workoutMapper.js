@@ -52,12 +52,57 @@ const workoutMapper = {
         
         return workout;
 
+    },    
+
+    editWorkout: async (workoutId, updatedWorkout) => {
+
+        await db.query(`
+        
+        with updated_workout as (UPDATE workout
+        SET date = $1, content = $2
+        WHERE id = $3 RETURNING *)
+        
+        UPDATE health
+        SET weight = $4, muscle_mass = $5, fat_mass = $6, bone_mass = $7, body_water = $8
+        FROM updated_workout
+        WHERE health.workout_id = $3
+        ;
+        `, [updatedWorkout.date, updatedWorkout.content, workoutId, updatedWorkout.weight, updatedWorkout.muscleMass, updatedWorkout.fatMass, updatedWorkout.boneMass, updatedWorkout.bodyWater]);
+        
+        return; 
+
+    },
+    
+    findWorkout: async (workoutId) => {
+
+        const result = await db.query(`
+        
+        SELECT id, member_id
+        FROM workout
+        WHERE id = $1;`, [workoutId]
+); 
+return result.rows[0];
+
     },
 
-    findComment : async (workoutId) => {
+
+
+    deleteWorkout: async (workoutId, memberId) => {
+
+        await db.query(`
+        
+        DELETE FROM workout
+        WHERE id = $1
+        AND member_id = $2;`, [workoutId, memberId]
+); 
+return;
+
+    },
+
+    findCommentByWorkoutId : async (workoutId) => {
 
         const check = await db.query(`
-        SELECT id
+        SELECT id, coach_id, workout_id
         FROM comment 
         WHERE workout_id = $1;`, [workoutId]
 )
@@ -65,6 +110,19 @@ const workoutMapper = {
         return check.rows[0];
 
     },
+
+    findCommentById : async (commentId) => {
+
+        const check = await db.query(`
+        SELECT id, coach_id, workout_id
+        FROM comment 
+        WHERE id = $1;`, [commentId]
+)
+
+        return check.rows[0];
+
+    },
+
 
     addComment : async (content, coachId, workoutId) => {
 
@@ -74,6 +132,28 @@ const workoutMapper = {
 );
 
         return newComment.rows[0];
+    },
+
+    editComment: async (commentId, newContent, coachId) => {
+
+        const result = await db.query(`
+        UPDATE comment
+        SET content = $1
+        WHERE id = $2 
+        AND coach_id = $3;`, [newContent, commentId, coachId]
+);
+
+        return result.rows[0];
+    },
+
+    deleteComment: async (commentId, coachId) => {
+
+        await db.query(`
+        DELETE FROM comment
+        WHERE id = $1 
+        AND coach_id = $2;`, [commentId, coachId]
+);
+         return;
     }
 };
 

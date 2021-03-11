@@ -26,8 +26,8 @@ POST {{baseUrl}}/login
 Content-Type: application/json
 
 {
-    "email": "alext@coach.com",
-    "password": "coach"
+    "email": "alaint@gmail.com",
+    "password": "password"
 }
 
 
@@ -55,17 +55,37 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjM1LCJlb
 ### Ajouter un workout par un member
 POST {{baseUrl}}/new-workout
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMsImVtYWlsIjoibWF0aGlsZGUuZnJlcmUxQGdtYWlsLmNvbSIsInJvbGUiOiJNRU1CRVIiLCJpYXQiOjE2MTUzMDA5MDksImV4cCI6MTYxNTMzNjkwOX0.-yDYsGHd8ia95umArcO7QeL2pCx6VKTQjyFlZcImiPo
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjM1LCJlbWFpbCI6ImFsYWludEBnbWFpbC5jb20iLCJyb2xlIjoiTUVNQkVSIiwiaWF0IjoxNjE1NDcwOTQwLCJleHAiOjE2MTU1MDY5NDB9.wA2g3zL-19PbPI0N6c9P6ThEDHbWzDtEu_3RE_bpK7M
 
 {
-    "date": "2021-02-16",
-    "content": "bla bla bla",
-    "weight": 45,
+    "date": "2021-03-11",
+    "content": "Entrainement dos/ épaules 7 exercices 1h30",
+    "weight": 85,
     "muscleMass": 87,
     "fatMass": 8,
     "boneMass": 5,
     "bodyWater": 59
 }
+
+### Modifier un workout par un member
+PATCH {{baseUrl}}/edit-workout/19
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjM1LCJlbWFpbCI6ImFsYWludEBnbWFpbC5jb20iLCJyb2xlIjoiTUVNQkVSIiwiaWF0IjoxNjE1NDcwOTQwLCJleHAiOjE2MTU1MDY5NDB9.wA2g3zL-19PbPI0N6c9P6ThEDHbWzDtEu_3RE_bpK7M
+
+{
+    "date": "2021-03-11",
+    "content": "Workout modifié bis ",
+    "weight": 84,
+    "muscleMass": 9,
+    "fatMass": 9,
+    "boneMass": 9,
+    "bodyWater": 9
+}
+
+### Supprimer un workout par un member
+DELETE {{baseUrl}}/delete-workout/18
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjM1LCJlbWFpbCI6ImFsYWludEBnbWFpbC5jb20iLCJyb2xlIjoiTUVNQkVSIiwiaWF0IjoxNjE1NDAxNTMwLCJleHAiOjE2MTU0Mzc1MzB9.bMiPnoLxnOf84Q7Do-eh_ut2W0CCqd2yWKwV-ki6MYI
 
 ### suppression d'un user
 DELETE {{baseUrl}}/users/7
@@ -86,11 +106,11 @@ POST {{baseUrl}}/new-user
 Content-Type: application/json
 
 {
-    "firstname": "TOTO",
-    "lastname": "Térieur",
-    "email": "toto@coach.com",
+    "firstname": "Ali",
+    "lastname": "Lecoach",
+    "email": "alilecoach@coach.com",
     "role": "COACH",
-    "specialities": [2, 5, 7]
+    "specialities": []
 }
 
 
@@ -99,7 +119,7 @@ Content-Type: application/json
 
 ### Récupérer tous les coachs
 GET {{baseUrl}}/coachs
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImVtYWlsIjoiYWxpYmFiYUBnbWFpbC5jb20iLCJyb2xlIjoiTUVNQkVSIiwiaWF0IjoxNjE1MzgxMzQwLCJleHAiOjE2MTU0MTczNDB9.hAdf7XVga5gvjVDmvyUGo3MnA88RE2uX4MMVc_CUiYE
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjM0LCJlbWFpbCI6ImFsZXh0QGNvYWNoLmNvbSIsInJvbGUiOiJDT0FDSCIsImlhdCI6MTYxNTQ1ODQ2NywiZXhwIjoxNjE1NDk0NDY3fQ.kbzoCNS6yjW8TdwM_ZoLj6wbgDIzDnBqZ0PpPOfuTuY
 ### Récupérer le profil d'un coach avec les spécialités
 GET {{baseUrl}}/coachs/6
 
@@ -124,13 +144,28 @@ Content-Type: application/json
 }
 
 ### Ajouter new Comment
-POST {{baseUrl}}/new-comment/10
+POST {{baseUrl}}/new-comment/9
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjM0LCJlbWFpbCI6ImFsZXh0QGNvYWNoLmNvbSIsInJvbGUiOiJDT0FDSCIsImlhdCI6MTYxNTM5OTEzOCwiZXhwIjoxNjE1NDM1MTM4fQ.L6cu4ZTURk5gaZ6sqLynrX7IxPettaYHUX3npT8UPoE
 
 {
     "content": "Test comment."
 }
+
+### Modifier Comment
+PATCH {{baseUrl}}/edit-comment/7
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjM0LCJlbWFpbCI6ImFsZXh0QGNvYWNoLmNvbSIsInJvbGUiOiJDT0FDSCIsImlhdCI6MTYxNTQ1MzE3NCwiZXhwIjoxNjE1NDg5MTc0fQ.T0mc25PpeR2d2CmKDOpPvJEDguLCFk5zsoSBh72dJoo
+
+{
+    "content": "Nouveau comment modifié."
+}
+
+### DELETE Comment
+DELETE {{baseUrl}}/delete-comment/7
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjM0LCJlbWFpbCI6ImFsZXh0QGNvYWNoLmNvbSIsInJvbGUiOiJDT0FDSCIsImlhdCI6MTYxNTQ1MzE3NCwiZXhwIjoxNjE1NDg5MTc0fQ.T0mc25PpeR2d2CmKDOpPvJEDguLCFk5zsoSBh72dJoo
+
 
 ############################## COACHING #############################
 
@@ -147,12 +182,10 @@ Content-Type: application/json
 
 
 ### Récupérer coachings disponibles a une date
-POST {{baseUrl}}/available-coachings
+GET {{baseUrl}}/available-coachings?date=2021-04-05
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjM1LCJlbWFpbCI6ImFsYWludEBnbWFpbC5jb20iLCJyb2xlIjoiTUVNQkVSIiwiaWF0IjoxNjE1NDU0MzM3LCJleHAiOjE2MTU0OTAzMzd9.l3CjIwykudQ_ljEC72RY-MXcSR7xlskReZcwu0xOI8M
 
-{
-    "date": "2021-04-05"
-}
 
 ### Récupérer un coaching avec le coach et le membre qui y participe
 GET {{baseUrl}}/coaching/5
