@@ -209,11 +209,11 @@ const workoutController = {
             const check = await workoutMapper.findCommentById(commentId);
 
             if (!check) {
-                return res.status(200).json("Ce commentaire est introuvable.");
+                return res.status(404).json("Ce commentaire est introuvable.");
             }
 
             if (check.coach_id !== userId) {
-                return res.status(200).json("Vous ne pouvez pas supprimer ce commentaire.");
+                return res.status(403).json("Vous ne pouvez pas supprimer ce commentaire.");
             }
 
             await workoutMapper.deleteComment(commentId, userId);

@@ -72,7 +72,7 @@ GET {{baseUrl}}/coachs/7/last-bookings
 POST {{baseUrl}}/new-user
 Content-Type: application/x-www-form-urlencoded
 
-firstname=Bernard&lastname=Laporte&email=bernard@edf.com&role=COACH&specialities[0]=2&specialities[1]=4
+firstname=Bernard&lastname=Laporte&email=bernard@edf.com&role=COACH&specialties[0]=2&specialties[1]=4
 
 
 ############################## COACHING #############################

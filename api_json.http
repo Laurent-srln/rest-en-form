@@ -59,14 +59,14 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjM1LCJlb
 ### Ajouter un workout par un member
 POST {{baseUrl}}/new-workout
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjM1LCJlbWFpbCI6ImFsYWludEBnbWFpbC5jb20iLCJyb2xlIjoiTUVNQkVSIiwiaWF0IjoxNjE1NDcwOTQwLCJleHAiOjE2MTU1MDY5NDB9.wA2g3zL-19PbPI0N6c9P6ThEDHbWzDtEu_3RE_bpK7M
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjM1LCJlbWFpbCI6ImFsYWludEBnbWFpbC5jb20iLCJyb2xlIjoiTUVNQkVSIiwiaWF0IjoxNjE1NTcwNDk3LCJleHAiOjE2MTU2MDY0OTd9.RQ7WeXmtK7B-nbgJw4P5ceQ6ulmBe5fo6vJtBaGomxM
 
 {
     "date": "2021-03-11",
-    "content": "Entrainement dos/ épaules 7 exercices 1h30",
-    "weight": 85,
-    "muscleMass": 87,
-    "fatMass": 8,
+    "content": "Entrainement with Joi",
+    "weight": 86,
+    "muscleMass": 85,
+    "fatMass": 10,
     "boneMass": 5,
     "bodyWater": 59
 }
@@ -100,10 +100,10 @@ Content-Type: application/json
 
 {
     "firstname": "Ali",
-    "lastname": "Baboi",
+    "lastname": "Babo",
     "email": "Alibaboi@coach.com",
     "role": "MEMBER",
-    "specialties":[6, 2]
+    "specialties":[6, 2, 3]
     
 }
 
@@ -113,22 +113,22 @@ POST {{baseUrl}}/new-user
 Content-Type: application/json
 
 {
-    "firstname": "Ali",
-    "lastname": "baba",
-    "email": "alibaba@gmail.com",
+    "firstname": "CCC",
+    "lastname": "DDD",
+    "email": "cd@gmail.com",
     "role": "MEMBER"
 }
 
-### Ajouter new Coach (même route avec array specialities en plus)
+### Ajouter new Coach (même route avec array specialties en plus)
 POST {{baseUrl}}/new-user
 Content-Type: application/json
 
 {
-    "firstname": "Ali",
-    "lastname": "Lecoach",
-    "email": "alilecoach@coach.com",
+    "firstname": "NNN",
+    "lastname": "CCCC",
+    "email": "nc@coach.com",
     "role": "COACH",
-    "specialities": []
+    "specialties": [2,3]
 }
 
 
@@ -149,7 +149,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjM1LCJlb
 GET {{baseUrl}}/coach-last-bookings
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjM0LCJlbWFpbCI6ImFsZXh0QGNvYWNoLmNvbSIsInJvbGUiOiJDT0FDSCIsImlhdCI6MTYxNTM5OTEzOCwiZXhwIjoxNjE1NDM1MTM4fQ.L6cu4ZTURk5gaZ6sqLynrX7IxPettaYHUX3npT8UPoE
 
-### Ajouter new Coach (même route avec array specialities en plus)
+### Ajouter new Coach (même route avec array specialties en plus)
 POST {{baseUrl}}/new-user
 Content-Type: application/json
 
@@ -158,13 +158,13 @@ Content-Type: application/json
     "lastname": "Dupont",
     "email": "Tean@edf.com",
     "role": "COACH",
-    "specialities": [2, 5, 7]
+    "specialties": [2, 5, 7]
 }
 
 ### Ajouter new Comment
-POST {{baseUrl}}/new-comment/9
+POST {{baseUrl}}/new-comment/77
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjM0LCJlbWFpbCI6ImFsZXh0QGNvYWNoLmNvbSIsInJvbGUiOiJDT0FDSCIsImlhdCI6MTYxNTM5OTEzOCwiZXhwIjoxNjE1NDM1MTM4fQ.L6cu4ZTURk5gaZ6sqLynrX7IxPettaYHUX3npT8UPoE
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjM0LCJlbWFpbCI6ImFsZXh0QGNvYWNoLmNvbSIsInJvbGUiOiJDT0FDSCIsImlhdCI6MTYxNTQ3NDg0MiwiZXhwIjoxNjE1NTEwODQyfQ.ydOEp18fcYlI7MPTkVotkfRyAjq1cC1a6yr8-HwtFhs
 
 {
     "content": "Test comment."
