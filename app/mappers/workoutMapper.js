@@ -51,7 +51,7 @@ const workoutMapper = {
 
         workout.id = newWorkout.rows[0].workout_id;
         
-        return workout;
+        return new Workout(workout) ;
 
     },    
 
@@ -70,7 +70,7 @@ const workoutMapper = {
         ;
         `, [updatedWorkout.date, updatedWorkout.content, workoutId, updatedWorkout.weight, updatedWorkout.muscleMass, updatedWorkout.fatMass, updatedWorkout.boneMass, updatedWorkout.bodyWater]);
         
-        return; 
+        return new Workout(updatedWorkout);
 
     },
     
@@ -81,10 +81,10 @@ const workoutMapper = {
         SELECT id, member_id
         FROM workout
         WHERE id = $1;`, [workoutId]
-); 
-return result.rows[0];
+        ); 
+    return result.rows[0];
 
-    },
+    },  
 
 
 
@@ -95,8 +95,8 @@ return result.rows[0];
         DELETE FROM workout
         WHERE id = $1
         AND member_id = $2;`, [workoutId, memberId]
-); 
-return;
+        ); 
+    return;
 
     },
 
@@ -106,7 +106,7 @@ return;
         SELECT id, coach_id, workout_id
         FROM comment 
         WHERE workout_id = $1;`, [workoutId]
-)
+        )
 
         return check.rows[0];
 
@@ -117,8 +117,8 @@ return;
         const check = await db.query(`
         SELECT id, coach_id, workout_id
         FROM comment 
-        WHERE id = $1;`, [commentId]
-)
+        WHERE id = $1;`, [commentId]    
+        )
 
         return check.rows[0];
 
@@ -130,7 +130,7 @@ return;
         const newComment = await db.query(`
         INSERT INTO comment ("content", coach_id, workout_id)
         VALUES ($1, $2, $3) RETURNING *;`, [content, coachId, workoutId]
-);
+        );
 
         return newComment.rows[0];
     },
@@ -142,7 +142,7 @@ return;
         SET content = $1
         WHERE id = $2 
         AND coach_id = $3;`, [newContent, commentId, coachId]
-);
+        );
 
         return result.rows[0];
     },
@@ -153,7 +153,7 @@ return;
         DELETE FROM comment
         WHERE id = $1 
         AND coach_id = $2;`, [commentId, coachId]
-);
+        );
          return;
     }
 };

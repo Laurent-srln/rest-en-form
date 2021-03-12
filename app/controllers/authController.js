@@ -1,6 +1,4 @@
 const emailValidator = require('email-validator');
-
-
 const authMapper = require('../mappers/authMapper');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
