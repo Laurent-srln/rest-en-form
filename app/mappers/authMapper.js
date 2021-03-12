@@ -31,10 +31,10 @@ const authMapper = {
         const result = await db.query(`
         SELECT u.id, u.email, u.password, u.role
         FROM "user" u
-        WHERE "email" = $1;`,
+        WHERE lower(email) = $1;`,
         [email]
         )
-
+        console.log(email)
         return result.rows[0];
     },
 
@@ -47,7 +47,7 @@ const authMapper = {
         END
         AS password
         FROM "user" u
-        WHERE u.email = $1
+        WHERE low u.email = $1
         `, [email])
 
         if(!result.rows.length){

@@ -69,14 +69,13 @@ const userMapper = {
         result.rows[0].specialities = result.rows[0].specialities.split(",");
         return new User (result.rows[0]);
     },
-    
 
     addUser: async (user) => {
 
         //! Voir pour modifier pour éviter que le user soit ajouté sans ses spécialité (INSERT INTO user OK mais INSERT INTO coach_has_specialty NOT OK)
 
         const check = await db.query(`
-        SELECT id FROM "user" WHERE email = $1;`, [user.email]);
+        SELECT id FROM "user" WHERE lower(email) = $1;`, [user.email.toLowerCase()]);
 
         if (check.rows.length) {
             
@@ -85,7 +84,7 @@ const userMapper = {
 
         const result = await db.query(`
         INSERT INTO "user" ("firstname", "lastname", "email", "role", "token")
-        VALUES ($1, $2, $3, $4, $5) RETURNING id;`, [user.firstname, user.lastname, user.email, user.role, user.token] 
+        VALUES ($1, $2, $3, $4, $5) RETURNING id;`, [user.firstname, user.lastname, user.email.toLowerCase(), user.role, user.token] 
         );
 
         user.id = result.rows[0].id;
@@ -143,7 +142,7 @@ const userMapper = {
         lastname = $2,
         email = $3
         WHERE id = $4
-        ;`, [user.firstname, user.lastname, user.email, id]
+        ;`, [user.firstname, user.lastname, user.email.toLowerCase(), id]
         )
 
         if(user.role === "COACH"){
