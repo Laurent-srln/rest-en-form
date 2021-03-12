@@ -102,7 +102,7 @@ const workoutController = {
     
             const workout = await workoutMapper.editWorkout(workoutId, updatedWorkout);
     
-            res.json(workout)
+            res.status(200).json({ "message" : `workout avec l'id ${workoutId} a bien été mis à jour`,workout})
             }
             catch (err) {
             res.status(400).json(err.message);

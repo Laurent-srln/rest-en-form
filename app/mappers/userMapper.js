@@ -99,7 +99,7 @@ const userMapper = {
 
         }
 
-        return user;
+        return new User(user);
     },
 
     findOneUser : async (id) => {
@@ -135,7 +135,7 @@ const userMapper = {
     },
     updateOneUser : async (id, user)=> {
 
-        const updatedUser = await db.query(`
+        await db.query(`
 
         UPDATE "user"
         SET firstname = $1,
@@ -163,7 +163,7 @@ const userMapper = {
             } ;
           
         }
-        return updatedUser;
+        return new User(user);
     },
 
   
