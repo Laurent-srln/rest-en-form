@@ -13,7 +13,7 @@
 
 
 ### Set new Password
-POST {{baseUrl}}/register?token=0a8c6070-1978-448d-9317-f25dcd93a312
+POST {{baseUrl}}/register?token=9b317c11-b0ad-468d-9869-3d9fe7473733
 Content-Type: application/json
 
 {
@@ -26,8 +26,8 @@ POST {{baseUrl}}/login
 Content-Type: application/json
 
 {
-    "email": "alaint@gmail.com",
-    "password": "password"
+    "email": "soso@gmail.com",
+    "password":"member"
 }
 
 
@@ -95,13 +95,13 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjM1LCJlb
 DELETE {{baseUrl}}/users/7
 
 ### Editer un user 
-PATCH  {{baseUrl}}/users/1
+PATCH  {{baseUrl}}/users/10
 Content-Type: application/json
 
 {
-    "firstname": "Ali",
-    "lastname": "Baboi",
-    "email": "Alibaboi@coach.com",
+    "firstname": "SOSO",
+    "lastname": "SOSO",
+    "email": "SOSOSO@gmail.com",
     "role": "MEMBER",
     "specialties":[6, 2]
     
@@ -113,9 +113,9 @@ POST {{baseUrl}}/new-user
 Content-Type: application/json
 
 {
-    "firstname": "Ali",
-    "lastname": "baba",
-    "email": "alibaba@gmail.com",
+    "firstname": "SOSO",
+    "lastname": "SOSO",
+    "email": "SOSO@gmail.com",
     "role": "MEMBER"
 }
 
@@ -164,7 +164,7 @@ Content-Type: application/json
 ### Ajouter new Comment
 POST {{baseUrl}}/new-comment/9
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjM0LCJlbWFpbCI6ImFsZXh0QGNvYWNoLmNvbSIsInJvbGUiOiJDT0FDSCIsImlhdCI6MTYxNTM5OTEzOCwiZXhwIjoxNjE1NDM1MTM4fQ.L6cu4ZTURk5gaZ6sqLynrX7IxPettaYHUX3npT8UPoE
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImVtYWlsIjoiYWxleHRAY29hY2guY29tIiwicm9sZSI6IkNPQUNIIiwiaWF0IjoxNjE1NDc3ODA1LCJleHAiOjE2MTU1MTM4MDV9.lcmowni7yqrJt7ozWr9zzAZ1PDDOlKoG12OM07kN8LA
 
 {
     "content": "Test comment."
