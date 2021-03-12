@@ -2,6 +2,10 @@ const express = require('express');
 const router = express.Router();
 
 const authorizationMiddleware = require('./services/authorizationMiddleware');
+const validateBody = require('./services/validator');
+
+const workoutSchema = require('./schemas/workout');
+const userSchema = require('./schemas/user');
 
 const userController = require('./controllers/userController');
 const workoutController = require('./controllers/workoutController');
@@ -17,7 +21,7 @@ router.get('/members/:id(\\d+)', authorizationMiddleware, userController.oneMemb
 router.get('/members/:id(\\d+)/next-bookings', authorizationMiddleware, coachingController.checkMemberNextBookings);
 router.get('/workouts', authorizationMiddleware, workoutController.allWorkoutsByMember);
 router.get('/health', authorizationMiddleware, healthController.allHealthRecordsByMember);
-router.post('/new-workout',authorizationMiddleware, workoutController.addWorkout);
+router.post('/new-workout',authorizationMiddleware, validateBody(workoutSchema), workoutController.addWorkout);
 router.patch('/edit-workout/:workoutId', authorizationMiddleware, workoutController.editWorkout);
 router.delete('/delete-workout/:workoutId', authorizationMiddleware, workoutController.deleteWorkout);
 router.post('/new-comment/:workoutId',authorizationMiddleware, workoutController.addComment);
@@ -34,10 +38,12 @@ router.get('/coaching/:id(\\d+)', authorizationMiddleware, coachingController.fi
 router.get('/specialties', authorizationMiddleware, specialtyController.allspecialties);
 
 router.post('/new-coachings', authorizationMiddleware, coachingController.addCoachings);
-router.post('/new-user', authorizationMiddleware, userController.newUser);
+router.post('/new-user', authorizationMiddleware, validateBody(userSchema), userController.newUser);
 router.post('/register', authController.newPassword);
 router.post('/login', authController.submitLogin);
-router.patch('/users/:id(\\d+)', authorizationMiddleware, userController.editUser);
+router.patch('/users/:id(\\d+)', authorizationMiddleware, validateBody(userSchema), userController.editUser);
+
+router.post('/new-coachings', authorizationMiddleware, coachingController.addCoachings);
 
 router.post('/specialties', specialtyController.newSpecialty);
 router.get('/available-coachings', authorizationMiddleware, coachingController.findAvailableCoachings);

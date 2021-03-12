@@ -60,10 +60,10 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJlb
 
 {
     "date": "2021-03-11",
-    "content": "Entrainement dos/ épaules 7 exercices 1h30",
-    "weight": 85,
-    "muscleMass": 87,
-    "fatMass": 8,
+    "content": "Entrainement with Joi",
+    "weight": 86,
+    "muscleMass": 85,
+    "fatMass": 10,
     "boneMass": 5,
     "bodyWater": 59
 }
@@ -199,7 +199,7 @@ Authorization: Bearer
     "lastname": "Dupont",
     "email": "Tean@edf.com",
     "role": "COACH",
-    "specialities": [2, 5, 7]
+    "specialties": [2, 5, 7]
 }
 
 

@@ -33,7 +33,7 @@ const userMapper = {
     findAllCoachs : async ()=>{
 
         const result = await db.query(`
-        SELECT u.id, u.firstname, u.lastname, u.email, string_agg(s.name, ',') as specialities, u.created_at, u.updated_at
+        SELECT u.id, u.firstname, u.lastname, u.email, string_agg(s.name, ',') as specialties, u.created_at, u.updated_at
         FROM "user" u 
         LEFT JOIN coach_has_specialty chs ON u.id = chs.coach_id
         LEFT JOIN specialty s ON chs.specialty_id = s.id
@@ -43,8 +43,8 @@ const userMapper = {
         `)
         result.rows.forEach( coach => {
 
-            if (coach.specialities) {
-            coach.specialities = coach.specialities.split(",")}
+            if (coach.specialties) {
+            coach.specialties = coach.specialties.split(",")}
         })
         return result.rows.map(coach => new User(coach));
 
@@ -53,7 +53,7 @@ const userMapper = {
     findOneCoach : async (coachId)=> {
 
         const result = await db.query(`
-        SELECT u.id, u.firstname, u.lastname, u.email, string_agg(s.name, ',') as specialities, u.created_at, u.updated_at
+        SELECT u.id, u.firstname, u.lastname, u.email, string_agg(s.name, ',') as specialties, u.created_at, u.updated_at
         FROM "user" u 
         LEFT JOIN coach_has_specialty chs ON u.id = chs.coach_id
         LEFT JOIN specialty s ON chs.specialty_id = s.id
@@ -66,7 +66,7 @@ const userMapper = {
             throw new Error ("Pas de coach avec l'user_id : "+ coachId)
         }
 
-        result.rows[0].specialities = result.rows[0].specialities.split(",");
+        result.rows[0].specialties = result.rows[0].specialties.split(",");
         return new User (result.rows[0]);
     },
 
@@ -91,7 +91,7 @@ const userMapper = {
 
         if (user.role === "COACH") {
 
-        for (const specialtyId of user.specialities) {
+        for (const specialtyId of user.specialties) {
             await db.query(`
         INSERT INTO "coach_has_specialty" (coach_id, specialty_id)
         VALUES ($1, $2);`, [user.id, specialtyId] )
@@ -145,6 +145,8 @@ const userMapper = {
         ;`, [user.firstname, user.lastname, user.email.toLowerCase(), id]
         )
 
+            //! A modifier, il faut tester le role en db pas celui transmi par la request
+            
         if(user.role === "COACH"){
 
         await db.query (`
