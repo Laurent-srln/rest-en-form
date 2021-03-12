@@ -10,9 +10,11 @@ const authController = require('./controllers/authController');
 const healthController = require('./controllers/healthController');
 const specialtyController = require('./controllers/specialtyController');
 
-router.get('/members', userController.allMembers);
-router.get('/members/:id(\\d+)', userController.oneMember);
-router.get('/members/:id(\\d+)/next-bookings', coachingController.checkMemberNextBookings);
+//! rajouter la route pour avoir les données health d'un member par un coach!
+
+router.get('/members', authorizationMiddleware, userController.allMembers);
+router.get('/members/:id(\\d+)', authorizationMiddleware, userController.oneMember);
+router.get('/members/:id(\\d+)/next-bookings', authorizationMiddleware, coachingController.checkMemberNextBookings);
 router.get('/workouts', authorizationMiddleware, workoutController.allWorkoutsByMember);
 router.get('/health', authorizationMiddleware, healthController.allHealthRecordsByMember);
 router.post('/new-workout',authorizationMiddleware, workoutController.addWorkout);
@@ -26,17 +28,16 @@ router.get('/coachs/:id(\\d+)', userController.oneCoach);
 router.get('/coach-next-bookings',authorizationMiddleware, coachingController.coachNextBookings);
 router.get('/coach-last-bookings',authorizationMiddleware, coachingController.coachLastBookings);
 
-//! Il faudra créer je pense de nouvelles routes pour qu'un coach récupère les prochaines résa d'un adhérent. Pour la query on récupèrera donc l'id via l'url et non le token.
 router.get('/member-next-bookings',authorizationMiddleware, coachingController.memberNextBookings);
 // router.get('/member-last-bookings',authorizationMiddleware, coachingController.memberLastBookings);
-router.get('/coaching/:id(\\d+)', coachingController.findACoachingById);
-router.get('/specialties', specialtyController.allspecialties);
+router.get('/coaching/:id(\\d+)', authorizationMiddleware, coachingController.findACoachingById);
+router.get('/specialties', authorizationMiddleware, specialtyController.allspecialties);
 
-router.post('/new-coachings', coachingController.addCoachings);
-router.post('/new-user', userController.newUser);
+router.post('/new-coachings', authorizationMiddleware, coachingController.addCoachings);
+router.post('/new-user', authorizationMiddleware, userController.newUser);
 router.post('/register', authController.newPassword);
 router.post('/login', authController.submitLogin);
-router.patch('/users/:id(\\d+)', userController.editUser);
+router.patch('/users/:id(\\d+)', authorizationMiddleware, userController.editUser);
 
 router.post('/specialties', specialtyController.newSpecialty);
 router.get('/available-coachings', authorizationMiddleware, coachingController.findAvailableCoachings);

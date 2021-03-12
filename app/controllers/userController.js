@@ -137,7 +137,7 @@ const userController = {
 
                 await userMapper.updateOneUser(id, user);
 
-                res.status(200).json(user);
+                res.status(200).json({ "message" : `le user avec l'id ${id} a bien été mis à jour`, user});
             }
       
         } catch (err) {

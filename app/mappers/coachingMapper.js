@@ -120,9 +120,6 @@ const coachingMapper = {
 
         return coachings;
 
-
-        console.log(firstStart);
-
     },
 
     findAvailableCoachings: async (date) => {
