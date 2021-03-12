@@ -12,7 +12,8 @@ const workoutMapper = {
         LEFT JOIN "user" member ON w.member_id = member.id
         LEFT JOIN "comment" "c" ON w.id = "c".workout_id
         LEFT JOIN "user" coach ON "c".coach_id = coach.id
-        WHERE w.member_id = $1;`
+        WHERE w.member_id = $1
+        ORDER BY w.date DESC;`
         , [id])
 
         if(!result.rows.length){
