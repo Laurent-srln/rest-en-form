@@ -10,10 +10,12 @@
 // URL pour sqitch deploy et revert sur URL heroku
 
 
-############################## CONNEXION #############################
+##################################################################################
+#################################### CONNEXION ###################################
+##################################################################################
 
 
-### Set new Password avec le token reçu par le nouveau user après sa créatin par le gérant.
+### DÉFINIR UN NOUVEAU MOT DE PASSE
 POST {{baseUrl}}/register?token=752be6c9-4848-47c9-8539-e34bcdf8271c
 Content-Type: application/json
 
@@ -22,7 +24,8 @@ Content-Type: application/json
     "confirm": "member"
 }
 
-### Connexion / page de login 
+
+### ENVOYER SES INFORMATIONS DE CONNEXION 
 POST {{baseUrl}}/login
 Content-Type: application/json
 
@@ -32,28 +35,18 @@ Content-Type: application/json
 }
 
 
-############################## FONTCIONS POSSIBLES MEMBERS #############################
 
 
-### Récupérer tous ses Workouts 
-GET {{baseUrl}}/workouts
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJlbWFpbCI6InNvc29zb0BnbWFpbC5jb20iLCJyb2xlIjoiTUVNQkVSIiwiaWF0IjoxNjE1NTQ0NTQxLCJleHAiOjE2MTU1ODA1NDF9.GbuwA3pXyOTDXDC45rehNS5P2Oa9JsvHLLHW699taFk
-
-### Récupérer tous ses healthRecords 
-GET {{baseUrl}}/health
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJlbWFpbCI6InNvc29zb0BnbWFpbC5jb20iLCJyb2xlIjoiTUVNQkVSIiwiaWF0IjoxNjE1NTQ0NTQxLCJleHAiOjE2MTU1ODA1NDF9.GbuwA3pXyOTDXDC45rehNS5P2Oa9JsvHLLHW699taFk
-
-### Récupérer tous les prochains RDV d'un member par un coach
-GET {{baseUrl}}/members/1/next-bookings
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJlbWFpbCI6InNvc29zb0BnbWFpbC5jb20iLCJyb2xlIjoiTUVNQkVSIiwiaWF0IjoxNjE1NTQ0NTQxLCJleHAiOjE2MTU1ODA1NDF9.GbuwA3pXyOTDXDC45rehNS5P2Oa9JsvHLLHW699taFk
+##################################################################################
+########################## FONTCIONS POSSIBLES MEMBERS ###########################
+##################################################################################
 
 
-### Récupérer ses prochains RDV 
-GET {{baseUrl}}/member-next-bookings
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJlbWFpbCI6InNvc29zb0BnbWFpbC5jb20iLCJyb2xlIjoiTUVNQkVSIiwiaWF0IjoxNjE1NTQ0NTQxLCJleHAiOjE2MTU1ODA1NDF9.GbuwA3pXyOTDXDC45rehNS5P2Oa9JsvHLLHW699taFk
+////////// WORKOUTS & HEALTH DATA \\\\\\\\\\
+//-----------------------------------------\\
 
 
-### Ajouter un workout 
+### AJOUTER UN WORKOUT + HEALTH DATA
 POST {{baseUrl}}/new-workout
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJlbWFpbCI6InNvc29zb0BnbWFpbC5jb20iLCJyb2xlIjoiTUVNQkVSIiwiaWF0IjoxNjE1NTQ0NTQxLCJleHAiOjE2MTU1ODA1NDF9.GbuwA3pXyOTDXDC45rehNS5P2Oa9JsvHLLHW699taFk
@@ -69,22 +62,17 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJlb
 }
 
 
-### Réserver un coaching
-POST {{baseUrl}}/book-coaching
-Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjM1LCJlbWFpbCI6ImFsYWludEBnbWFpbC5jb20iLCJyb2xlIjoiTUVNQkVSIiwiaWF0IjoxNjE1Mzc5MTY4LCJleHAiOjE2MTU0MTUxNjh9.LLxeSRK0kU_LeKxbknRHYlmua3Q8UYsLko3Csk3dRlk
-
-{
-    "coachingId": 1
-}
-
-### Supprimer une réservation
-PATCH {{baseUrl}}/bookings/3/delete
-Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjM1LCJlbWFpbCI6ImFsYWludEBnbWFpbC5jb20iLCJyb2xlIjoiTUVNQkVSIiwiaWF0IjoxNjE1Mzc5MTY4LCJleHAiOjE2MTU0MTUxNjh9.LLxeSRK0kU_LeKxbknRHYlmua3Q8UYsLko3Csk3dRlk
+### RÉCUPÉRER TOUS LES WORKOUTS PAR ORDRE DÉCROISSANT 
+GET {{baseUrl}}/workouts
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJlbWFpbCI6InNvc29zb0BnbWFpbC5jb20iLCJyb2xlIjoiTUVNQkVSIiwiaWF0IjoxNjE1NTQ0NTQxLCJleHAiOjE2MTU1ODA1NDF9.GbuwA3pXyOTDXDC45rehNS5P2Oa9JsvHLLHW699taFk
 
 
-### Modifier un workout 
+### RÉCUPÉRER TOUS LES ENREGISTREMENTS SANTÉ 
+GET {{baseUrl}}/health
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJlbWFpbCI6InNvc29zb0BnbWFpbC5jb20iLCJyb2xlIjoiTUVNQkVSIiwiaWF0IjoxNjE1NTQ0NTQxLCJleHAiOjE2MTU1ODA1NDF9.GbuwA3pXyOTDXDC45rehNS5P2Oa9JsvHLLHW699taFk
+
+
+### MODIFIER UN WORKOUT ET SES DONNÉES SANTÉ
 PATCH {{baseUrl}}/edit-workout/2
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJlbWFpbCI6InNvc29zb0BnbWFpbC5jb20iLCJyb2xlIjoiTUVNQkVSIiwiaWF0IjoxNjE1NTQ0NTQxLCJleHAiOjE2MTU1ODA1NDF9.GbuwA3pXyOTDXDC45rehNS5P2Oa9JsvHLLHW699taFk
@@ -99,35 +87,84 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJlb
     "bodyWater": 9
 }
 
-### Supprimer un workout 
+
+### SUPPRIMER UN WORKOUT ET LES DONNÉES SANTÉ ASSOCIÉES
 DELETE {{baseUrl}}/delete-workout/18
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJlbWFpbCI6InNvc29zb0BnbWFpbC5jb20iLCJyb2xlIjoiTUVNQkVSIiwiaWF0IjoxNjE1NTQ0NTQxLCJleHAiOjE2MTU1ODA1NDF9.GbuwA3pXyOTDXDC45rehNS5P2Oa9JsvHLLHW699taFk
 
-############################## FONCTIONS D'UN COACHS #############################
 
-### Récupérer tous les adhérents
+////////// COACHINGS \\\\\\\\\\
+//----------------------------\\
+
+
+### RÉCUPÉRER TOUS LES COACHINGS DISPONIBLES À UNE DATE
+GET {{baseUrl}}/available-coachings?date=2021-04-05
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjM1LCJlbWFpbCI6ImFsYWludEBnbWFpbC5jb20iLCJyb2xlIjoiTUVNQkVSIiwiaWF0IjoxNjE1NDU0MzM3LCJleHAiOjE2MTU0OTAzMzd9.l3CjIwykudQ_ljEC72RY-MXcSR7xlskReZcwu0xOI8M
+
+
+### RÉCUPÉRER LES PROCHAINS COACHINGS PRÉVUS 
+GET {{baseUrl}}/member-next-bookings
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJlbWFpbCI6InNvc29zb0BnbWFpbC5jb20iLCJyb2xlIjoiTUVNQkVSIiwiaWF0IjoxNjE1NTQ0NTQxLCJleHAiOjE2MTU1ODA1NDF9.GbuwA3pXyOTDXDC45rehNS5P2Oa9JsvHLLHW699taFk
+
+
+### RÉSERVER UN COACHING (update)
+POST {{baseUrl}}/book-coaching
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjM1LCJlbWFpbCI6ImFsYWludEBnbWFpbC5jb20iLCJyb2xlIjoiTUVNQkVSIiwiaWF0IjoxNjE1Mzc5MTY4LCJleHAiOjE2MTU0MTUxNjh9.LLxeSRK0kU_LeKxbknRHYlmua3Q8UYsLko3Csk3dRlk
+
+{
+    "coachingId": 1
+}
+
+
+### SUPPRIMER UNE RÉSERVATION (update) 
+PATCH {{baseUrl}}/bookings/3/delete
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjM1LCJlbWFpbCI6ImFsYWludEBnbWFpbC5jb20iLCJyb2xlIjoiTUVNQkVSIiwiaWF0IjoxNjE1Mzc5MTY4LCJleHAiOjE2MTU0MTUxNjh9.LLxeSRK0kU_LeKxbknRHYlmua3Q8UYsLko3Csk3dRlk
+
+
+
+
+##################################################################################
+############################## FONCTIONS D'UN COACHS #############################
+##################################################################################
+
+
+////////// ADHÉRENTS \\\\\\\\\\
+//----------------------------\\
+
+
+### RÉCUPÉRER TOUS LES ADHÉRENTS
 GET {{baseUrl}}/members
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJlbWFpbCI6InNvc29zb0BnbWFpbC5jb20iLCJyb2xlIjoiTUVNQkVSIiwiaWF0IjoxNjE1NTQ0NTQxLCJleHAiOjE2MTU1ODA1NDF9.GbuwA3pXyOTDXDC45rehNS5P2Oa9JsvHLLHW699taFk
 
-### Récupérer tous les prochains RDV d'un member 
-GET {{baseUrl}}/members/1/next-bookings
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJlbWFpbCI6InNvc29zb0BnbWFpbC5jb20iLCJyb2xlIjoiTUVNQkVSIiwiaWF0IjoxNjE1NTQ0NTQxLCJleHAiOjE2MTU1ODA1NDF9.GbuwA3pXyOTDXDC45rehNS5P2Oa9JsvHLLHW699taFk
+
+////////// COACHINGS \\\\\\\\\\
+//----------------------------\\
 
 
-### Récupérer le profil d'un coach avec les spécialités
-GET {{baseUrl}}/coachs/6
-
-### Récupérer les prochains RDV d'un coach
+### RÉCUPÉRER SES PROCHAINS RDV COACHING
 GET {{baseUrl}}/coach-next-bookings
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjM1LCJlbWFpbCI6ImFsYWludEBnbWFpbC5jb20iLCJyb2xlIjoiTUVNQkVSIiwiaWF0IjoxNjE1Mzc5MTY4LCJleHAiOjE2MTU0MTUxNjh9.LLxeSRK0kU_LeKxbknRHYlmua3Q8UYsLko3Csk3dRlk
 
-### Récuperer les RDV passés d'un coach
+
+### RÉCUPÉRER SES RDV COACHING PASSÉS
 GET {{baseUrl}}/coach-last-bookings
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjM0LCJlbWFpbCI6ImFsZXh0QGNvYWNoLmNvbSIsInJvbGUiOiJDT0FDSCIsImlhdCI6MTYxNTM5OTEzOCwiZXhwIjoxNjE1NDM1MTM4fQ.L6cu4ZTURk5gaZ6sqLynrX7IxPettaYHUX3npT8UPoE
 
 
-### Créer un commentaire sur une séance de Workout d'un member
+### RÉCUPÉRER LES PROCHAINS RDV COACHING D'UN ADHÉRENT
+GET {{baseUrl}}/members/1/next-bookings
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJlbWFpbCI6InNvc29zb0BnbWFpbC5jb20iLCJyb2xlIjoiTUVNQkVSIiwiaWF0IjoxNjE1NTQ0NTQxLCJleHAiOjE2MTU1ODA1NDF9.GbuwA3pXyOTDXDC45rehNS5P2Oa9JsvHLLHW699taFk
+
+
+////////// WORKOUTS & COMMENTAIRES \\\\\\\\\\
+//------------------------------------------\\
+
+
+### CRÉER UN COMMENTAIRE ASSOCIÉ AU WORKOUT D'UN ADHÉRENT
 POST {{baseUrl}}/new-comment/9
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImVtYWlsIjoiYWxleHRAY29hY2guY29tIiwicm9sZSI6IkNPQUNIIiwiaWF0IjoxNjE1NDc3ODA1LCJleHAiOjE2MTU1MTM4MDV9.lcmowni7yqrJt7ozWr9zzAZ1PDDOlKoG12OM07kN8LA
@@ -136,13 +173,8 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImVtY
     "content": "Test comment."
 }
 
-### Supprimer un commentaire
-DELETE {{baseUrl}}/delete-comment/7
-Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjM0LCJlbWFpbCI6ImFsZXh0QGNvYWNoLmNvbSIsInJvbGUiOiJDT0FDSCIsImlhdCI6MTYxNTQ1MzE3NCwiZXhwIjoxNjE1NDg5MTc0fQ.T0mc25PpeR2d2CmKDOpPvJEDguLCFk5zsoSBh72dJoo
 
-
-### Modifier un commentaire
+### MODIFIER UN COMMENTAIRE
 PATCH {{baseUrl}}/edit-comment/7
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjM0LCJlbWFpbCI6ImFsZXh0QGNvYWNoLmNvbSIsInJvbGUiOiJDT0FDSCIsImlhdCI6MTYxNTQ1MzE3NCwiZXhwIjoxNjE1NDg5MTc0fQ.T0mc25PpeR2d2CmKDOpPvJEDguLCFk5zsoSBh72dJoo
@@ -152,32 +184,48 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjM0LCJlb
 }
 
 
-############################## FONCTIONS POUR MANAGER #############################
+### SUPPRIMER UN COMMENTAIRE
+DELETE {{baseUrl}}/delete-comment/7
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjM0LCJlbWFpbCI6ImFsZXh0QGNvYWNoLmNvbSIsInJvbGUiOiJDT0FDSCIsImlhdCI6MTYxNTQ1MzE3NCwiZXhwIjoxNjE1NDg5MTc0fQ.T0mc25PpeR2d2CmKDOpPvJEDguLCFk5zsoSBh72dJoo
 
-//////////////////////Spécialité//////////////////////////
 
-### Récupérer toutes les spécialités
-GET {{baseUrl}}/specialties
-Authorization: Bearer
 
-### Ajouter une spécialité
+
+##################################################################################
+############################# FONCTIONS POUR MANAGER #############################
+##################################################################################
+
+
+////////// SPÉCIALITÉS \\\\\\\\\\
+//------------------------------\\
+
+
+### AJOUTER UNE SPÉCIALITÉ
 POST {{baseUrl}}/specialties
 Content-Type: application/json
 Authorization: Bearer
 
 {
     "name": "Karate"
-    
 }
 
-### Supprimer une spécialité
+
+### RÉCUPÉRER TOUTES LES SPÉCIALITÉS
+GET {{baseUrl}}/specialties
+Authorization: Bearer
+
+
+### SUPPRIMER UNE SPÉCIALITÉ
 DELETE  {{baseUrl}}/specialties/15
 Authorization: Bearer
 
-//////////////////////////USER//////////////////////////////
+
+////////// USERS \\\\\\\\\\
+//------------------------\\
 
 
-### Ajouter new Member
+### AJOUTER UN ADHÉRENT
 POST {{baseUrl}}/new-user
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJlbWFpbCI6InNvc29zb0BnbWFpbC5jb20iLCJyb2xlIjoiTUVNQkVSIiwiaWF0IjoxNjE1NTQ0NTQxLCJleHAiOjE2MTU1ODA1NDF9.GbuwA3pXyOTDXDC45rehNS5P2Oa9JsvHLLHW699taFk
@@ -189,7 +237,8 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJlb
     "role": "MEMBER"
 }
 
-### Ajouter new Coach 
+
+### AJOUTER UN COACH
 POST {{baseUrl}}/new-user
 Content-Type: application/json
 Authorization: Bearer
@@ -203,16 +252,16 @@ Authorization: Bearer
 }
 
 
-### Récupérer un adhérent
+### RÉCUPÉRER UN ADHÉRENT
 GET {{baseUrl}}/members/3
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJlbWFpbCI6InNvc29zb0BnbWFpbC5jb20iLCJyb2xlIjoiTUVNQkVSIiwiaWF0IjoxNjE1NTQ0NTQxLCJleHAiOjE2MTU1ODA1NDF9.GbuwA3pXyOTDXDC45rehNS5P2Oa9JsvHLLHW699taFk
 
-### suppression d'un user
-DELETE {{baseUrl}}/users/
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJlbWFpbCI6InNvc29zb0BnbWFpbC5jb20iLCJyb2xlIjoiTUVNQkVSIiwiaWF0IjoxNjE1NTQ0NTQxLCJleHAiOjE2MTU1ODA1NDF9.GbuwA3pXyOTDXDC45rehNS5P2Oa9JsvHLLHW699taFk
+
+### RÉCUPÉRER UN COACH
+GET {{baseUrl}}/coachs/6
 
 
-### Editer un user 
+### MODIFIER UN USER 
 PATCH  {{baseUrl}}/users/10
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJlbWFpbCI6InNvc29zb0BnbWFpbC5jb20iLCJyb2xlIjoiTUVNQkVSIiwiaWF0IjoxNjE1NTQ0NTQxLCJleHAiOjE2MTU1ODA1NDF9.GbuwA3pXyOTDXDC45rehNS5P2Oa9JsvHLLHW699taFk
@@ -223,13 +272,19 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJlb
     "email": "SOSOSO@gmail.com",
     "role": "MEMBER",
     "specialties":[6, 2]
-    
 }
 
-///////////////////////////COACHING/////////////////////////////
+
+### SUPPRIMER UN USER
+DELETE {{baseUrl}}/users/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJlbWFpbCI6InNvc29zb0BnbWFpbC5jb20iLCJyb2xlIjoiTUVNQkVSIiwiaWF0IjoxNjE1NTQ0NTQxLCJleHAiOjE2MTU1ODA1NDF9.GbuwA3pXyOTDXDC45rehNS5P2Oa9JsvHLLHW699taFk
 
 
-### Ajouter des créneaux coaching 
+////////// COACHINGS \\\\\\\\\\
+//----------------------------\\
+
+
+### AJOUTER DES CRÉNEAUX COACHING 
 POST {{baseUrl}}/new-coachings
 Content-Type: application/json
 Authorization: Bearer
@@ -241,21 +296,24 @@ Authorization: Bearer
     "coachId": 34
 }
 
-### Récupérer un coaching avec le coach et le membre qui y participe    
+
+### RÉCUPÉRER UN COACHING    
 GET {{baseUrl}}/coaching/5
 Authorization: Bearer
 
-### suppression d'un coaching
+
+### SUPPRIMER UN COACHING
 DELETE {{baseUrl}}/coaching/5
 Authorization: Bearer
 
-### Récupérer coachings disponibles a une date
-GET {{baseUrl}}/available-coachings?date=2021-04-05
-Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjM1LCJlbWFpbCI6ImFsYWludEBnbWFpbC5jb20iLCJyb2xlIjoiTUVNQkVSIiwiaWF0IjoxNjE1NDU0MzM3LCJleHAiOjE2MTU0OTAzMzd9.l3CjIwykudQ_ljEC72RY-MXcSR7xlskReZcwu0xOI8M
 
-############################## FONCTIONS TOUT LE MONDE #############################
 
-### Récupérer la liste des coachs
+
+##################################################################################
+############################## FONCTIONS TOUT LE MONDE ###########################
+##################################################################################
+
+
+### RÉCUPÉRER LES COACHS
 GET {{baseUrl}}/coachs
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjM0LCJlbWFpbCI6ImFsZXh0QGNvYWNoLmNvbSIsInJvbGUiOiJDT0FDSCIsImlhdCI6MTYxNTQ1ODQ2NywiZXhwIjoxNjE1NDk0NDY3fQ.kbzoCNS6yjW8TdwM_ZoLj6wbgDIzDnBqZ0PpPOfuTuY
