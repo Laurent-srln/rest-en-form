@@ -16,12 +16,12 @@
 
 
 ### DÉFINIR UN NOUVEAU MOT DE PASSE
-POST {{baseUrl}}/register?token=752be6c9-4848-47c9-8539-e34bcdf8271c
+POST {{baseUrl}}/register?token=0e7905f4-ac19-4311-b990-f08e3d06b62f
 Content-Type: application/json
 
 {
-    "password": "member",
-    "confirm": "member"
+    "password": "@1Aaaaaa",
+    "confirm": "@1Aaaaaa"
 }
 
 
@@ -30,8 +30,8 @@ POST {{baseUrl}}/login
 Content-Type: application/json
 
 {
-    "email": "soso@gmail.com",
-    "password":"member"
+    "email": "alext@coach.com",
+    "password":"coach"
 }
 
 
@@ -49,12 +49,12 @@ Content-Type: application/json
 ### AJOUTER UN WORKOUT + HEALTH DATA
 POST {{baseUrl}}/new-workout
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJlbWFpbCI6InNvc29zb0BnbWFpbC5jb20iLCJyb2xlIjoiTUVNQkVSIiwiaWF0IjoxNjE1NTQ0NTQxLCJleHAiOjE2MTU1ODA1NDF9.GbuwA3pXyOTDXDC45rehNS5P2Oa9JsvHLLHW699taFk
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjM1LCJlbWFpbCI6ImFsYWludEBnbWFpbC5jb20iLCJyb2xlIjoiTUVNQkVSIiwiaWF0IjoxNjE1NjM2NjIyLCJleHAiOjE2MTU2NzI2MjJ9.dzajZDtIb1ek1biIjELhCg4qBMDj1fCooFCr6Q0wyFA
 
 {
-    "date": "2021-03-11",
-    "content": "Entrainement with Joi",
-    "weight": 86,
+    "date": "2021-03-12",
+    "content": "sdsqdf",
+    "weight": 30,
     "muscleMass": 85,
     "fatMass": 10,
     "boneMass": 5,
@@ -165,19 +165,19 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJlb
 
 
 ### CRÉER UN COMMENTAIRE ASSOCIÉ AU WORKOUT D'UN ADHÉRENT
-POST {{baseUrl}}/new-comment/9
+POST {{baseUrl}}/new-comment/2
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImVtYWlsIjoiYWxleHRAY29hY2guY29tIiwicm9sZSI6IkNPQUNIIiwiaWF0IjoxNjE1NDc3ODA1LCJleHAiOjE2MTU1MTM4MDV9.lcmowni7yqrJt7ozWr9zzAZ1PDDOlKoG12OM07kN8LA
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjM0LCJlbWFpbCI6ImFsZXh0QGNvYWNoLmNvbSIsInJvbGUiOiJDT0FDSCIsImlhdCI6MTYxNTY0NDI2MywiZXhwIjoxNjE1NjgwMjYzfQ.ongcmgT5ZoFZh3wt_k4_FPW08TEEIQ4x23OjUyXp_NE
 
 {
-    "content": "Test comment."
+    "content": "ssss"
 }
 
 
 ### MODIFIER UN COMMENTAIRE
-PATCH {{baseUrl}}/edit-comment/7
+PATCH {{baseUrl}}/edit-comment/12
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjM0LCJlbWFpbCI6ImFsZXh0QGNvYWNoLmNvbSIsInJvbGUiOiJDT0FDSCIsImlhdCI6MTYxNTQ1MzE3NCwiZXhwIjoxNjE1NDg5MTc0fQ.T0mc25PpeR2d2CmKDOpPvJEDguLCFk5zsoSBh72dJoo
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjM0LCJlbWFpbCI6ImFsZXh0QGNvYWNoLmNvbSIsInJvbGUiOiJDT0FDSCIsImlhdCI6MTYxNTY0NDI2MywiZXhwIjoxNjE1NjgwMjYzfQ.ongcmgT5ZoFZh3wt_k4_FPW08TEEIQ4x23OjUyXp_NE
 
 {
     "content": "Nouveau comment modifié."
@@ -207,7 +207,7 @@ Content-Type: application/json
 Authorization: Bearer
 
 {
-    "name": "Karate"
+    "name": "test"
 }
 
 
@@ -228,33 +228,33 @@ Authorization: Bearer
 ### AJOUTER UN ADHÉRENT
 POST {{baseUrl}}/new-user
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJlbWFpbCI6InNvc29zb0BnbWFpbC5jb20iLCJyb2xlIjoiTUVNQkVSIiwiaWF0IjoxNjE1NTQ0NTQxLCJleHAiOjE2MTU1ODA1NDF9.GbuwA3pXyOTDXDC45rehNS5P2Oa9JsvHLLHW699taFk
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQyLCJlbWFpbCI6ImpvaXBhc3N3b3JkQGdtYWlsLmNvbSIsInJvbGUiOiJNRU1CRVIiLCJpYXQiOjE2MTU2Mjc4ODYsImV4cCI6MTYxNTY2Mzg4Nn0.Tlej2J3Yo_0B5arjr3VW3mFIsZrbTj8Kon0oeQNHpDY
 
 {
-    "firstname": "SOSO",
-    "lastname": "SOSO",
-    "email": "SOSO@gmail.com",
-    "role": "MEMBER"
+    "firstname": "test",
+    "lastname": "user",
+    "email": "autrebis@",
+    "role": "MEBER"
 }
 
 
 ### AJOUTER UN COACH
 POST {{baseUrl}}/new-user
 Content-Type: application/json
-Authorization: Bearer
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQyLCJlbWFpbCI6ImpvaXBhc3N3b3JkQGdtYWlsLmNvbSIsInJvbGUiOiJNRU1CRVIiLCJpYXQiOjE2MTU2Mjc4ODYsImV4cCI6MTYxNTY2Mzg4Nn0.Tlej2J3Yo_0B5arjr3VW3mFIsZrbTj8Kon0oeQNHpDY
 
 {
     "firstname": "Tean",
     "lastname": "Dupont",
-    "email": "Tean@edf.com",
+    "email": "test@coach.com",
     "role": "COACH",
-    "specialties": [2, 5, 7]
+    "specialties": "f"
 }
 
 
 ### RÉCUPÉRER UN ADHÉRENT
 GET {{baseUrl}}/members/3
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJlbWFpbCI6InNvc29zb0BnbWFpbC5jb20iLCJyb2xlIjoiTUVNQkVSIiwiaWF0IjoxNjE1NTQ0NTQxLCJleHAiOjE2MTU1ODA1NDF9.GbuwA3pXyOTDXDC45rehNS5P2Oa9JsvHLLHW699taFk
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQyLCJlbWFpbCI6ImpvaXBhc3N3b3JkQGdtYWlsLmNvbSIsInJvbGUiOiJNRU1CRVIiLCJpYXQiOjE2MTU2Mjc4ODYsImV4cCI6MTYxNTY2Mzg4Nn0.Tlej2J3Yo_0B5arjr3VW3mFIsZrbTj8Kon0oeQNHpDY
 
 
 ### RÉCUPÉRER UN COACH
@@ -287,12 +287,12 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJlb
 ### AJOUTER DES CRÉNEAUX COACHING 
 POST {{baseUrl}}/new-coachings
 Content-Type: application/json
-Authorization: Bearer
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjM0LCJlbWFpbCI6ImFsZXh0QGNvYWNoLmNvbSIsInJvbGUiOiJDT0FDSCIsImlhdCI6MTYxNTY0Njk4OCwiZXhwIjoxNjE1NjgyOTg4fQ.sh8q4_TX933CLHBKOGZQNRY7gvmoxntJ15bszwJGO7g
 
 {
-    "date": "2021-04-15",
-    "start": "09:30",
-    "end": "10:00",
+    "date": "2022-04-15",
+    "start": "10:00",
+    "end": "12:00",
     "coachId": 34
 }
 

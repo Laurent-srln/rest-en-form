@@ -26,6 +26,7 @@ const authMapper = {
         )
     },
 
+
     checkConnexion : async (email) => {
 
         const result = await db.query(`
