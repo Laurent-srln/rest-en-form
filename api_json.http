@@ -1,7 +1,7 @@
 @protocol= http
 @domainname= localhost
 @port= {{$dotenv PORT}}
-@baseUrl = {{protocol}}://{{domainname}}:{{port}}
+@baseUrl = {{protocol}}://{{domainname}}:{{port}}/api-v1
 
 # https://app-osport.herokuapp.com
 
