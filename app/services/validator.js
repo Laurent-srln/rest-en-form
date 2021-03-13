@@ -4,15 +4,18 @@
  * @returns {Function} middleware Express prêt à l'emploi
  */
 
-const validateBody = (schema) => (request, response, next) => {
+const validate = (schema) => (req, res, next) => {
     // on regarde ce qu'il y a dans req.body et on le valide par rapport au schema Joi
-    const { error } = schema.validate(request.body);
+    const { error } = schema.validate({...req.body, ...req.params});
+
+    console.log({...req.body, ...req.params});
 
     if (error) {
-        response.status(400).json(error.message);
+        res.status(400).json(error.message);
+        console.log(error);
     } else {
         next();
     }
 };
 
-module.exports = validateBody;
+module.exports = validate;
