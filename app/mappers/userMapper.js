@@ -42,7 +42,7 @@ const userMapper = {
         return;
     },
 
-    findOneUser : async (id) => {
+    getUserById : async (id) => {
         const result = await db.query(`
         SELECT * 
         FROM "user"
@@ -51,7 +51,7 @@ const userMapper = {
         return result.rows[0]
     },
 
-    findAllMembers: async () => {
+    getAllMembers: async () => {
         const result = await db.query(`
         SELECT u.id, u.firstname, u.lastname, u.email, u.created_at, u.updated_at
         FROM "user" u
@@ -61,7 +61,7 @@ const userMapper = {
 
     },
 
-    findOneMember: async (id) => {
+    getMemberById: async (id) => {
         const result = await db.query(`
         SELECT u.id, u.firstname, u.lastname, u.email, u.created_at, u.updated_at
         FROM "user" u
@@ -77,7 +77,7 @@ const userMapper = {
         return new User(result.rows[0])
     },
 
-    findMemberByEmail : async (email) => {
+    getMemberByEmail : async (email) => {
         const result = await db.query(`
         SELECT u.id, u.firstname, u.lastname, u.email
         FROM "user" u 
@@ -88,7 +88,7 @@ const userMapper = {
         return result.rows;
     },
 
-    findAllCoachs : async ()=>{
+    getAllCoachs : async ()=>{
 
         const result = await db.query(`
         SELECT u.id, u.firstname, u.lastname, u.email, string_agg(s.name, ',') as specialties, u.created_at, u.updated_at
@@ -108,7 +108,7 @@ const userMapper = {
 
     },
 
-    findOneCoach : async (coachId)=> {
+    getCoachById : async (coachId)=> {
 
         const result = await db.query(`
         SELECT u.id, u.firstname, u.lastname, u.email, string_agg(s.name, ',') as specialties, u.created_at, u.updated_at
@@ -128,7 +128,7 @@ const userMapper = {
         return new User (result.rows[0]);
     },
 
-    updateOneUser : async (id, user)=> {
+    editUser : async (id, user)=> {
 
         await db.query(`
 
@@ -163,7 +163,7 @@ const userMapper = {
         return new User(user);
     },
     
-    deleteOneUser : async (id) => {
+    deleteUser : async (id) => {
 
             await db.query(`
             with deleted_user as (

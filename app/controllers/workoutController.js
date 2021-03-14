@@ -51,11 +51,11 @@ const workoutController = {
         };
     },
 
-    allWorkoutsByMember: async (req, res) => {
+    getAllWorkoutsByMemberId: async (req, res) => {
 
         const {userId} = jsonwebtoken.decode(req.headers.authorization.substring(7))
         try{
-        const workouts = await workoutMapper.findAllWorkoutsByMember(userId);
+        const workouts = await workoutMapper.getAllWorkoutsByMemberIdId(userId);
 
         res.json(workouts)
         }catch(err){
@@ -71,7 +71,7 @@ const workoutController = {
 
         try {
 
-            const check = await workoutMapper.findWorkout(workoutId);
+            const check = await workoutMapper.getWorkoutById(workoutId);
 
             if (!check) {
 
@@ -117,7 +117,7 @@ const workoutController = {
         const {userId} = jsonwebtoken.decode(req.headers.authorization.substring(7));
         const { workoutId } = req.params;
 
-        const check = await workoutMapper.findWorkout(workoutId);
+        const check = await workoutMapper.getWorkoutById(workoutId);
 
         if (!check) {
             res.status(200).json("Ce workout est introuvable.");

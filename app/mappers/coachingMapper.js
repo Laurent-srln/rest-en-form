@@ -76,7 +76,7 @@ const coachingMapper = {
 
     },
 
-    findOneCoaching : async (id) => {
+    getCoachByIding : async (id) => {
 
         const result = await db.query(`
         SELECT *
@@ -91,7 +91,7 @@ const coachingMapper = {
         return result.rows[0];
     },
 
-    findAvailableCoachings: async (date) => {
+    getAvailableCoachings: async (date) => {
 
         const availableCoachings = await db.query(`
         SELECT c.id, u.firstname, u.lastname, c.start_time::time, c.end_time::time 
@@ -104,7 +104,7 @@ const coachingMapper = {
     return availableCoachings.rows;
     },
 
-    findNextBookingsByMember: async (memberId) => {
+    getNextBookingsByMemberId: async (memberId) => {
 
         const result = await db.query(`
         SELECT c.id, start_time, end_time, coach_id, coach.firstname as coach_firstname, coach.lastname as coach_lastname, member_id, member.firstname as member_firstname, member.lastname as member_lastname, c.created_at, c.updated_at
@@ -120,7 +120,7 @@ const coachingMapper = {
     },
 
     
-    findNextBookings: async (coachId) => {
+    getNextBookingsbyCoachId: async (coachId) => {
         const result = await db.query(`
         SELECT c.id, start_time, end_time, coach_id, coach.firstname as coach_firstname, coach.lastname as coach_lastname, member_id, member.firstname as member_firstname, member.lastname as member_lastname, c.created_at, c.updated_at
         FROM "coaching" c
@@ -135,7 +135,7 @@ const coachingMapper = {
         return result.rows.map(coaching => new Coaching(coaching));
     },
 
-    findLastBookings: async (coachId) => {
+    getLastBookingsbyCoachId: async (coachId) => {
         const result = await db.query(`
         SELECT c.id, start_time, end_time, coach_id, coach.firstname as coach_firstname, coach.lastname as coach_lastname, member_id, member.firstname as member_firstname, member.lastname as member_lastname, c.created_at, c.updated_at
         FROM "coaching" c
@@ -150,7 +150,7 @@ const coachingMapper = {
         return result.rows.map(coaching => new Coaching(coaching));
     },
 
-    bookCoaching: async (memberId, coachingId ) => {
+    addBooking: async (memberId, coachingId ) => {
 
 
         const result = await db.query(`
@@ -174,7 +174,7 @@ const coachingMapper = {
         return result.rows[0]; 
     },
 
-    deleteOneCoaching : async (id) => {
+    deleteCoachingById : async (id) => {
 
         const deletedCoaching = await db.query(`
         DELETE FROM "coaching"

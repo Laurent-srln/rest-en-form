@@ -5,11 +5,11 @@ const jsonwebtoken = require('jsonwebtoken');
 
 const healthController = {
 
-    allHealthRecordsByMember: async (req, res) => {
+    getAllHealthRecordsByMemberId: async (req, res) => {
 
         const {userId} = jsonwebtoken.decode(req.headers.authorization.substring(7))
         try{
-        const healthRecords = await healthMapper.findAllHealthRecordsByMember(userId);
+        const healthRecords = await healthMapper.getAllHealthRecordsByMemberId(userId);
 
         res.json(healthRecords)
         }catch(err){

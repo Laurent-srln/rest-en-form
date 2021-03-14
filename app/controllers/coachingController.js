@@ -50,14 +50,14 @@ const coachingController = {
             res.status(404).json(err.message)
         }
 
-        },
+    },
 
-    findACoachingById : async (req, res) => {
+    getCoachingById : async (req, res) => {
 
         const {id} = req.params;
 
         try{
-        const result = await coachingMapper.findOneCoaching(id);
+        const result = await coachingMapper.getCoachByIding(id);
         
         console.log(result);
         
@@ -67,7 +67,7 @@ const coachingController = {
 
     },
 
-    findAvailableCoachings: async (req,res) => {
+    getAvailableCoachings: async (req,res) => {
         const { date } = req.query;
 
         if (dayjs(date).isSameOrBefore(dayjs(), 'day')) {
@@ -77,7 +77,7 @@ const coachingController = {
         };
 
         try {
-                const AvailableCoachings = await coachingMapper.findAvailableCoachings(date);
+                const AvailableCoachings = await coachingMapper.getAvailableCoachings(date);
     
         res.json(AvailableCoachings)
 
@@ -87,11 +87,11 @@ const coachingController = {
 
     },
 
-    memberNextBookings: async (req, res) => {
+    getMemberNextBookingsByTokenId: async (req, res) => {
 
         const {userId} = jsonwebtoken.decode(req.headers.authorization.substring(7));
         try{
-        const bookings = await coachingMapper.findNextBookingsByMember(userId);
+        const bookings = await coachingMapper.getNextBookingsByMemberId(userId);
         
         res.json(bookings)
         }catch(err){
@@ -99,11 +99,11 @@ const coachingController = {
         }
     },
 
-    checkMemberNextBookings : async (req, res) => {
+    getMemberNextBookingsByParamsId : async (req, res) => {
 
         const {id} = req.params;
         try{
-        const bookings = await coachingMapper.findNextBookingsByMember(id);
+        const bookings = await coachingMapper.getNextBookingsByMemberId(id);
         
         res.json(bookings)
         }catch(err){
@@ -112,11 +112,11 @@ const coachingController = {
         
     },
 
-    coachNextBookings: async (req, res) => {
+    getCoachNextBookings: async (req, res) => {
 
         const {userId} = jsonwebtoken.decode(req.headers.authorization.substring(7));
         try{
-        const bookings = await coachingMapper.findNextBookings(userId);
+        const bookings = await coachingMapper.getNextBookingsbyCoachId(userId);
         
         res.json(bookings)
         }catch(err){
@@ -124,11 +124,11 @@ const coachingController = {
         }
     },
 
-    coachLastBookings: async (req, res) => {
+    getCoachLastBookings: async (req, res) => {
 
         const {userId} = jsonwebtoken.decode(req.headers.authorization.substring(7));
         try{
-        const bookings = await coachingMapper.findLastBookings(userId);
+        const bookings = await coachingMapper.getLastBookingsbyCoachId(userId);
 
         res.json(bookings)
         }catch(err){
@@ -136,20 +136,20 @@ const coachingController = {
         }
     },
 
-    bookCoaching: async (req,res) => {
+    addBooking: async (req,res) => {
 
         try {
 
             const { coachingId } = req.body;
             const {userId} = jsonwebtoken.decode(req.headers.authorization.substring(7));
 
-            const check = await coachingMapper.findOneCoaching(coachingId);
+            const check = await coachingMapper.getCoachByIding(coachingId);
 
             if (check.member_id) {
                 return res.json("Coaching déjà réserevé.");
             }
 
-            const coaching = await coachingMapper.bookCoaching(userId,coachingId );
+            const coaching = await coachingMapper.addBooking(userId,coachingId );
 
             res.json('Réservation bien enregistrée.');
         } catch(err){
@@ -164,7 +164,7 @@ const coachingController = {
         const { coachingId } = req.params;
         const { userId } = jsonwebtoken.decode(req.headers.authorization.substring(7));
 
-        const check = await coachingMapper.findOneCoaching(coachingId);
+        const check = await coachingMapper.getCoachByIding(coachingId);
 
         if (check.member_id !== userId) {
             return res.json("Vous n'avez pas réservé ce coaching.");
@@ -179,14 +179,14 @@ const coachingController = {
         } 
     },
 
-    deleteACoachingByPk : async (req, res) => {
+    deleteCoachingById : async (req, res) => {
 
         try{
         const {id} = req.params;
         
-        const isCoaching = await coachingMapper.findOneCoaching(id);
+        const isCoaching = await coachingMapper.getCoachByIding(id);
         
-            await coachingMapper.deleteOneCoaching(isCoaching.id);
+            await coachingMapper.deleteCoachingById(isCoaching.id);
 
             res.json("Coaching supprimé");
 

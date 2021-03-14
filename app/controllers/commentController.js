@@ -13,14 +13,14 @@ const commentController = {
         const { content } = req.body;
         const {userId} = jsonwebtoken.decode(req.headers.authorization.substring(7));
 
-        const checkWorkout = await workoutMapper.findWorkout(workoutId);
+        const checkWorkout = await workoutMapper.getWorkoutById(workoutId);
 
         if (!checkWorkout) {
             res.status(200).json("Ce workout est introuvable.");
             return;
         }
 
-        const check = await commentMapper.findCommentByWorkoutId(workoutId);
+        const check = await commentMapper.getCommentByWorkoutId(workoutId);
 
         if (check) {
            return res.status(200).json("Un commentaire existe déjà pour ce workout.")
@@ -43,7 +43,7 @@ const commentController = {
             const { content } = req.body;
             const {userId} = jsonwebtoken.decode(req.headers.authorization.substring(7));
 
-            const check = await commentMapper.findCommentById(commentId);
+            const check = await commentMapper.getCommentById(commentId);
 
             if (!check) {
                 return res.status(200).json("Ce commentaire est introuvable.");
@@ -70,7 +70,7 @@ const commentController = {
             const { commentId } = req.params;
             const {userId} = jsonwebtoken.decode(req.headers.authorization.substring(7));
 
-            const check = await commentMapper.findCommentById(commentId);
+            const check = await commentMapper.getCommentById(commentId);
 
             if (!check) {
                 return res.status(404).json("Ce commentaire est introuvable.");

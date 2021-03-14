@@ -12,7 +12,7 @@ const commentMapper = {
         return newComment.rows[0];
     },
 
-    findCommentByWorkoutId : async (workoutId) => {
+    getCommentByWorkoutId : async (workoutId) => {
 
         const check = await db.query(`
         SELECT id, coach_id, workout_id
@@ -24,7 +24,7 @@ const commentMapper = {
 
     },
 
-    findCommentById : async (commentId) => {
+    getCommentById : async (commentId) => {
 
         const check = await db.query(`
         SELECT id, coach_id, workout_id

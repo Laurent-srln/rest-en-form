@@ -4,12 +4,12 @@ const db = require('../database');
 
 const specialtyMapper = {
 
-    addSpecialty : async (newSpecialty)=> {
+    addSpecialty : async (addSpecialty)=> {
 
         const check = await db.query(`
         SELECT *
         FROM "specialty" 
-        WHERE lower(name) = $1`, [newSpecialty.toLowerCase()]
+        WHERE lower(name) = $1`, [addSpecialty.toLowerCase()]
         )
         
         if (check.rows.length) {
@@ -20,13 +20,13 @@ const specialtyMapper = {
         const result = await db.query(`
         INSERT INTO "specialty"
         (name)
-        VALUES($1) RETURNING id;`, [newSpecialty]);
+        VALUES($1) RETURNING id;`, [addSpecialty]);
 
         return new Specialty(result.rows[0]);
 
     },
 
-    findAllSpecialties : async ()=> {
+    getAllSpecialties : async ()=> {
 
         const result = await db.query(`
         SELECT * 
@@ -39,7 +39,7 @@ const specialtyMapper = {
         return result.rows.map(specialty=> new Specialty(specialty) )
     },
 
-    deleteOneSpecialty : async (id)=>{
+    deletecialtyByIByIdd : async (id)=>{
 
         const check = await db.query(`
         SELECT * 

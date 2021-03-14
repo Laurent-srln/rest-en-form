@@ -7,7 +7,7 @@ const jwtSecret = require('../services/jwtSecret');
 
 const authController = {
 
-    newPassword : async (req, res) => {
+    setPassword : async (req, res) => {
 
         const newPassword = req.body;
         const token = req.query.token;
@@ -23,7 +23,7 @@ const authController = {
                 return res.json({"message": "Les deux mots de passe doivent être identique"})
             }
 
-            const foundToken = await authMapper.findToken(token);
+            const foundToken = await authMapper.getToken(token);
 
             if(!foundToken) {
                 return res.json({"message": "Token not found"})
@@ -32,7 +32,7 @@ const authController = {
             const hashPassword = await bcrypt.hash(newPassword.password, saltRounds);
             console.log(hashPassword);
 
-                await authMapper.addPassword(token, hashPassword);
+                await authMapper.setPassword(token, hashPassword);
                 res.json({"message": "Le nouveau mot de passe a bien été enregistré"})
 
         } catch (err) {
@@ -61,7 +61,7 @@ const authController = {
             }
 
                 
-            const result = await authMapper.checkConnexion(email);
+            const result = await authMapper.getUserAuthInfo(email);
             
             if (!result){
 

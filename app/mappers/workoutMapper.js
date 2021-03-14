@@ -35,7 +35,7 @@ const workoutMapper = {
 
     },
 
-    findAllWorkoutsByMember: async (id) => {
+    getAllWorkoutsByMemberIdId: async (id) => {
 
         const result = await db.query(`
         SELECT w.id, w.date, w.content as description, w.created_at, w.updated_at, member.id as member_id, member.firstname as member_firstname, member.lastname as member_lastname, h.weight, h.muscle_mass, h.fat_mass, h.bone_mass, h.body_water, coach.id as comment_coach_id, coach.firstname as comment_coach_firstname, coach.lastname as comment_coach_lastname, "c".content as comment_content, "c".created_at as comment_date
@@ -55,7 +55,7 @@ const workoutMapper = {
         return result.rows.map(workout => new Workout(workout));
     },
 
-    findWorkout: async (workoutId) => {
+    getWorkoutById: async (workoutId) => {
 
         const result = await db.query(`
         
