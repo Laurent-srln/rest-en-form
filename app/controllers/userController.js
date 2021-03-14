@@ -1,5 +1,6 @@
 
 const userMapper = require('../mappers/userMapper');
+const specialtyMapper = require('../mappers/specialtyMapper');
 const passwordMail = require('../services/passwordMail');
 const emailValidator = require('email-validator');
 
@@ -58,29 +59,73 @@ const userController = {
     },
 
     newUser : async (req, res) => {
-        user = req.body
-
-        const validEmail = emailValidator.validate(user.email);
-
-        if (!user.email || !user.firstname || !user.lastname || !user.role ) {
-            res.status(400).json({"message": `Tous les champs obligatoires doivent être remplis`})
-            return;
-        };
-
-        if (!validEmail){
-
-            res.status(400).json({"message": `email non valide`})
-            return;
-        };
-
-
+       
+        
         try {
-            user.token = uuidv4();
-            const newUser = await userMapper.addUser(user);
+        
+        // Récupération des données du form
+        user = req.body
+        
+        // On teste que tous les champs obligatoires sont bien rempli
+            if (!user.email || !user.firstname || !user.lastname || !user.role ) {
+                res.status(400).json({"message": `Tous les champs obligatoires doivent être remplis`});
+                return;
+            };
+        
+        //On vérifie que l'email récupéré est valide
+        const validEmail = emailValidator.validate(user.email);
+        
+            if (!validEmail){
+                res.status(400).json({"message": `email non valide`});
+                return;
+        };
 
+        // On vérifie que l'email ne correspond pas à un user déja en db
+        const checkEmail = await userMapper.findMemberByEmail(user.email);
+
+            if (checkEmail.length) {
+                res.status(400).json({"message": `Un utilisateur avec cette adresse email existe déjà. id : ${checkEmail[0].id}`})
+                return;
+        };
+
+        // On génère un token et on l'ajout à l'objet user récupéré du form
+            user.token = uuidv4();
+
+        // Si c'est un MEMBER qu'on veut insérer :
+            if (user.role === 'MEMBER') {
+                await userMapper.addUser(user);
+            };
+        
+        // Si c'est un COACH :
+             if (user.role === 'COACH') {
+
+                if (!user.specialties || !user.specialties.length) {
+                    await userMapper.addUser(user);
+                }
+
+                else {
+                // On récupère les spécialités enregistrées et on stocke leurs id dans un array
+                const specialties= await specialtyMapper.findAllSpecialties();
+                let specialtiesId = [];
+                specialties.forEach(specialty => specialtiesId.push(specialty.id))
+                console.log("specialtiesId :", specialtiesId);
+
+                // On parcourt les id envoyés dans le form pour les comparer aux id en db.
+                user.specialties.forEach( specialty => {
+                    if (!specialtiesId.includes(specialty)) {
+                        res.status(400).json({"message": `La spécialité avec l'id ${specialty} n'existe pas.`})
+                        return;
+                    }});
+           
+                await userMapper.addCoach(user);
+                }
+            };
+
+        // On envoie un mail au nouveau user avec un lien lui permettant de configurer son password
             await passwordMail(user.token, user.email);
 
-            res.json(newUser)
+            res.status(200).json({"message": `L'utilisateur a bien été ajouté.`});
+
         } catch (err) {
             res.status(400).json(err.message);
         };
@@ -99,7 +144,7 @@ const userController = {
 
             await userMapper.deleteOneUser(isUser.id);
 
-            res.json("cet user a bien été supprimé")
+            res.json("Cet user a bien été supprimé")
         }   
         
     },

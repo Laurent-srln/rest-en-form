@@ -30,6 +30,17 @@ const userMapper = {
         return new User(result.rows[0])
     },
 
+    findMemberByEmail : async (email) => {
+        const result = await db.query(`
+        SELECT u.id, u.firstname, u.lastname, u.email
+        FROM "user" u 
+        WHERE lower(u.email) = $1;`,
+         [email.toLowerCase()]
+    );
+
+        return result.rows;
+    },
+
     findAllCoachs : async ()=>{
 
         const result = await db.query(`
@@ -70,36 +81,42 @@ const userMapper = {
         return new User (result.rows[0]);
     },
 
-    addUser: async (user) => {
+    addCoach: async (user) => {
 
-        //! Voir pour modifier pour éviter que le user soit ajouté sans ses spécialité (INSERT INTO user OK mais INSERT INTO coach_has_specialty NOT OK)
+        if (user.specialties.length > 0) {
 
-        const check = await db.query(`
-        SELECT id FROM "user" WHERE lower(email) = $1;`, [user.email.toLowerCase()]);
+        let query = `
+        with 
+        new_coach as (INSERT INTO "user" ("firstname", "lastname", "email", "role", "token")
+        VALUES ($1, $2, $3, $4, $5) RETURNING id)
 
-        if (check.rows.length) {
-            
-            throw new Error(`Un utilisateur avec cette adresse email existe déjà. id : ${check.rows[0].id}`)
-        }
-
-        const result = await db.query(`
-        INSERT INTO "user" ("firstname", "lastname", "email", "role", "token")
-        VALUES ($1, $2, $3, $4, $5) RETURNING id;`, [user.firstname, user.lastname, user.email.toLowerCase(), user.role, user.token] 
+        INSERT INTO "coach_has_specialty" (coach_id, specialty_id)
+        VALUES
+        ((SELECT "id" FROM new_coach), $6)`;
+        
+        for (i=1; i<user.specialties.length; i++) {
+         query += `, ((SELECT "id" FROM new_coach), $${i+6})`
+        } ;
+        
+        console.log(query)
+     
+        await db.query(query, [user.firstname, user.lastname, user.email.toLowerCase(), user.role, user.token, ...user.specialties ] 
         );
 
-        user.id = result.rows[0].id;
-
-        if (user.role === "COACH") {
-
-        for (const specialtyId of user.specialties) {
-            await db.query(`
-        INSERT INTO "coach_has_specialty" (coach_id, specialty_id)
-        VALUES ($1, $2);`, [user.id, specialtyId] )
-         } ;
-
         }
 
-        return new User(user);
+        return;
+    },
+
+
+    addUser: async (user) => {
+     
+        const result = await db.query(`
+        INSERT INTO "user" ("firstname", "lastname", "email", "role", "token")
+        VALUES ($1, $2, $3, $4, $5) RETURNING *;`, [user.firstname, user.lastname, user.email.toLowerCase(), user.role, user.token] 
+        );
+
+        return result.rows[0];
     },
 
     findOneUser : async (id) => {
@@ -111,27 +128,18 @@ const userMapper = {
         return result.rows[0]
     },
 
-    deleteOneUser : async (id) =>{
+    deleteOneUser : async (id) => {
 
-    
-        const check = await db.query(`
-        SELECT role
-        FROM "user"
-        WHERE id = $1`, [id])
-
-        if(check.rows[0].role === "MEMBER"){
-            
             await db.query(`
+            with deleted_user as (
+                DELETE FROM "user"
+                WHERE id = $1 RETURNING id)
             UPDATE "coaching"
             SET member_id = NULL
-            WHERE member_id = $1`, [id])   
-        }
-        
-           const result = await db.query(`
-            DELETE FROM "user"
-            WHERE id =$1`,[id])
-        
-        return result;     
+            WHERE member_id = (SELECT id FROM deleted_user);`, [id]);
+            
+            return
+    
     },
     updateOneUser : async (id, user)=> {
 

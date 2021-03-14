@@ -54,7 +54,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjM1LCJlb
 {
     "date": "2021-03-12",
     "content": "description du workout",
-    "weight": 30,
+    "weight": 80,
     "muscleMass": 85,
     "fatMass": 10,
     "boneMass": 5,
@@ -78,13 +78,13 @@ Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJlbWFpbCI6InNvc29zb0BnbWFpbC5jb20iLCJyb2xlIjoiTUVNQkVSIiwiaWF0IjoxNjE1NTQ0NTQxLCJleHAiOjE2MTU1ODA1NDF9.GbuwA3pXyOTDXDC45rehNS5P2Oa9JsvHLLHW699taFk
 
 {
-    "date": "2021-03-11",
-    "content": "Workout modifié bis ",
-    "weight": 84,
-    "muscleMass": 9,
-    "fatMass": 9,
-    "boneMass": 9,
-    "bodyWater": 9
+    "date": "2021-03-12",
+    "content": "description du workout",
+    "weight": 80,
+    "muscleMass": 85,
+    "fatMass": 10,
+    "boneMass": 5,
+    "bodyWater": 59
 }
 
 
@@ -142,7 +142,7 @@ Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjM0LCJlbWFpbCI6ImFsZXh0QGNvYWNoLmNvbSIsInJvbGUiOiJDT0FDSCIsImlhdCI6MTYxNTY0NDI2MywiZXhwIjoxNjE1NjgwMjYzfQ.ongcmgT5ZoFZh3wt_k4_FPW08TEEIQ4x23OjUyXp_NE
 
 {
-    "content": "ssss"
+    "content": "Commentaire"
 }
 
 
@@ -204,10 +204,10 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJlb
 ### AJOUTER UNE SPÉCIALITÉ
 POST {{baseUrl}}/specialties
 Content-Type: application/json
-Authorization: Bearer
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjM0LCJlbWFpbCI6ImFsZXh0QGNvYWNoLmNvbSIsInJvbGUiOiJDT0FDSCIsImlhdCI6MTYxNTcxNTI2MSwiZXhwIjoxNjE1NzUxMjYxfQ.NLqs-zX0hQ7fpcrlaVmv4JBflFvcr1naQi2-_yTYwKg
 
 {
-    "name": "test"
+    "name": "nomDeLaSpécialité"
 }
 
 
@@ -218,7 +218,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjM0LCJlb
 
 ### SUPPRIMER UNE SPÉCIALITÉ
 DELETE  {{baseUrl}}/specialties/15
-Authorization: Bearer
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjM0LCJlbWFpbCI6ImFsZXh0QGNvYWNoLmNvbSIsInJvbGUiOiJDT0FDSCIsImlhdCI6MTYxNTcxNTI2MSwiZXhwIjoxNjE1NzUxMjYxfQ.NLqs-zX0hQ7fpcrlaVmv4JBflFvcr1naQi2-_yTYwKg
 
 
 ////////// USERS \\\\\\\\\\
@@ -231,9 +231,9 @@ Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjM0LCJlbWFpbCI6ImFsZXh0QGNvYWNoLmNvbSIsInJvbGUiOiJDT0FDSCIsImlhdCI6MTYxNTY3MzAxOSwiZXhwIjoxNjE1NzA5MDE5fQ.EeyZS8wBsRyQ54qKgtx_0ZUXnQviwKYV9XNQMeRCA-0
 
 {
-    "firstname": "test",
-    "lastname": "userqsdqsd",
-    "email": "autrebis@qsdqds.com",
+    "firstname": "Prénom",
+    "lastname": "Nom",
+    "email": "nom@email.com",
     "role": "MEMBER"
 }
 
@@ -244,9 +244,9 @@ Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjM0LCJlbWFpbCI6ImFsZXh0QGNvYWNoLmNvbSIsInJvbGUiOiJDT0FDSCIsImlhdCI6MTYxNTcxNTI2MSwiZXhwIjoxNjE1NzUxMjYxfQ.NLqs-zX0hQ7fpcrlaVmv4JBflFvcr1naQi2-_yTYwKg
 
 {
-    "firstname": "Pierre",
-    "lastname": "Carreras",
-    "email": "ccc@coach.com",
+    "firstname": "Prénom",
+    "lastname": "Nom",
+    "email": "nom@email.com",
     "role": "COACH",
     "specialties": [1,3]
 }
@@ -267,11 +267,11 @@ Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJlbWFpbCI6InNvc29zb0BnbWFpbC5jb20iLCJyb2xlIjoiTUVNQkVSIiwiaWF0IjoxNjE1NTQ0NTQxLCJleHAiOjE2MTU1ODA1NDF9.GbuwA3pXyOTDXDC45rehNS5P2Oa9JsvHLLHW699taFk
 
 {
-    "firstname": "SOSO",
-    "lastname": "SOSOSO",
-    "email": "SOSOSO@gmail.com",
-    "role": "MEMBER",
-    "specialties":[6, 2]
+    "firstname": "Prénom",
+    "lastname": "Nom",
+    "email": "nom@email.com",
+    "role": "COACH",
+    "specialties": [1,3]
 }
 
 
@@ -293,18 +293,18 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjM0LCJlb
     "date": "2022-04-15",
     "start": "10:00",
     "end": "12:00",
-    "coachId": 34
+    "coachId": 3
 }
 
 
 ### RÉCUPÉRER UN COACHING    
 GET {{baseUrl}}/coaching/5
-Authorization: Bearer
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjM0LCJlbWFpbCI6ImFsZXh0QGNvYWNoLmNvbSIsInJvbGUiOiJDT0FDSCIsImlhdCI6MTYxNTcxNTI2MSwiZXhwIjoxNjE1NzUxMjYxfQ.NLqs-zX0hQ7fpcrlaVmv4JBflFvcr1naQi2-_yTYwKg
 
 
 ### SUPPRIMER UN COACHING
 DELETE {{baseUrl}}/coaching/5
-Authorization: Bearer
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjM0LCJlbWFpbCI6ImFsZXh0QGNvYWNoLmNvbSIsInJvbGUiOiJDT0FDSCIsImlhdCI6MTYxNTcxNTI2MSwiZXhwIjoxNjE1NzUxMjYxfQ.NLqs-zX0hQ7fpcrlaVmv4JBflFvcr1naQi2-_yTYwKg
 
 
 
