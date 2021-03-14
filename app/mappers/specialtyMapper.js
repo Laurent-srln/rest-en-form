@@ -4,8 +4,29 @@ const db = require('../database');
 
 const specialtyMapper = {
 
+    addSpecialty : async (addSpecialty)=> {
 
-    findAllSpecialties : async ()=> {
+        const check = await db.query(`
+        SELECT *
+        FROM "specialty" 
+        WHERE lower(name) = $1`, [addSpecialty.toLowerCase()]
+        )
+        
+        if (check.rows.length) {
+            
+            throw new Error(`Cette spécialité existe déjà. id : ${check.rows[0].id}`)
+        };
+
+        const result = await db.query(`
+        INSERT INTO "specialty"
+        (name)
+        VALUES($1) RETURNING id;`, [addSpecialty]);
+
+        return new Specialty(result.rows[0]);
+
+    },
+
+    getAllSpecialties : async ()=> {
 
         const result = await db.query(`
         SELECT * 
@@ -18,29 +39,7 @@ const specialtyMapper = {
         return result.rows.map(specialty=> new Specialty(specialty) )
     },
 
-    addSpecialty : async (newSpecialty)=> {
-
-        const check = await db.query(`
-        SELECT *
-        FROM "specialty" 
-        WHERE lower(name) = $1`, [newSpecialty.toLowerCase()]
-        )
-        
-        if (check.rows.length) {
-            
-            throw new Error(`Cette spécialité existe déjà. id : ${check.rows[0].id}`)
-        };
-
-        const result = await db.query(`
-        INSERT INTO "specialty"
-        (name)
-        VALUES($1) RETURNING id;`, [newSpecialty]);
-
-        return new Specialty(result.rows[0]);
-
-    },
-
-    deleteOneSpecialty : async (id)=>{
+    deletecialtyByIByIdd : async (id)=>{
 
         const check = await db.query(`
         SELECT * 
@@ -57,8 +56,6 @@ const specialtyMapper = {
             WHERE id = $1 `, [id]);
         
     }
-
-
 };
 
 module.exports = specialtyMapper;

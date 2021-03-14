@@ -2,18 +2,7 @@ const specialtyMapper = require('../mappers/specialtyMapper');
 
 const specialtyController = {
 
-    allspecialties : async (req, res)=> {
-        
-        try{
-        const result = await specialtyMapper.findAllSpecialties();
-
-        res.status(200).json(result)
-        }catch(err){
-            res.status(400).json(err.message); 
-        }    
-    },
-
-    newSpecialty : async (req, res)=>{
+    addSpecialty : async (req, res)=>{
 
         const newSpecialty = req.body.name;
         
@@ -31,13 +20,24 @@ const specialtyController = {
         }
     },
 
+    getAllSpecialties : async (req, res)=> {
+        
+        try{
+        const result = await specialtyMapper.findgetAllSpecialties();
+
+        res.status(200).json(result)
+        }catch(err){
+            res.status(400).json(err.message); 
+        }    
+    },
+
     deleteSpecialty : async (req, res) => {
 
         const {id} = req.params;
 
         try{
 
-            const result = await specialtyMapper.deleteOneSpecialty(id);
+            const result = await specialtyMapper.deleteSpecialtyById(id);
 
             res.status(200).json("spécialité bien supprimée");
         }catch(err){

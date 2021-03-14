@@ -14,54 +14,6 @@ require('dayjs/locale/fr');
 dayjs.locale('fr');
 
 const coachingController = {
-    memberNextBookings: async (req, res) => {
-
-        const {userId} = jsonwebtoken.decode(req.headers.authorization.substring(7));
-        try{
-        const bookings = await coachingMapper.findNextBookingsByMember(userId);
-        
-        res.json(bookings)
-        }catch(err){
-            res.status(404).json(err.message)
-        }
-    },
-
-    checkMemberNextBookings : async (req, res) => {
-
-        const {id} = req.params;
-        try{
-        const bookings = await coachingMapper.findNextBookingsByMember(id);
-        
-        res.json(bookings)
-        }catch(err){
-            res.status(404).json(err.message)
-        }
-        
-    },
-
-    coachNextBookings: async (req, res) => {
-
-        const {userId} = jsonwebtoken.decode(req.headers.authorization.substring(7));
-        try{
-        const bookings = await coachingMapper.findNextBookings(userId);
-        
-        res.json(bookings)
-        }catch(err){
-            res.status(404).json(err.message)
-        }
-    },
-
-    coachLastBookings: async (req, res) => {
-
-        const {userId} = jsonwebtoken.decode(req.headers.authorization.substring(7));
-        try{
-        const bookings = await coachingMapper.findLastBookings(userId);
-
-        res.json(bookings)
-        }catch(err){
-            res.status(404).json(err.message)
-        }
-    },
 
     addCoachings : async (req, res) => {
 
@@ -98,9 +50,24 @@ const coachingController = {
             res.status(404).json(err.message)
         }
 
-        },
+    },
 
-    findAvailableCoachings: async (req,res) => {
+    getCoachingById : async (req, res) => {
+
+        const {id} = req.params;
+
+        try{
+        const result = await coachingMapper.getCoachByIding(id);
+        
+        console.log(result);
+        
+        }catch(err){
+            res.status(400).json(err.message)
+        }
+
+    },
+
+    getAvailableCoachings: async (req,res) => {
         const { date } = req.query;
 
         if (dayjs(date).isSameOrBefore(dayjs(), 'day')) {
@@ -110,7 +77,7 @@ const coachingController = {
         };
 
         try {
-                const AvailableCoachings = await coachingMapper.findAvailableCoachings(date);
+                const AvailableCoachings = await coachingMapper.getAvailableCoachings(date);
     
         res.json(AvailableCoachings)
 
@@ -120,53 +87,69 @@ const coachingController = {
 
     },
 
-    findACoachingById : async (req, res) => {
+    getMemberNextBookingsByTokenId: async (req, res) => {
 
-        const {id} = req.params;
-
+        const {userId} = jsonwebtoken.decode(req.headers.authorization.substring(7));
         try{
-        const result = await coachingMapper.findOneCoaching(id);
+        const bookings = await coachingMapper.getNextBookingsByMemberId(userId);
         
-        console.log(result);
-       
+        res.json(bookings)
         }catch(err){
-            res.status(400).json(err.message)
+            res.status(404).json(err.message)
         }
-
     },
 
-    //Delete par un manager
-    deleteACoachingByPk : async (req, res) => {
+    getMemberNextBookingsByParamsId : async (req, res) => {
 
-        try{
         const {id} = req.params;
+        try{
+        const bookings = await coachingMapper.getNextBookingsByMemberId(id);
         
-        const isCoaching = await coachingMapper.findOneCoaching(id);
-        
-            await coachingMapper.deleteOneCoaching(isCoaching.id);
-
-            res.json("Coaching supprimé");
-
+        res.json(bookings)
         }catch(err){
-            res.status(400).json("id déjà supprimé");
+            res.status(404).json(err.message)
         }
-               
+        
     },
 
-    bookCoaching: async (req,res) => {
+    getCoachNextBookings: async (req, res) => {
+
+        const {userId} = jsonwebtoken.decode(req.headers.authorization.substring(7));
+        try{
+        const bookings = await coachingMapper.getNextBookingsbyCoachId(userId);
+        
+        res.json(bookings)
+        }catch(err){
+            res.status(404).json(err.message)
+        }
+    },
+
+    getCoachLastBookings: async (req, res) => {
+
+        const {userId} = jsonwebtoken.decode(req.headers.authorization.substring(7));
+        try{
+        const bookings = await coachingMapper.getLastBookingsbyCoachId(userId);
+
+        res.json(bookings)
+        }catch(err){
+            res.status(404).json(err.message)
+        }
+    },
+
+    addBooking: async (req,res) => {
 
         try {
 
             const { coachingId } = req.body;
             const {userId} = jsonwebtoken.decode(req.headers.authorization.substring(7));
 
-            const check = await coachingMapper.findOneCoaching(coachingId);
+            const check = await coachingMapper.getCoachByIding(coachingId);
 
             if (check.member_id) {
                 return res.json("Coaching déjà réserevé.");
             }
 
-            const coaching = await coachingMapper.bookCoaching(userId,coachingId );
+            const coaching = await coachingMapper.addBooking(userId,coachingId );
 
             res.json('Réservation bien enregistrée.');
         } catch(err){
@@ -181,7 +164,7 @@ const coachingController = {
         const { coachingId } = req.params;
         const { userId } = jsonwebtoken.decode(req.headers.authorization.substring(7));
 
-        const check = await coachingMapper.findOneCoaching(coachingId);
+        const check = await coachingMapper.getCoachByIding(coachingId);
 
         if (check.member_id !== userId) {
             return res.json("Vous n'avez pas réservé ce coaching.");
@@ -194,7 +177,25 @@ const coachingController = {
     } catch(err){
             res.status(400).json(err.message);
         } 
+    },
+
+    deleteCoachingById : async (req, res) => {
+
+        try{
+        const {id} = req.params;
+        
+        const isCoaching = await coachingMapper.getCoachByIding(id);
+        
+            await coachingMapper.deleteCoachingById(isCoaching.id);
+
+            res.json("Coaching supprimé");
+
+        }catch(err){
+            res.status(400).json("id déjà supprimé");
+        }
+               
     }
+
 };
 
 module.exports = coachingController;

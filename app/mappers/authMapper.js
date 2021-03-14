@@ -1,7 +1,7 @@
 const db = require('../database');
 const authMapper = {
 
-    findToken: async (token) => {
+    getToken: async (token) => {
         result = await db.query(`
         
         SELECT id
@@ -13,21 +13,7 @@ const authMapper = {
         return result.rows[0];
     },
 
-    addPassword : async (token, password) => {
-
-        console.log({"token": token, "password":password});
-
-        await db.query(`
-
-        UPDATE "user"
-        SET password = $1, token = NULL
-        WHERE "token" = $2`,
-        [password, token]
-        )
-    },
-
-
-    checkConnexion : async (email) => {
+    getUserAuthInfo : async (email) => {
 
         const result = await db.query(`
         SELECT u.id, u.email, u.password, u.role
@@ -39,7 +25,7 @@ const authMapper = {
         return result.rows[0];
     },
 
-    findUserByEmail : async (email) => {
+    getUserByEmail : async (email) => {
         const result = await db.query(`
         SELECT u.id, u.email, u.role,
         CASE
@@ -56,7 +42,21 @@ const authMapper = {
         }
 
         return result.rows[0]
+    },
+
+    setPassword : async (token, password) => {
+
+        console.log({"token": token, "password":password});
+
+        await db.query(`
+
+        UPDATE "user"
+        SET password = $1, token = NULL
+        WHERE "token" = $2`,
+        [password, token]
+        )
     }
+
 }
 
 module.exports = authMapper;

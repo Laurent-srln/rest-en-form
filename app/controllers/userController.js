@@ -8,57 +8,8 @@ const { v4: uuidv4 } = require('uuid');
 
 
 const userController = {
-    allMembers: async (req, res) => {
 
-        try{
-        const members = await userMapper.findAllMembers();
-
-        res.json(members)
-        }catch(err){
-            res.json(err.message)
-        }
-    },
-
-    oneMember : async (req, res) => {
-
-        const {id} = req.params;
-        
-        try{
-        const member = await userMapper.findOneMember(id);
-
-        res.json(member);
-        }catch(err){
-            res.status(400).json(err.message);
-        }
-    },
-
-    allCoachs : async (req, res) => {
-
-        try {
-            const coachs = await userMapper.findAllCoachs();
-    
-    
-        res.json(coachs)
-        } catch(err){
-            res.status(400).json(err.message);
-        }
-    },
-
-    oneCoach : async (req, res) => {
-
-        const {id} = req.params
-
-        try{
-        const coach = await userMapper.findOneCoach(id);
-        console.log(coach);
-
-        res.json(coach)
-        }catch(err){
-            res.status(400).json(err.message);
-        }
-    },
-
-    newUser : async (req, res) => {
+    addUser : async (req, res) => {
        
         
         try {
@@ -81,7 +32,7 @@ const userController = {
         };
 
         // On vérifie que l'email ne correspond pas à un user déja en db
-        const checkEmail = await userMapper.findMemberByEmail(user.email);
+        const checkEmail = await userMapper.getMemberByEmail(user.email);
 
             if (checkEmail.length) {
                 res.status(400).json({"message": `Un utilisateur avec cette adresse email existe déjà. id : ${checkEmail[0].id}`})
@@ -105,7 +56,7 @@ const userController = {
 
                 else {
                 // On récupère les spécialités enregistrées et on stocke leurs id dans un array
-                const specialties= await specialtyMapper.findAllSpecialties();
+                const specialties= await specialtyMapper.findgetAllSpecialties();
                 let specialtiesId = [];
                 specialties.forEach(specialty => specialtiesId.push(specialty.id))
                 console.log("specialtiesId :", specialtiesId);
@@ -131,22 +82,54 @@ const userController = {
         };
     },
 
-    deleteUser : async (req, res) => {
+    getAllMembers: async (req, res) => {
+
+        try{
+        const members = await userMapper.getAllMembers();
+
+        res.json(members)
+        }catch(err){
+            res.json(err.message)
+        }
+    },
+
+    getMemberById : async (req, res) => {
 
         const {id} = req.params;
         
-        const isUser = await userMapper.findOneUser(id);
-        
-        if(!isUser) {
-            res.status(400).json("Pas de user à cet id, veuillez en entrer un valide")
+        try{
+        const member = await userMapper.getMemberById(id);
+
+        res.json(member);
+        }catch(err){
+            res.status(400).json(err.message);
         }
-        else {
+    },
 
-            await userMapper.deleteOneUser(isUser.id);
+    getAllCoachs : async (req, res) => {
 
-            res.json("Cet user a bien été supprimé")
-        }   
-        
+        try {
+            const coachs = await userMapper.getAllCoachs();
+    
+    
+        res.json(coachs)
+        } catch(err){
+            res.status(400).json(err.message);
+        }
+    },
+
+    getCoachById : async (req, res) => {
+
+        const {id} = req.params
+
+        try{
+        const coach = await userMapper.getCoachById(id);
+        console.log(coach);
+
+        res.json(coach)
+        }catch(err){
+            res.status(400).json(err.message);
+        }
     },
 
     editUser : async (req, res) => {
@@ -172,7 +155,7 @@ const userController = {
        
         try {
             
-            const userToUpdate = await userMapper.findOneUser(id)
+            const userToUpdate = await userMapper.getUserById(id)
 
             if(!userToUpdate){
 
@@ -180,7 +163,7 @@ const userController = {
             }
             else{
 
-                await userMapper.updateOneUser(id, user);
+                await userMapper.editUser(id, user);
 
                 res.status(200).json({ "message" : `le user avec l'id ${id} a bien été mis à jour`, user});
             }
@@ -189,8 +172,25 @@ const userController = {
             res.status(400).json(err.message);
         };
    
+    },
+
+    deleteUser : async (req, res) => {
+
+        const {id} = req.params;
+        
+        const isUser = await userMapper.getUserById(id);
+        
+        if(!isUser) {
+            res.status(400).json("Pas de user à cet id, veuillez en entrer un valide")
+        }
+        else {
+
+            await userMapper.deleteUser(isUser.id);
+
+            res.json("Cet user a bien été supprimé")
+        }   
+        
     }
- 
 }
 
 module.exports = userController;

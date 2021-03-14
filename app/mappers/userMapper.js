@@ -4,81 +4,15 @@ const Workout = require('../models/workout');
 const db = require('../database');
 
 const userMapper = {
-    findAllMembers: async () => {
+
+    addUser: async (user) => {
+     
         const result = await db.query(`
-        SELECT u.id, u.firstname, u.lastname, u.email, u.created_at, u.updated_at
-        FROM "user" u
-        WHERE u.role = 'MEMBER'`)
+        INSERT INTO "user" ("firstname", "lastname", "email", "role", "token")
+        VALUES ($1, $2, $3, $4, $5) RETURNING *;`, [user.firstname, user.lastname, user.email.toLowerCase(), user.role, user.token] 
+        );
 
-        return result.rows.map(member => new User(member));
-
-    },
-
-    findOneMember: async (id) => {
-        const result = await db.query(`
-        SELECT u.id, u.firstname, u.lastname, u.email, u.created_at, u.updated_at
-        FROM "user" u
-        WHERE u.role = 'MEMBER'
-        AND u.id = $1;`
-        , [id])
-
-        if(!result.rows[0]) {
-
-            throw new Error(`Cet id ${id} ne correspond pas à un Member`);
-        }
-
-        return new User(result.rows[0])
-    },
-
-    findMemberByEmail : async (email) => {
-        const result = await db.query(`
-        SELECT u.id, u.firstname, u.lastname, u.email
-        FROM "user" u 
-        WHERE lower(u.email) = $1;`,
-         [email.toLowerCase()]
-    );
-
-        return result.rows;
-    },
-
-    findAllCoachs : async ()=>{
-
-        const result = await db.query(`
-        SELECT u.id, u.firstname, u.lastname, u.email, string_agg(s.name, ',') as specialties, u.created_at, u.updated_at
-        FROM "user" u 
-        LEFT JOIN coach_has_specialty chs ON u.id = chs.coach_id
-        LEFT JOIN specialty s ON chs.specialty_id = s.id
-        WHERE u.role = 'COACH'
-        GROUP BY u.firstname, u.lastname, u.email, u.id
-        ORDER BY u.firstname;
-        `)
-        result.rows.forEach( coach => {
-
-            if (coach.specialties) {
-            coach.specialties = coach.specialties.split(",")}
-        })
-        return result.rows.map(coach => new User(coach));
-
-    },
-
-    findOneCoach : async (coachId)=> {
-
-        const result = await db.query(`
-        SELECT u.id, u.firstname, u.lastname, u.email, string_agg(s.name, ',') as specialties, u.created_at, u.updated_at
-        FROM "user" u 
-        LEFT JOIN coach_has_specialty chs ON u.id = chs.coach_id
-        LEFT JOIN specialty s ON chs.specialty_id = s.id
-        WHERE u.role = 'COACH'
-        AND u.id = $1
-        GROUP BY u.firstname, u.lastname, u.email, u.id;
-        `, [coachId])
-
-        if(!result.rows.length){
-            throw new Error ("Pas de coach avec l'user_id : "+ coachId)
-        }
-
-        result.rows[0].specialties = result.rows[0].specialties.split(",");
-        return new User (result.rows[0]);
+        return result.rows[0];
     },
 
     addCoach: async (user) => {
@@ -108,18 +42,7 @@ const userMapper = {
         return;
     },
 
-
-    addUser: async (user) => {
-     
-        const result = await db.query(`
-        INSERT INTO "user" ("firstname", "lastname", "email", "role", "token")
-        VALUES ($1, $2, $3, $4, $5) RETURNING *;`, [user.firstname, user.lastname, user.email.toLowerCase(), user.role, user.token] 
-        );
-
-        return result.rows[0];
-    },
-
-    findOneUser : async (id) => {
+    getUserById : async (id) => {
         const result = await db.query(`
         SELECT * 
         FROM "user"
@@ -128,20 +51,84 @@ const userMapper = {
         return result.rows[0]
     },
 
-    deleteOneUser : async (id) => {
+    getAllMembers: async () => {
+        const result = await db.query(`
+        SELECT u.id, u.firstname, u.lastname, u.email, u.created_at, u.updated_at
+        FROM "user" u
+        WHERE u.role = 'MEMBER'`)
 
-            await db.query(`
-            with deleted_user as (
-                DELETE FROM "user"
-                WHERE id = $1 RETURNING id)
-            UPDATE "coaching"
-            SET member_id = NULL
-            WHERE member_id = (SELECT id FROM deleted_user);`, [id]);
-            
-            return
-    
+        return result.rows.map(member => new User(member));
+
     },
-    updateOneUser : async (id, user)=> {
+
+    getMemberById: async (id) => {
+        const result = await db.query(`
+        SELECT u.id, u.firstname, u.lastname, u.email, u.created_at, u.updated_at
+        FROM "user" u
+        WHERE u.role = 'MEMBER'
+        AND u.id = $1;`
+        , [id])
+
+        if(!result.rows[0]) {
+
+            throw new Error(`Cet id ${id} ne correspond pas à un Member`);
+        }
+
+        return new User(result.rows[0])
+    },
+
+    getMemberByEmail : async (email) => {
+        const result = await db.query(`
+        SELECT u.id, u.firstname, u.lastname, u.email
+        FROM "user" u 
+        WHERE lower(u.email) = $1;`,
+         [email.toLowerCase()]
+    );
+
+        return result.rows;
+    },
+
+    getAllCoachs : async ()=>{
+
+        const result = await db.query(`
+        SELECT u.id, u.firstname, u.lastname, u.email, string_agg(s.name, ',') as specialties, u.created_at, u.updated_at
+        FROM "user" u 
+        LEFT JOIN coach_has_specialty chs ON u.id = chs.coach_id
+        LEFT JOIN specialty s ON chs.specialty_id = s.id
+        WHERE u.role = 'COACH'
+        GROUP BY u.firstname, u.lastname, u.email, u.id
+        ORDER BY u.firstname;
+        `)
+        result.rows.forEach( coach => {
+
+            if (coach.specialties) {
+            coach.specialties = coach.specialties.split(",")}
+        })
+        return result.rows.map(coach => new User(coach));
+
+    },
+
+    getCoachById : async (coachId)=> {
+
+        const result = await db.query(`
+        SELECT u.id, u.firstname, u.lastname, u.email, string_agg(s.name, ',') as specialties, u.created_at, u.updated_at
+        FROM "user" u 
+        LEFT JOIN coach_has_specialty chs ON u.id = chs.coach_id
+        LEFT JOIN specialty s ON chs.specialty_id = s.id
+        WHERE u.role = 'COACH'
+        AND u.id = $1
+        GROUP BY u.firstname, u.lastname, u.email, u.id;
+        `, [coachId])
+
+        if(!result.rows.length){
+            throw new Error ("Pas de coach avec l'user_id : "+ coachId)
+        }
+
+        result.rows[0].specialties = result.rows[0].specialties.split(",");
+        return new User (result.rows[0]);
+    },
+
+    editUser : async (id, user)=> {
 
         await db.query(`
 
@@ -175,8 +162,20 @@ const userMapper = {
         }
         return new User(user);
     },
+    
+    deleteUser : async (id) => {
 
-  
+            await db.query(`
+            with deleted_user as (
+                DELETE FROM "user"
+                WHERE id = $1 RETURNING id)
+            UPDATE "coaching"
+            SET member_id = NULL
+            WHERE member_id = (SELECT id FROM deleted_user);`, [id]);
+            
+            return
+    
+    }
 };
 
 module.exports = userMapper;

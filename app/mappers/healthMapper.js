@@ -3,7 +3,7 @@ const db = require('../database');
 
 const healthMapper = {
 
-    findAllHealthRecordsByMember: async (memberId) => {
+    getAllHealthRecordsByMemberId: async (memberId) => {
     
         const result = await db.query(`
         SELECT h.id, h.created_at, h.updated_at, w.id as workout_id, w.date as workout_date, h.weight, h.muscle_mass, h.fat_mass, h.bone_mass, h.body_water, member.id as member_id, member.firstname as member_firstname, member.lastname as member_lastname
