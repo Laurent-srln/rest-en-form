@@ -13,20 +13,6 @@ const authMapper = {
         return result.rows[0];
     },
 
-    addPassword : async (token, password) => {
-
-        console.log({"token": token, "password":password});
-
-        await db.query(`
-
-        UPDATE "user"
-        SET password = $1, token = NULL
-        WHERE "token" = $2`,
-        [password, token]
-        )
-    },
-
-
     checkConnexion : async (email) => {
 
         const result = await db.query(`
@@ -56,7 +42,21 @@ const authMapper = {
         }
 
         return result.rows[0]
+    },
+
+    addPassword : async (token, password) => {
+
+        console.log({"token": token, "password":password});
+
+        await db.query(`
+
+        UPDATE "user"
+        SET password = $1, token = NULL
+        WHERE "token" = $2`,
+        [password, token]
+        )
     }
+
 }
 
 module.exports = authMapper;

@@ -8,55 +8,6 @@ const { v4: uuidv4 } = require('uuid');
 
 
 const userController = {
-    allMembers: async (req, res) => {
-
-        try{
-        const members = await userMapper.findAllMembers();
-
-        res.json(members)
-        }catch(err){
-            res.json(err.message)
-        }
-    },
-
-    oneMember : async (req, res) => {
-
-        const {id} = req.params;
-        
-        try{
-        const member = await userMapper.findOneMember(id);
-
-        res.json(member);
-        }catch(err){
-            res.status(400).json(err.message);
-        }
-    },
-
-    allCoachs : async (req, res) => {
-
-        try {
-            const coachs = await userMapper.findAllCoachs();
-    
-    
-        res.json(coachs)
-        } catch(err){
-            res.status(400).json(err.message);
-        }
-    },
-
-    oneCoach : async (req, res) => {
-
-        const {id} = req.params
-
-        try{
-        const coach = await userMapper.findOneCoach(id);
-        console.log(coach);
-
-        res.json(coach)
-        }catch(err){
-            res.status(400).json(err.message);
-        }
-    },
 
     newUser : async (req, res) => {
        
@@ -131,22 +82,54 @@ const userController = {
         };
     },
 
-    deleteUser : async (req, res) => {
+    allMembers: async (req, res) => {
+
+        try{
+        const members = await userMapper.findAllMembers();
+
+        res.json(members)
+        }catch(err){
+            res.json(err.message)
+        }
+    },
+
+    oneMember : async (req, res) => {
 
         const {id} = req.params;
         
-        const isUser = await userMapper.findOneUser(id);
-        
-        if(!isUser) {
-            res.status(400).json("Pas de user à cet id, veuillez en entrer un valide")
+        try{
+        const member = await userMapper.findOneMember(id);
+
+        res.json(member);
+        }catch(err){
+            res.status(400).json(err.message);
         }
-        else {
+    },
 
-            await userMapper.deleteOneUser(isUser.id);
+    allCoachs : async (req, res) => {
 
-            res.json("Cet user a bien été supprimé")
-        }   
-        
+        try {
+            const coachs = await userMapper.findAllCoachs();
+    
+    
+        res.json(coachs)
+        } catch(err){
+            res.status(400).json(err.message);
+        }
+    },
+
+    oneCoach : async (req, res) => {
+
+        const {id} = req.params
+
+        try{
+        const coach = await userMapper.findOneCoach(id);
+        console.log(coach);
+
+        res.json(coach)
+        }catch(err){
+            res.status(400).json(err.message);
+        }
     },
 
     editUser : async (req, res) => {
@@ -189,8 +172,25 @@ const userController = {
             res.status(400).json(err.message);
         };
    
+    },
+
+    deleteUser : async (req, res) => {
+
+        const {id} = req.params;
+        
+        const isUser = await userMapper.findOneUser(id);
+        
+        if(!isUser) {
+            res.status(400).json("Pas de user à cet id, veuillez en entrer un valide")
+        }
+        else {
+
+            await userMapper.deleteOneUser(isUser.id);
+
+            res.json("Cet user a bien été supprimé")
+        }   
+        
     }
- 
 }
 
 module.exports = userController;

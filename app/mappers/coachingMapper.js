@@ -17,52 +17,6 @@ const { time } = require('console');
 
 const coachingMapper = {
 
-    findNextBookingsByMember: async (memberId) => {
-
-        const result = await db.query(`
-        SELECT c.id, start_time, end_time, coach_id, coach.firstname as coach_firstname, coach.lastname as coach_lastname, member_id, member.firstname as member_firstname, member.lastname as member_lastname, c.created_at, c.updated_at
-        FROM "coaching" c
-        LEFT JOIN "user" coach ON c.coach_id = coach.id
-        LEFT join "user" member ON c.member_id = member.id
-        WHERE c.member_id = $1
-        AND c.end_time > now()
-        ORDER BY start_time;`,
-        [memberId])
-
-        return result.rows.map(coaching => new Coaching(coaching));
-    },
-
-    
-    findNextBookings: async (coachId) => {
-        const result = await db.query(`
-        SELECT c.id, start_time, end_time, coach_id, coach.firstname as coach_firstname, coach.lastname as coach_lastname, member_id, member.firstname as member_firstname, member.lastname as member_lastname, c.created_at, c.updated_at
-        FROM "coaching" c
-        LEFT JOIN "user" coach ON c.coach_id = coach.id
-        LEFT join "user" member ON c.member_id = member.id
-        WHERE c.member_id IS NOT NULL
-        AND c.end_time > now()
-        AND c.coach_id=$1
-        ORDER BY start_time;`,
-        [coachId])
-
-        return result.rows.map(coaching => new Coaching(coaching));
-    },
-
-    findLastBookings: async (coachId) => {
-        const result = await db.query(`
-        SELECT c.id, start_time, end_time, coach_id, coach.firstname as coach_firstname, coach.lastname as coach_lastname, member_id, member.firstname as member_firstname, member.lastname as member_lastname, c.created_at, c.updated_at
-        FROM "coaching" c
-        LEFT JOIN "user" coach ON c.coach_id = coach.id
-        LEFT join "user" member ON c.member_id = member.id
-        WHERE c.member_id IS NOT NULL
-        AND c.end_time < now()
-        AND c.coach_id=$1
-        ORDER BY start_time DESC;`,
-        [coachId])
-
-        return result.rows.map(coaching => new Coaching(coaching));
-    },
-
     addCoachings: async (params) => {
         console.log(params);
 
@@ -122,22 +76,6 @@ const coachingMapper = {
 
     },
 
-    findAvailableCoachings: async (date) => {
-
-        const availableCoachings = await db.query(`
-        SELECT c.id, u.firstname, u.lastname, c.start_time::time, c.end_time::time 
-        FROM "coaching" c
-        LEFT JOIN "user" u ON c.coach_id = u.id
-        WHERE start_time::date = $1
-        AND member_id IS NULL
-        ORDER BY c.start_time;`, [date]);
-    
-
-    return availableCoachings.rows;
-
-
-    },
-
     findOneCoaching : async (id) => {
 
         const result = await db.query(`
@@ -153,17 +91,64 @@ const coachingMapper = {
         return result.rows[0];
     },
 
-    deleteOneCoaching : async (id) => {
+    findAvailableCoachings: async (date) => {
 
-        const deletedCoaching = await db.query(`
-        DELETE FROM "coaching"
-        WHERE coaching.id = $1
-        `, [id])
-
-        return deletedCoaching;
+        const availableCoachings = await db.query(`
+        SELECT c.id, u.firstname, u.lastname, c.start_time::time, c.end_time::time 
+        FROM "coaching" c
+        LEFT JOIN "user" u ON c.coach_id = u.id
+        WHERE start_time::date = $1
+        AND member_id IS NULL
+        ORDER BY c.start_time;`, [date]);
+    
+    return availableCoachings.rows;
     },
 
+    findNextBookingsByMember: async (memberId) => {
 
+        const result = await db.query(`
+        SELECT c.id, start_time, end_time, coach_id, coach.firstname as coach_firstname, coach.lastname as coach_lastname, member_id, member.firstname as member_firstname, member.lastname as member_lastname, c.created_at, c.updated_at
+        FROM "coaching" c
+        LEFT JOIN "user" coach ON c.coach_id = coach.id
+        LEFT join "user" member ON c.member_id = member.id
+        WHERE c.member_id = $1
+        AND c.end_time > now()
+        ORDER BY start_time;`,
+        [memberId])
+
+        return result.rows.map(coaching => new Coaching(coaching));
+    },
+
+    
+    findNextBookings: async (coachId) => {
+        const result = await db.query(`
+        SELECT c.id, start_time, end_time, coach_id, coach.firstname as coach_firstname, coach.lastname as coach_lastname, member_id, member.firstname as member_firstname, member.lastname as member_lastname, c.created_at, c.updated_at
+        FROM "coaching" c
+        LEFT JOIN "user" coach ON c.coach_id = coach.id
+        LEFT join "user" member ON c.member_id = member.id
+        WHERE c.member_id IS NOT NULL
+        AND c.end_time > now()
+        AND c.coach_id=$1
+        ORDER BY start_time;`,
+        [coachId])
+
+        return result.rows.map(coaching => new Coaching(coaching));
+    },
+
+    findLastBookings: async (coachId) => {
+        const result = await db.query(`
+        SELECT c.id, start_time, end_time, coach_id, coach.firstname as coach_firstname, coach.lastname as coach_lastname, member_id, member.firstname as member_firstname, member.lastname as member_lastname, c.created_at, c.updated_at
+        FROM "coaching" c
+        LEFT JOIN "user" coach ON c.coach_id = coach.id
+        LEFT join "user" member ON c.member_id = member.id
+        WHERE c.member_id IS NOT NULL
+        AND c.end_time < now()
+        AND c.coach_id=$1
+        ORDER BY start_time DESC;`,
+        [coachId])
+
+        return result.rows.map(coaching => new Coaching(coaching));
+    },
 
     bookCoaching: async (memberId, coachingId ) => {
 
@@ -187,8 +172,17 @@ const coachingMapper = {
 
         
         return result.rows[0]; 
-    }
+    },
 
+    deleteOneCoaching : async (id) => {
+
+        const deletedCoaching = await db.query(`
+        DELETE FROM "coaching"
+        WHERE coaching.id = $1
+        `, [id])
+
+        return deletedCoaching;
+    }
 };
 
 module.exports = coachingMapper;

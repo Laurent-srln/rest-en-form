@@ -18,18 +18,6 @@ dayjs.locale('fr');
 
 const workoutController = {
 
-    allWorkoutsByMember: async (req, res) => {
-
-        const {userId} = jsonwebtoken.decode(req.headers.authorization.substring(7))
-        try{
-        const workouts = await workoutMapper.findAllWorkoutsByMember(userId);
-
-        res.json(workouts)
-        }catch(err){
-            res.status(400).json(err.message);
-        }
-    },
-
     addWorkout: async (req, res) => {
 
     
@@ -61,6 +49,18 @@ const workoutController = {
         res.status(400).json(err.message);
 
         };
+    },
+
+    allWorkoutsByMember: async (req, res) => {
+
+        const {userId} = jsonwebtoken.decode(req.headers.authorization.substring(7))
+        try{
+        const workouts = await workoutMapper.findAllWorkoutsByMember(userId);
+
+        res.json(workouts)
+        }catch(err){
+            res.status(400).json(err.message);
+        }
     },
 
     editWorkout: async (req, res) => {
@@ -108,8 +108,6 @@ const workoutController = {
             res.status(400).json(err.message);
     
             };
-
-
     },
 
     deleteWorkout: async (req,res) => {
@@ -140,95 +138,7 @@ const workoutController = {
 
         };
 
-    },
-
-    addComment: async (req,res) => {
-
-            try {
-        const { workoutId } = req.params;
-        const { content } = req.body;
-        const {userId} = jsonwebtoken.decode(req.headers.authorization.substring(7));
-
-        const checkWorkout = await workoutMapper.findWorkout(workoutId);
-
-        if (!checkWorkout) {
-            res.status(200).json("Ce workout est introuvable.");
-            return;
-        }
-
-        const check = await workoutMapper.findCommentByWorkoutId(workoutId);
-
-        if (check) {
-           return res.status(200).json("Un commentaire existe déjà pour ce workout.")
-        }
-
-        const newComment = await workoutMapper.addComment(content, userId, workoutId);
-
-        return res.status(200).json("Commentaire bien ajouté au workout");
-    } catch (err) {
-        res.status(400).json(err.message);
-
-        } 
-
-    },
-
-    editComment: async (req,res) => {
-        
-        try {
-            const { commentId } = req.params;
-            const { content } = req.body;
-            const {userId} = jsonwebtoken.decode(req.headers.authorization.substring(7));
-
-            const check = await workoutMapper.findCommentById(commentId);
-
-            if (!check) {
-                return res.status(200).json("Ce commentaire est introuvable.");
-            }
-
-            if (check.coach_id !== userId) {
-                return res.status(200).json("Vous ne pouvez pas modifier ce commentaire.");
-            }
-
-            const newComment = await workoutMapper.editComment(commentId, content, userId);
-
-            return res.status(200).json("Le commentaire a bien été modifié");
-
-
-        } catch (err) {
-            res.status(400).json(err.message);
-    
-            } 
-    },
-
-    deleteComment: async (req,res) => {
-        
-        try {
-            const { commentId } = req.params;
-            const {userId} = jsonwebtoken.decode(req.headers.authorization.substring(7));
-
-            const check = await workoutMapper.findCommentById(commentId);
-
-            if (!check) {
-                return res.status(404).json("Ce commentaire est introuvable.");
-            }
-
-            if (check.coach_id !== userId) {
-                return res.status(403).json("Vous ne pouvez pas supprimer ce commentaire.");
-            }
-
-            await workoutMapper.deleteComment(commentId, userId);
-
-            return res.status(200).json("Le commentaire a bien été supprimé.");
-
-
-        } catch (err) {
-            res.status(400).json(err.message);
-    
-            } 
     }
-
-
-
 }
 
 module.exports = workoutController;

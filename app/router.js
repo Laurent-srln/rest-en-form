@@ -19,6 +19,7 @@ const coachingTimePeriodSchema = require('./schemas/coachingTimePeriod');
 // CONTROLLERS
 const userController = require('./controllers/userController');
 const workoutController = require('./controllers/workoutController');
+const commentController = require('./controllers/commentController');
 const coachingController = require('./controllers/coachingController');
 const authController = require('./controllers/authController');
 const healthController = require('./controllers/healthController');
@@ -44,9 +45,9 @@ router.patch('/bookings/:coachingId/delete',authorizationMiddleware, coachingCon
 
 // COACHS ROUTES
 //      Workout & Comments
-router.post('/new-comment/:workoutId',authorizationMiddleware, validator(commentSchema), workoutController.addComment);
-router.patch('/edit-comment/:commentId',authorizationMiddleware, validator(commentSchema), workoutController.editComment);
-router.delete('/delete-comment/:commentId',authorizationMiddleware, workoutController.deleteComment);
+router.post('/new-comment/:workoutId',authorizationMiddleware, validator(commentSchema), commentController.addComment);
+router.patch('/edit-comment/:commentId',authorizationMiddleware, validator(commentSchema), commentController.editComment);
+router.delete('/delete-comment/:commentId',authorizationMiddleware, commentController.deleteComment);
 //      Coachings
 router.get('/coach-next-bookings',authorizationMiddleware, coachingController.coachNextBookings);
 router.get('/coach-last-bookings',authorizationMiddleware, coachingController.coachLastBookings);

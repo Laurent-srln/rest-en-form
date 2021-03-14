@@ -4,20 +4,6 @@ const db = require('../database');
 
 const specialtyMapper = {
 
-
-    findAllSpecialties : async ()=> {
-
-        const result = await db.query(`
-        SELECT * 
-        FROM specialty`)
-
-        if(!result.rows) {
-
-            throw new Error(`Aucune spécialité`);
-        }
-        return result.rows.map(specialty=> new Specialty(specialty) )
-    },
-
     addSpecialty : async (newSpecialty)=> {
 
         const check = await db.query(`
@@ -40,6 +26,19 @@ const specialtyMapper = {
 
     },
 
+    findAllSpecialties : async ()=> {
+
+        const result = await db.query(`
+        SELECT * 
+        FROM specialty`)
+
+        if(!result.rows) {
+
+            throw new Error(`Aucune spécialité`);
+        }
+        return result.rows.map(specialty=> new Specialty(specialty) )
+    },
+
     deleteOneSpecialty : async (id)=>{
 
         const check = await db.query(`
@@ -57,8 +56,6 @@ const specialtyMapper = {
             WHERE id = $1 `, [id]);
         
     }
-
-
 };
 
 module.exports = specialtyMapper;

@@ -4,6 +4,53 @@ const Workout = require('../models/workout');
 const db = require('../database');
 
 const userMapper = {
+
+    addUser: async (user) => {
+     
+        const result = await db.query(`
+        INSERT INTO "user" ("firstname", "lastname", "email", "role", "token")
+        VALUES ($1, $2, $3, $4, $5) RETURNING *;`, [user.firstname, user.lastname, user.email.toLowerCase(), user.role, user.token] 
+        );
+
+        return result.rows[0];
+    },
+
+    addCoach: async (user) => {
+
+        if (user.specialties.length > 0) {
+
+        let query = `
+        with 
+        new_coach as (INSERT INTO "user" ("firstname", "lastname", "email", "role", "token")
+        VALUES ($1, $2, $3, $4, $5) RETURNING id)
+
+        INSERT INTO "coach_has_specialty" (coach_id, specialty_id)
+        VALUES
+        ((SELECT "id" FROM new_coach), $6)`;
+        
+        for (i=1; i<user.specialties.length; i++) {
+         query += `, ((SELECT "id" FROM new_coach), $${i+6})`
+        } ;
+        
+        console.log(query)
+     
+        await db.query(query, [user.firstname, user.lastname, user.email.toLowerCase(), user.role, user.token, ...user.specialties ] 
+        );
+
+        }
+
+        return;
+    },
+
+    findOneUser : async (id) => {
+        const result = await db.query(`
+        SELECT * 
+        FROM "user"
+        WHERE id = $1`, [id])
+        
+        return result.rows[0]
+    },
+
     findAllMembers: async () => {
         const result = await db.query(`
         SELECT u.id, u.firstname, u.lastname, u.email, u.created_at, u.updated_at
@@ -81,66 +128,6 @@ const userMapper = {
         return new User (result.rows[0]);
     },
 
-    addCoach: async (user) => {
-
-        if (user.specialties.length > 0) {
-
-        let query = `
-        with 
-        new_coach as (INSERT INTO "user" ("firstname", "lastname", "email", "role", "token")
-        VALUES ($1, $2, $3, $4, $5) RETURNING id)
-
-        INSERT INTO "coach_has_specialty" (coach_id, specialty_id)
-        VALUES
-        ((SELECT "id" FROM new_coach), $6)`;
-        
-        for (i=1; i<user.specialties.length; i++) {
-         query += `, ((SELECT "id" FROM new_coach), $${i+6})`
-        } ;
-        
-        console.log(query)
-     
-        await db.query(query, [user.firstname, user.lastname, user.email.toLowerCase(), user.role, user.token, ...user.specialties ] 
-        );
-
-        }
-
-        return;
-    },
-
-
-    addUser: async (user) => {
-     
-        const result = await db.query(`
-        INSERT INTO "user" ("firstname", "lastname", "email", "role", "token")
-        VALUES ($1, $2, $3, $4, $5) RETURNING *;`, [user.firstname, user.lastname, user.email.toLowerCase(), user.role, user.token] 
-        );
-
-        return result.rows[0];
-    },
-
-    findOneUser : async (id) => {
-        const result = await db.query(`
-        SELECT * 
-        FROM "user"
-        WHERE id = $1`, [id])
-        
-        return result.rows[0]
-    },
-
-    deleteOneUser : async (id) => {
-
-            await db.query(`
-            with deleted_user as (
-                DELETE FROM "user"
-                WHERE id = $1 RETURNING id)
-            UPDATE "coaching"
-            SET member_id = NULL
-            WHERE member_id = (SELECT id FROM deleted_user);`, [id]);
-            
-            return
-    
-    },
     updateOneUser : async (id, user)=> {
 
         await db.query(`
@@ -175,8 +162,20 @@ const userMapper = {
         }
         return new User(user);
     },
+    
+    deleteOneUser : async (id) => {
 
-  
+            await db.query(`
+            with deleted_user as (
+                DELETE FROM "user"
+                WHERE id = $1 RETURNING id)
+            UPDATE "coaching"
+            SET member_id = NULL
+            WHERE member_id = (SELECT id FROM deleted_user);`, [id]);
+            
+            return
+    
+    }
 };
 
 module.exports = userMapper;
