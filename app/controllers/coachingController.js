@@ -70,14 +70,14 @@ const coachingController = {
     getAvailableCoachings: async (req,res) => {
         const { selectedDate } = req.query;
 
-        if (dayjs(date).isSameOrBefore(dayjs(), 'day')) {
+        if (dayjs(selectedDate).isSameOrBefore(dayjs(), 'day')) {
 
                 res.status(400).json({"message": `La date sélectionnée doit être ultérieure à aujourd'hui.`})
                 return;
         };
 
         try {
-                const AvailableCoachings = await coachingMapper.getAvailableCoachings(date);
+                const AvailableCoachings = await coachingMapper.getAvailableCoachings(selectedDate);
     
         res.json(AvailableCoachings)
 
