@@ -106,7 +106,8 @@ const userController = {
 
     getMemberById : async (req, res) => {
 
-        const {id} = req.params;
+        let {id} = req.params;
+        id = Number(id);
         
         try{
         const member = await userMapper.getMemberById(id);
@@ -131,7 +132,8 @@ const userController = {
 
     getCoachById : async (req, res) => {
 
-        const {id} = req.params
+        let { id } = req.params;
+        id = Number(id);
 
         try{
         const coach = await userMapper.getCoachById(id);
@@ -145,7 +147,8 @@ const userController = {
 
     editUser : async (req, res) => {
 
-        const {id} = req.params;
+        let {id} = req.params;
+        id = Number(id);
 
         const user = req.body;
 
@@ -214,7 +217,8 @@ const userController = {
 
     deleteUser : async (req, res) => {
 
-        const {id} = req.params;
+        let {id} = req.params;
+        id = Number(id);
         
 
         const isUser = await userMapper.getUserById(id);

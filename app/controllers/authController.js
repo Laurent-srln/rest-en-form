@@ -11,7 +11,6 @@ const authController = {
 
         const newPassword = req.body;
         const token = req.query.token;
-        console.log(req.query);
 
         try {
         

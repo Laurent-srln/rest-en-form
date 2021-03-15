@@ -54,7 +54,8 @@ const coachingController = {
 
     getCoachingById : async (req, res) => {
 
-        const {id} = req.params;
+        let {id} = req.params;
+        id = Number(id);
 
         try{
         const result = await coachingMapper.getCoachByIding(id);
@@ -101,7 +102,10 @@ const coachingController = {
 
     getMemberNextBookingsByParamsId : async (req, res) => {
 
-        const {id} = req.params;
+        let {id} = req.params;
+        id = Number(id);
+
+        console.log(id);
         try{
         const bookings = await coachingMapper.getNextBookingsByMemberId(id);
         
@@ -161,7 +165,8 @@ const coachingController = {
 
         try {
 
-        const { coachingId } = req.params;
+        let { coachingId } = req.params;
+        coachingId = Number(coachingId);
         const { userId } = jsonwebtoken.decode(req.headers.authorization.substring(7));
 
         const check = await coachingMapper.getCoachByIding(coachingId);
@@ -182,7 +187,8 @@ const coachingController = {
     deleteCoachingById : async (req, res) => {
 
         try{
-        const {id} = req.params;
+        let {id} = req.params;
+        id = Number(id);
         
         const isCoaching = await coachingMapper.getCoachByIding(id);
         
