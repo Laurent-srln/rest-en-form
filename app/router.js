@@ -70,7 +70,7 @@ router.delete('/users/:id(\\d+)', authorizationMiddleware, userController.delete
 //      Coachings
 router.post('/new-coachings', authorizationMiddleware, validator(coachingTimePeriodSchema), coachingController.addCoachings);
 router.get('/coaching/:id(\\d+)', authorizationMiddleware, coachingController.getCoachingById);
-router.delete('/coaching/:id(\\d+)', coachingController.deleteCoachingById);
+router.delete('/coaching/:id(\\d+)', authorizationMiddleware, coachingController.deleteCoachingById);
 
 // ALL USERS ROUTES
 router.get('/coachs',authorizationMiddleware, userController.getAllCoachs);
