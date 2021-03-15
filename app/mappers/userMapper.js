@@ -78,7 +78,7 @@ const userMapper = {
         return new User(result.rows[0])
     },
 
-    getMemberByEmail : async (email) => {
+    getUserByEmail : async (email) => {
         const result = await db.query(`
         SELECT u.id, u.firstname, u.lastname, u.email
         FROM "user" u 
@@ -129,7 +129,17 @@ const userMapper = {
         return new User (result.rows[0]);
     },
 
-    editUser : async (id, user)=> {
+    setNewToken : async (email, token) => {
+
+        await db.query(`
+        UPDATE "user"
+        SET token = $1
+        WHERE email = $2;`, [token, email])
+
+        return;
+    },
+
+    editUser : async (id, user) => {
 
         const updaptedUSer = await db.query(`
         UPDATE "user"

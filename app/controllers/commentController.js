@@ -9,7 +9,8 @@ const commentController = {
     addComment: async (req,res) => {
 
             try {
-        const { workoutId } = req.params;
+        let { workoutId } = req.params;
+        workoutId = Number(workoutId);
         const { content } = req.body;
         const {userId} = jsonwebtoken.decode(req.headers.authorization.substring(7));
 
@@ -39,7 +40,8 @@ const commentController = {
     editComment: async (req,res) => {
         
         try {
-            const { commentId } = req.params;
+            let { commentId } = req.params;
+            commentId = Number(commentId);
             const { content } = req.body;
             const {userId} = jsonwebtoken.decode(req.headers.authorization.substring(7));
 
@@ -67,7 +69,8 @@ const commentController = {
     deleteComment: async (req,res) => {
         
         try {
-            const { commentId } = req.params;
+            let { commentId } = req.params;
+            commentId = Number(commentId);
             const {userId} = jsonwebtoken.decode(req.headers.authorization.substring(7));
 
             const check = await commentMapper.getCommentById(commentId);

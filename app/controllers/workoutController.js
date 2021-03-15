@@ -65,7 +65,8 @@ const workoutController = {
 
     editWorkout: async (req, res) => {
 
-        const { workoutId } = req.params;
+        let { workoutId } = req.params;
+        workoutId = Number(workoutId);
         const updatedWorkout = req.body;
         const { userId } = jsonwebtoken.decode(req.headers.authorization.substring(7));
 
@@ -115,7 +116,8 @@ const workoutController = {
         try {
 
         const {userId} = jsonwebtoken.decode(req.headers.authorization.substring(7));
-        const { workoutId } = req.params;
+        let { workoutId } = req.params;
+        workoutId = Number(workoutId);
 
         const check = await workoutMapper.getWorkoutById(workoutId);
 

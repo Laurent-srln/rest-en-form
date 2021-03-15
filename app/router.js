@@ -12,6 +12,7 @@ const workoutSchema = require('./schemas/workout');
 const userSchema = require('./schemas/user');
 const specialtySchema = require('./schemas/specialty');
 const setPasswordSchema = require('./schemas/setPassword');
+const newPasswordSchema = require('./schemas/newPassword');
 const loginSchema = require('./schemas/login');
 const commentSchema = require('./schemas/comment');
 const coachingTimePeriodSchema = require('./schemas/coachingTimePeriod');
@@ -29,6 +30,7 @@ const mainController = require('./controllers/mainController');
 
 // CONNEXION ROUTES
 router.post('/register', validator(setPasswordSchema), authController.setPassword);
+router.post('/forgotten-password', validator(newPasswordSchema), authController.getNewToken);
 router.post('/login', validator(loginSchema), authController.submitLogin);
 
 // MEMBERS ROUTES

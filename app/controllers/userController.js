@@ -1,7 +1,7 @@
 
 const userMapper = require('../mappers/userMapper');
 const specialtyMapper = require('../mappers/specialtyMapper');
-const passwordMail = require('../services/passwordMail');
+const passwordServices = require('../services/passwordServices');
 const emailValidator = require('email-validator');
 
 const { v4: uuidv4 } = require('uuid');
@@ -32,7 +32,7 @@ const userController = {
         };
 
         // On vérifie que l'email ne correspond pas à un user déja en db
-        const checkEmail = await userMapper.getMemberByEmail(user.email);
+        const checkEmail = await userMapper.getUserByEmail(user.email);
 
             if (checkEmail.length) {
                 res.status(400).json({"message": `Un utilisateur avec cette adresse email existe déjà. id : ${checkEmail[0].id}`})
@@ -85,7 +85,7 @@ const userController = {
             };
 
             // On envoie un mail au nouveau user avec un lien lui permettant de configurer son password
-            await passwordMail(user.token, user.email);
+            await passwordServices.passwordMail(user.token, user.email);
             
         } catch (err) {
             res.status(400).json(err.message);
@@ -106,7 +106,8 @@ const userController = {
 
     getMemberById : async (req, res) => {
 
-        const {id} = req.params;
+        let {id} = req.params;
+        id = Number(id);
         
         try{
         const member = await userMapper.getMemberById(id);
@@ -131,7 +132,8 @@ const userController = {
 
     getCoachById : async (req, res) => {
 
-        const {id} = req.params
+        let { id } = req.params;
+        id = Number(id);
 
         try{
         const coach = await userMapper.getCoachById(id);
@@ -145,7 +147,8 @@ const userController = {
 
     editUser : async (req, res) => {
 
-        const {id} = req.params;
+        let {id} = req.params;
+        id = Number(id);
 
         const user = req.body;
 
@@ -214,7 +217,8 @@ const userController = {
 
     deleteUser : async (req, res) => {
 
-        const {id} = req.params;
+        let {id} = req.params;
+        id = Number(id);
         
 
         const isUser = await userMapper.getUserById(id);

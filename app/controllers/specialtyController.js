@@ -33,7 +33,8 @@ const specialtyController = {
 
     deleteSpecialty : async (req, res) => {
 
-        const {id} = req.params;
+        let {id} = req.params;
+        id = Number(id);
 
         try{
 
