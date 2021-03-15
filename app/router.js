@@ -24,6 +24,7 @@ const coachingController = require('./controllers/coachingController');
 const authController = require('./controllers/authController');
 const healthController = require('./controllers/healthController');
 const specialtyController = require('./controllers/specialtyController');
+const mainController = require('./controllers/mainController');
 
 
 // CONNEXION ROUTES
@@ -64,7 +65,7 @@ router.delete('/specialties/:id(\\d+)', specialtyController.deleteSpecialty);
 router.post('/new-user', authorizationMiddleware, validator(userSchema), userController.addUser);
 router.get('/members/:id(\\d+)', authorizationMiddleware, userController.getMemberById);
 router.get('/coachs/:id(\\d+)', userController.getCoachById);
-router.patch('/users/:id(\\d+)', authorizationMiddleware, validator(userSchema), userController.editUser);
+router.patch('/users/:id(\\d+)', authorizationMiddleware,userController.editUser);
 router.delete('/users/:id(\\d+)', userController.deleteUser);
 //      Coachings
 router.post('/new-coachings', authorizationMiddleware, validator(coachingTimePeriodSchema), coachingController.addCoachings);
@@ -75,14 +76,9 @@ router.delete('/coaching/:id(\\d+)', coachingController.deleteCoachingById);
 router.get('/coachs',authorizationMiddleware, userController.getAllCoachs);
 
 // INVALID TOKEN
-router.use((err, req, res, next) => {
-    if (err.name === 'UnauthorizedError') {
-      console.log('401 UNAUTHORIZED - Invalid Token');
-      res.status(401).json('Invalid token');
-    }
-  })
+router.use(mainController.invalidToken);
 
-  //! 404 - to do
-
+//404 NOT FOUND
+router.use(mainController.notFound);
 
 module.exports = router;

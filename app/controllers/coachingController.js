@@ -146,7 +146,7 @@ const coachingController = {
             const check = await coachingMapper.getCoachByIding(coachingId);
 
             if (check.member_id) {
-                return res.json("Coaching déjà réserevé.");
+                return res.json("Coaching déjà réservé.");
             }
 
             const coaching = await coachingMapper.addBooking(userId,coachingId );
