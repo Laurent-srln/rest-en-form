@@ -58,15 +58,15 @@ router.get('/members', authorizationMiddleware, userController.getAllMembers);
 
 // OWNER ROUTES
 //      Specialties
-router.post('/specialties', validator(specialtySchema), specialtyController.addSpecialty);
+router.post('/specialties', authorizationMiddleware, validator(specialtySchema), specialtyController.addSpecialty);
 router.get('/specialties', authorizationMiddleware, specialtyController.getAllSpecialties);
-router.delete('/specialties/:id(\\d+)', specialtyController.deleteSpecialty);
+router.delete('/specialties/:id(\\d+)', authorizationMiddleware, specialtyController.deleteSpecialty);
 //      Users
 router.post('/new-user', authorizationMiddleware, validator(userSchema), userController.addUser);
 router.get('/members/:id(\\d+)', authorizationMiddleware, userController.getMemberById);
-router.get('/coachs/:id(\\d+)', userController.getCoachById);
+router.get('/coachs/:id(\\d+)', authorizationMiddleware, userController.getCoachById);
 router.patch('/users/:id(\\d+)', authorizationMiddleware,userController.editUser);
-router.delete('/users/:id(\\d+)', userController.deleteUser);
+router.delete('/users/:id(\\d+)', authorizationMiddleware, userController.deleteUser);
 //      Coachings
 router.post('/new-coachings', authorizationMiddleware, validator(coachingTimePeriodSchema), coachingController.addCoachings);
 router.get('/coaching/:id(\\d+)', authorizationMiddleware, coachingController.getCoachingById);
