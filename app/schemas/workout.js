@@ -8,7 +8,7 @@ const workoutSchema = Joi.object({
         .messages({
             'date.max': `L'enregistrement d'un entrainement pour une date future n'est pas autorisé.`,
             'date.base': `Une date valide doit être saisie.`,
-            'any.required': `Une date valide doit être saisie..`
+            'any.required': `Une date valide doit être saisie.`
           }),
     content: 
         Joi.string()

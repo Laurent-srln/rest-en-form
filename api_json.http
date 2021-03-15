@@ -16,12 +16,12 @@
 
 
 ### DÉFINIR UN NOUVEAU MOT DE PASSE
-POST {{baseUrl}}/register?token=0e7905f4-ac19-4311-b990-f08e3d06b62f
+POST {{baseUrl}}/register?token=123456
 Content-Type: application/json
 
 {
-    "password": "password",
-    "confirm": "password"
+    "password": "Kourouma15!",
+    "confirm": "Kourouma15!"
 }
 
 
@@ -262,16 +262,15 @@ GET {{baseUrl}}/coachs/6
 
 
 ### MODIFIER UN USER 
-PATCH  {{baseUrl}}/users/10
+PATCH  {{baseUrl}}/users/1
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJlbWFpbCI6InNvc29zb0BnbWFpbC5jb20iLCJyb2xlIjoiTUVNQkVSIiwiaWF0IjoxNjE1NTQ0NTQxLCJleHAiOjE2MTU1ODA1NDF9.GbuwA3pXyOTDXDC45rehNS5P2Oa9JsvHLLHW699taFk
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEyLCJlbWFpbCI6IkFsZXh0QGNvYWNoLmNvbSIsInJvbGUiOiJDT0FDSCIsImlhdCI6MTYxNTgxMjMwMSwiZXhwIjoxNjE1ODQ4MzAxfQ.y2i6dxj-71uamgCuPGqfbnj51lK6ztm927SeIPjEso8
 
 {
-    "firstname": "SOSO",
-    "lastname": "SOSOSO",
-    "email": "SOSOSO@gmail.com",
-    "role": "MEMBER",
-    "specialties":[6, 2]
+    "firstname": "ALLI",
+    "lastname": "LABAS",
+    "email": "AlABAS@gmail.com",
+    "specialties":[4,8]
 }
 
 
