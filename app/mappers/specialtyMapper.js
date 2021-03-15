@@ -39,7 +39,7 @@ const specialtyMapper = {
         return result.rows.map(specialty=> new Specialty(specialty) )
     },
 
-    deletecialtyByIByIdd : async (id)=>{
+    deleteSpecialtyById : async (id)=>{
 
         const check = await db.query(`
         SELECT * 
