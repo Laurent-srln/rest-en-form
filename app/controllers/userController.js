@@ -56,13 +56,13 @@ const userController = {
 
                 else {
                 // On récupère les spécialités enregistrées et on stocke leurs id dans un array
-                const specialties= await specialtyMapper.findgetAllSpecialties();
+                const specialties= await specialtyMapper.getAllSpecialties();
                 let specialtiesId = [];
                 specialties.forEach(specialty => specialtiesId.push(specialty.id))
                 console.log("specialtiesId :", specialtiesId);
 
                 // On parcourt les id envoyés dans le form pour les comparer aux id en db.
-                user.specialties.forEach( specialty => {
+                await user.specialties.forEach( specialty => {
                     if (!specialtiesId.includes(specialty)) {
                         res.status(400).json({"message": `La spécialité avec l'id ${specialty} n'existe pas.`})
                         return;

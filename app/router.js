@@ -31,7 +31,7 @@ router.post('/register', validator(setPasswordSchema), authController.setPasswor
 router.post('/login', validator(loginSchema), authController.submitLogin);
 
 // MEMBERS ROUTES
-//      Workout & Helth data
+//      Workout & Health data
 router.post('/new-workout',authorizationMiddleware, validator(workoutSchema), workoutController.addWorkout);
 router.get('/workouts', authorizationMiddleware, workoutController.getAllWorkoutsByMemberId);
 router.get('/health', authorizationMiddleware, healthController.getAllHealthRecordsByMemberId);
