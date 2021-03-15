@@ -24,6 +24,13 @@ Content-Type: application/json
     "confirm": "password"
 }
 
+### MOT DE PASSE OUBLIÉ
+POST {{baseUrl}}/forgotten-password
+Content-Type: application/json
+
+{
+    "email": "adresse@email.com"
+}
 
 ### ENVOYER SES INFORMATIONS DE CONNEXION 
 POST {{baseUrl}}/login

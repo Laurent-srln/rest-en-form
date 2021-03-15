@@ -24,6 +24,13 @@ Content-Type: application/json
     "confirm": "Kourouma15!"
 }
 
+### MOT DE PASSE OUBLIÉ
+POST {{baseUrl}}/forgotten-password
+Content-Type: application/json
+
+{
+    "email": "AlABAS@gmail.com"
+}
 
 ### ENVOYER SES INFORMATIONS DE CONNEXION 
 POST {{baseUrl}}/login
@@ -31,7 +38,7 @@ Content-Type: application/json
 
 {
     "email": "alext@coach.com",
-    "password":"Kourouma15!"
+    "password":"coach"
 }
 
 
@@ -101,7 +108,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJlb
 ### RÉCUPÉRER TOUS LES COACHINGS DISPONIBLES À UNE DATE
 GET {{baseUrl}}/available-coachings?date=2021-04-05
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjM1LCJlbWFpbCI6ImFsYWludEBnbWFpbC5jb20iLCJyb2xlIjoiTUVNQkVSIiwiaWF0IjoxNjE1NDU0MzM3LCJleHAiOjE2MTU0OTAzMzd9.l3CjIwykudQ_ljEC72RY-MXcSR7xlskReZcwu0xOI8M
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjM0LCJlbWFpbCI6ImFsZXh0QGNvYWNoLmNvbSIsInJvbGUiOiJDT0FDSCIsImlhdCI6MTYxNTg0Mjk3MywiZXhwIjoxNjE1ODc4OTczfQ.CspeGkxnA5QBr_KByHGic-crbAWMeKbmIXffMowHah0
 
 
 ### RÉCUPÉRER LES PROCHAINS COACHINGS PRÉVUS 
@@ -178,7 +185,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjM0LCJlb
 
 ### RÉCUPÉRER LES PROCHAINS RDV COACHING D'UN ADHÉRENT
 GET {{baseUrl}}/members/1/next-bookings
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJlbWFpbCI6InNvc29zb0BnbWFpbC5jb20iLCJyb2xlIjoiTUVNQkVSIiwiaWF0IjoxNjE1NTQ0NTQxLCJleHAiOjE2MTU1ODA1NDF9.GbuwA3pXyOTDXDC45rehNS5P2Oa9JsvHLLHW699taFk
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjM0LCJlbWFpbCI6ImFsZXh0QGNvYWNoLmNvbSIsInJvbGUiOiJDT0FDSCIsImlhdCI6MTYxNTg0Mjk3MywiZXhwIjoxNjE1ODc4OTczfQ.CspeGkxnA5QBr_KByHGic-crbAWMeKbmIXffMowHah0
 
 
 ////////// ADHÉRENTS \\\\\\\\\\
@@ -228,12 +235,12 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjE1LCJlb
 ### AJOUTER UN ADHÉRENT
 POST {{baseUrl}}/new-user
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjM0LCJlbWFpbCI6ImFsZXh0QGNvYWNoLmNvbSIsInJvbGUiOiJDT0FDSCIsImlhdCI6MTYxNTgzNTE3MSwiZXhwIjoxNjE1ODcxMTcxfQ.2MaNFvBZlnBH7wm8xPB7tnEY5Gbf7q60MMTli8Y05Fw
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjM0LCJlbWFpbCI6ImFsZXh0QGNvYWNoLmNvbSIsInJvbGUiOiJDT0FDSCIsImlhdCI6MTYxNTg0NTEzNSwiZXhwIjoxNjE1ODgxMTM1fQ.Y9buYMwvdYQdM5Pg7PwjRh2eqb1aP7hymH822upmOgA
 
 {
-    "firstname": "bud",
-    "lastname": "adduser",
-    "email": "bussg@addudddser.com",
+    "firstname": "test",
+    "lastname": "changmentmail",
+    "email": "changment@mail.com",
     "role": "MEMBER"
 }
 

@@ -1,9 +1,14 @@
 const emailValidator = require('email-validator');
 const authMapper = require('../mappers/authMapper');
+const userMapper = require('../mappers/userMapper');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 const jsonwebtoken = require('jsonwebtoken');
 const jwtSecret = require('../services/jwtSecret');
+
+const passwordServices = require('../services/passwordServices');
+
+const { v4: uuidv4 } = require('uuid');
 
 const authController = {
 
@@ -41,14 +46,14 @@ const authController = {
 
     },
 
-    submitLogin : async (req, res) => {
-        
-        const { email, password } = req.body;
+    getNewToken : async (req, res) => {
+
+        const { email } = req.body;
 
         try{
 
-            if(!password || !email) {
-                res.json({"message": "All field must be completed."});
+            if(!email) {
+                res.json({"message": "Merci de saisir un email."});
                 return;
             }
 
@@ -56,7 +61,50 @@ const authController = {
 
             if (!validEmail){
 
-                return res.status(400).json({"message": `Invalid email`})
+                return res.status(400).json({"message": `L'email saisi est incorrect.`})
+            }
+
+                
+            const result = await userMapper.getUserByEmail(email);
+            
+            if (!result.length){
+
+                return res.status(400).json({"message": `L'email saisi est incorrect.`});
+            }
+
+            // On génère un nouveau token
+            token = uuidv4();
+
+            await userMapper.setNewToken(email, token);
+
+
+            // On envoie un mail au nouveau user avec un lien lui permettant de configurer son password
+            await passwordServices.newPasswordMail(token, email);
+
+            res.status(200).json({"message": `Un email a été envoyé à ${email}.`});
+
+
+    } catch (err) {
+        res.status(400).json(err.message);
+    }
+},
+
+    submitLogin : async (req, res) => {
+        
+        const { email, password } = req.body;
+
+        try{
+
+            if(!password || !email) {
+                res.json({"message": "Tous les chmaps doivent être complétés."});
+                return;
+            }
+
+            const validEmail = emailValidator.validate(email);
+
+            if (!validEmail){
+
+                return res.status(400).json({"message": `Email ou mot de passe incorrect.`})
             }
 
                 
@@ -64,7 +112,7 @@ const authController = {
             
             if (!result){
 
-                return res.status(400).json({"message": `User not found.`});
+                return res.status(400).json({"message": `Email ou mot de passe incorrect.`});
             }
 
             await bcrypt.compare(password, result.password, function (err, isPasswordCorrect) {
