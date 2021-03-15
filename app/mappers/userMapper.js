@@ -2,6 +2,7 @@ const User = require('../models/user');
 const Workout = require('../models/workout');
 
 const db = require('../database');
+const { totalCount } = require('../database');
 
 const userMapper = {
 
@@ -130,37 +131,45 @@ const userMapper = {
 
     editUser : async (id, user)=> {
 
-        await db.query(`
-
+        const updaptedUSer = await db.query(`
         UPDATE "user"
         SET firstname = $1,
         lastname = $2,
         email = $3
         WHERE id = $4
-        ;`, [user.firstname, user.lastname, user.email.toLowerCase(), id]
-        )
+        RETURNING *;
+      `, [user.firstname, user.lastname, user.email, id]);
 
-            //! A modifier, il faut tester le role en db pas celui transmi par la request
-            
-        if(user.role === "COACH"){
+        return updaptedUSer;    
+        
+    },
 
-        await db.query (`
-        DELETE FROM
-        "coach_has_specialty"
-        WHERE coach_id = $1`, [id]
-        )
+    editCoach : async (id, user) => {
 
-            for (const specialtyId of user.specialties) {
+        let query = `
+        with 
+        updated_coach as (UPDATE "user"
+        SET firstname = $1,
+        lastname =$2,
+        email=$3
+        WHERE id = $4
+        RETURNING id),
+        deleted_specialty as (DELETE FROM "coach_has_specialty"
+        WHERE coach_id = $4)
 
-            await db.query(`
-            INSERT INTO "coach_has_specialty" (coach_id, specialty_id)
-            VALUES ($1, $2);`, [id, specialtyId] 
-            )
+        
+        INSERT INTO "coach_has_specialty" (coach_id, specialty_id)
+        VALUES
+        ((SELECT "id" FROM updated_coach), $5)`;
+                
+        for (i=1; i<user.specialties.length; i++) {
+         query += `, ((SELECT "id" FROM updated_coach), $${i+5})`
+        } ;
+                
+        await db.query(query, [user.firstname, user.lastname, user.email.toLowerCase(),id, ...user.specialties ] 
+        ); 
 
-            } ;
-          
-        }
-        return new User(user);
+        return;
     },
     
     deleteUser : async (id) => {
@@ -173,7 +182,7 @@ const userMapper = {
             SET member_id = NULL
             WHERE member_id = (SELECT id FROM deleted_user);`, [id]);
             
-            return
+            return;
     
     }
 };
