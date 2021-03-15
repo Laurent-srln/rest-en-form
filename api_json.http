@@ -31,7 +31,7 @@ Content-Type: application/json
 
 {
     "email": "alext@coach.com",
-    "password":"coach"
+    "password":"Kourouma15!"
 }
 
 
@@ -204,7 +204,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJlb
 ### AJOUTER UNE SPÉCIALITÉ
 POST {{baseUrl}}/specialties
 Content-Type: application/json
-Authorization: Bearer
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjM0LCJlbWFpbCI6ImFsZXh0QGNvYWNoLmNvbSIsInJvbGUiOiJDT0FDSCIsImlhdCI6MTYxNTcxMjYwMCwiZXhwIjoxNjE1NzQ4NjAwfQ.mLfoG1B_dhdWAeUEMBmy2HlY4GRDL26k-Qyfr53LnN0
 
 {
     "name": "test"
@@ -213,12 +213,12 @@ Authorization: Bearer
 
 ### RÉCUPÉRER TOUTES LES SPÉCIALITÉS
 GET {{baseUrl}}/specialties
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjM0LCJlbWFpbCI6ImFsZXh0QGNvYWNoLmNvbSIsInJvbGUiOiJDT0FDSCIsImlhdCI6MTYxNTcxMjYwMCwiZXhwIjoxNjE1NzQ4NjAwfQ.mLfoG1B_dhdWAeUEMBmy2HlY4GRDL26k-Qyfr53LnN0
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjE1LCJlbWFpbCI6ImFsZXh0QGNvYWNoLmNvbSIsInJvbGUiOiJDT0FDSCIsImlhdCI6MTYxNTgzNzQyNSwiZXhwIjoxNjE1ODczNDI1fQ.Xa-dDeSm51v7mTIocOVKbBATMtP2gDXDs6Jr6sZpw_g
 
 
 ### SUPPRIMER UNE SPÉCIALITÉ
 DELETE  {{baseUrl}}/specialties/15
-Authorization: Bearer
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjE1LCJlbWFpbCI6ImFsZXh0QGNvYWNoLmNvbSIsInJvbGUiOiJDT0FDSCIsImlhdCI6MTYxNTgzNzQyNSwiZXhwIjoxNjE1ODczNDI1fQ.Xa-dDeSm51v7mTIocOVKbBATMtP2gDXDs6Jr6sZpw_g
 
 
 ////////// USERS \\\\\\\\\\
