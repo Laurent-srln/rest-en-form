@@ -32,15 +32,15 @@ const userMapper = {
         for (i=1; i<user.specialties.length; i++) {
          query += `, ((SELECT "id" FROM new_coach), $${i+6})`
         } ;
-        
-        console.log(query)
-     
-        await db.query(query, [user.firstname, user.lastname, user.email.toLowerCase(), user.role, user.token, ...user.specialties ] 
-        );
 
+        query += ` RETURNING *`;
+     
+        const result = await db.query(query, [user.firstname, user.lastname, user.email.toLowerCase(), user.role, user.token, ...user.specialties ] 
+        );
+        
+        return result.rows;
         }
 
-        return;
     },
 
     getUserById : async (id) => {

@@ -228,12 +228,12 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjE1LCJlb
 ### AJOUTER UN ADHÉRENT
 POST {{baseUrl}}/new-user
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjM0LCJlbWFpbCI6ImFsZXh0QGNvYWNoLmNvbSIsInJvbGUiOiJDT0FDSCIsImlhdCI6MTYxNTY3MzAxOSwiZXhwIjoxNjE1NzA5MDE5fQ.EeyZS8wBsRyQ54qKgtx_0ZUXnQviwKYV9XNQMeRCA-0
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjM0LCJlbWFpbCI6ImFsZXh0QGNvYWNoLmNvbSIsInJvbGUiOiJDT0FDSCIsImlhdCI6MTYxNTgzNTE3MSwiZXhwIjoxNjE1ODcxMTcxfQ.2MaNFvBZlnBH7wm8xPB7tnEY5Gbf7q60MMTli8Y05Fw
 
 {
-    "firstname": "test",
-    "lastname": "userqsdqsd",
-    "email": "autrebis@qsdqds.com",
+    "firstname": "bud",
+    "lastname": "adduser",
+    "email": "bussg@addudddser.com",
     "role": "MEMBER"
 }
 
@@ -241,12 +241,12 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjM0LCJlb
 ### AJOUTER UN COACH
 POST {{baseUrl}}/new-user
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjM0LCJlbWFpbCI6ImFsZXh0QGNvYWNoLmNvbSIsInJvbGUiOiJDT0FDSCIsImlhdCI6MTYxNTc5OTY3MCwiZXhwIjoxNjE1ODM1NjcwfQ.BcFJT7zz2rSs4zebNJyYJZh6IQ1bDGYBEyX5P4VEjyE
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjM0LCJlbWFpbCI6ImFsZXh0QGNvYWNoLmNvbSIsInJvbGUiOiJDT0FDSCIsImlhdCI6MTYxNTgzNjAwOSwiZXhwIjoxNjE1ODcyMDA5fQ.a2yKdDhaF9tw323FTn9G0015Ld37z1ggNmAJfeoC8KE
 
 {
-    "firstname": "Pierre",
-    "lastname": "Martin",
-    "email": "pmzzdd@coach.com",
+    "firstname": "bug",
+    "lastname": "coachbis",
+    "email": "lasttest@coach.com",
     "role": "COACH",
     "specialties": [1,3, 5, 7]
 }
@@ -262,15 +262,15 @@ GET {{baseUrl}}/coachs/6
 
 
 ### MODIFIER UN USER 
-PATCH  {{baseUrl}}/users/1
+PATCH  {{baseUrl}}/users/6
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEyLCJlbWFpbCI6IkFsZXh0QGNvYWNoLmNvbSIsInJvbGUiOiJDT0FDSCIsImlhdCI6MTYxNTgxMjMwMSwiZXhwIjoxNjE1ODQ4MzAxfQ.y2i6dxj-71uamgCuPGqfbnj51lK6ztm927SeIPjEso8
 
 {
-    "firstname": "ALLI",
-    "lastname": "LABAS",
-    "email": "AlABAS@gmail.com",
-    "specialties":[4,8]
+    "firstname": "Jeannot",
+    "lastname": "Pru",
+    "email": "j.pruliere@oclock.io",
+    "specialties":[4,7]
 }
 
 

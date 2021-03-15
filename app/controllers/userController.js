@@ -44,7 +44,11 @@ const userController = {
 
         // Si c'est un MEMBER qu'on veut insérer :
             if (user.role === 'MEMBER') {
-                await userMapper.addUser(user);
+                const newUser = await userMapper.addUser(user);
+
+                const insertedUser =  await userMapper.getMemberById(newUser.id)
+              
+                res.status(200).json({"message": `L'utilisateur a bien été ajouté.`, insertedUser});
             };
         
         // Si c'est un COACH :
@@ -56,30 +60,37 @@ const userController = {
 
                 else {
                 // On récupère les spécialités enregistrées et on stocke leurs id dans un array
-                const specialties= await specialtyMapper.getAllSpecialties();
+                const specialties = await specialtyMapper.getAllSpecialties();
                 let specialtiesId = [];
+
+
                 specialties.forEach(specialty => specialtiesId.push(specialty.id))
-                console.log("specialtiesId :", specialtiesId);
 
                 // On parcourt les id envoyés dans le form pour les comparer aux id en db.
-                await user.specialties.forEach( specialty => {
-                    if (!specialtiesId.includes(specialty)) {
-                        res.status(400).json({"message": `La spécialité avec l'id ${specialty} n'existe pas.`})
-                        return;
-                    }});
-           
-                await userMapper.addCoach(user);
+
+                    for (let i = 0; i< user.specialties.length; i++) {
+                        if (!specialtiesId.includes(user.specialties[i])) {
+                
+                            return res.status(400).json({"message": `La spécialité avec l'id ${user.specialties[i]} n'existe pas.`});
+                        } 
+                    }
+                // On insère le user et ses ses specialités en db
+                const newCoach = await userMapper.addCoach(user);
+
+                const insertedCoach =  await userMapper.getCoachById(newCoach[0].coach_id)
+              
+                res.status(200).json({"message": `L'utilisateur a bien été ajouté.`, insertedCoach});
+
                 }
             };
 
-        // On envoie un mail au nouveau user avec un lien lui permettant de configurer son password
+            // On envoie un mail au nouveau user avec un lien lui permettant de configurer son password
             await passwordMail(user.token, user.email);
-
-            res.status(200).json({"message": `L'utilisateur a bien été ajouté.`});
-
+            
         } catch (err) {
             res.status(400).json(err.message);
-        };
+        }
+        ;
     },
 
     getAllMembers: async (req, res) => {
@@ -124,7 +135,7 @@ const userController = {
 
         try{
         const coach = await userMapper.getCoachById(id);
-        console.log(coach);
+        
 
         res.json(coach)
         }catch(err){
@@ -174,17 +185,16 @@ const userController = {
                  // On récupère les spécialités enregistrées et on stocke leurs id dans un array
                  const specialties= await specialtyMapper.getAllSpecialties();
                  let specialtiesId = [];
-                 specialties.forEach(specialty => specialtiesId.push(specialty.id))
-                 console.log("specialtiesId :", specialtiesId);
+                 specialties.forEach(specialty => specialtiesId.push(specialty.id));
  
                  // On parcourt les id envoyés dans le form pour les comparer aux id en db.
-                 user.specialties.forEach( specialty => {
-                     if (!specialtiesId.includes(specialty)) {
-                         res.status(400).json({"message": `La spécialité avec l'id ${specialty} n'existe pas.`})
-                         return;
-                     }});
-
-
+                 for (let i = 0; i< user.specialties.length; i++) {
+                    if (!specialtiesId.includes(user.specialties[i])) {
+            
+                        return res.status(400).json({"message": `La spécialité avec l'id ${user.specialties[i]} n'existe pas.`});
+                    } 
+                }
+                
                 await userMapper.editCoach(id, user);
 
                  
