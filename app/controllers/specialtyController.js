@@ -23,7 +23,7 @@ const specialtyController = {
     getAllSpecialties : async (req, res)=> {
         
         try{
-        const result = await specialtyMapper.findgetAllSpecialties();
+        const result = await specialtyMapper.getAllSpecialties();
 
         res.status(200).json(result)
         }catch(err){

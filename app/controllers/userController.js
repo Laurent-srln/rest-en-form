@@ -56,7 +56,7 @@ const userController = {
 
                 else {
                 // On récupère les spécialités enregistrées et on stocke leurs id dans un array
-                const specialties= await specialtyMapper.findgetAllSpecialties();
+                const specialties= await specialtyMapper.getAllSpecialties();
                 let specialtiesId = [];
                 specialties.forEach(specialty => specialtiesId.push(specialty.id))
                 console.log("specialtiesId :", specialtiesId);

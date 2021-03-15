@@ -1,9 +1,15 @@
 const Joi = require('joi');
 
 const UserSchema = Joi.object({
+    id:
+        Joi.number()
+        .integer()
+        .min(1)
+        .error(new Error (
+            `L'id de l'utilisateur doit être un nombre entier.`)),
     firstname: 
-        Joi.string().
-        required()
+        Joi.string()
+        .required()
         .messages({
             'string.base': `Un prénom doit être saisi.`,
             'string.empty': `Un prénom doit être saisi.`,

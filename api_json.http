@@ -30,8 +30,8 @@ POST {{baseUrl}}/login
 Content-Type: application/json
 
 {
-    "email": "nom@email.com",
-    "password":"password"
+    "email": "alext@coach.com",
+    "password":"coach"
 }
 
 
@@ -241,14 +241,14 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjM0LCJlb
 ### AJOUTER UN COACH
 POST {{baseUrl}}/new-user
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjM0LCJlbWFpbCI6ImFsZXh0QGNvYWNoLmNvbSIsInJvbGUiOiJDT0FDSCIsImlhdCI6MTYxNTcxNTI2MSwiZXhwIjoxNjE1NzUxMjYxfQ.NLqs-zX0hQ7fpcrlaVmv4JBflFvcr1naQi2-_yTYwKg
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjM0LCJlbWFpbCI6ImFsZXh0QGNvYWNoLmNvbSIsInJvbGUiOiJDT0FDSCIsImlhdCI6MTYxNTc5OTY3MCwiZXhwIjoxNjE1ODM1NjcwfQ.BcFJT7zz2rSs4zebNJyYJZh6IQ1bDGYBEyX5P4VEjyE
 
 {
     "firstname": "Pierre",
-    "lastname": "Carreras",
-    "email": "ccc@coach.com",
+    "lastname": "Martin",
+    "email": "pmzzdd@coach.com",
     "role": "COACH",
-    "specialties": [1,3]
+    "specialties": [1,3, 5, 7]
 }
 
 
