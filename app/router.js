@@ -64,7 +64,7 @@ router.delete('/specialties/:id(\\d+)', specialtyController.deleteSpecialty);
 router.post('/new-user', authorizationMiddleware, validator(userSchema), userController.addUser);
 router.get('/members/:id(\\d+)', authorizationMiddleware, userController.getMemberById);
 router.get('/coachs/:id(\\d+)', userController.getCoachById);
-router.patch('/users/:id(\\d+)', authorizationMiddleware, validator(userSchema), userController.editUser);
+router.patch('/users/:id(\\d+)', authorizationMiddleware,userController.editUser);
 router.delete('/users/:id(\\d+)', userController.deleteUser);
 //      Coachings
 router.post('/new-coachings', authorizationMiddleware, validator(coachingTimePeriodSchema), coachingController.addCoachings);

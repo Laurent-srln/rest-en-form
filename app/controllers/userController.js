@@ -157,27 +157,56 @@ const userController = {
             
             const userToUpdate = await userMapper.getUserById(id)
 
-            if(!userToUpdate){
+            if (userToUpdate.role === 'MEMBER') {
 
-                res.status(400).json("Pas de user à cet id, veuillez en entrer un valide")
-            }
-            else{
+            await userMapper.editUser(id, user);    
 
-                await userMapper.editUser(id, user);
+            const updatedUser =  await userMapper.getMemberById(id)
+              
+            res.status(200).json({"message": `L'utilisateur a bien été modifié.`, updatedUser});
+            
+            };
 
-                res.status(200).json({ "message" : `le user avec l'id ${id} a bien été mis à jour`, user});
-            }
-      
-        } catch (err) {
+        
+            // Si c'est un COACH :
+             if (userToUpdate.role === 'COACH') {
+
+                 // On récupère les spécialités enregistrées et on stocke leurs id dans un array
+                 const specialties= await specialtyMapper.getAllSpecialties();
+                 let specialtiesId = [];
+                 specialties.forEach(specialty => specialtiesId.push(specialty.id))
+                 console.log("specialtiesId :", specialtiesId);
+ 
+                 // On parcourt les id envoyés dans le form pour les comparer aux id en db.
+                 user.specialties.forEach( specialty => {
+                     if (!specialtiesId.includes(specialty)) {
+                         res.status(400).json({"message": `La spécialité avec l'id ${specialty} n'existe pas.`})
+                         return;
+                     }});
+
+
+                await userMapper.editCoach(id, user);
+
+                 
+                const updatedCoach = await userMapper.getCoachById(id);
+
+                res.status(200).json({"message": `L'utilisateur a bien été modifié.`, updatedCoach});
+            };
+
+        
+        }catch (err) {
+
             res.status(400).json(err.message);
         };
-   
+            
+
     },
 
     deleteUser : async (req, res) => {
 
         const {id} = req.params;
         
+
         const isUser = await userMapper.getUserById(id);
         
         if(!isUser) {
