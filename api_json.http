@@ -38,7 +38,7 @@ Content-Type: application/json
 
 {
     "email": "alext@coach.com",
-    "password":"coach"
+    "password":"Kourouma15!"
 }
 
 
@@ -269,9 +269,9 @@ GET {{baseUrl}}/coachs/6
 
 
 ### MODIFIER UN USER 
-PATCH  {{baseUrl}}/users/6
+PATCH  {{baseUrl}}/users/25
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEyLCJlbWFpbCI6IkFsZXh0QGNvYWNoLmNvbSIsInJvbGUiOiJDT0FDSCIsImlhdCI6MTYxNTgxMjMwMSwiZXhwIjoxNjE1ODQ4MzAxfQ.y2i6dxj-71uamgCuPGqfbnj51lK6ztm927SeIPjEso8
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjE1LCJlbWFpbCI6ImFsZXh0QGNvYWNoLmNvbSIsInJvbGUiOiJDT0FDSCIsImlhdCI6MTYxNTkwMjkzOCwiZXhwIjoxNjE1OTM4OTM4fQ.a-sXApQCog0OAwQTLbL4WVY8Ov_6ydCdHd4Mc7EhSks
 
 {
     "firstname": "Jeannot",
