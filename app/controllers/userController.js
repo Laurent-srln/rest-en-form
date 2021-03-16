@@ -171,6 +171,12 @@ const userController = {
             
             const userToUpdate = await userMapper.getUserById(id)
 
+            if(!userToUpdate) {
+
+                res.status(400).json({"message": `pas de user avec cet id ${id}`})
+                return;
+            }
+
             if (userToUpdate.role === 'MEMBER') {
 
             await userMapper.editUser(id, user);    
