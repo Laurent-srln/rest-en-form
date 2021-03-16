@@ -30,7 +30,7 @@ const authController = {
             const foundToken = await authMapper.getToken(token);
 
             if(!foundToken) {
-                return res.json({"message": "Token not found"})
+                return res.json({"message": "Profil non trouvé."})
             }
 
             const hashPassword = await bcrypt.hash(newPassword.password, saltRounds);
@@ -104,12 +104,13 @@ const authController = {
 
             if (!validEmail){
 
+
                 return res.status(400).json({"message": `Email ou mot de passe incorrect.`})
             }
 
                 
             const result = await authMapper.getUserAuthInfo(email);
-            
+
             if (!result){
 
                 return res.status(400).json({"message": `Email ou mot de passe incorrect.`});

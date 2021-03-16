@@ -41,9 +41,12 @@ const workoutController = {
         };
 
 
-        const workout = await workoutMapper.addWorkout(newWorkout, userId);
+        const workoutId = await workoutMapper.addWorkout(newWorkout, userId);
 
-        res.json(workout)
+        const workout = await workoutMapper.getWorkoutById(workoutId.workout_id);
+        console.log(workout);
+
+        res.status(200).json({"message": `L'entrainement a bien été ajouté.`, "workout": workout})
         }
         catch (err) {
         res.status(400).json(err.message);
@@ -57,7 +60,7 @@ const workoutController = {
         try{
         const workouts = await workoutMapper.getAllWorkoutsByMemberIdId(userId);
 
-        res.json(workouts)
+        res.status(200).json(workouts)
         }catch(err){
             res.status(400).json(err.message);
         }
@@ -80,7 +83,7 @@ const workoutController = {
                 return;
             }
 
-            if (check.member_id !== userId) {
+            if (check.memberId !== userId) {
 
                 res.status(400).json({"message": `Vous ne pouvez pas modifier ce workout.`})
                 return;
@@ -96,14 +99,14 @@ const workoutController = {
             if (!dayjs(updatedWorkout.date).isSameOrBefore(dayjs(), 'day')) {
     
     
-                res.status(400).json("Les modifications ont bien été enregistrées.")
+                res.status(200).json({"message": "Les modifications ont bien été enregistrées."});
                 return;
             };
     
     
             const workout = await workoutMapper.editWorkout(workoutId, updatedWorkout);
     
-            res.status(200).json({ "message" : `workout avec l'id ${workoutId} a bien été mis à jour`,workout})
+            res.status(200).json({ "message" : `L'entraînement a bien été mis à jour`})
             }
             catch (err) {
             res.status(400).json(err.message);
@@ -122,18 +125,18 @@ const workoutController = {
         const check = await workoutMapper.getWorkoutById(workoutId);
 
         if (!check) {
-            res.status(200).json("Ce workout est introuvable.");
+            res.status(400).json("Ce workout est introuvable.");
             return;
         }
 
-        if (check.member_id !== userId) {
-            res.status(200).json("Cet utilisateur ne peut pas supprimer ce workout.");
+        if (check.memberId !== userId) {
+            res.status(400).json({"message": "Cet utilisateur ne peut pas supprimer ce workout."});
             return;
         }
-
+        const deletedWorkout = await workoutMapper.getWorkoutById(workoutId);
         await workoutMapper.deleteWorkout(workoutId, userId);
 
-        res.status(200).json("Le workout a été supprimé.");
+        res.status(200).json({"message": "L'entraînement a bien été supprimé.", "workout": deletedWorkout});
         return;
     }         catch (err) {
         res.status(400).json(err.message);

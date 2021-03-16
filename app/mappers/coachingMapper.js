@@ -76,19 +76,21 @@ const coachingMapper = {
 
     },
 
-    getCoachByIding : async (id) => {
+    getCoachingById : async (id) => {
 
         const result = await db.query(`
-        SELECT *
-        FROM "coaching"
-        WHERE id = $1`, [id])
+        SELECT c.id, c.start_time, c.end_time, coach.id as coach_id, coach.firstname as coach_firstname, coach.lastname as coach_lastname, member.id as member_id, member.firstname as member_firstname, member.lastname as member_lastname, c.created_at, c.updated_at
+        FROM "coaching" c
+        LEFT JOIN  "user" coach ON c.coach_id = coach.id
+        LEFT JOIN  "user" member ON c.member_id = member.id
+        WHERE c.id = $1`, [id])
 
         if(!result.rows[0]){
            
             throw new Error( `Pas de coaching avec cet id`);
         }
         
-        return result.rows[0];
+        return new Coaching (result.rows[0]);
     },
 
     getAvailableCoachings: async (date) => {

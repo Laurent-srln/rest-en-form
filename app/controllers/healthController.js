@@ -11,7 +11,7 @@ const healthController = {
         try{
         const healthRecords = await healthMapper.getAllHealthRecordsByMemberId(userId);
 
-        res.json(healthRecords)
+        res.status(200).json(healthRecords)
         }catch(err){
             res.status(400).json(err.message);
         }

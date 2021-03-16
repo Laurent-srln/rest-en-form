@@ -11,7 +11,7 @@ const validate = (schema) => (req, res, next) => {
     // console.log({...req.body, ...req.params});
 
     if (error) {
-        res.status(400).json(error.message);
+        res.status(400).json({"message": error.message});
         console.log(error);
     } else {
         next();

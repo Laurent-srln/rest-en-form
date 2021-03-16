@@ -17,19 +17,19 @@ const commentController = {
         const checkWorkout = await workoutMapper.getWorkoutById(workoutId);
 
         if (!checkWorkout) {
-            res.status(200).json("Ce workout est introuvable.");
+            res.status(400).json({"message": "Ce workout est introuvable."});
             return;
         }
 
         const check = await commentMapper.getCommentByWorkoutId(workoutId);
 
         if (check) {
-           return res.status(200).json("Un commentaire existe déjà pour ce workout.")
+           return res.status(200).json({"message": "Un commentaire existe déjà pour ce workout."})
         }
 
         const newComment = await commentMapper.addComment(content, userId, workoutId);
 
-        return res.status(200).json("Commentaire bien ajouté au workout");
+        return res.status(200).json({"message": "Commentaire bien ajouté au workout"});
     } catch (err) {
         res.status(400).json(err.message);
 
@@ -48,16 +48,16 @@ const commentController = {
             const check = await commentMapper.getCommentById(commentId);
 
             if (!check) {
-                return res.status(200).json("Ce commentaire est introuvable.");
+                return res.status(200).json({"message": "Ce commentaire est introuvable."});
             }
 
             if (check.coach_id !== userId) {
-                return res.status(200).json("Vous ne pouvez pas modifier ce commentaire.");
+                return res.status(200).json({"message": "Vous ne pouvez pas modifier ce commentaire."});
             }
 
             const newComment = await commentMapper.editComment(commentId, content, userId);
 
-            return res.status(200).json("Le commentaire a bien été modifié");
+            return res.status(200).json({"message": "Le commentaire a bien été modifié"});
 
 
         } catch (err) {
@@ -76,16 +76,16 @@ const commentController = {
             const check = await commentMapper.getCommentById(commentId);
 
             if (!check) {
-                return res.status(404).json("Ce commentaire est introuvable.");
+                return res.status(404).json({"message": "Ce commentaire est introuvable."});
             }
 
             if (check.coach_id !== userId) {
-                return res.status(403).json("Vous ne pouvez pas supprimer ce commentaire.");
+                return res.status(403).json({"message": "Vous ne pouvez pas supprimer ce commentaire."});
             }
 
             await commentMapper.deleteComment(commentId, userId);
 
-            return res.status(200).json("Le commentaire a bien été supprimé.");
+            return res.status(200).json({"message": "Le commentaire a bien été supprimé."});
 
 
         } catch (err) {

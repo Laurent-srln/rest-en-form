@@ -20,7 +20,7 @@ const specialtyMapper = {
         const result = await db.query(`
         INSERT INTO "specialty"
         (name)
-        VALUES($1) RETURNING id;`, [addSpecialty]);
+        VALUES($1) RETURNING *;`, [addSpecialty]);
 
         return new Specialty(result.rows[0]);
 
@@ -53,7 +53,9 @@ const specialtyMapper = {
         const result = await db.query(`
             DELETE
             FROM "specialty"
-            WHERE id = $1 `, [id]);
+            WHERE id = $1 RETURNING *`, [id]);
+
+            return result.rows[0];
         
     }
 };

@@ -45,7 +45,7 @@ const coachingController = {
         try {
             const coachings = await coachingMapper.addCoachings(params);
 
-        res.json(coachings)
+        res.json({"message": "Les créneaux de coaching ont bien été ajoutés.", "coachings": coachings})
         } catch(err){
             res.status(404).json(err.message)
         }
@@ -58,7 +58,7 @@ const coachingController = {
         id = Number(id);
 
         try{
-        const result = await coachingMapper.getCoachByIding(id);
+        const result = await coachingMapper.getCoachingById(id);
         
         console.log(result);
         
@@ -80,10 +80,10 @@ const coachingController = {
         try {
                 const AvailableCoachings = await coachingMapper.getAvailableCoachings(date);
     
-        res.json(AvailableCoachings)
+        res.status(200).json(AvailableCoachings)
 
         } catch(err){
-                res.status(404).json(err.message)
+                res.status(400).json(err.message)
         }
 
     },
@@ -111,7 +111,7 @@ const coachingController = {
         
         res.json(bookings)
         }catch(err){
-            res.status(404).json(err.message)
+            res.status(400).json(err.message)
         }
         
     },
@@ -124,7 +124,7 @@ const coachingController = {
         
         res.json(bookings)
         }catch(err){
-            res.status(404).json(err.message)
+            res.status(400).json(err.message)
         }
     },
 
@@ -136,7 +136,7 @@ const coachingController = {
 
         res.json(bookings)
         }catch(err){
-            res.status(404).json(err.message)
+            res.status(400).json(err.message)
         }
     },
 
@@ -147,15 +147,18 @@ const coachingController = {
             const { coachingId } = req.body;
             const {userId} = jsonwebtoken.decode(req.headers.authorization.substring(7));
 
-            const check = await coachingMapper.getCoachByIding(coachingId);
+            const check = await coachingMapper.getCoachingById(coachingId);
 
-            if (check.member_id) {
-                return res.json("Coaching déjà réservé.");
+            if (check.memberId) {
+                return res.status(400).json({"message": "Coaching déjà réservé."});
             }
 
-            const coaching = await coachingMapper.addBooking(userId,coachingId );
+            await coachingMapper.addBooking(userId,coachingId );
+            
+            const coaching = await coachingMapper.getCoachingById(coachingId);
 
-            res.json('Réservation bien enregistrée.');
+            res.status(200).json({"message": 'Réservation bien enregistrée.', "coaching": coaching});
+
         } catch(err){
             res.status(400).json(err.message);
         } 
@@ -169,15 +172,17 @@ const coachingController = {
         coachingId = Number(coachingId);
         const { userId } = jsonwebtoken.decode(req.headers.authorization.substring(7));
 
-        const check = await coachingMapper.getCoachByIding(coachingId);
+        const check = await coachingMapper.getCoachingById(coachingId);
 
-        if (check.member_id !== userId) {
-            return res.json("Vous n'avez pas réservé ce coaching.");
+        if (check.memberId !== userId) {
+            return res.status(400).json({"message": "Vous n'avez pas réservé ce coaching."});
         }
 
         await coachingMapper.deleteBooking(userId, coachingId);
 
-        res.json('Réservation annulée.')
+        const coaching = await coachingMapper.getCoachingById(coachingId);
+
+        res.status(200).json({"message":'Réservation annulée.', "coaching": coaching})
 
     } catch(err){
             res.status(400).json(err.message);
@@ -190,14 +195,16 @@ const coachingController = {
         let {id} = req.params;
         id = Number(id);
         
-        const isCoaching = await coachingMapper.getCoachByIding(id);
+        const isCoaching = await coachingMapper.getCoachingById(id);
+
+            const coaching = await coachingMapper.getCoachingById(id);
         
             await coachingMapper.deleteCoachingById(isCoaching.id);
 
-            res.json("Coaching supprimé");
+            res.status(200).json({"message": "Coaching supprimé.", "coaching": coaching});
 
         }catch(err){
-            res.status(400).json("id déjà supprimé");
+            res.status(400).json(err.message);
         }
                
     }
