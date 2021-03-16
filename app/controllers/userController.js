@@ -48,7 +48,7 @@ const userController = {
 
                 const insertedUser =  await userMapper.getMemberById(newUser.id)
               
-                res.status(200).json({"message": `L'utilisateur a bien été ajouté.`, insertedUser});
+                res.status(200).json({"message": `L'utilisateur a bien été ajouté.`, "newUser":  insertedUser});
             };
         
         // Si c'est un COACH :
@@ -79,7 +79,7 @@ const userController = {
 
                 const insertedCoach =  await userMapper.getCoachById(newCoach[0].coach_id)
               
-                res.status(200).json({"message": `L'utilisateur a bien été ajouté.`, insertedCoach});
+                res.status(200).json({"message": `L'utilisateur a bien été ajouté.`, "newUser": insertedCoach});
 
                 }
             };
@@ -183,7 +183,7 @@ const userController = {
 
             const updatedUser =  await userMapper.getMemberById(id)
               
-            res.status(200).json({"message": `L'utilisateur a bien été modifié.`, updatedUser});
+            res.status(200).json({"message": `L'utilisateur a bien été modifié.`, "updatedUser": updatedUser});
             
             };
 
@@ -209,7 +209,7 @@ const userController = {
                  
                 const updatedCoach = await userMapper.getCoachById(id);
 
-                res.status(200).json({"message": `L'utilisateur a bien été modifié.`, updatedCoach});
+                res.status(200).json({"message": `L'utilisateur a bien été modifié.`, "updatedUser": updatedCoach});
             };
 
         
@@ -226,20 +226,28 @@ const userController = {
         let {id} = req.params;
         id = Number(id);
         
-
+        try {
         const isUser = await userMapper.getUserById(id);
         
+        console.log(isUser);
         if(!isUser) {
-            res.status(400).json("Pas de user à cet id, veuillez en entrer un valide")
+            res.status(400).json({"message": "Pas d'utilisateur avec cet id.}"});
         }
         else {
 
+            const deletedUser = await userMapper.getUserById(id);            
             await userMapper.deleteUser(isUser.id);
 
-            res.json("Cet user a bien été supprimé")
+            res.status(400).json({"message": "Cet user a bien été supprimé", "deletedUser": deletedUser})
         }   
         
+    } catch (err) {
+
+        res.status(400).json(err.message);
+}
+
     }
+
 }
 
 module.exports = userController;

@@ -19,7 +19,7 @@ const authMapper = {
         SELECT u.id, u.email, u.password, u.role
         FROM "user" u
         WHERE lower(email) = $1;`,
-        [email]
+        [email.toLowerCase()]
         )
         console.log(email)
         return result.rows[0];

@@ -7,14 +7,14 @@ const specialtyController = {
         const newSpecialty = req.body.name;
         
         if (!newSpecialty){
-            res.status(400).json("Veuillez entrer une spécialité");
+            res.status(400).json({"message": "Veuillez saisir une spécialité"});
             return;
         }
 
         try{
             const specialty = await specialtyMapper.addSpecialty(newSpecialty);
 
-            res.status(200).json(specialty);
+            res.status(200).json({"message": "La spécialité a bien été ajoutée.", "specialité": specialty});
         }catch(err){
             res.status(400).json(err.message);
         }
@@ -40,7 +40,7 @@ const specialtyController = {
 
             const result = await specialtyMapper.deleteSpecialtyById(id);
 
-            res.status(200).json("spécialité bien supprimée");
+            res.status(200).json({"message": "La spécialité a bien été supprimée.", "specialty": result});
         }catch(err){
 
             res.status(400).json(err.message);

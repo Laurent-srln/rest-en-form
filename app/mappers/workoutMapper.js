@@ -29,9 +29,8 @@ const workoutMapper = {
         ;
         `, [workout.date, workout.content, memberId, workout.weight, workout.muscleMass, workout.fatMass, workout.boneMass, workout.bodyWater]);
 
-        workout.id = newWorkout.rows[0].workout_id;
         
-        return new Workout(workout) ;
+        return newWorkout.rows[0] ;
 
     },
 
@@ -59,11 +58,19 @@ const workoutMapper = {
 
         const result = await db.query(`
         
-        SELECT id, member_id
-        FROM workout
-        WHERE id = $1;`, [workoutId]
+        SELECT w.id, w.date, w.content as description, w.created_at, w.updated_at, member.id as member_id, member.firstname as member_firstname, member.lastname as member_lastname, h.weight, h.muscle_mass, h.fat_mass, h.bone_mass, h.body_water, coach.id as comment_coach_id, coach.firstname as comment_coach_firstname, coach.lastname as comment_coach_lastname, "c".content as comment_content, "c".created_at as comment_date
+        FROM workout w
+        LEFT JOIN health h ON w.id = h.workout_id
+        LEFT JOIN "user" member ON w.member_id = member.id
+        LEFT JOIN "comment" "c" ON w.id = "c".workout_id
+        LEFT JOIN "user" coach ON "c".coach_id = coach.id
+        WHERE w.id = $1;`, [workoutId]
         ); 
-    return result.rows[0];
+
+        if(!result.rows){
+            throw new Error(`Pas de workout avec l'id : ${workoutId}`)}
+
+            return new Workout (result.rows[0]);
 
     },
 
