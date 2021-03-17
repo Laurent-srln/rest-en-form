@@ -34,7 +34,7 @@ const userController = {
         // On vérifie que l'email ne correspond pas à un user déja en db
         const checkEmail = await userMapper.getUserByEmail(user.email);
 
-            if (checkEmail.length) {
+            if (checkEmail) {
                 res.status(400).json({"message": `Un utilisateur avec cette adresse email existe déjà. id : ${checkEmail[0].id}`})
                 return;
         };

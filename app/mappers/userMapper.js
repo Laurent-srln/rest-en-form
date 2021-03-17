@@ -92,7 +92,7 @@ const userMapper = {
     );
     if(!result.rows[0]) {
 
-        throw new Error(`Cet email ne correspond à aucun utilisateur.`);
+        return;
     }
         return new User(result.rows[0])
     },
