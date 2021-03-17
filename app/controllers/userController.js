@@ -77,7 +77,9 @@ const userController = {
                 // On insère le user et ses ses specialités en db
                 const newCoach = await userMapper.addCoach(user);
 
-                const insertedCoach =  await userMapper.getCoachById(newCoach[0].coach_id)
+                console.log(newCoach);
+
+                const insertedCoach =  await userMapper.getCoachById(newCoach[0].id)
               
                 res.status(200).json({"message": `L'utilisateur a bien été ajouté.`, "newUser": insertedCoach});
 
@@ -87,9 +89,9 @@ const userController = {
             // On envoie un mail au nouveau user avec un lien lui permettant de configurer son password
             await passwordServices.passwordMail(user.token, user.email);
             
-        } catch (err) {
-            res.status(400).json(err.message);
-        }
+        } catch(err) {
+            res.status(400).json({"message": err.message});
+            }
         ;
     },
 
@@ -99,8 +101,8 @@ const userController = {
         const members = await userMapper.getAllMembers();
 
         res.json(members)
-        }catch(err){
-            res.json(err.message)
+    } catch(err) {
+        res.status(400).json({"message": err.message});
         }
     },
 
@@ -113,8 +115,8 @@ const userController = {
         const member = await userMapper.getMemberById(id);
 
         res.json(member);
-        }catch(err){
-            res.status(400).json(err.message);
+    } catch(err) {
+        res.status(400).json({"message": err.message});
         }
     },
 
@@ -125,8 +127,8 @@ const userController = {
     
     
         res.json(coachs)
-        } catch(err){
-            res.status(400).json(err.message);
+    } catch(err) {
+        res.status(400).json({"message": err.message});
         }
     },
 
@@ -140,8 +142,8 @@ const userController = {
         
 
         res.json(coach)
-        }catch(err){
-            res.status(400).json(err.message);
+    } catch(err) {
+        res.status(400).json({"message": err.message});
         }
     },
 
@@ -213,10 +215,9 @@ const userController = {
             };
 
         
-        }catch (err) {
-
-            res.status(400).json(err.message);
-        };
+        } catch(err) {
+            res.status(400).json({"message": err.message});
+            };
             
 
     },
@@ -241,10 +242,9 @@ const userController = {
             res.status(400).json({"message": "Cet user a bien été supprimé", "deletedUser": deletedUser})
         }   
         
-    } catch (err) {
-
-        res.status(400).json(err.message);
-}
+    } catch(err) {
+        res.status(400).json({"message": err.message});
+        }
 
     }
 

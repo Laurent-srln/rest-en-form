@@ -27,13 +27,12 @@ const commentController = {
            return res.status(200).json({"message": "Un commentaire existe déjà pour ce workout."})
         }
 
-        const newComment = await commentMapper.addComment(content, userId, workoutId);
+        await commentMapper.addComment(content, userId, workoutId);
 
         return res.status(200).json({"message": "Commentaire bien ajouté au workout"});
-    } catch (err) {
-        res.status(400).json(err.message);
-
-        } 
+    } catch(err) {
+        res.status(400).json({"message": err.message});
+        }
 
     },
 
@@ -45,25 +44,25 @@ const commentController = {
             const { content } = req.body;
             const {userId} = jsonwebtoken.decode(req.headers.authorization.substring(7));
 
-            const check = await commentMapper.getCommentById(commentId);
+            const comment = await commentMapper.getCommentById(commentId);
 
-            if (!check) {
+            if (!comment) {
                 return res.status(200).json({"message": "Ce commentaire est introuvable."});
             }
 
-            if (check.coach_id !== userId) {
+            if (comment.coachId !== userId) {
                 return res.status(200).json({"message": "Vous ne pouvez pas modifier ce commentaire."});
             }
 
-            const newComment = await commentMapper.editComment(commentId, content, userId);
+            await commentMapper.editComment(commentId, content, userId);
 
             return res.status(200).json({"message": "Le commentaire a bien été modifié"});
 
 
-        } catch (err) {
-            res.status(400).json(err.message);
-    
-            } 
+        } catch(err) {
+            res.status(400).json({"message": err.message});
+            }
+
     },
 
     deleteComment: async (req,res) => {
@@ -79,7 +78,7 @@ const commentController = {
                 return res.status(404).json({"message": "Ce commentaire est introuvable."});
             }
 
-            if (check.coach_id !== userId) {
+            if (check.coachId !== userId) {
                 return res.status(403).json({"message": "Vous ne pouvez pas supprimer ce commentaire."});
             }
 
@@ -88,10 +87,9 @@ const commentController = {
             return res.status(200).json({"message": "Le commentaire a bien été supprimé."});
 
 
-        } catch (err) {
-            res.status(400).json(err.message);
-    
-            } 
+        } catch(err) {
+            res.status(400).json({"message": err.message});
+            }
     }
 }
 

@@ -39,10 +39,9 @@ const authController = {
                 await authMapper.setPassword(token, hashPassword);
                 res.json({"message": "Le nouveau mot de passe a bien été enregistré"})
 
-        } catch (err) {
-            
-            res.status(400).json(err.message);
-        }
+        } catch(err) {
+            res.status(400).json({"message": err.message});
+            }
 
     },
 
@@ -84,9 +83,9 @@ const authController = {
             res.status(200).json({"message": `Un email a été envoyé à ${email}.`});
 
 
-    } catch (err) {
-        res.status(400).json(err.message);
-    }
+        } catch(err) {
+            res.status(400).json({"message": err.message});
+            }
 },
 
     submitLogin : async (req, res) => {
@@ -137,9 +136,10 @@ const authController = {
                     token: jsonwebtoken.sign(jwtContent, jwtSecret, jwtOptions)});
                 }
 
-    })} catch (err) {
-        res.status(400).json(err.message);
-    }
+    })        
+        } catch(err) {
+        res.status(400).json({"message": err.message});
+        }
 
    } 
 }

@@ -33,7 +33,7 @@ const userMapper = {
          query += `, ((SELECT "id" FROM new_coach), $${i+6})`
         } ;
 
-        query += ` RETURNING *`;
+        query += ` RETURNING coach_id as id`;
      
         const result = await db.query(query, [user.firstname, user.lastname, user.email.toLowerCase(), user.role, user.token, ...user.specialties ] 
         );
@@ -77,7 +77,7 @@ const userMapper = {
 
         if(!result.rows[0]) {
 
-            throw new Error(`Cet id ${id} ne correspond pas à un Member`);
+            throw new Error(`Cet id ${id} ne correspond pas à un adhérent.`);
         }
 
         return new User(result.rows[0])
@@ -85,13 +85,16 @@ const userMapper = {
 
     getUserByEmail : async (email) => {
         const result = await db.query(`
-        SELECT u.id, u.firstname, u.lastname, u.email,  u.role
+        SELECT u.id, u.firstname, u.lastname, u.email, u.role, u.created_at, u.updated_at
         FROM "user" u 
         WHERE lower(u.email) = $1;`,
          [email.toLowerCase()]
     );
+    if(!result.rows[0]) {
 
-        return result.rows;
+        throw new Error(`Cet email ne correspond à aucun utilisateur.`);
+    }
+        return new User(result.rows[0])
     },
 
     getAllCoachs : async ()=>{
@@ -127,7 +130,7 @@ const userMapper = {
         `, [coachId])
 
         if(!result.rows.length){
-            throw new Error ("Pas de coach avec l'user_id : "+ coachId)
+            throw new Error ("Pas de coach avec l'id : "+ coachId)
         }
 
         result.rows[0].specialties = result.rows[0].specialties.split(",");
@@ -146,7 +149,7 @@ const userMapper = {
 
     editUser : async (id, user) => {
 
-        const updaptedUSer = await db.query(`
+        await db.query(`
         UPDATE "user"
         SET firstname = $1,
         lastname = $2,
@@ -155,7 +158,7 @@ const userMapper = {
         RETURNING *;
       `, [user.firstname, user.lastname, user.email, id]);
 
-        return updaptedUSer;    
+        return;    
         
     },
 

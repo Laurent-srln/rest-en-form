@@ -1,23 +1,12 @@
-class Coaching {
+class Comment {
     id;
-    startTime;
-    endTime;
+    content;
     coachId;
     coachFirstname;
     coachLastname;
-    memberId;
-    memberFirstname;
-    memberLastname;
+    workoutId;
     createdAt;
     updatedAt
-
-    set start_time(val) {
-        this.startTime = val;
-    }
-
-    set end_time(val) {
-        this.endTime = val;
-    }
 
     set coach_id(val){
         this.coachId = val;
@@ -31,16 +20,8 @@ class Coaching {
         this.coachLastname = val;
     }
 
-    set member_id(val){
-        this.memberId = val;
-    }
-
-    set member_firstname(val){
-        this.memberFirstname = val;
-    }
-
-    set member_lastname(val){
-        this.memberLastname = val;
+    set workout_id(val){
+        this.workoutId = val;
     }
 
     set created_at(val){
@@ -59,4 +40,4 @@ class Coaching {
     }
 }
 
-module.exports = Coaching;
+module.exports = Comment;

@@ -34,7 +34,7 @@ const coachingMapper = {
         if (!checkCoach.rows.length) {
 
             console.log(checkCoach.rows[0]);
-            throw new Error(`Il n'y a pas de coach avec le user_id : ${coachId}`)
+            throw new Error(`Il n'y a pas de coach avec l'id : ${coachId}`)
         };
 
         const checkCoachings = await db.query(`
@@ -96,14 +96,14 @@ const coachingMapper = {
     getAvailableCoachings: async (date) => {
 
         const availableCoachings = await db.query(`
-        SELECT c.id, u.firstname, u.lastname, c.start_time, c.end_time 
+        SELECT c.id, c.start_time, c.end_time, coach.firstname as coach_firstname, coach.lastname as coach_lastname, c.created_at, C.updated_at
         FROM "coaching" c
-        LEFT JOIN "user" u ON c.coach_id = u.id
+        LEFT JOIN "user" coach ON c.coach_id = coach.id
         WHERE start_time::date = $1
         AND member_id IS NULL
-        ORDER BY c.start_time;`, [date]);
+        ORDER BY c.start_time, coach_firstname;`, [date]);
     
-    return availableCoachings.rows;
+    return availableCoachings.rows.map(coaching => new Coaching(coaching))
     },
 
     getNextBookingsByMemberId: async (memberId) => {
