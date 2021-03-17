@@ -55,6 +55,7 @@ router.delete('/delete-comment/:commentId',authorizationMiddleware, commentContr
 router.get('/coach-next-bookings',authorizationMiddleware, coachingController.getCoachNextBookings);
 router.get('/coach-last-bookings',authorizationMiddleware, coachingController.getCoachLastBookings);
 router.get('/members/:id(\\d+)/next-bookings', authorizationMiddleware, coachingController.getMemberNextBookingsByParamsId);
+router.get('/members/:id(\\d+)/workouts', authorizationMiddleware, workoutController.getMemberWorkoutsByParamsId); 
 //      Members
 router.get('/members', authorizationMiddleware, userController.getAllMembers);
 
