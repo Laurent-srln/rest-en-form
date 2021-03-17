@@ -1,4 +1,5 @@
 const db = require('../database');
+const Comment = require('../models/comment');
 
 const commentMapper = {
 
@@ -15,24 +16,34 @@ const commentMapper = {
     getCommentByWorkoutId : async (workoutId) => {
 
         const check = await db.query(`
-        SELECT id, coach_id, workout_id
-        FROM comment 
-        WHERE workout_id = $1;`, [workoutId]
+        SELECT c.id, c.content, c.coach_id, coach.firstname as coach_firstname, coach.lastname as coach_lastname, workout_id, created_at, updated_at
+        FROM comment c
+        LEFT JOIN "user" coach ON c.coach_id = coach.id
+        WHERE c.workout_id = $1;`, [workoutId]
         )
 
-        return check.rows[0];
+        if(!result.rows.length){
+            throw new Error("Il n'y a pas de commentaire pour l'entraînement avec l'id" + workoutId)
+        }
+
+        return new Comment(check.rows[0]);
 
     },
 
     getCommentById : async (commentId) => {
 
         const check = await db.query(`
-        SELECT id, coach_id, workout_id
-        FROM comment 
-        WHERE id = $1;`, [commentId]    
+        SELECT c.id, c.content, c.coach_id, coach.firstname as coach_firstname, coach.lastname as coach_lastname, workout_id, created_at, updated_at
+        FROM comment c
+        LEFT JOIN "user" coach ON c.coach_id = coach.id
+        WHERE c.id = $1;`, [commentId]    
         )
 
-        return check.rows[0];
+        if(!result.rows.length){
+            throw new Error("Il n'y a pas de commentaire avec l'id" + commentId)
+        }
+
+        return new Comment(check.rows[0]);
 
     },
 
@@ -45,7 +56,7 @@ const commentMapper = {
         AND coach_id = $3;`, [newContent, commentId, coachId]
         );
 
-        return result.rows[0];
+        return;
     },
 
     deleteComment: async (commentId, coachId) => {

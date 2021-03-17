@@ -55,7 +55,7 @@ const specialtyMapper = {
             FROM "specialty"
             WHERE id = $1 RETURNING *`, [id]);
 
-            return result.rows[0];
+            return new Specialty(result.rows[0]);
         
     }
 };

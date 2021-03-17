@@ -46,8 +46,8 @@ const coachingController = {
             const coachings = await coachingMapper.addCoachings(params);
 
         res.json({"message": "Les créneaux de coaching ont bien été ajoutés.", "coachings": coachings})
-        } catch(err){
-            res.status(404).json(err.message)
+    } catch(err) {
+        res.status(400).json({"message": err.message});
         }
 
     },
@@ -62,8 +62,8 @@ const coachingController = {
         
         console.log(result);
         
-        }catch(err){
-            res.status(400).json(err.message)
+    } catch(err) {
+        res.status(400).json({"message": err.message});
         }
 
     },
@@ -82,8 +82,8 @@ const coachingController = {
     
         res.status(200).json(AvailableCoachings)
 
-        } catch(err){
-                res.status(400).json(err.message)
+    } catch(err) {
+        res.status(400).json({"message": err.message});
         }
 
     },
@@ -95,8 +95,8 @@ const coachingController = {
         const bookings = await coachingMapper.getNextBookingsByMemberId(userId);
         
         res.json(bookings)
-        }catch(err){
-            res.status(404).json(err.message)
+    } catch(err) {
+        res.status(400).json({"message": err.message});
         }
     },
 
@@ -110,8 +110,8 @@ const coachingController = {
         const bookings = await coachingMapper.getNextBookingsByMemberId(id);
         
         res.json(bookings)
-        }catch(err){
-            res.status(400).json(err.message)
+    } catch(err) {
+        res.status(400).json({"message": err.message});
         }
         
     },
@@ -123,8 +123,8 @@ const coachingController = {
         const bookings = await coachingMapper.getNextBookingsbyCoachId(userId);
         
         res.json(bookings)
-        }catch(err){
-            res.status(400).json(err.message)
+    } catch(err) {
+        res.status(400).json({"message": err.message});
         }
     },
 
@@ -135,8 +135,8 @@ const coachingController = {
         const bookings = await coachingMapper.getLastBookingsbyCoachId(userId);
 
         res.json(bookings)
-        }catch(err){
-            res.status(400).json(err.message)
+    } catch(err) {
+        res.status(400).json({"message": err.message});
         }
     },
 
@@ -159,9 +159,9 @@ const coachingController = {
 
             res.status(200).json({"message": 'Réservation bien enregistrée.', "coaching": coaching});
 
-        } catch(err){
-            res.status(400).json(err.message);
-        } 
+        } catch(err) {
+            res.status(400).json({"message": err.message});
+            }
     },
 
     deleteBooking: async (req,res) => {
@@ -184,9 +184,9 @@ const coachingController = {
 
         res.status(200).json({"message":'Réservation annulée.', "coaching": coaching})
 
-    } catch(err){
-            res.status(400).json(err.message);
-        } 
+    } catch(err) {
+        res.status(400).json({"message": err.message});
+        }
     },
 
     deleteCoachingById : async (req, res) => {
@@ -203,9 +203,9 @@ const coachingController = {
 
             res.status(200).json({"message": "Coaching supprimé.", "coaching": coaching});
 
-        }catch(err){
-            res.status(400).json(err.message);
-        }
+        } catch(err) {
+            res.status(400).json({"message": err.message});
+            }
                
     }
 

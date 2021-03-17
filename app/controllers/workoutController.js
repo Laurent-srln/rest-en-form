@@ -43,14 +43,11 @@ const workoutController = {
 
         const workoutId = await workoutMapper.addWorkout(newWorkout, userId);
 
-        const workout = await workoutMapper.getWorkoutById(workoutId.workout_id);
-        console.log(workout);
+        const workout = await workoutMapper.getWorkoutById(workoutId.id);
 
         res.status(200).json({"message": `L'entrainement a bien été ajouté.`, "workout": workout})
-        }
-        catch (err) {
-        res.status(400).json(err.message);
-
+    } catch(err) {
+        res.status(400).json({"message": err.message});
         };
     },
 
@@ -61,8 +58,8 @@ const workoutController = {
         const workouts = await workoutMapper.getAllWorkoutsByMemberIdId(userId);
 
         res.status(200).json(workouts)
-        }catch(err){
-            res.status(400).json(err.message);
+    } catch(err) {
+        res.status(400).json({"message": err.message});
         }
     },
 
@@ -104,13 +101,11 @@ const workoutController = {
             };
     
     
-            const workout = await workoutMapper.editWorkout(workoutId, updatedWorkout);
+            await workoutMapper.editWorkout(workoutId, updatedWorkout);
     
             res.status(200).json({ "message" : `L'entraînement a bien été mis à jour`})
-            }
-            catch (err) {
-            res.status(400).json(err.message);
-    
+        } catch(err) {
+            res.status(400).json({"message": err.message});
             };
     },
 
@@ -138,9 +133,8 @@ const workoutController = {
 
         res.status(200).json({"message": "L'entraînement a bien été supprimé.", "workout": deletedWorkout});
         return;
-    }         catch (err) {
-        res.status(400).json(err.message);
-
+    } catch(err) {
+        res.status(400).json({"message": err.message});
         };
 
     }
