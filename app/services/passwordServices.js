@@ -27,7 +27,7 @@ passwordMail: async (token, email) => {
       to: "user.restenforme@gmail.com", // list of receivers
       subject: "Finalisez votre inscription à notre application de suivi !", // Subject line
       text: "https://app-osport.herokuapp.com/login", // plain text body
-      html: `<a href="https://app-osport.herokuapp.com/register?token=${token}"a>Cliquez ici pour configurer votre mot de passe</a>`, // html body
+      html: `<a href="http://localhost:8080/register?token=${token}"a>Cliquez ici pour configurer votre mot de passe</a>`, // html body
   });
 
   console.log(`Mail envoyé à ${email}`);
@@ -56,7 +56,7 @@ newPasswordMail: async (token, email) => {
       to: "user.restenforme@gmail.com", // list of receivers
       subject: "Réinitialisez votre mot de passe.", // Subject line
       text: "https://app-osport.herokuapp.com/login", // plain text body
-      html: `<a href="https://app-osport.herokuapp.com/register?token=${token}"a>Cliquez ici pour configurer votre mot de passe</a>`, // html body
+      html: `<a href="http://localhost:8080/register?token=${token}"a>Cliquez ici pour configurer votre mot de passe</a>`, // html body
   });
 
   console.log(`Mail envoyé à ${email}`);
