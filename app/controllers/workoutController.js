@@ -63,6 +63,19 @@ const workoutController = {
         }
     },
 
+    getMemberWorkoutsByParamsId : async (req, res) => {
+
+        let {id} = req.params;
+        id = Number(id);
+        try{
+        const workouts = await workoutMapper.getAllWorkoutsByMemberIdId(id);
+    
+        res.status(200).json(workouts)
+    } catch(err) {
+        res.status(400).json({"message": err.message});
+        }
+    },
+
     editWorkout: async (req, res) => {
 
         let { workoutId } = req.params;
