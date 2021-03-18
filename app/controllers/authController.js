@@ -20,24 +20,24 @@ const authController = {
         try {
         
             if(!newPassword.password || !newPassword.confirm) {
-                return res.json({"message": "Tous les champs doivent être remplis."})
+                return res.status(400).json({"message": "Tous les champs doivent être remplis."})
             }
 
             if(newPassword.password !== newPassword.confirm) {
-                return res.json({"message": "Les deux mots de passe doivent être identique"})
+                return res.status(400).json({"message": "Les deux mots de passe doivent être identique"})
             }
 
             const foundToken = await authMapper.getToken(token);
 
             if(!foundToken) {
-                return res.json({"message": "Profil non trouvé."})
+                return res.status(400).json({"message": "Profil non trouvé."})
             }
 
             const hashPassword = await bcrypt.hash(newPassword.password, saltRounds);
             console.log(hashPassword);
 
                 await authMapper.setPassword(token, hashPassword);
-                res.json({"message": "Le nouveau mot de passe a bien été enregistré"})
+                res.status(200).json({"message": "Le nouveau mot de passe a bien été enregistré"})
 
         } catch(err) {
             res.status(400).json({"message": err.message});
