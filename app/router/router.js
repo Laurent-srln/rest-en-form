@@ -2,33 +2,37 @@ const express = require('express');
 const router = express.Router();
 
 // TOKEN AUTHENTIFICATION MIDDLEWARE
-const authorizationMiddleware = require('./services/authorizationMiddleware');
-const validCoach = require('./services/validCoach');
-const validMember = require('./services/validMember');
-const validOwner = require('./services/validOwner');
+const authorizationMiddleware = require('../services/authorizationMiddleware');
+const validCoach = require('../services/validCoach');
+const validMember = require('../services/validMember');
+const validOwner = require('../services/validOwner');
 
 // JOI VALIDATION MIDDLEWARE
-const validator = require('./services/validator');
+const validator = require('../services/validator');
 
 // JOI SCHEMAS
-const workoutSchema = require('./schemas/workout');
-const userSchema = require('./schemas/user');
-const specialtySchema = require('./schemas/specialty');
-const setPasswordSchema = require('./schemas/setPassword');
-const newPasswordSchema = require('./schemas/newPassword');
-const loginSchema = require('./schemas/login');
-const commentSchema = require('./schemas/comment');
-const coachingTimePeriodSchema = require('./schemas/coachingTimePeriod');
+const workoutSchema = require('../schemas/workout');
+const userSchema = require('../schemas/user');
+const specialtySchema = require('../schemas/specialty');
+const setPasswordSchema = require('../schemas/setPassword');
+const newPasswordSchema = require('../schemas/newPassword');
+const loginSchema = require('../schemas/login');
+const commentSchema = require('../schemas/comment');
+const coachingTimePeriodSchema = require('../schemas/coachingTimePeriod');
 
 // CONTROLLERS
-const userController = require('./controllers/userController');
-const workoutController = require('./controllers/workoutController');
-const commentController = require('./controllers/commentController');
-const coachingController = require('./controllers/coachingController');
-const authController = require('./controllers/authController');
-const healthController = require('./controllers/healthController');
-const specialtyController = require('./controllers/specialtyController');
-const mainController = require('./controllers/mainController');
+const userController = require('../controllers/userController');
+const workoutController = require('../controllers/workoutController');
+const commentController = require('../controllers/commentController');
+const coachingController = require('../controllers/coachingController');
+const authController = require('../controllers/authController');
+const healthController = require('../controllers/healthController');
+const specialtyController = require('../controllers/specialtyController');
+const mainController = require('../controllers/mainController');
+
+/**
+ * 
+ */
 
 
 // CONNEXION ROUTES
