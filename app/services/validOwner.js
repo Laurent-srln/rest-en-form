@@ -1,10 +1,10 @@
 const jsonwebtoken = require('jsonwebtoken');
 
-const validCoach = (req, res, next) => {
+const validOwner = (req, res, next) => {
 
     const {role} = jsonwebtoken.decode(req.headers.authorization.substring(7));
 
-    if (role !== 'COACH') {
+    if (role !== 'OWNER') {
         res.status(403).json({"message": `Accès non autorisé.`});
         
     } else {
@@ -12,4 +12,4 @@ const validCoach = (req, res, next) => {
     }
 };
 
-module.exports = validCoach;
+module.exports = validOwner;

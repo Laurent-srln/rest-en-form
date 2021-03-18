@@ -25,7 +25,7 @@ const workoutMapper = {
         
         INSERT INTO health ("weight", muscle_mass, fat_mass, bone_mass, body_water, workout_id)
         SELECT $4, $5, $6, $7, $8, "id"
-        FROM new_workout_id RETURNING workout_id
+        FROM new_workout_id
         RETURNING workout_id as id
         ;
         `, [workout.date, workout.content, memberId, workout.weight, workout.muscleMass, workout.fatMass, workout.boneMass, workout.bodyWater]);
