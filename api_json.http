@@ -16,7 +16,7 @@
 
 
 ### DÉFINIR UN NOUVEAU MOT DE PASSE
-POST {{baseUrl}}/register?token=dbc9a4f8-99c8-40cf-92bc-5fcd014b3f7e
+POST {{baseUrl}}/register?token=20b6a902-8d3c-41b6-95a3-923c9bb6f6ce
 Content-Type: application/json
 
 {
@@ -29,7 +29,7 @@ POST {{baseUrl}}/forgotten-password
 Content-Type: application/json
 
 {
-    "email": "AlABAS@gmail.com"
+    "email": "dario@oclock.io"
 }
 
 ### ENVOYER SES INFORMATIONS DE CONNEXION 
@@ -37,8 +37,8 @@ POST {{baseUrl}}/login
 Content-Type: application/json
 
 {
-    "email": "alext@coach.com",
-    "password":"coach"
+    "email": "dario@oclock.io",
+    "password":"1Aaaaaaa!"
 }
 
 
@@ -56,7 +56,7 @@ Content-Type: application/json
 ### AJOUTER UN WORKOUT + HEALTH DATA
 POST {{baseUrl}}/new-workout
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImVtYWlsIjoiQWxBQkFTQGdtYWlsLmNvbSIsInJvbGUiOiJNRU1CRVIiLCJpYXQiOjE2MTU4OTA0NTIsImV4cCI6MTYxNTkyNjQ1Mn0.zc8G6ZAEiZ13Gzji-VQdXCXBJx_fnCdW4QCaW3UGe2o
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjM0LCJlbWFpbCI6ImFsZXh0QGNvYWNoLmNvbSIsInJvbGUiOiJDT0FDSCIsImlhdCI6MTYxNjA2NTMzNiwiZXhwIjoxNjE2MTAxMzM2fQ.gfyI06fucicVGacfixUhR9OW-0y8f1voMZP4yvVmfXI
 
 {
     "date": "2021-03-12",
@@ -71,18 +71,18 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImVtY
 
 ### RÉCUPÉRER TOUS LES WORKOUTS PAR ORDRE DÉCROISSANT 
 GET {{baseUrl}}/workouts
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJlbWFpbCI6InNvc29zb0BnbWFpbC5jb20iLCJyb2xlIjoiTUVNQkVSIiwiaWF0IjoxNjE1NTQ0NTQxLCJleHAiOjE2MTU1ODA1NDF9.GbuwA3pXyOTDXDC45rehNS5P2Oa9JsvHLLHW699taFk
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjM0LCJlbWFpbCI6ImFsZXh0QGNvYWNoLmNvbSIsInJvbGUiOiJDT0FDSCIsImlhdCI6MTYxNjA2NDg2NiwiZXhwIjoxNjE2MTAwODY2fQ.7lej6Ti3N4FbvlxLFABh76T0t5ZqC_Eil9o67ETUQ3M
 
 
 ### RÉCUPÉRER TOUS LES ENREGISTREMENTS SANTÉ 
 GET {{baseUrl}}/health
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJlbWFpbCI6InNvc29zb0BnbWFpbC5jb20iLCJyb2xlIjoiTUVNQkVSIiwiaWF0IjoxNjE1NTQ0NTQxLCJleHAiOjE2MTU1ODA1NDF9.GbuwA3pXyOTDXDC45rehNS5P2Oa9JsvHLLHW699taFk
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjM0LCJlbWFpbCI6ImFsZXh0QGNvYWNoLmNvbSIsInJvbGUiOiJDT0FDSCIsImlhdCI6MTYxNjA2NDg2NiwiZXhwIjoxNjE2MTAwODY2fQ.7lej6Ti3N4FbvlxLFABh76T0t5ZqC_Eil9o67ETUQ3M
 
 
 ### MODIFIER UN WORKOUT ET SES DONNÉES SANTÉ
 PATCH {{baseUrl}}/edit-workout/2
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJlbWFpbCI6InNvc29zb0BnbWFpbC5jb20iLCJyb2xlIjoiTUVNQkVSIiwiaWF0IjoxNjE1NTQ0NTQxLCJleHAiOjE2MTU1ODA1NDF9.GbuwA3pXyOTDXDC45rehNS5P2Oa9JsvHLLHW699taFk
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjM0LCJlbWFpbCI6ImFsZXh0QGNvYWNoLmNvbSIsInJvbGUiOiJDT0FDSCIsImlhdCI6MTYxNjA2NDg2NiwiZXhwIjoxNjE2MTAwODY2fQ.7lej6Ti3N4FbvlxLFABh76T0t5ZqC_Eil9o67ETUQ3M
 
 {
     "date": "2021-03-11",
@@ -98,7 +98,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJlb
 ### SUPPRIMER UN WORKOUT ET LES DONNÉES SANTÉ ASSOCIÉES
 DELETE {{baseUrl}}/delete-workout/48
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImVtYWlsIjoiQWxBQkFTQGdtYWlsLmNvbSIsInJvbGUiOiJNRU1CRVIiLCJpYXQiOjE2MTU4OTA0NTIsImV4cCI6MTYxNTkyNjQ1Mn0.zc8G6ZAEiZ13Gzji-VQdXCXBJx_fnCdW4QCaW3UGe2o
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjM0LCJlbWFpbCI6ImFsZXh0QGNvYWNoLmNvbSIsInJvbGUiOiJDT0FDSCIsImlhdCI6MTYxNjA2NDg2NiwiZXhwIjoxNjE2MTAwODY2fQ.7lej6Ti3N4FbvlxLFABh76T0t5ZqC_Eil9o67ETUQ3M
 
 
 ////////// COACHINGS \\\\\\\\\\
@@ -108,28 +108,28 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImVtY
 ### RÉCUPÉRER TOUS LES COACHINGS DISPONIBLES À UNE DATE
 GET {{baseUrl}}/available-coachings?date=2021-04-05
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjM0LCJlbWFpbCI6ImFsZXh0QGNvYWNoLmNvbSIsInJvbGUiOiJDT0FDSCIsImlhdCI6MTYxNTk3MDY1MywiZXhwIjoxNjE2MDA2NjUzfQ.hmtIPc04SC1ln4MDDj0ZrKecTujHuFSNeLB53pkA0Uo
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjM0LCJlbWFpbCI6ImFsZXh0QGNvYWNoLmNvbSIsInJvbGUiOiJDT0FDSCIsImlhdCI6MTYxNjA2NDg2NiwiZXhwIjoxNjE2MTAwODY2fQ.7lej6Ti3N4FbvlxLFABh76T0t5ZqC_Eil9o67ETUQ3M
 
 
 ### RÉCUPÉRER LES PROCHAINS COACHINGS PRÉVUS 
 GET {{baseUrl}}/member-next-bookings
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJlbWFpbCI6InNvc29zb0BnbWFpbC5jb20iLCJyb2xlIjoiTUVNQkVSIiwiaWF0IjoxNjE1NTQ0NTQxLCJleHAiOjE2MTU1ODA1NDF9.GbuwA3pXyOTDXDC45rehNS5P2Oa9JsvHLLHW699taFk
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjM0LCJlbWFpbCI6ImFsZXh0QGNvYWNoLmNvbSIsInJvbGUiOiJDT0FDSCIsImlhdCI6MTYxNjA2NDg2NiwiZXhwIjoxNjE2MTAwODY2fQ.7lej6Ti3N4FbvlxLFABh76T0t5ZqC_Eil9o67ETUQ3M
 
 
 ### RÉSERVER UN COACHING (update)
 POST {{baseUrl}}/book-coaching
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImVtYWlsIjoiQWxBQkFTQGdtYWlsLmNvbSIsInJvbGUiOiJNRU1CRVIiLCJpYXQiOjE2MTU4OTA0NTIsImV4cCI6MTYxNTkyNjQ1Mn0.zc8G6ZAEiZ13Gzji-VQdXCXBJx_fnCdW4QCaW3UGe2o
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjM0LCJlbWFpbCI6ImFsZXh0QGNvYWNoLmNvbSIsInJvbGUiOiJDT0FDSCIsImlhdCI6MTYxNjA2NDg2NiwiZXhwIjoxNjE2MTAwODY2fQ.7lej6Ti3N4FbvlxLFABh76T0t5ZqC_Eil9o67ETUQ3M
 
 {
-    "coachingId": 92
+    "coachingId": 88
 }
 
 
 ### SUPPRIMER UNE RÉSERVATION (update) 
-PATCH {{baseUrl}}/bookings/92/delete
+PATCH {{baseUrl}}/bookings/88/delete
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImVtYWlsIjoiQWxBQkFTQGdtYWlsLmNvbSIsInJvbGUiOiJNRU1CRVIiLCJpYXQiOjE2MTU4OTA0NTIsImV4cCI6MTYxNTkyNjQ1Mn0.zc8G6ZAEiZ13Gzji-VQdXCXBJx_fnCdW4QCaW3UGe2o
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjM0LCJlbWFpbCI6ImFsZXh0QGNvYWNoLmNvbSIsInJvbGUiOiJDT0FDSCIsImlhdCI6MTYxNjA2NDg2NiwiZXhwIjoxNjE2MTAwODY2fQ.7lej6Ti3N4FbvlxLFABh76T0t5ZqC_Eil9o67ETUQ3M
 
 
 
@@ -235,12 +235,12 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImVtY
 ### AJOUTER UN ADHÉRENT
 POST {{baseUrl}}/new-user
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjM0LCJlbWFpbCI6ImFsZXh0QGNvYWNoLmNvbSIsInJvbGUiOiJDT0FDSCIsImlhdCI6MTYxNTk3ODkzMiwiZXhwIjoxNjE2MDE0OTMyfQ.iAmIARzR50ZCB2XAJvSlw5aUWlho7OhiwWLmaL1mZhw
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJlbWFpbCI6ImRhcmlvQG9jbG9jay5pbyIsInJvbGUiOiJPV05FUiIsImlhdCI6MTYxNjA2NjQ5MiwiZXhwIjoxNjE2MTAyNDkyfQ.P-kXj4uDBV7Raw8ycLIOO_9HnUH2d6r0IcWaKJdmwLk
 
 {
     "firstname": "test",
     "lastname": "testssss",
-    "email": "changm11esssnt@toto.com",
+    "email": "validowner@toto.com",
     "role": "MEMBER"
 }
 

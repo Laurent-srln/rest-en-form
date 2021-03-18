@@ -60,13 +60,13 @@ const authController = {
 
             if (!validEmail){
 
-                return res.status(400).status(400).json({"message": `L'email saisi est incorrect.`})
+                return res.status(400).json({"message": `L'email saisi est incorrect.`})
             }
 
                 
             const result = await userMapper.getUserByEmail(email);
             
-            if (!result.length){
+            if (!result){
 
                 return res.status(400).json({"message": `L'email saisi est incorrect.`});
             }
