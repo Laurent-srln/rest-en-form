@@ -100,7 +100,7 @@ const userController = {
         try{
         const members = await userMapper.getAllMembers();
 
-        res.json(members)
+        res.status(200).json(members)
     } catch(err) {
         res.status(400).json({"message": err.message});
         }
@@ -114,7 +114,7 @@ const userController = {
         try{
         const member = await userMapper.getMemberById(id);
 
-        res.json(member);
+        res.status(200).json(member);
     } catch(err) {
         res.status(400).json({"message": err.message});
         }
@@ -126,7 +126,7 @@ const userController = {
             const coachs = await userMapper.getAllCoachs();
     
     
-        res.json(coachs)
+        res.status(200).json(coachs)
     } catch(err) {
         res.status(400).json({"message": err.message});
         }
@@ -141,7 +141,7 @@ const userController = {
         const coach = await userMapper.getCoachById(id);
         
 
-        res.json(coach)
+        res.status(200).json(coach)
     } catch(err) {
         res.status(400).json({"message": err.message});
         }
