@@ -23,7 +23,7 @@ passwordMail: async (token, email) => {
 
   // send mail with defined transport object
     await transporter.sendMail({
-      from: '"Le gérant de votre salle de sport" <restenforme.gerant@gmail.com>', // sender address
+      from: `${email} - "Le gérant de votre salle de sport" <restenforme.gerant@gmail.com>`, // sender address
       to: "user.restenforme@gmail.com", // list of receivers
       subject: "Finalisez votre inscription à notre application de suivi !", // Subject line
       text: "https://app-osport.herokuapp.com/login", // plain text body
@@ -52,7 +52,7 @@ newPasswordMail: async (token, email) => {
 
   // send mail with defined transport object
     await transporter.sendMail({
-      from: '"Le gérant de votre salle de sport" <restenforme.gerant@gmail.com>', // sender address
+      from: `${email} - "Le gérant de votre salle de sport" <restenforme.gerant@gmail.com>`, // sender address
       to: "user.restenforme@gmail.com", // list of receivers
       subject: "Réinitialisez votre mot de passe.", // Subject line
       text: "https://app-osport.herokuapp.com/login", // plain text body

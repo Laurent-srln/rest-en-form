@@ -38,7 +38,7 @@ Content-Type: application/json
 
 {
     "email": "alext@coach.com",
-    "password":"Kourouma15!"
+    "password":"coach"
 }
 
 
@@ -152,10 +152,6 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjM0LCJlb
     "content": "ssss"
 }
 
-### RECUPERER LES WORKOUT D'UN ADHÉRENT
-GET  {{baseUrl}}/members/2/workouts
-Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjE1LCJlbWFpbCI6ImFsZXh0QGNvYWNoLmNvbSIsInJvbGUiOiJDT0FDSCIsImlhdCI6MTYxNTk5Njc3MCwiZXhwIjoxNjE2MDMyNzcwfQ.kKrFLL5ARMu2kxtzg2a0kBsZz3cc3yV4xBCREkDv35I
 
 ### MODIFIER UN COMMENTAIRE
 PATCH {{baseUrl}}/edit-comment/12
@@ -239,12 +235,12 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImVtY
 ### AJOUTER UN ADHÉRENT
 POST {{baseUrl}}/new-user
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImVtYWlsIjoiQWxBQkFTQGdtYWlsLmNvbSIsInJvbGUiOiJNRU1CRVIiLCJpYXQiOjE2MTU4OTA0NTIsImV4cCI6MTYxNTkyNjQ1Mn0.zc8G6ZAEiZ13Gzji-VQdXCXBJx_fnCdW4QCaW3UGe2o
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjM0LCJlbWFpbCI6ImFsZXh0QGNvYWNoLmNvbSIsInJvbGUiOiJDT0FDSCIsImlhdCI6MTYxNTk3ODkzMiwiZXhwIjoxNjE2MDE0OTMyfQ.iAmIARzR50ZCB2XAJvSlw5aUWlho7OhiwWLmaL1mZhw
 
 {
     "firstname": "test",
-    "lastname": "changmentmail",
-    "email": "changmesssnt@mail.com",
+    "lastname": "testssss",
+    "email": "changm11esssnt@toto.com",
     "role": "MEMBER"
 }
 
@@ -252,12 +248,12 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImVtY
 ### AJOUTER UN COACH
 POST {{baseUrl}}/new-user
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjM0LCJlbWFpbCI6ImFsZXh0QGNvYWNoLmNvbSIsInJvbGUiOiJDT0FDSCIsImlhdCI6MTYxNTk3MDY1MywiZXhwIjoxNjE2MDA2NjUzfQ.hmtIPc04SC1ln4MDDj0ZrKecTujHuFSNeLB53pkA0Uo
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjM0LCJlbWFpbCI6ImFsZXh0QGNvYWNoLmNvbSIsInJvbGUiOiJDT0FDSCIsImlhdCI6MTYxNjA2MDM1OSwiZXhwIjoxNjE2MDk2MzU5fQ.QPrOC7TvuqmbwSVRcbeLm_lFuqskD-a9Z8oF6B2qju0
 
 {
     "firstname": "bug",
     "lastname": "coachbis",
-    "email": "testnesssswcoach@coach.com",
+    "email": "aaazzssaa@coach.com",
     "role": "COACH",
     "specialties": [1,3]
 }
@@ -273,14 +269,14 @@ GET {{baseUrl}}/coachs/6
 
 
 ### MODIFIER UN USER 
-PATCH  {{baseUrl}}/users/25
+PATCH  {{baseUrl}}/users/95
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjE1LCJlbWFpbCI6ImFsZXh0QGNvYWNoLmNvbSIsInJvbGUiOiJDT0FDSCIsImlhdCI6MTYxNTkwMjkzOCwiZXhwIjoxNjE1OTM4OTM4fQ.a-sXApQCog0OAwQTLbL4WVY8Ov_6ydCdHd4Mc7EhSks
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjM0LCJlbWFpbCI6ImFsZXh0QGNvYWNoLmNvbSIsInJvbGUiOiJDT0FDSCIsImlhdCI6MTYxNTk3MDY1MywiZXhwIjoxNjE2MDA2NjUzfQ.hmtIPc04SC1ln4MDDj0ZrKecTujHuFSNeLB53pkA0Uo
 
 {
-    "firstname": "Jeannot",
-    "lastname": "Pru",
-    "email": "j.pruliere@oclock.io",
+    "firstname": "bug",
+    "lastname": "coachbis",
+    "email": "j.testndddesssssswcoach@oclock.io",
     "specialties":[4,7]
 }
 
