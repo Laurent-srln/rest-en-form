@@ -76,6 +76,17 @@ const coachingMapper = {
 
     },
 
+    getAllCoachings : async() => {
+        const result = await db.query(`
+        SELECT c.id, c.start_time, c.end_time, coach.id as coach_id, coach.firstname as coach_firstname, coach.lastname as coach_lastname, member.id as member_id, member.firstname as member_firstname, member.lastname as member_lastname, c.created_at, c.updated_at
+        FROM "coaching" c
+        LEFT JOIN  "user" coach ON c.coach_id = coach.id
+        LEFT JOIN  "user" member ON c.member_id = member.id
+        ;`)
+
+        return result.rows.map(coaching => new Coaching(coaching));
+    },
+
     getCoachingById : async (id) => {
 
         const result = await db.query(`
