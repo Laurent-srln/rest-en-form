@@ -45,7 +45,7 @@ const coachingController = {
         try {
             const coachings = await coachingMapper.addCoachings(params);
 
-        res.json({"message": "Les créneaux de coaching ont bien été ajoutés.", "coachings": coachings})
+        res.status(400).json({"message": "Les créneaux de coaching ont bien été ajoutés.", "coachings": coachings})
     } catch(err) {
         res.status(400).json({"message": err.message});
         }
@@ -94,7 +94,7 @@ const coachingController = {
         try{
         const bookings = await coachingMapper.getNextBookingsByMemberId(userId);
         
-        res.json(bookings)
+        res.status(200).json(bookings)
     } catch(err) {
         res.status(400).json({"message": err.message});
         }
@@ -109,7 +109,7 @@ const coachingController = {
         try{
         const bookings = await coachingMapper.getNextBookingsByMemberId(id);
         
-        res.json(bookings)
+        res.status(200).json(bookings)
     } catch(err) {
         res.status(400).json({"message": err.message});
         }
@@ -122,7 +122,7 @@ const coachingController = {
         try{
         const bookings = await coachingMapper.getNextBookingsbyCoachId(userId);
         
-        res.json(bookings)
+        res.status(200).json(bookings)
     } catch(err) {
         res.status(400).json({"message": err.message});
         }
@@ -134,7 +134,7 @@ const coachingController = {
         try{
         const bookings = await coachingMapper.getLastBookingsbyCoachId(userId);
 
-        res.json(bookings)
+        res.status(200).json(bookings)
     } catch(err) {
         res.status(400).json({"message": err.message});
         }

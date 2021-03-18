@@ -52,7 +52,7 @@ const authController = {
         try{
 
             if(!email) {
-                res.json({"message": "Merci de saisir un email."});
+                res.status(400).json({"message": "Merci de saisir un email."});
                 return;
             }
 
@@ -60,7 +60,7 @@ const authController = {
 
             if (!validEmail){
 
-                return res.status(400).json({"message": `L'email saisi est incorrect.`})
+                return res.status(400).status(400).json({"message": `L'email saisi est incorrect.`})
             }
 
                 
@@ -95,7 +95,7 @@ const authController = {
         try{
 
             if(!password || !email) {
-                res.json({"message": "Tous les chmaps doivent être complétés."});
+                res.status(400).json({"message": "Tous les chmaps doivent être complétés."});
                 return;
             }
 
@@ -119,7 +119,7 @@ const authController = {
 
 
                 if (!isPasswordCorrect) {
-                    res.json({logged: false});
+                    res.status(400).json({logged: false});
                     return;
                 }
 
