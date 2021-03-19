@@ -98,7 +98,7 @@ const coachingMapper = {
 
         if(!result.rows[0]){
            
-            throw new Error( `Pas de coaching avec cet id`);
+            throw new Error( `Ce coaching n'existe pas.`);
         }
         
         return new Coaching (result.rows[0]);

@@ -51,7 +51,7 @@ const userMapper = {
 
         if(!result.rows[0]) {
 
-            throw new Error(`Cet id ${id} ne correspond pas à un utilisateur.`);
+            throw new Error(`Cet id ne correspond à aucun utilisateur.`);
         }
         
         return new User(result.rows[0])
@@ -61,7 +61,8 @@ const userMapper = {
         const result = await db.query(`
         SELECT u.id, u.firstname, u.lastname, u.email, u.role, u.created_at, u.updated_at
         FROM "user" u
-        WHERE u.role = 'MEMBER'`)
+        WHERE u.role = 'MEMBER'
+        ORDER BY u.firstname, u.lastname`)
 
         return result.rows.map(member => new User(member));
 
@@ -106,7 +107,7 @@ const userMapper = {
         LEFT JOIN specialty s ON chs.specialty_id = s.id
         WHERE u.role = 'COACH'
         GROUP BY u.firstname, u.lastname, u.email, u.id
-        ORDER BY u.firstname;
+        ORDER BY u.firstname, u.lastname;
         `)
         result.rows.forEach( coach => {
 

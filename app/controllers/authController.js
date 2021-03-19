@@ -95,7 +95,7 @@ const authController = {
         try{
 
             if(!password || !email) {
-                res.status(400).json({"message": "Tous les chmaps doivent être complétés."});
+                res.status(400).json({"message": "Tous les champs doivent être complétés."});
                 return;
             }
 

@@ -1,4 +1,5 @@
 const coachingMapper = require('../mappers/coachingMapper');
+const userMapper = require('../mappers/userMapper');
 const jsonwebtoken = require('jsonwebtoken');
 
 const dayjs = require('dayjs');
@@ -58,7 +59,7 @@ const coachingController = {
 
             const result = await coachingMapper.getAllCoachings();
 
-            res.status(200).json({"message" : `Coachings trouvés`, "coachings " : result})
+            res.status(200).json(result)
 
         }catch(err){
             res.status(400).json({"message" : err.message})
@@ -74,7 +75,7 @@ const coachingController = {
         try{
         const result = await coachingMapper.getCoachingById(id);
         
-        console.log(result);
+        res.status(200).json(result);
         
     } catch(err) {
         res.status(400).json({"message": err.message});
@@ -121,6 +122,15 @@ const coachingController = {
 
         console.log(id);
         try{
+        
+        const user = await userMapper.getUserById(id)
+
+        if(!user) {
+
+            res.status(400).json({"message": `pas de user avec cet id ${id}`})
+            return;
+        }
+
         const bookings = await coachingMapper.getNextBookingsByMemberId(id);
         
         res.status(200).json(bookings)

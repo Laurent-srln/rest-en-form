@@ -14,7 +14,7 @@ const workoutMapper = {
 
         if(!check.rows[0]) {
 
-            throw new Error(`Cet id ${memberId} ne correspond pas à un Member`);
+            throw new Error(`Il n'y a pas d'adhérent avec cet id.`);
         }
 
         const newWorkout = await db.query(`
@@ -49,7 +49,7 @@ const workoutMapper = {
         , [id])
 
         if(!result.rows.length){
-            throw new Error("pas de workout pour le membre avec l'id" + id)
+            throw new Error("Il n'y a pas d'entraînements enregistrés pour cet utilisateur.")
         }
 
         return result.rows.map(workout => new Workout(workout));
@@ -68,8 +68,8 @@ const workoutMapper = {
         WHERE w.id = $1;`, [workoutId]
         ); 
 
-        if(!result.rows){
-            throw new Error(`Pas de workout avec l'id : ${workoutId}`)}
+        if(!result.rows.length){
+            throw new Error(`Aucun entraînement ne correspond à cet id.`)}
 
             return new Workout (result.rows[0]);
 

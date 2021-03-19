@@ -23,8 +23,8 @@ const commentController = {
 
         const check = await commentMapper.getCommentByWorkoutId(workoutId);
 
-        if (check) {
-           return res.status(200).json({"message": "Un commentaire existe déjà pour ce workout."})
+        if (check.length) {
+           return res.status(400).json({"message": "Un commentaire existe déjà pour ce workout."})
         }
 
         await commentMapper.addComment(content, userId, workoutId);

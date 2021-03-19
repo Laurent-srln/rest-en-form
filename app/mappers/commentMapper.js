@@ -16,15 +16,11 @@ const commentMapper = {
     getCommentByWorkoutId : async (workoutId) => {
 
         const check = await db.query(`
-        SELECT c.id, c.content, c.coach_id, coach.firstname as coach_firstname, coach.lastname as coach_lastname, workout_id, created_at, updated_at
+        SELECT c.id, c.content, c.coach_id, coach.firstname as coach_firstname, coach.lastname as coach_lastname, workout_id, c.created_at, c.updated_at
         FROM comment c
         LEFT JOIN "user" coach ON c.coach_id = coach.id
         WHERE c.workout_id = $1;`, [workoutId]
         )
-
-        if(!result.rows.length){
-            throw new Error("Il n'y a pas de commentaire pour l'entraînement avec l'id" + workoutId)
-        }
 
         return new Comment(check.rows[0]);
 
@@ -32,18 +28,18 @@ const commentMapper = {
 
     getCommentById : async (commentId) => {
 
-        const check = await db.query(`
-        SELECT c.id, c.content, c.coach_id, coach.firstname as coach_firstname, coach.lastname as coach_lastname, workout_id, created_at, updated_at
+        const result = await db.query(`
+        SELECT c.id, c.content, c.coach_id, coach.firstname as coach_firstname, coach.lastname as coach_lastname, workout_id, c.created_at, c.updated_at
         FROM comment c
         LEFT JOIN "user" coach ON c.coach_id = coach.id
         WHERE c.id = $1;`, [commentId]    
         )
 
         if(!result.rows.length){
-            throw new Error("Il n'y a pas de commentaire avec l'id" + commentId)
+            throw new Error("Il n'y a pas de commentaire avec cet id.")
         }
 
-        return new Comment(check.rows[0]);
+        return new Comment( result.rows[0]);
 
     },
 

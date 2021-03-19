@@ -1,7 +1,7 @@
 @protocol= http
 @domainname= localhost
 @port= {{$dotenv PORT}}
-@baseUrl = https://app-osport.herokuapp.com/api-v1
+@baseUrl = {{protocol}}://{{domainname}}:{{port}}/api-v1
 
 # https://app-osport.herokuapp.com/api-v1
 
@@ -18,7 +18,7 @@
 
 
 ### DÉFINIR UN NOUVEAU MOT DE PASSE
-POST {{baseUrl}}/register?token=651c54c5-a74a-43d6-92ea-698e2300fabc
+POST {{baseUrl}}/register?token=78c4eaa7-b8b2-419b-aca0-c04c3370c118
 Content-Type: application/json
 
 {
@@ -31,7 +31,7 @@ POST {{baseUrl}}/forgotten-password
 Content-Type: application/json
 
 {
-    "email": "b.ly@gmail.com"
+    "email": "contact@hogwarts.com"
 }
 
 ### ENVOYER SES INFORMATIONS DE CONNEXION 
@@ -39,7 +39,7 @@ POST {{baseUrl}}/login
 Content-Type: application/json
 
 {
-    "email": "b.ly@gmail.com",
+    "email": "dario@oclock.io",
     "password":"1Aaaaaaa!"
 }
 
@@ -84,7 +84,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjM0LCJlb
 ### MODIFIER UN WORKOUT ET SES DONNÉES SANTÉ
 PATCH {{baseUrl}}/edit-workout/2
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjM0LCJlbWFpbCI6ImFsZXh0QGNvYWNoLmNvbSIsInJvbGUiOiJDT0FDSCIsImlhdCI6MTYxNjA2NDg2NiwiZXhwIjoxNjE2MTAwODY2fQ.7lej6Ti3N4FbvlxLFABh76T0t5ZqC_Eil9o67ETUQ3M
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImVtYWlsIjoiQWxBQkFTQGdtYWlsLmNvbSIsInJvbGUiOiJNRU1CRVIiLCJpYXQiOjE2MTYxNDcwNTMsImV4cCI6MTYxNjE4MzA1M30.8yl3-R2CTzZ1Ds_L-PZUInejSzMmPYRDYb1IeOxgvjA
 
 {
     "date": "2021-03-11",
@@ -98,9 +98,9 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjM0LCJlb
 
 
 ### SUPPRIMER UN WORKOUT ET LES DONNÉES SANTÉ ASSOCIÉES
-DELETE {{baseUrl}}/delete-workout/48
+DELETE {{baseUrl}}/delete-workout/500
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjM0LCJlbWFpbCI6ImFsZXh0QGNvYWNoLmNvbSIsInJvbGUiOiJDT0FDSCIsImlhdCI6MTYxNjA2NDg2NiwiZXhwIjoxNjE2MTAwODY2fQ.7lej6Ti3N4FbvlxLFABh76T0t5ZqC_Eil9o67ETUQ3M
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImVtYWlsIjoiQWxBQkFTQGdtYWlsLmNvbSIsInJvbGUiOiJNRU1CRVIiLCJpYXQiOjE2MTYxNDcwNTMsImV4cCI6MTYxNjE4MzA1M30.8yl3-R2CTzZ1Ds_L-PZUInejSzMmPYRDYb1IeOxgvjA
 
 
 ////////// COACHINGS \\\\\\\\\\
@@ -146,19 +146,19 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjM0LCJlb
 
 
 ### CRÉER UN COMMENTAIRE ASSOCIÉ AU WORKOUT D'UN ADHÉRENT
-POST {{baseUrl}}/new-comment/2
+POST {{baseUrl}}/new-comment/35
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjM0LCJlbWFpbCI6ImFsZXh0QGNvYWNoLmNvbSIsInJvbGUiOiJDT0FDSCIsImlhdCI6MTYxNTY0NDI2MywiZXhwIjoxNjE1NjgwMjYzfQ.ongcmgT5ZoFZh3wt_k4_FPW08TEEIQ4x23OjUyXp_NE
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjE0LCJlbWFpbCI6ImZhYmllbkBlZGYuY29tIiwicm9sZSI6IkNPQUNIIiwiaWF0IjoxNjE2MTQ4ODQwLCJleHAiOjE2MTYxODQ4NDB9.m_v5h2yh3Y4Lw5Mh-8p9VopuS88oErK6gpNM407-_AE
 
 {
-    "content": "ssss"
+    "content": "test commentaire aaaaa"
 }
 
 
 ### MODIFIER UN COMMENTAIRE
-PATCH {{baseUrl}}/edit-comment/12
+PATCH {{baseUrl}}/edit-comment/141
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjM0LCJlbWFpbCI6ImFsZXh0QGNvYWNoLmNvbSIsInJvbGUiOiJDT0FDSCIsImlhdCI6MTYxNTY0NDI2MywiZXhwIjoxNjE1NjgwMjYzfQ.ongcmgT5ZoFZh3wt_k4_FPW08TEEIQ4x23OjUyXp_NE
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjE0LCJlbWFpbCI6ImZhYmllbkBlZGYuY29tIiwicm9sZSI6IkNPQUNIIiwiaWF0IjoxNjE2MTQ4ODQwLCJleHAiOjE2MTYxODQ4NDB9.m_v5h2yh3Y4Lw5Mh-8p9VopuS88oErK6gpNM407-_AE
 
 {
     "content": "Nouveau comment modifié."
@@ -166,9 +166,9 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjM0LCJlb
 
 
 ### SUPPRIMER UN COMMENTAIRE
-DELETE {{baseUrl}}/delete-comment/7
+DELETE {{baseUrl}}/delete-comment/141
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjM0LCJlbWFpbCI6ImFsZXh0QGNvYWNoLmNvbSIsInJvbGUiOiJDT0FDSCIsImlhdCI6MTYxNTQ1MzE3NCwiZXhwIjoxNjE1NDg5MTc0fQ.T0mc25PpeR2d2CmKDOpPvJEDguLCFk5zsoSBh72dJoo
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjE0LCJlbWFpbCI6ImZhYmllbkBlZGYuY29tIiwicm9sZSI6IkNPQUNIIiwiaWF0IjoxNjE2MTQ4ODQwLCJleHAiOjE2MTYxODQ4NDB9.m_v5h2yh3Y4Lw5Mh-8p9VopuS88oErK6gpNM407-_AE
 
 
 ////////// COACHINGS \\\\\\\\\\
@@ -177,17 +177,17 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjM0LCJlb
 
 ### RÉCUPÉRER SES PROCHAINS RDV COACHING
 GET {{baseUrl}}/coach-next-bookings
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjM1LCJlbWFpbCI6ImFsYWludEBnbWFpbC5jb20iLCJyb2xlIjoiTUVNQkVSIiwiaWF0IjoxNjE1Mzc5MTY4LCJleHAiOjE2MTU0MTUxNjh9.LLxeSRK0kU_LeKxbknRHYlmua3Q8UYsLko3Csk3dRlk
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjcsImVtYWlsIjoiY29udGFjdEBob2d3YXJ0cy5jb20iLCJyb2xlIjoiQ09BQ0giLCJpYXQiOjE2MTYxNDk2ODIsImV4cCI6MTYxNjE4NTY4Mn0.8sH6DM3dBRvGp7cLAnenBcDjXRpKhhr-SfKi5rhjm7s
 
 
 ### RÉCUPÉRER SES RDV COACHING PASSÉS
 GET {{baseUrl}}/coach-last-bookings
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjM0LCJlbWFpbCI6ImFsZXh0QGNvYWNoLmNvbSIsInJvbGUiOiJDT0FDSCIsImlhdCI6MTYxNTM5OTEzOCwiZXhwIjoxNjE1NDM1MTM4fQ.L6cu4ZTURk5gaZ6sqLynrX7IxPettaYHUX3npT8UPoE
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjcsImVtYWlsIjoiY29udGFjdEBob2d3YXJ0cy5jb20iLCJyb2xlIjoiQ09BQ0giLCJpYXQiOjE2MTYxNDk2ODIsImV4cCI6MTYxNjE4NTY4Mn0.8sH6DM3dBRvGp7cLAnenBcDjXRpKhhr-SfKi5rhjm7s
 
 
 ### RÉCUPÉRER LES PROCHAINS RDV COACHING D'UN ADHÉRENT
-GET {{baseUrl}}/members/1/next-bookings
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjM0LCJlbWFpbCI6ImFsZXh0QGNvYWNoLmNvbSIsInJvbGUiOiJDT0FDSCIsImlhdCI6MTYxNTg0Mjk3MywiZXhwIjoxNjE1ODc4OTczfQ.CspeGkxnA5QBr_KByHGic-crbAWMeKbmIXffMowHah0
+GET {{baseUrl}}/members/1123/next-bookings
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjcsImVtYWlsIjoiY29udGFjdEBob2d3YXJ0cy5jb20iLCJyb2xlIjoiQ09BQ0giLCJpYXQiOjE2MTYxNDk2ODIsImV4cCI6MTYxNjE4NTY4Mn0.8sH6DM3dBRvGp7cLAnenBcDjXRpKhhr-SfKi5rhjm7s
 
 
 ////////// ADHÉRENTS \\\\\\\\\\
@@ -196,7 +196,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjM0LCJlb
 
 ### RÉCUPÉRER TOUS LES ADHÉRENTS
 GET {{baseUrl}}/members
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJlbWFpbCI6InNvc29zb0BnbWFpbC5jb20iLCJyb2xlIjoiTUVNQkVSIiwiaWF0IjoxNjE1NTQ0NTQxLCJleHAiOjE2MTU1ODA1NDF9.GbuwA3pXyOTDXDC45rehNS5P2Oa9JsvHLLHW699taFk
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjcsImVtYWlsIjoiY29udGFjdEBob2d3YXJ0cy5jb20iLCJyb2xlIjoiQ09BQ0giLCJpYXQiOjE2MTYxNDk2ODIsImV4cCI6MTYxNjE4NTY4Mn0.8sH6DM3dBRvGp7cLAnenBcDjXRpKhhr-SfKi5rhjm7s
 
 
 
@@ -213,21 +213,21 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJlb
 ### AJOUTER UNE SPÉCIALITÉ
 POST {{baseUrl}}/specialties
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImVtYWlsIjoiQWxBQkFTQGdtYWlsLmNvbSIsInJvbGUiOiJNRU1CRVIiLCJpYXQiOjE2MTU4OTA0NTIsImV4cCI6MTYxNTkyNjQ1Mn0.zc8G6ZAEiZ13Gzji-VQdXCXBJx_fnCdW4QCaW3UGe2o
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJlbWFpbCI6ImRhcmlvQG9jbG9jay5pbyIsInJvbGUiOiJPV05FUiIsImlhdCI6MTYxNjE1MDEyNSwiZXhwIjoxNjE2MTg2MTI1fQ.QLTloCz7xPTFiB4Jdoa4dz_Y0YYrsi5JYG4qw_2h9Q4
 
 {
-    "name": "newSpébis"
+    "name": "NEWSpébis"
 }
 
 
 ### RÉCUPÉRER TOUTES LES SPÉCIALITÉS
 GET {{baseUrl}}/specialties
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjE1LCJlbWFpbCI6ImFsZXh0QGNvYWNoLmNvbSIsInJvbGUiOiJDT0FDSCIsImlhdCI6MTYxNTgzNzQyNSwiZXhwIjoxNjE1ODczNDI1fQ.Xa-dDeSm51v7mTIocOVKbBATMtP2gDXDs6Jr6sZpw_g
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJlbWFpbCI6ImRhcmlvQG9jbG9jay5pbyIsInJvbGUiOiJPV05FUiIsImlhdCI6MTYxNjE1MDEyNSwiZXhwIjoxNjE2MTg2MTI1fQ.QLTloCz7xPTFiB4Jdoa4dz_Y0YYrsi5JYG4qw_2h9Q4
 
 
 ### SUPPRIMER UNE SPÉCIALITÉ
-DELETE  {{baseUrl}}/specialties/36
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImVtYWlsIjoiQWxBQkFTQGdtYWlsLmNvbSIsInJvbGUiOiJNRU1CRVIiLCJpYXQiOjE2MTU4OTA0NTIsImV4cCI6MTYxNTkyNjQ1Mn0.zc8G6ZAEiZ13Gzji-VQdXCXBJx_fnCdW4QCaW3UGe2o
+DELETE  {{baseUrl}}/specialties/33
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJlbWFpbCI6ImRhcmlvQG9jbG9jay5pbyIsInJvbGUiOiJPV05FUiIsImlhdCI6MTYxNjE1MDEyNSwiZXhwIjoxNjE2MTg2MTI1fQ.QLTloCz7xPTFiB4Jdoa4dz_Y0YYrsi5JYG4qw_2h9Q4
 
 
 ////////// USERS \\\\\\\\\\
@@ -237,12 +237,12 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImVtY
 ### AJOUTER UN ADHÉRENT
 POST {{baseUrl}}/new-user
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJlbWFpbCI6ImRhcmlvQG9jbG9jay5pbyIsInJvbGUiOiJPV05FUiIsImlhdCI6MTYxNjA2NjQ5MiwiZXhwIjoxNjE2MTAyNDkyfQ.P-kXj4uDBV7Raw8ycLIOO_9HnUH2d6r0IcWaKJdmwLk
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJlbWFpbCI6ImRhcmlvQG9jbG9jay5pbyIsInJvbGUiOiJPV05FUiIsImlhdCI6MTYxNjE1MDEyNSwiZXhwIjoxNjE2MTg2MTI1fQ.QLTloCz7xPTFiB4Jdoa4dz_Y0YYrsi5JYG4qw_2h9Q4
 
 {
     "firstname": "test",
     "lastname": "testssss",
-    "email": "validowner@toto.com",
+    "email": "nouveauval@toto.com",
     "role": "MEMBER"
 }
 
@@ -250,42 +250,42 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJlb
 ### AJOUTER UN COACH
 POST {{baseUrl}}/new-user
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjM0LCJlbWFpbCI6ImFsZXh0QGNvYWNoLmNvbSIsInJvbGUiOiJDT0FDSCIsImlhdCI6MTYxNjA2MDM1OSwiZXhwIjoxNjE2MDk2MzU5fQ.QPrOC7TvuqmbwSVRcbeLm_lFuqskD-a9Z8oF6B2qju0
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJlbWFpbCI6ImRhcmlvQG9jbG9jay5pbyIsInJvbGUiOiJPV05FUiIsImlhdCI6MTYxNjE1MDEyNSwiZXhwIjoxNjE2MTg2MTI1fQ.QLTloCz7xPTFiB4Jdoa4dz_Y0YYrsi5JYG4qw_2h9Q4
 
 {
     "firstname": "bug",
     "lastname": "coachbis",
-    "email": "aaazzssaa@coach.com",
+    "email": "aaazzsxxsaaaa@coach.com",
     "role": "COACH",
     "specialties": [1,3]
 }
 
 
 ### RÉCUPÉRER UN ADHÉRENT
-GET {{baseUrl}}/members/3
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQyLCJlbWFpbCI6ImpvaXBhc3N3b3JkQGdtYWlsLmNvbSIsInJvbGUiOiJNRU1CRVIiLCJpYXQiOjE2MTU2Mjc4ODYsImV4cCI6MTYxNTY2Mzg4Nn0.Tlej2J3Yo_0B5arjr3VW3mFIsZrbTj8Kon0oeQNHpDY
+GET {{baseUrl}}/members/7
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJlbWFpbCI6ImRhcmlvQG9jbG9jay5pbyIsInJvbGUiOiJPV05FUiIsImlhdCI6MTYxNjE1MDEyNSwiZXhwIjoxNjE2MTg2MTI1fQ.QLTloCz7xPTFiB4Jdoa4dz_Y0YYrsi5JYG4qw_2h9Q4
 
 
 ### RÉCUPÉRER UN COACH
-GET {{baseUrl}}/coachs/6
+GET {{baseUrl}}/coachs/7
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJlbWFpbCI6ImRhcmlvQG9jbG9jay5pbyIsInJvbGUiOiJPV05FUiIsImlhdCI6MTYxNjE1MDEyNSwiZXhwIjoxNjE2MTg2MTI1fQ.QLTloCz7xPTFiB4Jdoa4dz_Y0YYrsi5JYG4qw_2h9Q4
 
 
 ### MODIFIER UN USER 
-PATCH  {{baseUrl}}/users/95
+PATCH  {{baseUrl}}/users/7
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjM0LCJlbWFpbCI6ImFsZXh0QGNvYWNoLmNvbSIsInJvbGUiOiJDT0FDSCIsImlhdCI6MTYxNTk3MDY1MywiZXhwIjoxNjE2MDA2NjUzfQ.hmtIPc04SC1ln4MDDj0ZrKecTujHuFSNeLB53pkA0Uo
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJlbWFpbCI6ImRhcmlvQG9jbG9jay5pbyIsInJvbGUiOiJPV05FUiIsImlhdCI6MTYxNjE1MDEyNSwiZXhwIjoxNjE2MTg2MTI1fQ.QLTloCz7xPTFiB4Jdoa4dz_Y0YYrsi5JYG4qw_2h9Q4
 
 {
-    "firstname": "bug",
-    "lastname": "coachbis",
-    "email": "j.testndddesssssswcoach@oclock.io",
-    "specialties":[4,7]
+    "firstname": "Albus",
+    "email": "contact@hogwarts.com",
+    "specialties":[4,7, 1]
 }
 
 
 ### SUPPRIMER UN USER
-DELETE {{baseUrl}}/users/88
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjM0LCJlbWFpbCI6ImFsZXh0QGNvYWNoLmNvbSIsInJvbGUiOiJDT0FDSCIsImlhdCI6MTYxNTk2OTUxOSwiZXhwIjoxNjE2MDA1NTE5fQ.MQZ5PFCetsiKWxoihSDAX03DiRI4vlZOX3IoMLtj6bU
+DELETE {{baseUrl}}/users/102
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJlbWFpbCI6ImRhcmlvQG9jbG9jay5pbyIsInJvbGUiOiJPV05FUiIsImlhdCI6MTYxNjE1MDEyNSwiZXhwIjoxNjE2MTg2MTI1fQ.QLTloCz7xPTFiB4Jdoa4dz_Y0YYrsi5JYG4qw_2h9Q4
 
 
 ////////// COACHINGS \\\\\\\\\\
@@ -295,27 +295,27 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjM0LCJlb
 ### AJOUTER DES CRÉNEAUX COACHING 
 POST {{baseUrl}}/new-coachings
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjM0LCJlbWFpbCI6ImFsZXh0QGNvYWNoLmNvbSIsInJvbGUiOiJDT0FDSCIsImlhdCI6MTYxNTg4OTE3NSwiZXhwIjoxNjE1OTI1MTc1fQ.cEGfllea3kHtIgIidUWeh8cVv9cl2hNXT0pBGAWgLU4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJlbWFpbCI6ImRhcmlvQG9jbG9jay5pbyIsInJvbGUiOiJPV05FUiIsImlhdCI6MTYxNjE1MDEyNSwiZXhwIjoxNjE2MTg2MTI1fQ.QLTloCz7xPTFiB4Jdoa4dz_Y0YYrsi5JYG4qw_2h9Q4
 
 {
-    "date": "2022-05-15",
-    "start": "10:00",
-    "end": "12:00",
-    "coachId": 34
+    "date": "2021-06-15",
+    "start": "11:45",
+    "end": "10:00",
+    "coachId": 7
 }
 
 ### RÉCUPÉRER TOUS LES COACHINGS  
 GET {{baseUrl}}/coachings
-Authorization: Bearer
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJlbWFpbCI6ImRhcmlvQG9jbG9jay5pbyIsInJvbGUiOiJPV05FUiIsImlhdCI6MTYxNjE1MDEyNSwiZXhwIjoxNjE2MTg2MTI1fQ.QLTloCz7xPTFiB4Jdoa4dz_Y0YYrsi5JYG4qw_2h9Q4
 
 ### RÉCUPÉRER UN COACHING    
 GET {{baseUrl}}/coaching/5
-Authorization: Bearer
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJlbWFpbCI6ImRhcmlvQG9jbG9jay5pbyIsInJvbGUiOiJPV05FUiIsImlhdCI6MTYxNjE1MDEyNSwiZXhwIjoxNjE2MTg2MTI1fQ.QLTloCz7xPTFiB4Jdoa4dz_Y0YYrsi5JYG4qw_2h9Q4
 
 
 ### SUPPRIMER UN COACHING
-DELETE {{baseUrl}}/coaching/92
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImVtYWlsIjoiQWxBQkFTQGdtYWlsLmNvbSIsInJvbGUiOiJNRU1CRVIiLCJpYXQiOjE2MTU4OTA0NTIsImV4cCI6MTYxNTkyNjQ1Mn0.zc8G6ZAEiZ13Gzji-VQdXCXBJx_fnCdW4QCaW3UGe2o
+DELETE {{baseUrl}}/coaching/5
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJlbWFpbCI6ImRhcmlvQG9jbG9jay5pbyIsInJvbGUiOiJPV05FUiIsImlhdCI6MTYxNjE1MDEyNSwiZXhwIjoxNjE2MTg2MTI1fQ.QLTloCz7xPTFiB4Jdoa4dz_Y0YYrsi5JYG4qw_2h9Q4
 
 
 
@@ -327,4 +327,4 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImVtY
 
 ### RÉCUPÉRER LES COACHS
 GET {{baseUrl}}/coachs
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjM0LCJlbWFpbCI6ImFsZXh0QGNvYWNoLmNvbSIsInJvbGUiOiJDT0FDSCIsImlhdCI6MTYxNTQ1ODQ2NywiZXhwIjoxNjE1NDk0NDY3fQ.kbzoCNS6yjW8TdwM_ZoLj6wbgDIzDnBqZ0PpPOfuTuY
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJlbWFpbCI6ImRhcmlvQG9jbG9jay5pbyIsInJvbGUiOiJPV05FUiIsImlhdCI6MTYxNjE1MDEyNSwiZXhwIjoxNjE2MTg2MTI1fQ.QLTloCz7xPTFiB4Jdoa4dz_Y0YYrsi5JYG4qw_2h9Q4

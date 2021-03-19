@@ -204,6 +204,7 @@ router.patch('/users/:id(\\d+)', authorizationMiddleware, validOwner,userControl
 router.delete('/users/:id(\\d+)', authorizationMiddleware, validOwner, userController.deleteUser);
 //      Coachings
 router.post('/new-coachings', authorizationMiddleware, validOwner, validator(coachingTimePeriodSchema), coachingController.addCoachings);
+router.get('/coachings', authorizationMiddleware, validOwner, coachingController.getAllCoachings);
 router.get('/coaching/:id(\\d+)', authorizationMiddleware, validOwner, coachingController.getCoachingById);
 router.delete('/coaching/:id(\\d+)', authorizationMiddleware, validOwner, coachingController.deleteCoachingById);
 

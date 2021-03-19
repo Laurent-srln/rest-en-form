@@ -30,7 +30,8 @@ const specialtyMapper = {
 
         const result = await db.query(`
         SELECT * 
-        FROM specialty`)
+        FROM specialty
+        ORDER BY name`)
 
         if(!result.rows) {
 
@@ -47,7 +48,7 @@ const specialtyMapper = {
         WHERE id = $1`, [id])
 
         if(!check.rows[0]) {
-            throw new Error(`Pas de spécialité à cet id ${id}`);
+            throw new Error(`Cette spécialité n'existe pas.`);
         }
         
         const result = await db.query(`
