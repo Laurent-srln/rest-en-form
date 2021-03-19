@@ -38,7 +38,7 @@ const authMapper = {
         `, [email])
 
         if(!result.rows.length){
-            throw new Error(`l'email ${email} ne correspond à aucun user`)
+            throw new Error(`L'email ${email} ne correspond à aucun utilisateur.`)
         }
 
         return result.rows[0]

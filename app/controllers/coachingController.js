@@ -45,7 +45,7 @@ const coachingController = {
         try {
             const coachings = await coachingMapper.addCoachings(params);
 
-        res.status(400).json({"message": "Les créneaux de coaching ont bien été ajoutés.", "coachings": coachings})
+        res.status(200).json({"message": "Les créneaux de coaching ont bien été ajoutés.", "coachings": coachings})
     } catch(err) {
         res.status(400).json({"message": err.message});
         }

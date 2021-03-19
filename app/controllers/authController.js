@@ -119,7 +119,7 @@ const authController = {
 
 
                 if (!isPasswordCorrect) {
-                    res.status(400).json({logged: false});
+                    res.status(400).json({"message": `Email ou mot de passe incorrect.`, "logged": false});
                     return;
                 }
 

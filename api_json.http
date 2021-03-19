@@ -1,9 +1,11 @@
 @protocol= http
 @domainname= localhost
 @port= {{$dotenv PORT}}
-@baseUrl = {{protocol}}://{{domainname}}:{{port}}/api-v1
+@baseUrl = https://app-osport.herokuapp.com/api-v1
 
-# https://app-osport.herokuapp.com
+# https://app-osport.herokuapp.com/api-v1
+
+//{{protocol}}://{{domainname}}:{{port}}/api-v1
 
 //snkcmuclyjjrag:e460879da3dc3d10454bd6031a1f3887e8c2be23ad5911e352e49feca6da5fd8@ec2-176-34-222-188.eu-west-1.compute.amazonaws.com:5432/daindlp1mpsoct
 
@@ -16,7 +18,7 @@
 
 
 ### DÉFINIR UN NOUVEAU MOT DE PASSE
-POST {{baseUrl}}/register?token=20b6a902-8d3c-41b6-95a3-923c9bb6f6ce
+POST {{baseUrl}}/register?token=651c54c5-a74a-43d6-92ea-698e2300fabc
 Content-Type: application/json
 
 {
@@ -29,7 +31,7 @@ POST {{baseUrl}}/forgotten-password
 Content-Type: application/json
 
 {
-    "email": "dario@oclock.io"
+    "email": "b.ly@gmail.com"
 }
 
 ### ENVOYER SES INFORMATIONS DE CONNEXION 
@@ -37,7 +39,7 @@ POST {{baseUrl}}/login
 Content-Type: application/json
 
 {
-    "email": "dario@oclock.io",
+    "email": "b.ly@gmail.com",
     "password":"1Aaaaaaa!"
 }
 
