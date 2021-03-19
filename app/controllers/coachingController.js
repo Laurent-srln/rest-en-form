@@ -52,6 +52,20 @@ const coachingController = {
 
     },
 
+    getAllCoachings : async (req, res) => {
+
+        try{
+
+            const result = await coachingMapper.getAllCoachings();
+
+            res.status(200).json({"message" : `Coachings trouvés`, "coachings " : result})
+
+        }catch(err){
+            res.status(400).json({"message" : err.message})
+        }
+
+    },
+
     getCoachingById : async (req, res) => {
 
         let {id} = req.params;
