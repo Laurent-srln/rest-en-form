@@ -39,7 +39,7 @@ POST {{baseUrl}}/login
 Content-Type: application/json
 
 {
-    "email": "dario@oclock.io",
+    "email": "AlABAS@gmail.com",
     "password":"1Aaaaaaa!"
 }
 
@@ -73,7 +73,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjM0LCJlb
 
 ### RÉCUPÉRER TOUS LES WORKOUTS PAR ORDRE DÉCROISSANT 
 GET {{baseUrl}}/workouts
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjM0LCJlbWFpbCI6ImFsZXh0QGNvYWNoLmNvbSIsInJvbGUiOiJDT0FDSCIsImlhdCI6MTYxNjA2NDg2NiwiZXhwIjoxNjE2MTAwODY2fQ.7lej6Ti3N4FbvlxLFABh76T0t5ZqC_Eil9o67ETUQ3M
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImVtYWlsIjoiQWxBQkFTQGdtYWlsLmNvbSIsInJvbGUiOiJNRU1CRVIiLCJpYXQiOjE2MTYxODIzNDgsImV4cCI6MTYxNjIxODM0OH0.EEBbIAJVg-hs6SAe3jLSHQvE2dpEr7V5fYoTIE_5eqo
 
 
 ### RÉCUPÉRER TOUS LES ENREGISTREMENTS SANTÉ 
@@ -110,16 +110,16 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImVtY
 ### RÉCUPÉRER TOUS LES COACHINGS DISPONIBLES À UNE DATE
 GET {{baseUrl}}/available-coachings?date=2021-04-05
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjM0LCJlbWFpbCI6ImFsZXh0QGNvYWNoLmNvbSIsInJvbGUiOiJDT0FDSCIsImlhdCI6MTYxNjA2NDg2NiwiZXhwIjoxNjE2MTAwODY2fQ.7lej6Ti3N4FbvlxLFABh76T0t5ZqC_Eil9o67ETUQ3M
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImVtYWlsIjoiQWxBQkFTQGdtYWlsLmNvbSIsInJvbGUiOiJNRU1CRVIiLCJpYXQiOjE2MTYxODIzNDgsImV4cCI6MTYxNjIxODM0OH0.EEBbIAJVg-hs6SAe3jLSHQvE2dpEr7V5fYoTIE_5eqo
 
 
 ### RÉCUPÉRER LES PROCHAINS COACHINGS PRÉVUS 
 GET {{baseUrl}}/member-next-bookings
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjM0LCJlbWFpbCI6ImFsZXh0QGNvYWNoLmNvbSIsInJvbGUiOiJDT0FDSCIsImlhdCI6MTYxNjA2NDg2NiwiZXhwIjoxNjE2MTAwODY2fQ.7lej6Ti3N4FbvlxLFABh76T0t5ZqC_Eil9o67ETUQ3M
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImVtYWlsIjoiQWxBQkFTQGdtYWlsLmNvbSIsInJvbGUiOiJNRU1CRVIiLCJpYXQiOjE2MTYxODIzNDgsImV4cCI6MTYxNjIxODM0OH0.EEBbIAJVg-hs6SAe3jLSHQvE2dpEr7V5fYoTIE_5eqo
 
 
 ### RÉSERVER UN COACHING (update)
-POST {{baseUrl}}/book-coaching
+PATCH {{baseUrl}}/book-coaching
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjM0LCJlbWFpbCI6ImFsZXh0QGNvYWNoLmNvbSIsInJvbGUiOiJDT0FDSCIsImlhdCI6MTYxNjA2NDg2NiwiZXhwIjoxNjE2MTAwODY2fQ.7lej6Ti3N4FbvlxLFABh76T0t5ZqC_Eil9o67ETUQ3M
 

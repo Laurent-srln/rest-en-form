@@ -23,6 +23,9 @@ const options = {
       servers: [
          {
             url: "https://app-osport.herokuapp.com/api-v1"
+         },
+         {
+            url: "http://localhost:3004/api-v1"
          }
       ]
    },
