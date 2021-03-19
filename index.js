@@ -22,11 +22,11 @@ const options = {
       },
       servers: [
          {
-            url: "https://app-osport.herokuapp.com"
+            url: "https://app-osport.herokuapp.com/api-v1"
          }
       ]
    },
-   apis: [ './app/*.js']
+   apis: [ './app/router/*.js']
 };
 
 const specs = swaggerJsDoc(options);

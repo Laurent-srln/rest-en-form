@@ -31,7 +31,55 @@ const specialtyController = require('../controllers/specialtyController');
 const mainController = require('../controllers/mainController');
 
 /**
- * 
+ * @swagger
+ * components:
+ *  schemas:
+ *      workout:
+ *          type: object
+ *          required:
+ *              - date
+ *              - content
+ *              - weight
+ *              - muscleMass
+ *              - fatMass
+ *              - boneMass
+ *              - bodyWater
+ *          properties:
+ *              date:
+ *                  type: string
+ *                  description: The date of the workout
+ *              content:
+ *                  type: string
+ *                  description: The description of the workout
+ *              weight:
+ *                  type: integer
+ *                  description: The body weight of the member
+ *              muscleMass:
+ *                  type: integer
+ *                  description: The percentage of muscle mass
+ *              fatMass:
+ *                  type: integer
+ *                  description: The percentage of fat mass
+ *              boneMass:
+ *                  type: integer
+ *                  description: The percentage of bone mass
+ *              bodyWater:
+ *                  type: integer
+ *                  description: The percentage of body water
+ *          example:
+ *            date: '2021-03-15'
+ *            content: 'test nouveau workout'
+ *            weight: 80
+ *            muscleMass: 85
+ *            fatMass: 10
+ *            boneMass: 5
+ *            bodyWater: 60
+ *  securitySchemes:
+ *      bearerAuth:
+ *          type: apiKey
+ *          name: Authorization
+ *          in: header
+ *          bearerFormat: JWT
  */
 
 
@@ -42,7 +90,58 @@ router.post('/login', validator(loginSchema), authController.submitLogin);
 
 // MEMBERS ROUTES
 //      Workout & Health data
+
+/**
+ * @swagger
+ * /new-workout:
+ *      post:
+ *          summary: Create a workout for the logged member
+ *          tags: [Members]
+ *          requestBody:
+ *              required: true
+ *              content:
+ *                  application/json:
+ *                      schema:
+ *                          $ref: '#components/schemas/workout'
+ *          security:
+ *              - bearerAuth: []
+ *          responses:
+ *              200:
+ *                  description: The workout was succesfully created
+ *                  content:
+ *                      application/json:
+ *                          schema:
+ *                              type: object
+ *                              items:
+ *                                  $ref: '#/components/schemas/workout'
+ */
 router.post('/new-workout',authorizationMiddleware, validMember, validator(workoutSchema), workoutController.addWorkout);
+
+/**
+ * @swagger
+ * tags:
+ *  name: Members
+ *  description: Members routes
+ */
+
+/**
+ * @swagger
+ * /workouts:
+ *      get:
+ *          summary: Returns the list of all the workouts of a member
+ *          tags: [Members]
+ *          security:
+ *              - bearerAuth: []
+ *          responses:
+ *              200:
+ *                  description: The list of all the workouts of a member
+ *                  content:
+ *                      application/json:
+ *                          schema:
+ *                              type: array
+ *                              items:
+ *                                  $ref: '#/components/schemas/workout'
+ */
 router.get('/workouts', authorizationMiddleware, validMember, workoutController.getAllWorkoutsByMemberId);
 router.get('/health', authorizationMiddleware, validMember, healthController.getAllHealthRecordsByMemberId);
 router.patch('/edit-workout/:workoutId', authorizationMiddleware, validMember, workoutController.editWorkout);
@@ -56,6 +155,32 @@ router.patch('/bookings/:coachingId/delete',authorizationMiddleware, validMember
 // COACHS ROUTES
 //      Workout & Comments
 router.post('/new-comment/:workoutId',authorizationMiddleware, validCoach, validator(commentSchema), commentController.addComment);
+
+/**
+ * @swagger
+ * /members/{id}/workouts:
+ *      get:
+ *          summary: Returns the list of all the workouts of a member
+ *          tags: [Members]
+ *          parameters:
+ *              - in: path
+ *                name: id
+ *                schema:
+ *                      type: string
+ *                required: true
+ *                description: The member id
+ *          security:
+ *              - bearerAuth: []
+ *          responses:
+ *              200:
+ *                  description: The list of all the workouts of a member
+ *                  content:
+ *                      application/json:
+ *                          schema:
+ *                              type: array
+ *                              items:
+ *                                  $ref: '#/components/schemas/workout'
+ */
 router.get('/members/:id(\\d+)/workouts', authorizationMiddleware, validCoach, workoutController.getMemberWorkoutsByParamsId); 
 router.patch('/edit-comment/:commentId',authorizationMiddleware, validCoach, validator(commentSchema), commentController.editComment);
 router.delete('/delete-comment/:commentId',authorizationMiddleware, validCoach, commentController.deleteComment);
