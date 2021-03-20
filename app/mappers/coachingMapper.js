@@ -67,7 +67,7 @@ const coachingMapper = {
             ]
 );
             movingStart = movingStart.add(15, 'minute');
-            coachings.push(result.rows[0])
+            coachings.push(new Coaching(result.rows[0]))
 
         }  while(movingStart.isBefore(lastEnd, 'second')) 
         ;

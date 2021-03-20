@@ -19,7 +19,7 @@ const userController = {
         
         // On teste que tous les champs obligatoires sont bien rempli
             if (!user.email || !user.firstname || !user.lastname || !user.role ) {
-                res.status(400).json({"message": `Tous les champs obligatoires doivent être remplis`});
+                res.status(400).json({"message": `Tous les champs obligatoires doivent être remplis.`});
                 return;
             };
         
@@ -27,7 +27,7 @@ const userController = {
         const validEmail = emailValidator.validate(user.email);
         
             if (!validEmail){
-                res.status(400).json({"message": `email non valide`});
+                res.status(400).json({"message": `Email non valide.`});
                 return;
         };
 
@@ -155,7 +155,7 @@ const userController = {
         const user = req.body;
 
         if (!user.email || !user.firstname || !user.lastname ) {
-            res.status(400).json({"message": `Tous les champs obligatoires doivent être remplis`})
+            res.status(400).json({"message": `Tous les champs obligatoires doivent être remplis.`})
             return;
         };
 
@@ -164,7 +164,7 @@ const userController = {
             const validEmail = emailValidator.validate(user.email);
             if (!validEmail){
 
-                res.status(400).json({"message": `email non valide`})
+                res.status(400).json({"message": `Email non valide.`})
                 return;
             };
         }
@@ -175,7 +175,7 @@ const userController = {
 
             if(!userToUpdate) {
 
-                res.status(400).json({"message": `pas de user avec cet id ${id}`})
+                res.status(400).json({"message": `Il n'y a pas d'utilisateur avec cet id.`})
                 return;
             }
 
@@ -232,14 +232,14 @@ const userController = {
         
         console.log(isUser);
         if(!isUser) {
-            res.status(400).json({"message": "Pas d'utilisateur avec cet id.}"});
+            res.status(400).json({"message": "Il n'y a pas d'utilisateur avec cet id."});
         }
         else {
 
             const deletedUser = await userMapper.getUserById(id);            
             await userMapper.deleteUser(isUser.id);
 
-            res.status(400).json({"message": "Cet user a bien été supprimé", "deletedUser": deletedUser})
+            res.status(400).json({"message": "L'utilisateur a bien été supprimé.", "deletedUser": deletedUser})
         }   
         
     } catch(err) {

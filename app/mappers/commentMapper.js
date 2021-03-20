@@ -22,6 +22,10 @@ const commentMapper = {
         WHERE c.workout_id = $1;`, [workoutId]
         )
 
+        if(!check.rows.length){
+            return check.rows;
+        }
+
         return new Comment(check.rows[0]);
 
     },

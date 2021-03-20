@@ -17,19 +17,20 @@ const commentController = {
         const checkWorkout = await workoutMapper.getWorkoutById(workoutId);
 
         if (!checkWorkout) {
-            res.status(400).json({"message": "Ce workout est introuvable."});
+            res.status(400).json({"message": "Cet entraînement est introuvable."});
             return;
         }
 
         const check = await commentMapper.getCommentByWorkoutId(workoutId);
 
-        if (check.length) {
-           return res.status(400).json({"message": "Un commentaire existe déjà pour ce workout."})
+        if (check.id) {
+           return res.status(400).json({"message": "Un commentaire existe déjà pour cet entraînement."})
         }
 
         await commentMapper.addComment(content, userId, workoutId);
+        const workout = await workoutMapper.getWorkoutById(workoutId);
 
-        return res.status(200).json({"message": "Commentaire bien ajouté au workout"});
+        return res.status(200).json({"message": "Le commentaire bien été ajouté.", "workout": workout});
     } catch(err) {
         res.status(400).json({"message": err.message});
         }
@@ -55,8 +56,9 @@ const commentController = {
             }
 
             await commentMapper.editComment(commentId, content, userId);
+            const workout = await workoutMapper.getWorkoutById(comment.workoutId);
 
-            return res.status(200).json({"message": "Le commentaire a bien été modifié"});
+            return res.status(200).json({"message": "Le commentaire a bien été modifié.", "workout": workout});
 
 
         } catch(err) {
@@ -82,9 +84,10 @@ const commentController = {
                 return res.status(403).json({"message": "Vous ne pouvez pas supprimer ce commentaire."});
             }
 
+            const workout = await workoutMapper.getWorkoutById(check.workoutId);
             await commentMapper.deleteComment(commentId, userId);
 
-            return res.status(200).json({"message": "Le commentaire a bien été supprimé."});
+            return res.status(200).json({"message": "Le commentaire a bien été supprimé.", "workout": workout});
 
 
         } catch(err) {

@@ -49,7 +49,7 @@ const workoutMapper = {
         , [id])
 
         if(!result.rows.length){
-            throw new Error("Il n'y a pas d'entraînements enregistrés pour cet utilisateur.")
+            throw new Error("Il n'y a pas d'entraînement enregistré pour cet utilisateur.")
         }
 
         return result.rows.map(workout => new Workout(workout));

@@ -78,7 +78,7 @@ const userMapper = {
 
         if(!result.rows[0]) {
 
-            throw new Error(`Cet id ${id} ne correspond pas à un adhérent.`);
+            throw new Error(`Cet id ne correspond pas à un adhérent.`);
         }
 
         return new User(result.rows[0])
@@ -131,7 +131,7 @@ const userMapper = {
         `, [coachId])
 
         if(!result.rows.length){
-            throw new Error ("Pas de coach avec l'id : "+ coachId)
+            throw new Error ("Il n'y a pas de coach avec l'id : "+ coachId)
         }
 
         result.rows[0].specialties = result.rows[0].specialties.split(",");
