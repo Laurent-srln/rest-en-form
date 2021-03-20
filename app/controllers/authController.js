@@ -24,7 +24,7 @@ const authController = {
             }
 
             if(newPassword.password !== newPassword.confirm) {
-                return res.status(400).json({"message": "Les deux mots de passe doivent être identique"})
+                return res.status(400).json({"message": "Les deux mots de passe doivent être identique."})
             }
 
             const foundToken = await authMapper.getToken(token);
@@ -37,7 +37,7 @@ const authController = {
             console.log(hashPassword);
 
                 await authMapper.setPassword(token, hashPassword);
-                res.status(200).json({"message": "Le nouveau mot de passe a bien été enregistré"})
+                res.status(200).json({"message": "Le nouveau mot de passe a bien été enregistré."})
 
         } catch(err) {
             res.status(400).json({"message": err.message});
@@ -52,7 +52,7 @@ const authController = {
         try{
 
             if(!email) {
-                res.status(400).json({"message": "Merci de saisir un email."});
+                res.status(400).json({"message": "Un email doit être saisi."});
                 return;
             }
 

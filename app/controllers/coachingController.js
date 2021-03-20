@@ -127,7 +127,7 @@ const coachingController = {
 
         if(!user) {
 
-            res.status(400).json({"message": `pas de user avec cet id ${id}`})
+            res.status(400).json({"message": `Il n'y a pas d'utilisateur avec cet id.`})
             return;
         }
 
@@ -225,7 +225,7 @@ const coachingController = {
         
             await coachingMapper.deleteCoachingById(isCoaching.id);
 
-            res.status(200).json({"message": "Coaching supprimé.", "coaching": coaching});
+            res.status(200).json({"message": "Le coaching a bien été supprimé.", "coaching": coaching});
 
         } catch(err) {
             res.status(400).json({"message": err.message});

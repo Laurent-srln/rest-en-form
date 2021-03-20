@@ -2,6 +2,7 @@
 @domainname= localhost
 @port= {{$dotenv PORT}}
 @baseUrl = {{protocol}}://{{domainname}}:{{port}}/api-v1
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJlbWFpbCI6ImRhcmlvQG9jbG9jay5pbyIsInJvbGUiOiJPV05FUiIsImlhdCI6MTYxNjI0MDc1MiwiZXhwIjoxNjE2Mjc2NzUyfQ.JmFsJhv9gIsr_jA6AQ4nqM2lSRGTUdoH0gKdoenFOY8
 
 # https://app-osport.herokuapp.com/api-v1
 
@@ -18,7 +19,7 @@
 
 
 ### DÉFINIR UN NOUVEAU MOT DE PASSE
-POST {{baseUrl}}/register?token=78c4eaa7-b8b2-419b-aca0-c04c3370c118
+POST {{baseUrl}}/register?token=f87b267c-b41b-410e-8bf1-172ea687ce5b
 Content-Type: application/json
 
 {
@@ -39,11 +40,9 @@ POST {{baseUrl}}/login
 Content-Type: application/json
 
 {
-    "email": "AlABAS@gmail.com",
+    "email": "dario@oclock.io",
     "password":"1Aaaaaaa!"
 }
-
-
 
 
 ##################################################################################
@@ -58,7 +57,7 @@ Content-Type: application/json
 ### AJOUTER UN WORKOUT + HEALTH DATA
 POST {{baseUrl}}/new-workout
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjM0LCJlbWFpbCI6ImFsZXh0QGNvYWNoLmNvbSIsInJvbGUiOiJDT0FDSCIsImlhdCI6MTYxNjA2NTMzNiwiZXhwIjoxNjE2MTAxMzM2fQ.gfyI06fucicVGacfixUhR9OW-0y8f1voMZP4yvVmfXI
+Authorization: Bearer {{token}}
 
 {
     "date": "2021-03-12",
@@ -73,18 +72,18 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjM0LCJlb
 
 ### RÉCUPÉRER TOUS LES WORKOUTS PAR ORDRE DÉCROISSANT 
 GET {{baseUrl}}/workouts
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImVtYWlsIjoiQWxBQkFTQGdtYWlsLmNvbSIsInJvbGUiOiJNRU1CRVIiLCJpYXQiOjE2MTYxODIzNDgsImV4cCI6MTYxNjIxODM0OH0.EEBbIAJVg-hs6SAe3jLSHQvE2dpEr7V5fYoTIE_5eqo
+Authorization: Bearer {{token}}
 
 
 ### RÉCUPÉRER TOUS LES ENREGISTREMENTS SANTÉ 
 GET {{baseUrl}}/health
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjM0LCJlbWFpbCI6ImFsZXh0QGNvYWNoLmNvbSIsInJvbGUiOiJDT0FDSCIsImlhdCI6MTYxNjA2NDg2NiwiZXhwIjoxNjE2MTAwODY2fQ.7lej6Ti3N4FbvlxLFABh76T0t5ZqC_Eil9o67ETUQ3M
+Authorization: Bearer {{token}}
 
 
 ### MODIFIER UN WORKOUT ET SES DONNÉES SANTÉ
-PATCH {{baseUrl}}/edit-workout/2
+PATCH {{baseUrl}}/edit-workout/53
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImVtYWlsIjoiQWxBQkFTQGdtYWlsLmNvbSIsInJvbGUiOiJNRU1CRVIiLCJpYXQiOjE2MTYxNDcwNTMsImV4cCI6MTYxNjE4MzA1M30.8yl3-R2CTzZ1Ds_L-PZUInejSzMmPYRDYb1IeOxgvjA
+Authorization: Bearer {{token}}
 
 {
     "date": "2021-03-11",
@@ -98,9 +97,9 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImVtY
 
 
 ### SUPPRIMER UN WORKOUT ET LES DONNÉES SANTÉ ASSOCIÉES
-DELETE {{baseUrl}}/delete-workout/500
+DELETE {{baseUrl}}/delete-workout/53
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImVtYWlsIjoiQWxBQkFTQGdtYWlsLmNvbSIsInJvbGUiOiJNRU1CRVIiLCJpYXQiOjE2MTYxNDcwNTMsImV4cCI6MTYxNjE4MzA1M30.8yl3-R2CTzZ1Ds_L-PZUInejSzMmPYRDYb1IeOxgvjA
+Authorization: Bearer {{token}}
 
 
 ////////// COACHINGS \\\\\\\\\\
@@ -110,28 +109,28 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImVtY
 ### RÉCUPÉRER TOUS LES COACHINGS DISPONIBLES À UNE DATE
 GET {{baseUrl}}/available-coachings?date=2021-04-05
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImVtYWlsIjoiQWxBQkFTQGdtYWlsLmNvbSIsInJvbGUiOiJNRU1CRVIiLCJpYXQiOjE2MTYxODIzNDgsImV4cCI6MTYxNjIxODM0OH0.EEBbIAJVg-hs6SAe3jLSHQvE2dpEr7V5fYoTIE_5eqo
+Authorization: Bearer {{token}}
 
 
 ### RÉCUPÉRER LES PROCHAINS COACHINGS PRÉVUS 
 GET {{baseUrl}}/member-next-bookings
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImVtYWlsIjoiQWxBQkFTQGdtYWlsLmNvbSIsInJvbGUiOiJNRU1CRVIiLCJpYXQiOjE2MTYxODIzNDgsImV4cCI6MTYxNjIxODM0OH0.EEBbIAJVg-hs6SAe3jLSHQvE2dpEr7V5fYoTIE_5eqo
+Authorization: Bearer {{token}}
 
 
 ### RÉSERVER UN COACHING (update)
 PATCH {{baseUrl}}/book-coaching
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjM0LCJlbWFpbCI6ImFsZXh0QGNvYWNoLmNvbSIsInJvbGUiOiJDT0FDSCIsImlhdCI6MTYxNjA2NDg2NiwiZXhwIjoxNjE2MTAwODY2fQ.7lej6Ti3N4FbvlxLFABh76T0t5ZqC_Eil9o67ETUQ3M
+Authorization: Bearer {{token}}
 
 {
-    "coachingId": 88
+    "coachingId": 100
 }
 
 
 ### SUPPRIMER UNE RÉSERVATION (update) 
-PATCH {{baseUrl}}/bookings/88/delete
+PATCH {{baseUrl}}/bookings/100/delete
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjM0LCJlbWFpbCI6ImFsZXh0QGNvYWNoLmNvbSIsInJvbGUiOiJDT0FDSCIsImlhdCI6MTYxNjA2NDg2NiwiZXhwIjoxNjE2MTAwODY2fQ.7lej6Ti3N4FbvlxLFABh76T0t5ZqC_Eil9o67ETUQ3M
+Authorization: Bearer {{token}}
 
 
 
@@ -146,9 +145,9 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjM0LCJlb
 
 
 ### CRÉER UN COMMENTAIRE ASSOCIÉ AU WORKOUT D'UN ADHÉRENT
-POST {{baseUrl}}/new-comment/35
+POST {{baseUrl}}/new-comment/38
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjE0LCJlbWFpbCI6ImZhYmllbkBlZGYuY29tIiwicm9sZSI6IkNPQUNIIiwiaWF0IjoxNjE2MTQ4ODQwLCJleHAiOjE2MTYxODQ4NDB9.m_v5h2yh3Y4Lw5Mh-8p9VopuS88oErK6gpNM407-_AE
+Authorization: Bearer {{token}}
 
 {
     "content": "test commentaire aaaaa"
@@ -156,9 +155,9 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjE0LCJlb
 
 
 ### MODIFIER UN COMMENTAIRE
-PATCH {{baseUrl}}/edit-comment/141
+PATCH {{baseUrl}}/edit-comment/21
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjE0LCJlbWFpbCI6ImZhYmllbkBlZGYuY29tIiwicm9sZSI6IkNPQUNIIiwiaWF0IjoxNjE2MTQ4ODQwLCJleHAiOjE2MTYxODQ4NDB9.m_v5h2yh3Y4Lw5Mh-8p9VopuS88oErK6gpNM407-_AE
+Authorization: Bearer {{token}}
 
 {
     "content": "Nouveau comment modifié."
@@ -166,9 +165,9 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjE0LCJlb
 
 
 ### SUPPRIMER UN COMMENTAIRE
-DELETE {{baseUrl}}/delete-comment/141
+DELETE {{baseUrl}}/delete-comment/20
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjE0LCJlbWFpbCI6ImZhYmllbkBlZGYuY29tIiwicm9sZSI6IkNPQUNIIiwiaWF0IjoxNjE2MTQ4ODQwLCJleHAiOjE2MTYxODQ4NDB9.m_v5h2yh3Y4Lw5Mh-8p9VopuS88oErK6gpNM407-_AE
+Authorization: Bearer {{token}}
 
 
 ////////// COACHINGS \\\\\\\\\\
@@ -177,17 +176,17 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjE0LCJlb
 
 ### RÉCUPÉRER SES PROCHAINS RDV COACHING
 GET {{baseUrl}}/coach-next-bookings
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjcsImVtYWlsIjoiY29udGFjdEBob2d3YXJ0cy5jb20iLCJyb2xlIjoiQ09BQ0giLCJpYXQiOjE2MTYxNDk2ODIsImV4cCI6MTYxNjE4NTY4Mn0.8sH6DM3dBRvGp7cLAnenBcDjXRpKhhr-SfKi5rhjm7s
+Authorization: Bearer {{token}}
 
 
 ### RÉCUPÉRER SES RDV COACHING PASSÉS
 GET {{baseUrl}}/coach-last-bookings
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjcsImVtYWlsIjoiY29udGFjdEBob2d3YXJ0cy5jb20iLCJyb2xlIjoiQ09BQ0giLCJpYXQiOjE2MTYxNDk2ODIsImV4cCI6MTYxNjE4NTY4Mn0.8sH6DM3dBRvGp7cLAnenBcDjXRpKhhr-SfKi5rhjm7s
+Authorization: Bearer {{token}}
 
 
 ### RÉCUPÉRER LES PROCHAINS RDV COACHING D'UN ADHÉRENT
-GET {{baseUrl}}/members/1123/next-bookings
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjcsImVtYWlsIjoiY29udGFjdEBob2d3YXJ0cy5jb20iLCJyb2xlIjoiQ09BQ0giLCJpYXQiOjE2MTYxNDk2ODIsImV4cCI6MTYxNjE4NTY4Mn0.8sH6DM3dBRvGp7cLAnenBcDjXRpKhhr-SfKi5rhjm7s
+GET {{baseUrl}}/members/1/next-bookings
+Authorization: Bearer {{token}}
 
 
 ////////// ADHÉRENTS \\\\\\\\\\
@@ -196,7 +195,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjcsImVtY
 
 ### RÉCUPÉRER TOUS LES ADHÉRENTS
 GET {{baseUrl}}/members
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjcsImVtYWlsIjoiY29udGFjdEBob2d3YXJ0cy5jb20iLCJyb2xlIjoiQ09BQ0giLCJpYXQiOjE2MTYxNDk2ODIsImV4cCI6MTYxNjE4NTY4Mn0.8sH6DM3dBRvGp7cLAnenBcDjXRpKhhr-SfKi5rhjm7s
+Authorization: Bearer {{token}}
 
 
 
@@ -213,7 +212,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjcsImVtY
 ### AJOUTER UNE SPÉCIALITÉ
 POST {{baseUrl}}/specialties
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJlbWFpbCI6ImRhcmlvQG9jbG9jay5pbyIsInJvbGUiOiJPV05FUiIsImlhdCI6MTYxNjE1MDEyNSwiZXhwIjoxNjE2MTg2MTI1fQ.QLTloCz7xPTFiB4Jdoa4dz_Y0YYrsi5JYG4qw_2h9Q4
+Authorization: Bearer {{token}}
 
 {
     "name": "NEWSpébis"
@@ -222,12 +221,12 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJlb
 
 ### RÉCUPÉRER TOUTES LES SPÉCIALITÉS
 GET {{baseUrl}}/specialties
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJlbWFpbCI6ImRhcmlvQG9jbG9jay5pbyIsInJvbGUiOiJPV05FUiIsImlhdCI6MTYxNjE1MDEyNSwiZXhwIjoxNjE2MTg2MTI1fQ.QLTloCz7xPTFiB4Jdoa4dz_Y0YYrsi5JYG4qw_2h9Q4
+Authorization: Bearer {{token}}
 
 
 ### SUPPRIMER UNE SPÉCIALITÉ
 DELETE  {{baseUrl}}/specialties/33
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJlbWFpbCI6ImRhcmlvQG9jbG9jay5pbyIsInJvbGUiOiJPV05FUiIsImlhdCI6MTYxNjE1MDEyNSwiZXhwIjoxNjE2MTg2MTI1fQ.QLTloCz7xPTFiB4Jdoa4dz_Y0YYrsi5JYG4qw_2h9Q4
+Authorization: Bearer {{token}}
 
 
 ////////// USERS \\\\\\\\\\
@@ -237,7 +236,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJlb
 ### AJOUTER UN ADHÉRENT
 POST {{baseUrl}}/new-user
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJlbWFpbCI6ImRhcmlvQG9jbG9jay5pbyIsInJvbGUiOiJPV05FUiIsImlhdCI6MTYxNjE1MDEyNSwiZXhwIjoxNjE2MTg2MTI1fQ.QLTloCz7xPTFiB4Jdoa4dz_Y0YYrsi5JYG4qw_2h9Q4
+Authorization: Bearer {{token}}
 
 {
     "firstname": "test",
@@ -250,7 +249,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJlb
 ### AJOUTER UN COACH
 POST {{baseUrl}}/new-user
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJlbWFpbCI6ImRhcmlvQG9jbG9jay5pbyIsInJvbGUiOiJPV05FUiIsImlhdCI6MTYxNjE1MDEyNSwiZXhwIjoxNjE2MTg2MTI1fQ.QLTloCz7xPTFiB4Jdoa4dz_Y0YYrsi5JYG4qw_2h9Q4
+Authorization: Bearer {{token}}
 
 {
     "firstname": "bug",
@@ -263,18 +262,18 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJlb
 
 ### RÉCUPÉRER UN ADHÉRENT
 GET {{baseUrl}}/members/7
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJlbWFpbCI6ImRhcmlvQG9jbG9jay5pbyIsInJvbGUiOiJPV05FUiIsImlhdCI6MTYxNjE1MDEyNSwiZXhwIjoxNjE2MTg2MTI1fQ.QLTloCz7xPTFiB4Jdoa4dz_Y0YYrsi5JYG4qw_2h9Q4
+Authorization: Bearer {{token}}
 
 
 ### RÉCUPÉRER UN COACH
 GET {{baseUrl}}/coachs/7
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJlbWFpbCI6ImRhcmlvQG9jbG9jay5pbyIsInJvbGUiOiJPV05FUiIsImlhdCI6MTYxNjE1MDEyNSwiZXhwIjoxNjE2MTg2MTI1fQ.QLTloCz7xPTFiB4Jdoa4dz_Y0YYrsi5JYG4qw_2h9Q4
+Authorization: Bearer {{token}}
 
 
 ### MODIFIER UN USER 
 PATCH  {{baseUrl}}/users/7
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJlbWFpbCI6ImRhcmlvQG9jbG9jay5pbyIsInJvbGUiOiJPV05FUiIsImlhdCI6MTYxNjE1MDEyNSwiZXhwIjoxNjE2MTg2MTI1fQ.QLTloCz7xPTFiB4Jdoa4dz_Y0YYrsi5JYG4qw_2h9Q4
+Authorization: Bearer {{token}}
 
 {
     "firstname": "Albus",
@@ -285,7 +284,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJlb
 
 ### SUPPRIMER UN USER
 DELETE {{baseUrl}}/users/102
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJlbWFpbCI6ImRhcmlvQG9jbG9jay5pbyIsInJvbGUiOiJPV05FUiIsImlhdCI6MTYxNjE1MDEyNSwiZXhwIjoxNjE2MTg2MTI1fQ.QLTloCz7xPTFiB4Jdoa4dz_Y0YYrsi5JYG4qw_2h9Q4
+Authorization: Bearer {{token}}
 
 
 ////////// COACHINGS \\\\\\\\\\
@@ -295,7 +294,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJlb
 ### AJOUTER DES CRÉNEAUX COACHING 
 POST {{baseUrl}}/new-coachings
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJlbWFpbCI6ImRhcmlvQG9jbG9jay5pbyIsInJvbGUiOiJPV05FUiIsImlhdCI6MTYxNjE1MDEyNSwiZXhwIjoxNjE2MTg2MTI1fQ.QLTloCz7xPTFiB4Jdoa4dz_Y0YYrsi5JYG4qw_2h9Q4
+Authorization: Bearer {{token}}
 
 {
     "date": "2021-06-15",
@@ -306,16 +305,16 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJlb
 
 ### RÉCUPÉRER TOUS LES COACHINGS  
 GET {{baseUrl}}/coachings
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJlbWFpbCI6ImRhcmlvQG9jbG9jay5pbyIsInJvbGUiOiJPV05FUiIsImlhdCI6MTYxNjE1MDEyNSwiZXhwIjoxNjE2MTg2MTI1fQ.QLTloCz7xPTFiB4Jdoa4dz_Y0YYrsi5JYG4qw_2h9Q4
+Authorization: Bearer {{token}}
 
 ### RÉCUPÉRER UN COACHING    
 GET {{baseUrl}}/coaching/5
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJlbWFpbCI6ImRhcmlvQG9jbG9jay5pbyIsInJvbGUiOiJPV05FUiIsImlhdCI6MTYxNjE1MDEyNSwiZXhwIjoxNjE2MTg2MTI1fQ.QLTloCz7xPTFiB4Jdoa4dz_Y0YYrsi5JYG4qw_2h9Q4
+Authorization: Bearer {{token}}
 
 
 ### SUPPRIMER UN COACHING
 DELETE {{baseUrl}}/coaching/5
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJlbWFpbCI6ImRhcmlvQG9jbG9jay5pbyIsInJvbGUiOiJPV05FUiIsImlhdCI6MTYxNjE1MDEyNSwiZXhwIjoxNjE2MTg2MTI1fQ.QLTloCz7xPTFiB4Jdoa4dz_Y0YYrsi5JYG4qw_2h9Q4
+Authorization: Bearer {{token}}
 
 
 
@@ -327,4 +326,4 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJlb
 
 ### RÉCUPÉRER LES COACHS
 GET {{baseUrl}}/coachs
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJlbWFpbCI6ImRhcmlvQG9jbG9jay5pbyIsInJvbGUiOiJPV05FUiIsImlhdCI6MTYxNjE1MDEyNSwiZXhwIjoxNjE2MTg2MTI1fQ.QLTloCz7xPTFiB4Jdoa4dz_Y0YYrsi5JYG4qw_2h9Q4
+Authorization: Bearer {{token}}

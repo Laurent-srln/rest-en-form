@@ -15,7 +15,7 @@ const healthMapper = {
         , [memberId])
 
         if(!result.rows.length){
-            throw new Error("pas de workout pour le membre avec l'id" + memberId)
+            throw new Error("Il n'y a pas d'entraînement pour l'adhérent avec l'id" + memberId)
         }
 
         return result.rows.map(health => new Health(health));

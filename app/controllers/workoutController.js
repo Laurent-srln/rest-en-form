@@ -28,7 +28,7 @@ const workoutController = {
 
         if (!newWorkout.weight || !newWorkout.muscleMass || !newWorkout.fatMass || !newWorkout.boneMass || !newWorkout.bodyWater) {
 
-            res.status(400).json({"message": `Tous les champs obligatoires doivent être remplis`})
+            res.status(400).json({"message": `Tous les champs obligatoires doivent être remplis.`})
             return;
 
         }
@@ -36,7 +36,7 @@ const workoutController = {
         if (!dayjs(newWorkout.date).isSameOrBefore(dayjs(), 'day')) {
 
 
-            res.status(400).json({"message": `La date de l'entrainement doit ne peut être ultérieure à aujourd'hui`})
+            res.status(400).json({"message": `La date de l'entraînement doit ne peut être ultérieure à aujourd'hui.`})
             return;
         };
 
@@ -45,7 +45,7 @@ const workoutController = {
 
         const workout = await workoutMapper.getWorkoutById(workoutId.id);
 
-        res.status(200).json({"message": `L'entrainement a bien été ajouté.`, "workout": workout})
+        res.status(200).json({"message": `L'entraînement a bien été ajouté.`, "workout": workout})
     } catch(err) {
         res.status(400).json({"message": err.message});
         };
@@ -89,19 +89,19 @@ const workoutController = {
 
             if (!check) {
 
-                res.status(400).json({"message": `Ce workout est introuvable.`})
+                res.status(400).json({"message": `Cet entraînement est introuvable.`})
                 return;
             }
 
             if (check.memberId !== userId) {
 
-                res.status(400).json({"message": `Vous ne pouvez pas modifier ce workout.`})
+                res.status(400).json({"message": `Vous ne pouvez pas modifier cet entraînement.`})
                 return;
             }
 
             if (!updatedWorkout.weight || !updatedWorkout.muscleMass || !updatedWorkout.fatMass || !updatedWorkout.boneMass || !updatedWorkout.bodyWater) {
     
-                res.status(400).json({"message": `Tous les champs obligatoires doivent être remplis`})
+                res.status(400).json({"message": `Tous les champs obligatoires doivent être remplis.`})
                 return;
     
             }
@@ -115,8 +115,9 @@ const workoutController = {
     
     
             await workoutMapper.editWorkout(workoutId, updatedWorkout);
+            const workout = await workoutMapper.getWorkoutById(workoutId);
     
-            res.status(200).json({ "message" : `L'entraînement a bien été mis à jour`})
+            res.status(200).json({ "message" : `L'entraînement a bien été mis à jour.`, "workout": workout})
         } catch(err) {
             res.status(400).json({"message": err.message});
             };
@@ -133,12 +134,12 @@ const workoutController = {
         const check = await workoutMapper.getWorkoutById(workoutId);
 
         if (!check) {
-            res.status(400).json("Ce workout est introuvable.");
+            res.status(400).json("Cet entraînement est introuvable.");
             return;
         }
 
         if (check.memberId !== userId) {
-            res.status(400).json({"message": "Cet utilisateur ne peut pas supprimer ce workout."});
+            res.status(400).json({"message": "Cet utilisateur ne peut pas supprimer cet entraînement."});
             return;
         }
         const deletedWorkout = await workoutMapper.getWorkoutById(workoutId);

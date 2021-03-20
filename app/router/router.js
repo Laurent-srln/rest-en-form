@@ -175,7 +175,7 @@ const mainController = require('../controllers/mainController');
  *                  type: string
  *                  description: The date of the comment
  *          example:
- *            id:
+ *            id: 1
  *            date: '2021-02-06'
  *            description: 'Description of the workout'
  *            createdAt: '2021-02-06'
@@ -193,7 +193,7 @@ const mainController = require('../controllers/mainController');
  *            commentCoachLastname: 'Dupont'
  *            commentContent: 'Comment about the workout & the health data'
  *            commentDate: '2021-02-07'
- *      healtData:
+ *      healthData:
  *          type: object
  *          required:
  *              - id
@@ -287,13 +287,13 @@ const mainController = require('../controllers/mainController');
  *              endTime:
  *                  type: string
  *                  description: The end date and end time 
- *              commentCoachId:
+ *              coachId:
  *                  type: integer
  *                  description: The id of the coach
- *              commentCoachFirstname:
+ *              coachFirstname:
  *                  type: string
  *                  description: The firstname of the coach
- *              commentCoachLastname:
+ *              coachLastname:
  *                  type: string
  *                  description: The lastname of the coach
  *              memberId:
@@ -323,6 +323,74 @@ const mainController = require('../controllers/mainController');
  *            memberLastname: 'Laurent'
  *            createdAt: '2021-03-06T18:49:50.479Z'
  *            updatedAt: '2021-04-01T11:36:27.436Z'
+ *      availableCoaching:
+ *          type: object
+ *          properties:
+ *              id:
+ *                  type: integer
+ *                  description: The id of the coaching
+ *              startTime:
+ *                  type: string
+ *                  description: The start date and start time 
+ *              endTime:
+ *                  type: string
+ *                  description: The end date and end time 
+ *              coachId:
+ *                  type: integer
+ *                  description: The id of the coach
+ *              coachFirstname:
+ *                  type: string
+ *                  description: The firstname of the coach
+ *              coachLastname:
+ *                  type: string
+ *                  description: The lastname of the coach
+ *              createdAt:
+ *                  type: string
+ *                  description: The creation date of the coaching
+ *              updatedAt:
+ *                  type: string
+ *                  description: The last modification date of the coaching
+ *          example:
+ *            id: 1
+ *            startTime: '2021-04-05T08:00:00.000Z'
+ *            endTime: '2021-04-05T08:15:00.000Z'
+ *            coachId: 2
+ *            coachFirstname: 'Sountid'
+ *            coachLastname: 'Chan'
+ *            createdAt: '2021-03-06T18:49:50.479Z'
+ *            updatedAt: null
+ *      newCoaching:
+ *          type: object
+ *          properties:
+ *              id:
+ *                  type: integer
+ *                  description: The id of the coaching
+ *              startTime:
+ *                  type: string
+ *                  description: The start date and start time 
+ *              endTime:
+ *                  type: string
+ *                  description: The end date and end time 
+ *              coachId:
+ *                  type: integer
+ *                  description: The id of the coach
+ *              memberId:
+ *                  type: integer
+ *                  description: The id of the member
+ *              createdAt:
+ *                  type: string
+ *                  description: The creation date of the coaching
+ *              updatedAt:
+ *                  type: string
+ *                  description: The last modification date of the coaching
+ *          example:
+ *            id: 1
+ *            startTime: '2021-04-05T08:00:00.000Z'
+ *            endTime: '2021-04-05T08:15:00.000Z'
+ *            coachId: 2
+ *            memberId: null
+ *            createdAt: '2021-03-06T18:49:50.479Z'
+ *            updatedAt: null
  *      comment:
  *          type: object
  *          required:
@@ -531,6 +599,14 @@ const mainController = require('../controllers/mainController');
  *            specialties: [1, 3, 6]
  *            createdAt: '2021-03-15T18:49:50.479Z'
  *            updatedAt: '2021-03-22T11:36:27.436Z'
+ *      error(400):
+ *          type: object
+ *          properties:
+ *              message:
+ *                  type: string
+ *                  description: Details of the error
+ *          example:
+ *            message: "Le message détaillant l'erreur."
  *  securitySchemes:
  *      bearerAuth:
  *          type: apiKey
@@ -566,6 +642,24 @@ const mainController = require('../controllers/mainController');
  *                          example:
  *                              password: '1Password!'
  *                              confirm: '1Password!'
+ *          responses:
+ *              200:
+ *                  description: Password correctly saved
+ *                  content:
+ *                      application/json:
+ *                          schema:
+ *                              type: object
+ *                              properties:
+ *                                  message:
+ *                                      type: string
+ *                              example:
+ *                                  message: 'Le nouveau mot de passe a bien été enregistré.'
+ *              400:
+ *                  description: Bad request
+ *                  content:
+ *                      application/json:
+ *                          schema:
+ *                              $ref: '#/components/schemas/error(400)'
  */
 router.post('/register', validator(setPasswordSchema), authController.setPassword);
 /**
@@ -588,6 +682,24 @@ router.post('/register', validator(setPasswordSchema), authController.setPasswor
  *                                  description: The email of the user
  *                          example:
  *                              email: 'gwenaël.dupont@gmail.com'
+ *          responses:
+ *              200:
+ *                  description: New token generated and reset url sent
+ *                  content:
+ *                      application/json:
+ *                          schema:
+ *                              type: object
+ *                              properties:
+ *                                  message:
+ *                                      type: string
+ *                              example:
+ *                                  message: 'Un email a été envoyé à gwenaël.dupont@gmail.com.'
+ *              400:
+ *                  description: Bad request
+ *                  content:
+ *                      application/json:
+ *                          schema:
+ *                              $ref: '#/components/schemas/error(400)'
  */
 router.post('/forgotten-password', validator(newPasswordSchema), authController.getNewToken);
 /**
@@ -615,6 +727,30 @@ router.post('/forgotten-password', validator(newPasswordSchema), authController.
  *                          example:
  *                              email: 'gwenaël.dupont@gmail.com'
  *                              password: '1Password!'
+ *          responses:
+ *              200:
+ *                  description: New authentification token generated
+ *                  content:
+ *                      application/json:
+ *                          schema:
+ *                              type: object
+ *                              properties:
+ *                                  logged:
+ *                                      type: boolean
+ *                                  role:
+ *                                      type: string
+ *                                  token:
+ *                                      type: string
+ *                              example:
+ *                                  message: true
+ *                                  role: 'MEMBER'
+ *                                  token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImVtYWlsIjoiQWxBQkFTQGdtYWlsLmNvbSIsInJvbGUiOiJNRU1CRVIiLCJpYXQiOjE2MTYyMzIyMDAsImV4cCI6MTYxNjI2ODIwMH0.RFnz_3jOwd7f-GxILRYU19DCvTuic1q0tIfRQiTxqXM'
+ *              400:
+ *                  description: Bad request
+ *                  content:
+ *                      application/json:
+ *                          schema:
+ *                              $ref: '#/components/schemas/error(400)'
  */
 router.post('/login', validator(loginSchema), authController.submitLogin);
 
@@ -642,8 +778,19 @@ router.post('/login', validator(loginSchema), authController.submitLogin);
  *                      application/json:
  *                          schema:
  *                              type: object
- *                              items:
- *                                  $ref: '#/components/schemas/newWorkout'
+ *                              properties:
+ *                                  message:
+ *                                      type: string
+ *                                      example: "L'entrainement a bien été ajouté."
+ *                                  workout:
+ *                                      type: object
+ *                                      $ref: '#/components/schemas/workout'
+ *              400:
+ *                  description: Bad request
+ *                  content:
+ *                      application/json:
+ *                          schema:
+ *                              $ref: '#/components/schemas/error(400)'
  */
 router.post('/new-workout',authorizationMiddleware, validMember, validator(workoutSchema), workoutController.addWorkout);
 
@@ -666,6 +813,12 @@ router.post('/new-workout',authorizationMiddleware, validMember, validator(worko
  *                              type: array
  *                              items:
  *                                  $ref: '#/components/schemas/workout'
+ *              400:
+ *                  description: Bad request
+ *                  content:
+ *                      application/json:
+ *                          schema:
+ *                              $ref: '#/components/schemas/error(400)'
  */
 router.get('/workouts', authorizationMiddleware, validMember, workoutController.getAllWorkoutsByMemberId);
 /**
@@ -676,6 +829,21 @@ router.get('/workouts', authorizationMiddleware, validMember, workoutController.
  *          tags: [Members - Workouts & Health Data]
  *          security:
  *              - bearerAuth: []
+ *          responses:
+ *              200:
+ *                  description: The list of all the health data records of a member
+ *                  content:
+ *                      application/json:
+ *                          schema:
+ *                              type: array
+ *                              items:
+ *                                  $ref: '#/components/schemas/healthData'
+ *              400:
+ *                  description: Bad request
+ *                  content:
+ *                      application/json:
+ *                          schema:
+ *                              $ref: '#/components/schemas/error(400)'
  * */
 router.get('/health', authorizationMiddleware, validMember, healthController.getAllHealthRecordsByMemberId);
 /**
@@ -699,6 +867,26 @@ router.get('/health', authorizationMiddleware, validMember, healthController.get
  *                          $ref: '#components/schemas/newWorkout'
  *          security:
  *              - bearerAuth: []
+ *          responses:
+ *              200:
+ *                  description: The workout was succesfully modified
+ *                  content:
+ *                      application/json:
+ *                          schema:
+ *                              type: object
+ *                              properties:
+ *                                  message:
+ *                                      type: string
+ *                                      example: "L'entrainement a bien été mis à jour."
+ *                                  workout:
+ *                                      type: object
+ *                                      $ref: '#/components/schemas/workout'
+ *              400:
+ *                  description: Bad request
+ *                  content:
+ *                      application/json:
+ *                          schema:
+ *                              $ref: '#/components/schemas/error(400)'
  * */
 router.patch('/edit-workout/:workoutId', authorizationMiddleware, validMember, workoutController.editWorkout);
 /**
@@ -716,6 +904,26 @@ router.patch('/edit-workout/:workoutId', authorizationMiddleware, validMember, w
  *                description: The workout id
  *          security:
  *              - bearerAuth: []
+ *          responses:
+ *              200:
+ *                  description: The workout, its health data and its comment were succesfully deleted
+ *                  content:
+ *                      application/json:
+ *                          schema:
+ *                              type: object
+ *                              properties:
+ *                                  message:
+ *                                      type: string
+ *                                      example: "L'entrainement a bien été supprimé."
+ *                                  workout:
+ *                                      type: object
+ *                                      $ref: '#/components/schemas/workout'
+ *              400:
+ *                  description: Bad request
+ *                  content:
+ *                      application/json:
+ *                          schema:
+ *                              $ref: '#/components/schemas/error(400)'
  * */
 router.delete('/delete-workout/:workoutId', authorizationMiddleware, validMember, workoutController.deleteWorkout);
 //     Coachings
@@ -727,6 +935,21 @@ router.delete('/delete-workout/:workoutId', authorizationMiddleware, validMember
  *          tags: [Members - Coachings]
  *          security:
  *              - bearerAuth: []
+ *          responses:
+ *              200:
+ *                  description: The list of all the coachings still available for booking
+ *                  content:
+ *                      application/json:
+ *                          schema:
+ *                              type: array
+ *                              items:
+ *                                  $ref: '#/components/schemas/availableCoaching'
+ *              400:
+ *                  description: Bad request
+ *                  content:
+ *                      application/json:
+ *                          schema:
+ *                              $ref: '#/components/schemas/error(400)'
  * */
 router.get('/available-coachings', authorizationMiddleware, validMember, coachingController.getAvailableCoachings);
 /**
@@ -737,6 +960,21 @@ router.get('/available-coachings', authorizationMiddleware, validMember, coachin
  *          tags: [Members - Coachings]
  *          security:
  *              - bearerAuth: []
+ *          responses:
+ *              200:
+ *                  description: The list of the next bookings of the logged in member
+ *                  content:
+ *                      application/json:
+ *                          schema:
+ *                              type: array
+ *                              items:
+ *                                  $ref: '#/components/schemas/coaching'
+ *              400:
+ *                  description: Bad request
+ *                  content:
+ *                      application/json:
+ *                          schema:
+ *                              $ref: '#/components/schemas/error(400)'
  * */
 router.get('/member-next-bookings',authorizationMiddleware, validMember, coachingController.getMemberNextBookingsByTokenId);
 /**
@@ -761,6 +999,26 @@ router.get('/member-next-bookings',authorizationMiddleware, validMember, coachin
  *                              coachingId: 10
  *          security:
  *              - bearerAuth: []
+ *          responses:
+ *              200:
+ *                  description: The coaching was succesfully booked
+ *                  content:
+ *                      application/json:
+ *                          schema:
+ *                              type: object
+ *                              properties:
+ *                                  message:
+ *                                      type: string
+ *                                      example: "Réservation bien enregistrée."
+ *                                  coaching:
+ *                                      type: object
+ *                                      $ref: '#/components/schemas/coaching'
+ *              400:
+ *                  description: Bad request
+ *                  content:
+ *                      application/json:
+ *                          schema:
+ *                              $ref: '#/components/schemas/error(400)'
  * */
 router.patch('/book-coaching',authorizationMiddleware, validMember, coachingController.addBooking);
 /**
@@ -778,6 +1036,26 @@ router.patch('/book-coaching',authorizationMiddleware, validMember, coachingCont
  *                description: The coaching id
  *          security:
  *              - bearerAuth: []
+ *          responses:
+ *              200:
+ *                  description: The booking was succesfully cancelled
+ *                  content:
+ *                      application/json:
+ *                          schema:
+ *                              type: object
+ *                              properties:
+ *                                  message:
+ *                                      type: string
+ *                                      example: "Réservation annulée."
+ *                                  coaching:
+ *                                      type: object
+ *                                      $ref: '#/components/schemas/coaching'
+ *              400:
+ *                  description: Bad request
+ *                  content:
+ *                      application/json:
+ *                          schema:
+ *                              $ref: '#/components/schemas/error(400)'
  * */
 router.patch('/bookings/:coachingId/delete',authorizationMiddleware, validMember, coachingController.deleteBooking);
 
@@ -812,6 +1090,26 @@ router.patch('/bookings/:coachingId/delete',authorizationMiddleware, validMember
  *                              content: 'The content of the comment'
  *          security:
  *              - bearerAuth: []
+ *          responses:
+ *              200:
+ *                  description: The comment was succesfully added
+ *                  content:
+ *                      application/json:
+ *                          schema:
+ *                              type: object
+ *                              properties:
+ *                                  message:
+ *                                      type: string
+ *                                      example: "Le commentaire bien été ajouté."
+ *                                  workout:
+ *                                      type: object
+ *                                      $ref: '#/components/schemas/workout'
+ *              400:
+ *                  description: Bad request
+ *                  content:
+ *                      application/json:
+ *                          schema:
+ *                              $ref: '#/components/schemas/error(400)'
  * */
 router.post('/new-comment/:workoutId',authorizationMiddleware, validCoach, validator(commentSchema), commentController.addComment);
 
@@ -839,6 +1137,12 @@ router.post('/new-comment/:workoutId',authorizationMiddleware, validCoach, valid
  *                              type: array
  *                              items:
  *                                  $ref: '#/components/schemas/workout'
+ *              400:
+ *                  description: Bad request
+ *                  content:
+ *                      application/json:
+ *                          schema:
+ *                              $ref: '#/components/schemas/error(400)'
  */
 router.get('/members/:id(\\d+)/workouts', authorizationMiddleware, validCoach, workoutController.getMemberWorkoutsByParamsId); 
 /**
@@ -856,6 +1160,26 @@ router.get('/members/:id(\\d+)/workouts', authorizationMiddleware, validCoach, w
  *                description: The comment id
  *          security:
  *              - bearerAuth: []
+ *          responses:
+ *              200:
+ *                  description: The comment was succesfully modified
+ *                  content:
+ *                      application/json:
+ *                          schema:
+ *                              type: object
+ *                              properties:
+ *                                  message:
+ *                                      type: string
+ *                                      example: "Le commentaire a bien été modifié."
+ *                                  workout:
+ *                                      type: object
+ *                                      $ref: '#/components/schemas/workout'
+ *              400:
+ *                  description: Bad request
+ *                  content:
+ *                      application/json:
+ *                          schema:
+ *                              $ref: '#/components/schemas/error(400)'
  * */
 router.patch('/edit-comment/:commentId',authorizationMiddleware, validCoach, validator(commentSchema), commentController.editComment);
 /**
@@ -871,22 +1195,28 @@ router.patch('/edit-comment/:commentId',authorizationMiddleware, validCoach, val
  *                      type: string
  *                required: true
  *                description: The comment id
- *          requestBody:
- *              required: true
- *              content:
- *                  application/json:
- *                      schema:
- *                          type: object
- *                          required:
- *                              - content
- *                          properties: 
- *                              content:
- *                                  type: string
- *                                  description: The new content of the comment
- *                          example:
- *                              content: 'The new content of the comment'
  *          security:
  *              - bearerAuth: []
+ *          responses:
+ *              200:
+ *                  description: The comment was succesfully deleted
+ *                  content:
+ *                      application/json:
+ *                          schema:
+ *                              type: object
+ *                              properties:
+ *                                  message:
+ *                                      type: string
+ *                                      example: "Le commentaire a bien été supprimé."
+ *                                  workout:
+ *                                      type: object
+ *                                      $ref: '#/components/schemas/workout'
+ *              400:
+ *                  description: Bad request
+ *                  content:
+ *                      application/json:
+ *                          schema:
+ *                              $ref: '#/components/schemas/error(400)'
  * */
 router.delete('/delete-comment/:commentId',authorizationMiddleware, validCoach, commentController.deleteComment);
 //      Coachings
@@ -898,6 +1228,21 @@ router.delete('/delete-comment/:commentId',authorizationMiddleware, validCoach, 
  *          tags: [Coachs - Coachings]
  *          security:
  *              - bearerAuth: []
+ *          responses:
+ *              200:
+ *                  description: The list of the next bookings of the logged in coach
+ *                  content:
+ *                      application/json:
+ *                          schema:
+ *                              type: array
+ *                              items:
+ *                                  $ref: '#/components/schemas/coaching'
+ *              400:
+ *                  description: Bad request
+ *                  content:
+ *                      application/json:
+ *                          schema:
+ *                              $ref: '#/components/schemas/error(400)'
  */
 router.get('/coach-next-bookings',authorizationMiddleware, validCoach, coachingController.getCoachNextBookings);
 /**
@@ -908,6 +1253,21 @@ router.get('/coach-next-bookings',authorizationMiddleware, validCoach, coachingC
  *          tags: [Coachs - Coachings]
  *          security:
  *              - bearerAuth: []
+ *          responses:
+ *              200:
+ *                  description: The list of the last bookings of the logged in coach
+ *                  content:
+ *                      application/json:
+ *                          schema:
+ *                              type: array
+ *                              items:
+ *                                  $ref: '#/components/schemas/coaching'
+ *              400:
+ *                  description: Bad request
+ *                  content:
+ *                      application/json:
+ *                          schema:
+ *                              $ref: '#/components/schemas/error(400)'
  */
 router.get('/coach-last-bookings',authorizationMiddleware, validCoach, coachingController.getCoachLastBookings);
 /**
@@ -925,6 +1285,21 @@ router.get('/coach-last-bookings',authorizationMiddleware, validCoach, coachingC
  *                description: The member id
  *          security:
  *              - bearerAuth: []
+ *          responses:
+ *              200:
+ *                  description: The list of the next bookings of the member indicated in the parameter
+ *                  content:
+ *                      application/json:
+ *                          schema:
+ *                              type: array
+ *                              items:
+ *                                  $ref: '#/components/schemas/coaching'
+ *              400:
+ *                  description: Bad request
+ *                  content:
+ *                      application/json:
+ *                          schema:
+ *                              $ref: '#/components/schemas/error(400)'
  */
 router.get('/members/:id(\\d+)/next-bookings', authorizationMiddleware, validCoach, coachingController.getMemberNextBookingsByParamsId);
 //      Members
@@ -936,6 +1311,21 @@ router.get('/members/:id(\\d+)/next-bookings', authorizationMiddleware, validCoa
  *          tags: [Coachs - Members]
  *          security:
  *              - bearerAuth: []
+ *          responses:
+ *              200:
+ *                  description: The list of all the member
+ *                  content:
+ *                      application/json:
+ *                          schema:
+ *                              type: array
+ *                              items:
+ *                                  $ref: '#/components/schemas/member'
+ *              400:
+ *                  description: Bad request
+ *                  content:
+ *                      application/json:
+ *                          schema:
+ *                              $ref: '#/components/schemas/error(400)'
  */
 router.get('/members', authorizationMiddleware, userController.getAllMembers);
 
@@ -963,6 +1353,26 @@ router.get('/members', authorizationMiddleware, userController.getAllMembers);
  *                              name: 'Specialty'
  *          security:
  *              - bearerAuth: []
+ *          responses:
+ *              200:
+ *                  description: The specialty was succesfully added
+ *                  content:
+ *                      application/json:
+ *                          schema:
+ *                              type: object
+ *                              properties:
+ *                                  message:
+ *                                      type: string
+ *                                      example: "La spécialité a bien été ajoutée."
+ *                                  speciality:
+ *                                      type: object
+ *                                      $ref: '#/components/schemas/specialty'
+ *              400:
+ *                  description: Bad request
+ *                  content:
+ *                      application/json:
+ *                          schema:
+ *                              $ref: '#/components/schemas/error(400)'
  */
 router.post('/specialties', authorizationMiddleware, validOwner, validator(specialtySchema), specialtyController.addSpecialty);
 /**
@@ -973,6 +1383,21 @@ router.post('/specialties', authorizationMiddleware, validOwner, validator(speci
  *          tags: [Owner - Specialties]
  *          security:
  *              - bearerAuth: []
+ *          responses:
+ *              200:
+ *                  description: The list of all specialties
+ *                  content:
+ *                      application/json:
+ *                          schema:
+ *                              type: array
+ *                              items:
+ *                                  $ref: '#/components/schemas/specialty'
+ *              400:
+ *                  description: Bad request
+ *                  content:
+ *                      application/json:
+ *                          schema:
+ *                              $ref: '#/components/schemas/error(400)'
  */
 router.get('/specialties', authorizationMiddleware, validOwner, specialtyController.getAllSpecialties);
 /**
@@ -990,6 +1415,26 @@ router.get('/specialties', authorizationMiddleware, validOwner, specialtyControl
  *                description: The specialty id
  *          security:
  *              - bearerAuth: []
+ *          responses:
+ *              200:
+ *                  description: The specialty was succesfully deleted
+ *                  content:
+ *                      application/json:
+ *                          schema:
+ *                              type: object
+ *                              properties:
+ *                                  message:
+ *                                      type: string
+ *                                      example: "La spécialité a bien été supprimée."
+ *                                  speciality:
+ *                                      type: object
+ *                                      $ref: '#/components/schemas/specialty'
+ *              400:
+ *                  description: Bad request
+ *                  content:
+ *                      application/json:
+ *                          schema:
+ *                              $ref: '#/components/schemas/error(400)'
  */
 router.delete('/specialties/:id(\\d+)', authorizationMiddleware, validOwner, specialtyController.deleteSpecialty);
 //      Users
@@ -1009,6 +1454,28 @@ router.delete('/specialties/:id(\\d+)', authorizationMiddleware, validOwner, spe
  *                              - $ref: '#components/schemas/newMember'
  *          security:
  *              - bearerAuth: []
+ *          responses:
+ *              200:
+ *                  description: The user was succesfully added
+ *                  content:
+ *                      application/json:
+ *                          schema:
+ *                              type: object
+ *                              properties:
+ *                                  message:
+ *                                      type: string
+ *                                      example: "L'utilisateur a bien été ajouté."
+ *                                  newUser:
+ *                                      type: object
+ *                                      anyOf:
+ *                                          - $ref: '#/components/schemas/coach'
+ *                                          - $ref: '#/components/schemas/member'
+ *              400:
+ *                  description: Bad request
+ *                  content:
+ *                      application/json:
+ *                          schema:
+ *                              $ref: '#/components/schemas/error(400)'
  */
 router.post('/new-user', authorizationMiddleware, validOwner, validator(userSchema), userController.addUser);
 /**
@@ -1026,6 +1493,19 @@ router.post('/new-user', authorizationMiddleware, validOwner, validator(userSche
  *                description: The member id
  *          security:
  *              - bearerAuth: []
+ *          responses:
+ *              200:
+ *                  description: The member specified in parameter
+ *                  content:
+ *                      application/json:
+ *                          schema:
+ *                              $ref: '#/components/schemas/member'
+ *              400:
+ *                  description: Bad request
+ *                  content:
+ *                      application/json:
+ *                          schema:
+ *                              $ref: '#/components/schemas/error(400)'
  */
 router.get('/members/:id(\\d+)', authorizationMiddleware, validOwner, userController.getMemberById);
 /**
@@ -1043,6 +1523,19 @@ router.get('/members/:id(\\d+)', authorizationMiddleware, validOwner, userContro
  *                description: The coach id
  *          security:
  *              - bearerAuth: []
+ *          responses:
+ *              200:
+ *                  description: The coach specified in parameter
+ *                  content:
+ *                      application/json:
+ *                          schema:
+ *                              $ref: '#/components/schemas/coach'
+ *              400:
+ *                  description: Bad request
+ *                  content:
+ *                      application/json:
+ *                          schema:
+ *                              $ref: '#/components/schemas/error(400)'
  */
 router.get('/coachs/:id(\\d+)', authorizationMiddleware, validOwner, userController.getCoachById);
 /**
@@ -1090,6 +1583,28 @@ router.get('/coachs/:id(\\d+)', authorizationMiddleware, validOwner, userControl
  *                          specialties: [1, 3, 6]
  *          security:
  *              - bearerAuth: []
+ *          responses:
+ *              200:
+ *                  description: The user was succesfully modified
+ *                  content:
+ *                      application/json:
+ *                          schema:
+ *                              type: object
+ *                              properties:
+ *                                  message:
+ *                                      type: string
+ *                                      example: "L'utilisateur a bien été modifié."
+ *                                  updatedUser:
+ *                                      type: object
+ *                                      anyOf:
+ *                                          - $ref: '#/components/schemas/coach'
+ *                                          - $ref: '#/components/schemas/member'
+ *              400:
+ *                  description: Bad request
+ *                  content:
+ *                      application/json:
+ *                          schema:
+ *                              $ref: '#/components/schemas/error(400)'
  */
 router.patch('/users/:id(\\d+)', authorizationMiddleware, validOwner,userController.editUser);
 /**
@@ -1107,6 +1622,28 @@ router.patch('/users/:id(\\d+)', authorizationMiddleware, validOwner,userControl
  *                description: The user id
  *          security:
  *              - bearerAuth: []
+ *          responses:
+ *              200:
+ *                  description: The user was succesfully deleted
+ *                  content:
+ *                      application/json:
+ *                          schema:
+ *                              type: object
+ *                              properties:
+ *                                  message:
+ *                                      type: string
+ *                                      example: "L'utilisateur a bien été supprimé."
+ *                                  deletedUser:
+ *                                      type: object
+ *                                      anyOf:
+ *                                          - $ref: '#/components/schemas/coach'
+ *                                          - $ref: '#/components/schemas/member'
+ *              400:
+ *                  description: Bad request
+ *                  content:
+ *                      application/json:
+ *                          schema:
+ *                              $ref: '#/components/schemas/error(400)'
  */
 router.delete('/users/:id(\\d+)', authorizationMiddleware, validOwner, userController.deleteUser);
 //      Coachings
@@ -1116,8 +1653,58 @@ router.delete('/users/:id(\\d+)', authorizationMiddleware, validOwner, userContr
  *      post:
  *          summary: Add new 15 minutes coaching slots
  *          tags: [Owner - Coachings]
+ *          requestBody:
+ *              required: true
+ *              content:
+ *                  application/json:
+ *                      schema:
+ *                        type: object
+ *                        required:
+ *                            - date
+ *                            - start
+ *                            - end
+ *                            - coachId
+ *                        properties:
+ *                            date:
+ *                                type: string
+ *                                description: The date of the coaching slots
+ *                            start:
+ *                                type: string
+ *                                description: The start time of the first slot
+ *                            end:
+ *                                type: string
+ *                                description: The end time of the last slot
+ *                            coachId:
+ *                                type: integer
+ *                                description: The id of the coach
+ *                        example:
+ *                          date: '2021-06-23'
+ *                          start: '09:00'
+ *                          end: '12:00'
+ *                          coachId: 7
  *          security:
  *              - bearerAuth: []
+ *          responses:
+ *              200:
+ *                  description: The coachings slots were succesfully added
+ *                  content:
+ *                      application/json:
+ *                          schema:
+ *                              type: object
+ *                              properties:
+ *                                  message:
+ *                                      type: string
+ *                                      example: "Les créneaux de coaching ont bien été ajoutés."
+ *                                  coachings:
+ *                                      type: array
+ *                                      items:
+ *                                          $ref: '#/components/schemas/newCoaching'
+ *              400:
+ *                  description: Bad request
+ *                  content:
+ *                      application/json:
+ *                          schema:
+ *                              $ref: '#/components/schemas/error(400)'
  */
 router.post('/new-coachings', authorizationMiddleware, validOwner, validator(coachingTimePeriodSchema), coachingController.addCoachings);
 /**
@@ -1128,6 +1715,21 @@ router.post('/new-coachings', authorizationMiddleware, validOwner, validator(coa
  *          tags: [Owner - Coachings]
  *          security:
  *              - bearerAuth: []
+ *          responses:
+ *              200:
+ *                  description: All the coaching slots
+ *                  content:
+ *                      application/json:
+ *                          schema:
+ *                              type: array
+ *                              items:
+ *                                  $ref: '#/components/schemas/coaching'
+ *              400:
+ *                  description: Bad request
+ *                  content:
+ *                      application/json:
+ *                          schema:
+ *                              $ref: '#/components/schemas/error(400)'
  */
 router.get('/coachings', authorizationMiddleware, validOwner, coachingController.getAllCoachings);
 /**
@@ -1145,6 +1747,19 @@ router.get('/coachings', authorizationMiddleware, validOwner, coachingController
  *                description: The coaching id
  *          security:
  *              - bearerAuth: []
+ *          responses:
+ *              200:
+ *                  description: The coach specified in parameter
+ *                  content:
+ *                      application/json:
+ *                          schema:
+ *                              $ref: '#/components/schemas/coaching'
+ *              400:
+ *                  description: Bad request
+ *                  content:
+ *                      application/json:
+ *                          schema:
+ *                              $ref: '#/components/schemas/error(400)'
  */
 router.get('/coaching/:id(\\d+)', authorizationMiddleware, validOwner, coachingController.getCoachingById);
 /**
@@ -1162,6 +1777,25 @@ router.get('/coaching/:id(\\d+)', authorizationMiddleware, validOwner, coachingC
  *                description: The coaching id
  *          security:
  *              - bearerAuth: []
+ *          responses:
+ *              200:
+ *                  description: The coaching was succesfully deleted
+ *                  content:
+ *                      application/json:
+ *                          schema:
+ *                              type: object
+ *                              properties:
+ *                                  message:
+ *                                      type: string
+ *                                      example: "Le coaching a bien été supprimé."
+ *                                  coaching:
+ *                                      $ref: '#/components/schemas/coaching'
+ *              400:
+ *                  description: Bad request
+ *                  content:
+ *                      application/json:
+ *                          schema:
+ *                              $ref: '#/components/schemas/error(400)'
  */
 router.delete('/coaching/:id(\\d+)', authorizationMiddleware, validOwner, coachingController.deleteCoachingById);
 
@@ -1183,6 +1817,12 @@ router.delete('/coaching/:id(\\d+)', authorizationMiddleware, validOwner, coachi
  *                              type: array
  *                              items:
  *                                  $ref: '#/components/schemas/coach'
+ *              400:
+ *                  description: Bad request
+ *                  content:
+ *                      application/json:
+ *                          schema:
+ *                              $ref: '#/components/schemas/error(400)'
  */
 router.get('/coachs',authorizationMiddleware, userController.getAllCoachs);
 

@@ -18,7 +18,7 @@ const specialtyController = {
 
             res.status(200).json({
                 "message": "La spécialité a bien été ajoutée.",
-                "specialité": specialty
+                "specialty": specialty
             });
         } catch (err) {
             res.status(400).json({
