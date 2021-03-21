@@ -2,7 +2,7 @@
 @domainname= localhost
 @port= {{$dotenv PORT}}
 @baseUrl = {{protocol}}://{{domainname}}:{{port}}/api-v1
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJlbWFpbCI6ImRhcmlvQG9jbG9jay5pbyIsInJvbGUiOiJPV05FUiIsImlhdCI6MTYxNjI0MDc1MiwiZXhwIjoxNjE2Mjc2NzUyfQ.JmFsJhv9gIsr_jA6AQ4nqM2lSRGTUdoH0gKdoenFOY8
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJlbWFpbCI6ImRhcmlvQG9jbG9jay5pbyIsInJvbGUiOiJPV05FUiIsImlhdCI6MTYxNjMyNTExOSwiZXhwIjoxNjE2MzYxMTE5fQ.h1nl9gcAUS9VUpSHG6yzhmFY2xpthDl8boWVZnaO8lg
 
 # https://app-osport.herokuapp.com/api-v1
 
@@ -215,7 +215,7 @@ Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-    "name": "NEWSpébis"
+    "name": "newzzSpéfff"
 }
 
 
@@ -225,7 +225,7 @@ Authorization: Bearer {{token}}
 
 
 ### SUPPRIMER UNE SPÉCIALITÉ
-DELETE  {{baseUrl}}/specialties/33
+DELETE  {{baseUrl}}/specialties/30
 Authorization: Bearer {{token}}
 
 
@@ -241,7 +241,7 @@ Authorization: Bearer {{token}}
 {
     "firstname": "test",
     "lastname": "testssss",
-    "email": "nouveauval@toto.com",
+    "email": "nou@toto.com",
     "role": "MEMBER"
 }
 
@@ -254,8 +254,8 @@ Authorization: Bearer {{token}}
 {
     "firstname": "bug",
     "lastname": "coachbis",
-    "email": "aaazzsxxsaaaa@coach.com",
-    "role": "COACH",
+    "email": "aaaessrrrr@coach.com",
+    "role": "MEMBER",
     "specialties": [1,3]
 }
 
@@ -271,19 +271,20 @@ Authorization: Bearer {{token}}
 
 
 ### MODIFIER UN USER 
-PATCH  {{baseUrl}}/users/7
+PATCH  {{baseUrl}}/users/17
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-    "firstname": "Albus",
-    "email": "contact@hogwarts.com",
+    "firstname": "Nouveau",
+    "lastname": "Nom",
+    "email": "contact@texst.com",
     "specialties":[4,7, 1]
 }
 
 
 ### SUPPRIMER UN USER
-DELETE {{baseUrl}}/users/102
+DELETE {{baseUrl}}/users/18
 Authorization: Bearer {{token}}
 
 
@@ -297,9 +298,9 @@ Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-    "date": "2021-06-15",
+    "date": "2022-07-15",
     "start": "11:45",
-    "end": "10:00",
+    "end": "13:00",
     "coachId": 7
 }
 
@@ -308,12 +309,12 @@ GET {{baseUrl}}/coachings
 Authorization: Bearer {{token}}
 
 ### RÉCUPÉRER UN COACHING    
-GET {{baseUrl}}/coaching/5
+GET {{baseUrl}}/coaching/10
 Authorization: Bearer {{token}}
 
 
 ### SUPPRIMER UN COACHING
-DELETE {{baseUrl}}/coaching/5
+DELETE {{baseUrl}}/coaching/10
 Authorization: Bearer {{token}}
 
 

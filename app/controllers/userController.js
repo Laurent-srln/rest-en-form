@@ -87,7 +87,7 @@ const userController = {
             };
 
             // On envoie un mail au nouveau user avec un lien lui permettant de configurer son password
-            await passwordServices.passwordMail(user.token, user.email);
+            await passwordServices.passwordMail(user.token, user.email, user.firstname, user.lastname);
             
         } catch(err) {
             res.status(400).json({"message": err.message});

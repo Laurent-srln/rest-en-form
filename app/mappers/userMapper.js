@@ -62,7 +62,7 @@ const userMapper = {
         SELECT u.id, u.firstname, u.lastname, u.email, u.role, u.created_at, u.updated_at
         FROM "user" u
         WHERE u.role = 'MEMBER'
-        ORDER BY u.firstname, u.lastname`)
+        ORDER BY u.created_at DESC, u.firstname, u.lastname`)
 
         return result.rows.map(member => new User(member));
 

@@ -4,7 +4,7 @@ const { getMaxListeners } = require("process");
 
 const passwordServices = {
 
-passwordMail: async (token, email) => {
+passwordMail: async (token, email, firstname, lastname) => {
 
   // create reusable transporter object using the default SMTP transport
   let transporter = nodemailer.createTransport({
@@ -23,11 +23,13 @@ passwordMail: async (token, email) => {
 
   // send mail with defined transport object
     await transporter.sendMail({
-      from: `${email} - "Le gérant de votre salle de sport" <restenforme.gerant@gmail.com>`, // sender address
+      from: `"Le gérant de votre salle de sport" <restenforme.gerant@gmail.com>`, // sender address
       to: "user.restenforme@gmail.com", // list of receivers
       subject: "Finalisez votre inscription à notre application de suivi !", // Subject line
       text: "https://app-osport.herokuapp.com/login", // plain text body
-      html: `<a href="http://localhost:8080/register?token=${token}"a>Cliquez ici pour configurer votre mot de passe</a>`, // html body
+      html: `
+      <p>Bienvenue <strong>${firstname} ${lastname}</strong> !</p><br>
+      <a href="http://localhost:8080/register?token=${token}"a>Cliquez ici pour configurer votre mot de passe.</a>`, // html body
   });
 
   console.log(`Mail envoyé à ${email}`);
@@ -52,7 +54,7 @@ newPasswordMail: async (token, email) => {
 
   // send mail with defined transport object
     await transporter.sendMail({
-      from: `${email} - "Le gérant de votre salle de sport" <restenforme.gerant@gmail.com>`, // sender address
+      from: `"Le gérant de votre salle de sport" <restenforme.gerant@gmail.com>`, // sender address
       to: "user.restenforme@gmail.com", // list of receivers
       subject: "Réinitialisez votre mot de passe.", // Subject line
       text: "https://app-osport.herokuapp.com/login", // plain text body
