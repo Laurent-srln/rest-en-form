@@ -6,7 +6,7 @@ L'application **REST en FORM** a été réalisé dans le cadre de la formation D
 À l’origine du projet : Mathilde, pratiquante régulière en salle de sport, qui a fait le constat que l’interaction entre les adhérents et les coachs d’une structure n’était pas toujours optimale.
 Ayant pour projet d’ouvrir un jour son centre d’électrostimulation1, elle souhaitait développer un outil permettant de favoriser un accompagnement personnalisé de ses futurs adhérents.
 
-J'ai présenté ce projet dans le cadre du Titre Professionnel Développeur Web et Web Mobile : :point_right: [le dossier complet ici]() :point_left:
+J'ai présenté ce projet dans le cadre du Titre Professionnel Développeur Web et Web Mobile : :point_right: [le dossier complet ici](https://www.fichier-pdf.fr/2022/01/27/dossierdeprojet-tpdwwm-laurentseraline/) :point_left:
 
 ## A quoi sert l'application
 
@@ -19,3 +19,9 @@ leur choix en fonction de leurs objectifs.
 
 ## Réalisations personnelles
 
+- Wireframes
+- Modèle conceptuel de données
+- Modèle logique de données
+- Implémentation de la base de données physique
+- Développement fonctionnalités de l'API (design pattern MVC)
+- Documentation swagger
