@@ -623,6 +623,13 @@ const mainController = require('../controllers/mainController');
  *      post:
  *          summary: Register a new password for the user 
  *          tags: [LOGIN ROUTES]
+ *          parameters:
+ *              - in: query
+ *                name: token
+ *                schema:
+ *                      type: string
+ *                required: true
+ *                description: The token
  *          requestBody:
  *              required: true
  *              content:

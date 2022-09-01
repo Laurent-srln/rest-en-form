@@ -13,7 +13,8 @@ passwordMail: async (token, email, firstname, lastname) => {
         secure: false, // true for 465, false for other ports
         auth: {
           user: 'restenforme.gerant@gmail.com',
-          pass: '5Octobre2020'
+          pass: 'sdyshuyyglmonstg'
+          // pass: '5Octobre2020'
         },
         tls: {
           // do not fail on invalid certs
@@ -44,7 +45,8 @@ newPasswordMail: async (token, email) => {
         secure: false, // true for 465, false for other ports
         auth: {
           user: 'restenforme.gerant@gmail.com',
-          pass: '5Octobre2020'
+          pass: 'sdyshuyyglmonstg'
+          // pass: '5Octobre2020'
         },
         tls: {
           // do not fail on invalid certs
