@@ -41,6 +41,7 @@ const userController = {
 
         // On génère un token et on l'ajout à l'objet user récupéré du form
             user.token = uuidv4();
+            console.log(user.token);
 
         // Si c'est un MEMBER qu'on veut insérer :
             if (user.role === 'MEMBER') {
@@ -74,7 +75,7 @@ const userController = {
                             return res.status(400).json({"message": `La spécialité avec l'id ${user.specialties[i]} n'existe pas.`});
                         } 
                     }
-                // On insère le user et ses ses specialités en db
+                // On insère le user et ses specialités en db
                 const newCoach = await userMapper.addCoach(user);
 
                 console.log(newCoach);

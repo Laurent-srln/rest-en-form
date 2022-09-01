@@ -2,7 +2,7 @@
 @domainname= localhost
 @port= {{$dotenv PORT}}
 @baseUrl = {{protocol}}://{{domainname}}:{{port}}/api-v1
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJlbWFpbCI6ImRhcmlvQG9jbG9jay5pbyIsInJvbGUiOiJPV05FUiIsImlhdCI6MTYxNjMyNTExOSwiZXhwIjoxNjE2MzYxMTE5fQ.h1nl9gcAUS9VUpSHG6yzhmFY2xpthDl8boWVZnaO8lg
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJlbWFpbCI6ImRhcmlvQG9jbG9jay5pbyIsInJvbGUiOiJPV05FUiIsImlhdCI6MTYzMDUxMjA0NywiZXhwIjoxNjMwNTQ4MDQ3fQ.Ee9CdC9QsTqr8bDnfyBlpb29QPXT5jPEpRP9mfhu9iY
 
 # https://app-osport.herokuapp.com/api-v1
 
@@ -32,10 +32,10 @@ POST {{baseUrl}}/forgotten-password
 Content-Type: application/json
 
 {
-    "email": "contact@hogwarts.com"
+    "email": "dario@oclock.io"
 }
 
-### ENVOYER SES INFORMATIONS DE CONNEXION 
+### SOUMETTRE SES INFORMATIONS DE CONNEXION 
 POST {{baseUrl}}/login
 Content-Type: application/json
 
@@ -236,12 +236,12 @@ Authorization: Bearer {{token}}
 ### AJOUTER UN ADHÉRENT
 POST {{baseUrl}}/new-user
 Content-Type: application/json
-Authorization: Bearer {{token}}
+
 
 {
     "firstname": "test",
     "lastname": "testssss",
-    "email": "nou@toto.com",
+    "email": "sarah.maury",
     "role": "MEMBER"
 }
 
@@ -252,11 +252,11 @@ Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-    "firstname": "bug",
-    "lastname": "coachbis",
-    "email": "aaaessrrrr@coach.com",
-    "role": "MEMBER",
-    "specialties": [1,3]
+    "firstname": "Robert",
+    "lastname": "Laborde",
+    "email": "r.laborde@restenforme.com",
+    "role": "COACH",
+    "specialties": [1,3,4]
 }
 
 
@@ -271,20 +271,20 @@ Authorization: Bearer {{token}}
 
 
 ### MODIFIER UN USER 
-PATCH  {{baseUrl}}/users/17
+PATCH  {{baseUrl}}/users/152
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-    "firstname": "Nouveau",
-    "lastname": "Nom",
-    "email": "contact@texst.com",
-    "specialties":[4,7, 1]
+    "firstname": "Thérèse",
+    "lastname": "Ponsabledumatos",
+    "email": "t.pons@restenforme.com",
+    "specialties":[3,7]
 }
 
 
 ### SUPPRIMER UN USER
-DELETE {{baseUrl}}/users/18
+DELETE {{baseUrl}}/users/1
 Authorization: Bearer {{token}}
 
 

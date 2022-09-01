@@ -1477,7 +1477,8 @@ router.delete('/specialties/:id(\\d+)', authorizationMiddleware, validOwner, spe
  *                          schema:
  *                              $ref: '#/components/schemas/error(400)'
  */
-router.post('/new-user', authorizationMiddleware, validOwner, validator(userSchema), userController.addUser);
+router.post('/new-user', validator(userSchema), userController.addUser);
+//  authorizationMiddleware, validOwner,
 /**
  * @swagger
  * /members/{id}:

@@ -21,13 +21,13 @@ const options = {
          description: "A REST API for REST'Enforme"
       },
       servers: [
-         {
-            url: "https://app-osport.herokuapp.com/api-v1"
-         }
-         // ,
          // {
-         //    url: "http://localhost:3004/api-v1"
+         //    url: "https://app-osport.herokuapp.com/api-v1"
          // }
+         // ,
+         {
+            url: "http://localhost:3004/api-v1"
+         }
       ]
    },
    apis: [ './app/router/*.js']
@@ -37,7 +37,7 @@ const specs = swaggerJsDoc(options);
 
 const app = express();
 
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(specs));
+app.use("/api/v1/api-docs", swaggerUi.serve, swaggerUi.setup(specs));
 
 app.use(cors());
 
