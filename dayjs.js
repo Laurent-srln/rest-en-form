@@ -19,11 +19,12 @@ dayjs.locale('fr');
 
 // console.log(dayjs('2021-02-06 18:30').tz("Europe/Paris"));
 
+// const d = new Date(2021, 0, 0);
+// console.log(dayjs(d));
+// console.log(dayjs('2021-02-01T20:30:00.000', "YYYY-MM-DD"));
+// // console.log(dayjs('2021-02-01T16:00:00.000Z'));
 
-// console.log(dayjs('2021-03-03 20:30').isBefore(dayjs('2021-03-03 19:30'), 'second'));
-
-// let movingStart = dayjs(`2021-03-03 09:30`);
-
-// console.log(movingStart.add(15, 'minute'));
-
-console.log(dayjs('2021-02-01 18:45').format('mm'));
+console.log(dayjs().format());
+console.log(dayjs.utc().format());
+console.log(dayjs.utc().toJSON());
+console.log(dayjs.utc().toISOString());
