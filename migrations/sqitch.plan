@@ -1,0 +1,8 @@
+%syntax-version=1.0.0
+%project=osport
+
+init 2021-03-02T13:52:57Z Laurent Séraline <l.seraline@gmail.com> # creation of tables
+uuid 2021-03-09T16:19:21Z Laurent Séraline <l.seraline@gmail.com> # add uuid in table user
+unique_email 2021-03-15T12:50:08Z Laurent Séraline <l.seraline@gmail.com> # add constraint UNIQUE on email (relation user)
+unique_workout_id 2021-03-15T17:51:57Z Laurent Séraline <l.seraline@gmail.com> # add constraint UNIQUE on workout_id (relation comment)
+trigger_timestamp 2021-03-17T09:51:28Z Laurent Séraline <l.seraline@gmail.com> # Add a fonction to automatically set updated_at foels on updates
