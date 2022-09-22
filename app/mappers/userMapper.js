@@ -45,7 +45,7 @@ const userMapper = {
 
     getUserById : async (id) => {
         const result = await db.query(`
-        SELECT u.id, u.firstname, u.lastname, u.email, u.role, u.created_at, u.updated_at
+        SELECT u.id, u.firstname, u.lastname, u.email, u.role, u.token, u.created_at, u.updated_at
         FROM "user" u
         WHERE id = $1`, [id])
 
@@ -70,7 +70,7 @@ const userMapper = {
 
     getMemberById: async (id) => {
         const result = await db.query(`
-        SELECT u.id, u.firstname, u.lastname, u.email, u.role, u.created_at, u.updated_at
+        SELECT u.id, u.firstname, u.lastname, u.email, u.role, u.token, u.created_at, u.updated_at
         FROM "user" u
         WHERE u.role = 'MEMBER'
         AND u.id = $1;`
@@ -121,7 +121,7 @@ const userMapper = {
     getCoachById : async (coachId)=> {
 
         const result = await db.query(`
-        SELECT u.id, u.firstname, u.lastname, u.email, u.role, string_agg(s.name, ',') as specialties, u.created_at, u.updated_at
+        SELECT u.id, u.firstname, u.lastname, u.email, u.role, u.token, string_agg(s.name, ',') as specialties, u.created_at, u.updated_at
         FROM "user" u 
         LEFT JOIN coach_has_specialty chs ON u.id = chs.coach_id
         LEFT JOIN specialty s ON chs.specialty_id = s.id

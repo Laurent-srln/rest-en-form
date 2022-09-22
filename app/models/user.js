@@ -7,6 +7,7 @@ class User {
     specialties;
     createdAt;
     updatedAt;
+    token;
 
     set created_at(val){
         this.createdAt = val;

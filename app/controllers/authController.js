@@ -80,7 +80,7 @@ const authController = {
             // On envoie un mail au nouveau user avec un lien lui permettant de configurer son password
             await passwordServices.newPasswordMail(token, email);
 
-            res.status(200).json({"message": `Un email a été envoyé à ${email}.`});
+            res.status(200).json({"message": `Un email a été envoyé à ${email}.`, token});
 
 
         } catch(err) {

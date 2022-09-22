@@ -29,10 +29,13 @@ const authController = require('../controllers/authController');
 const healthController = require('../controllers/healthController');
 const specialtyController = require('../controllers/specialtyController');
 const mainController = require('../controllers/mainController');
+const testDataController = require('../controllers/testDataController');
 
 /**
  * @swagger
  * tags:
+ *  - name: RESET APP
+ *    description: 
  *  - name: LOGIN ROUTES
  *    description: Routes for authentication
  *  - name: MEMBERS ROUTES
@@ -180,17 +183,17 @@ const mainController = require('../controllers/mainController');
  *            description: 'Description of the workout'
  *            createdAt: '2021-02-06'
  *            updatedAt: null
- *            memberId: 1
- *            memberFirstname: 'Mathilde'
- *            memberLastname: 'Martin'
- *            weight: 60
+ *            memberId: 2
+ *            memberFirstname: 'John'
+ *            memberLastname: 'Doe'
+ *            weight: 80
  *            muscleMass: 80
  *            fatMass: 10
  *            boneMass: 10
  *            bodyWater: 60
- *            commentCoachId: 2
- *            commentCoachFirstname: 'Gwenaël'
- *            commentCoachLastname: 'Dupont'
+ *            commentCoachId: 4
+ *            commentCoachFirstname: 'Alex'
+ *            commentCoachLastname: 'Térieur'
  *            commentContent: 'Comment about the workout & the health data'
  *            commentDate: '2021-02-07'
  *      healthData:
@@ -260,9 +263,9 @@ const mainController = require('../controllers/mainController');
  *            fatMass: 10
  *            boneMass: 5
  *            bodyWater: 60
- *            memberId: 1
- *            memberFirstname: 'Mathilde'
- *            memberLastname: 'Martin'
+ *            memberId: 2
+ *            memberFirstname: 'John'
+ *            memberLastname: 'Doe'
  *      coaching:
  *          type: object
  *          required:
@@ -315,12 +318,12 @@ const mainController = require('../controllers/mainController');
  *            id: 1
  *            startTime: '2021-04-05T08:00:00.000Z'
  *            endTime: '2021-04-05T08:15:00.000Z'
- *            coachId: 2
- *            coachFirstname: 'Sountid'
- *            coachLastname: 'Chan'
- *            memberId: 1
- *            memberFirstname: 'Julien'
- *            memberLastname: 'Laurent'
+ *            coachId: 4
+ *            coachFirstname: 'Alex'
+ *            coachLastname: 'Térieur'
+ *            memberId: 2
+ *            memberFirstname: 'John'
+ *            memberLastname: 'Doe'
  *            createdAt: '2021-03-06T18:49:50.479Z'
  *            updatedAt: '2021-04-01T11:36:27.436Z'
  *      availableCoaching:
@@ -354,9 +357,9 @@ const mainController = require('../controllers/mainController');
  *            id: 1
  *            startTime: '2021-04-05T08:00:00.000Z'
  *            endTime: '2021-04-05T08:15:00.000Z'
- *            coachId: 2
- *            coachFirstname: 'Sountid'
- *            coachLastname: 'Chan'
+ *            coachId: 4
+ *            coachFirstname: 'Alex'
+ *            coachLastname: 'Térieur'
  *            createdAt: '2021-03-06T18:49:50.479Z'
  *            updatedAt: null
  *      newCoaching:
@@ -387,7 +390,7 @@ const mainController = require('../controllers/mainController');
  *            id: 1
  *            startTime: '2021-04-05T08:00:00.000Z'
  *            endTime: '2021-04-05T08:15:00.000Z'
- *            coachId: 2
+ *            coachId: 4
  *            memberId: null
  *            createdAt: '2021-03-06T18:49:50.479Z'
  *            updatedAt: null
@@ -426,9 +429,9 @@ const mainController = require('../controllers/mainController');
  *                  description: The last modification date of the comment
  *          example:
  *            id: 1
- *            coachId: 2
- *            coachFirstname: 'Sountid'
- *            coachLastname: 'Chan'
+ *            coachId: 4
+ *            coachFirstname: 'Alex'
+ *            coachLastname: 'Térieur'
  *            workoutId: 1
  *            createdAt: '2021-03-06T18:49:50.479Z'
  *            updatedAt: '2021-04-01T11:36:27.436Z'
@@ -478,8 +481,8 @@ const mainController = require('../controllers/mainController');
  *                  type: string
  *                  description: The role
  *          example:
- *            firstname: 'Mathilde'
- *            lastname: 'Martin'
+ *            firstname: 'Juliette'
+ *            lastname: 'Laborde'
  *            email: 'mathilde.martin@gmail.com'
  *            role: 'MEMBER'
  *      member:
@@ -516,9 +519,9 @@ const mainController = require('../controllers/mainController');
  *                  description: The last modification date of the member
  *          example:
  *            id: 1
- *            firstname: 'Mathilde'
- *            lastname: 'Martin'
- *            email: 'mathilde.martin@gmail.com'
+ *            firstname: 'Martin'
+ *            lastname: 'Durand'
+ *            email: 'member3@gmail.com'
  *            role: 'MEMBER'
  *            createdAt: '2021-03-15T18:49:50.479Z'
  *            updatedAt: '2021-03-22T11:36:27.436Z'
@@ -548,9 +551,9 @@ const mainController = require('../controllers/mainController');
  *                      type: integer
  *                  description: The specialties of the coach
  *          example:
- *            firstname: 'Sountid'
- *            lastname: 'Dupont'
- *            email: 'sountid.dupont@gmail.com'
+ *            firstname: 'Fabien'
+ *            lastname: 'Galthier'
+ *            email: 'f.galthier@gmail.com'
  *            role: 'COACH'
  *            specialties: [1, 3, 6]
  *      coach:
@@ -592,9 +595,9 @@ const mainController = require('../controllers/mainController');
  *                  description: The last modification date of the coach
  *          example:
  *            id: 1
- *            firstname: 'Sountid'
- *            lastname: 'Dupont'
- *            email: 'sountid.dupont@gmail.com'
+ *            firstname: 'Alex'
+ *            lastname: 'Térieur'
+ *            email: 'alex.terieur@gmail.com'
  *            role: 'COACH'
  *            specialties: [1, 3, 6]
  *            createdAt: '2021-03-15T18:49:50.479Z'
@@ -614,6 +617,34 @@ const mainController = require('../controllers/mainController');
  *          in: header
  *          bearerFormat: JWT
  */
+
+// RESET ROUTE
+/**
+ * @swagger
+ * /reset:
+ *      post:
+ *          summary: Reset app with initial test data
+ *          tags: [RESET APP]
+ *          responses:
+ *              200:
+ *                  description: App reset with initial data
+ *                  content:
+ *                      application/json:
+ *                          schema:
+ *                              type: object
+ *                              properties:
+ *                                  message:
+ *                                      type: string
+ *                              example:
+ *                                  message: "L'application a bien été réinitialisée."
+ *              400:
+ *                  description: Bad request
+ *                  content:
+ *                      application/json:
+ *                          schema:
+ *                              $ref: '#/components/schemas/error(400)'
+ */
+router.post('/reset', testDataController.resetApp);
 
 
 // CONNEXION ROUTES
@@ -688,7 +719,7 @@ router.post('/register', validator(setPasswordSchema), authController.setPasswor
  *                                  type: string
  *                                  description: The email of the user
  *                          example:
- *                              email: 'gwenaël.dupont@gmail.com'
+ *                              email: 'owner@gmail.com'
  *          responses:
  *              200:
  *                  description: New token generated and reset url sent
@@ -700,7 +731,7 @@ router.post('/register', validator(setPasswordSchema), authController.setPasswor
  *                                  message:
  *                                      type: string
  *                              example:
- *                                  message: 'Un email a été envoyé à gwenaël.dupont@gmail.com.'
+ *                                  message: 'Un email a été envoyé à l.seraline@gmail.com.'
  *              400:
  *                  description: Bad request
  *                  content:
@@ -713,7 +744,7 @@ router.post('/forgotten-password', validator(newPasswordSchema), authController.
  * @swagger
  * /login:
  *      post:
- *          summary: Log in to the site 
+ *          summary: Log in to the site - owner@... member1@... member2@... coach1@... coach2@...
  *          tags: [LOGIN ROUTES]
  *          requestBody:
  *              required: true
@@ -732,7 +763,7 @@ router.post('/forgotten-password', validator(newPasswordSchema), authController.
  *                                  type: string
  *                                  description: The password of the user
  *                          example:
- *                              email: 'gwenaël.dupont@gmail.com'
+ *                              email: 'owner@gmail.com'
  *                              password: '1Password!'
  *          responses:
  *              200:
