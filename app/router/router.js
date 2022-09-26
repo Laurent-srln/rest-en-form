@@ -618,6 +618,10 @@ const testDataController = require('../controllers/testDataController');
  *          bearerFormat: JWT
  */
 
+router.get('/', (req, res) => {
+    res.json('Hello, Heroku !')
+});
+
 // RESET ROUTE
 /**
  * @swagger
