@@ -1,12 +1,15 @@
 {
   "name": "projet-sport-back",
-  "version": "1.0.0",
-  "description": "api osport",
+  "version": "1.2.1",
+  "description": "api restenform",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "NODE_ENV=production node -r esm index.js",
     "dev": "NODE_ENV=development nodemon -r esm index.js"
+  },
+  "engines": {
+    "node": "16.x"
   },
   "repository": {
     "type": "git",
@@ -27,18 +30,18 @@
   "dependencies": {
     "bcrypt": "^5.0.1",
     "cors": "^2.8.5",
-    "dayjs": "^1.10.4",
-    "dotenv": "^8.2.0",
+    "dayjs": "^1.11.5",
+    "dotenv": "^8.6.0",
     "email-validator": "^2.0.4",
     "esm": "^3.2.25",
-    "express": "^4.17.1",
-    "express-jwt": "^6.0.0",
-    "joi": "^17.4.0",
+    "express": "^4.18.1",
+    "express-jwt": "^6.1.2",
+    "joi": "^17.6.1",
     "jsonwebtoken": "^8.5.1",
-    "nodemailer": "^6.5.0",
-    "pg": "^8.5.1",
-    "swagger-jsdoc": "^6.1.0",
-    "swagger-ui-express": "^4.1.6",
+    "nodemailer": "^6.7.8",
+    "pg": "^8.8.0",
+    "swagger-jsdoc": "^6.2.5",
+    "swagger-ui-express": "^4.5.0",
     "uuid": "^8.3.2"
   }
 }
