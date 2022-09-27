@@ -1,37 +1,28 @@
-const express = require('express');
-const router = express.Router();
 
-// TOKEN AUTHENTIFICATION MIDDLEWARE
-const authorizationMiddleware = require('../services/authorizationMiddleware');
-const validCoach = require('../services/validCoach');
-const validMember = require('../services/validMember');
-const validOwner = require('../services/validOwner');
-
-// JOI VALIDATION MIDDLEWARE
-const validator = require('../services/validator');
-
-// JOI SCHEMAS
-const workoutSchema = require('../schemas/workout');
-const userSchema = require('../schemas/user');
-const specialtySchema = require('../schemas/specialty');
-const setPasswordSchema = require('../schemas/setPassword');
-const newPasswordSchema = require('../schemas/newPassword');
-const loginSchema = require('../schemas/login');
-const commentSchema = require('../schemas/comment');
-const coachingTimePeriodSchema = require('../schemas/coachingTimePeriod');
-
-// CONTROLLERS
-const userController = require('../controllers/userController');
-const workoutController = require('../controllers/workoutController');
-const commentController = require('../controllers/commentController');
-const coachingController = require('../controllers/coachingController');
-const authController = require('../controllers/authController');
-const healthController = require('../controllers/healthController');
-const specialtyController = require('../controllers/specialtyController');
-const mainController = require('../controllers/mainController');
-const testDataController = require('../controllers/testDataController');
-
-
+/**
+ * @swagger
+ * tags:
+ *  - name: RESET APP
+ *    description: 
+ *  - name: LOGIN ROUTES
+ *    description: Routes for authentication
+ *  - name: MEMBERS ROUTES
+ *    description: Routes for users logged in as members
+ *  - name: Members - Workouts & Health Data
+ *  - name: Members - Coachings
+ *  - name: COACHS ROUTES
+ *    description: Routes for users logged in as coach
+ *  - name: Coachs - Workouts & Comments
+ *  - name: Coachs - Coachings
+ *  - name: Coachs - Members
+ *  - name: OWNER ROUTES
+ *    description: Routes for users logged in as owner
+ *  - name: Owner - Specialties
+ *  - name: Owner - Users
+ *  - name: Owner - Coachings
+ *  - name: ALL USERS ROUTES
+ *    description: Routes for all users
+ */
 
 
 /**
@@ -595,9 +586,7 @@ const testDataController = require('../controllers/testDataController');
  *          bearerFormat: JWT
  */
 
-router.get('/', (req, res) => {
-    res.json('Hello, Heroku !')
-});
+
 
 // RESET ROUTE
 /**
@@ -625,7 +614,7 @@ router.get('/', (req, res) => {
  *                          schema:
  *                              $ref: '#/components/schemas/error(400)'
  */
-router.post('/reset', testDataController.resetApp);
+
 
 
 // CONNEXION ROUTES
@@ -680,7 +669,7 @@ router.post('/reset', testDataController.resetApp);
  *                          schema:
  *                              $ref: '#/components/schemas/error(400)'
  */
-router.post('/register', validator(setPasswordSchema), authController.setPassword);
+
 /**
  * @swagger
  * /forgotten-password:
@@ -720,7 +709,7 @@ router.post('/register', validator(setPasswordSchema), authController.setPasswor
  *                          schema:
  *                              $ref: '#/components/schemas/error(400)'
  */
-router.post('/forgotten-password', validator(newPasswordSchema), authController.getNewToken);
+
 /**
  * @swagger
  * /login:
@@ -771,7 +760,7 @@ router.post('/forgotten-password', validator(newPasswordSchema), authController.
  *                          schema:
  *                              $ref: '#/components/schemas/error(400)'
  */
-router.post('/login', validator(loginSchema), authController.submitLogin);
+
 
 // MEMBERS ROUTES
 //      Workout & Health data
@@ -811,7 +800,6 @@ router.post('/login', validator(loginSchema), authController.submitLogin);
  *                          schema:
  *                              $ref: '#/components/schemas/error(400)'
  */
-router.post('/new-workout',authorizationMiddleware, validMember, validator(workoutSchema), workoutController.addWorkout);
 
 
 
@@ -839,7 +827,6 @@ router.post('/new-workout',authorizationMiddleware, validMember, validator(worko
  *                          schema:
  *                              $ref: '#/components/schemas/error(400)'
  */
-router.get('/workouts', authorizationMiddleware, validMember, workoutController.getAllWorkoutsByMemberId);
 /**
  * @swagger
  * /health:
@@ -864,7 +851,6 @@ router.get('/workouts', authorizationMiddleware, validMember, workoutController.
  *                          schema:
  *                              $ref: '#/components/schemas/error(400)'
  * */
-router.get('/health', authorizationMiddleware, validMember, healthController.getAllHealthRecordsByMemberId);
 /**
  * @swagger
  * /edit-workout/{workoutId}:
@@ -907,7 +893,6 @@ router.get('/health', authorizationMiddleware, validMember, healthController.get
  *                          schema:
  *                              $ref: '#/components/schemas/error(400)'
  * */
-router.patch('/edit-workout/:workoutId', authorizationMiddleware, validMember, workoutController.editWorkout);
 /**
  * @swagger
  * /delete-workout/{workoutId}:
@@ -944,7 +929,6 @@ router.patch('/edit-workout/:workoutId', authorizationMiddleware, validMember, w
  *                          schema:
  *                              $ref: '#/components/schemas/error(400)'
  * */
-router.delete('/delete-workout/:workoutId', authorizationMiddleware, validMember, workoutController.deleteWorkout);
 //     Coachings
 /**
  * @swagger
@@ -970,7 +954,6 @@ router.delete('/delete-workout/:workoutId', authorizationMiddleware, validMember
  *                          schema:
  *                              $ref: '#/components/schemas/error(400)'
  * */
-router.get('/available-coachings', authorizationMiddleware, validMember, coachingController.getAvailableCoachings);
 /**
  * @swagger
  * /member-next-bookings:
@@ -995,7 +978,6 @@ router.get('/available-coachings', authorizationMiddleware, validMember, coachin
  *                          schema:
  *                              $ref: '#/components/schemas/error(400)'
  * */
-router.get('/member-next-bookings',authorizationMiddleware, validMember, coachingController.getMemberNextBookingsByTokenId);
 /**
  * @swagger
  * /book-coaching:
@@ -1039,7 +1021,6 @@ router.get('/member-next-bookings',authorizationMiddleware, validMember, coachin
  *                          schema:
  *                              $ref: '#/components/schemas/error(400)'
  * */
-router.patch('/book-coaching',authorizationMiddleware, validMember, coachingController.addBooking);
 /**
  * @swagger
  * /bookings/{coachingId}/delete:
@@ -1076,7 +1057,6 @@ router.patch('/book-coaching',authorizationMiddleware, validMember, coachingCont
  *                          schema:
  *                              $ref: '#/components/schemas/error(400)'
  * */
-router.patch('/bookings/:coachingId/delete',authorizationMiddleware, validMember, coachingController.deleteBooking);
 
 // COACHS ROUTES
 //      Workout & Comments
@@ -1130,7 +1110,6 @@ router.patch('/bookings/:coachingId/delete',authorizationMiddleware, validMember
  *                          schema:
  *                              $ref: '#/components/schemas/error(400)'
  * */
-router.post('/new-comment/:workoutId',authorizationMiddleware, validCoach, validator(commentSchema), commentController.addComment);
 
 /**
  * @swagger
@@ -1163,7 +1142,6 @@ router.post('/new-comment/:workoutId',authorizationMiddleware, validCoach, valid
  *                          schema:
  *                              $ref: '#/components/schemas/error(400)'
  */
-router.get('/members/:id(\\d+)/workouts', authorizationMiddleware, validCoach, workoutController.getMemberWorkoutsByParamsId); 
 /**
  * @swagger
  * /edit-comment/{commentId}:
@@ -1200,7 +1178,6 @@ router.get('/members/:id(\\d+)/workouts', authorizationMiddleware, validCoach, w
  *                          schema:
  *                              $ref: '#/components/schemas/error(400)'
  * */
-router.patch('/edit-comment/:commentId',authorizationMiddleware, validCoach, validator(commentSchema), commentController.editComment);
 /**
  * @swagger
  * /delete-comment/{commentId}:
@@ -1237,7 +1214,6 @@ router.patch('/edit-comment/:commentId',authorizationMiddleware, validCoach, val
  *                          schema:
  *                              $ref: '#/components/schemas/error(400)'
  * */
-router.delete('/delete-comment/:commentId',authorizationMiddleware, validCoach, commentController.deleteComment);
 //      Coachings
 /**
  * @swagger
@@ -1263,7 +1239,6 @@ router.delete('/delete-comment/:commentId',authorizationMiddleware, validCoach, 
  *                          schema:
  *                              $ref: '#/components/schemas/error(400)'
  */
-router.get('/coach-next-bookings',authorizationMiddleware, validCoach, coachingController.getCoachNextBookings);
 /**
  * @swagger
  * /coach-last-bookings:
@@ -1288,7 +1263,6 @@ router.get('/coach-next-bookings',authorizationMiddleware, validCoach, coachingC
  *                          schema:
  *                              $ref: '#/components/schemas/error(400)'
  */
-router.get('/coach-last-bookings',authorizationMiddleware, validCoach, coachingController.getCoachLastBookings);
 /**
  * @swagger
  * /members/{id}/next-bookings:
@@ -1320,7 +1294,6 @@ router.get('/coach-last-bookings',authorizationMiddleware, validCoach, coachingC
  *                          schema:
  *                              $ref: '#/components/schemas/error(400)'
  */
-router.get('/members/:id(\\d+)/next-bookings', authorizationMiddleware, validCoach, coachingController.getMemberNextBookingsByParamsId);
 //      Members
 /**
  * @swagger
@@ -1346,7 +1319,6 @@ router.get('/members/:id(\\d+)/next-bookings', authorizationMiddleware, validCoa
  *                          schema:
  *                              $ref: '#/components/schemas/error(400)'
  */
-router.get('/members', authorizationMiddleware, userController.getAllMembers);
 
 // OWNER ROUTES
 //      Specialties
@@ -1393,7 +1365,6 @@ router.get('/members', authorizationMiddleware, userController.getAllMembers);
  *                          schema:
  *                              $ref: '#/components/schemas/error(400)'
  */
-router.post('/specialties', authorizationMiddleware, validOwner, validator(specialtySchema), specialtyController.addSpecialty);
 /**
  * @swagger
  * /specialties:
@@ -1418,7 +1389,6 @@ router.post('/specialties', authorizationMiddleware, validOwner, validator(speci
  *                          schema:
  *                              $ref: '#/components/schemas/error(400)'
  */
-router.get('/specialties', authorizationMiddleware, validOwner, specialtyController.getAllSpecialties);
 /**
  * @swagger
  * /specialties/{id]}:
@@ -1455,7 +1425,6 @@ router.get('/specialties', authorizationMiddleware, validOwner, specialtyControl
  *                          schema:
  *                              $ref: '#/components/schemas/error(400)'
  */
-router.delete('/specialties/:id(\\d+)', authorizationMiddleware, validOwner, specialtyController.deleteSpecialty);
 //      Users
 /**
  * @swagger
@@ -1496,7 +1465,6 @@ router.delete('/specialties/:id(\\d+)', authorizationMiddleware, validOwner, spe
  *                          schema:
  *                              $ref: '#/components/schemas/error(400)'
  */
-router.post('/new-user', validator(userSchema), userController.addUser);
 //  authorizationMiddleware, validOwner,
 /**
  * @swagger
@@ -1527,7 +1495,6 @@ router.post('/new-user', validator(userSchema), userController.addUser);
  *                          schema:
  *                              $ref: '#/components/schemas/error(400)'
  */
-router.get('/members/:id(\\d+)', authorizationMiddleware, validOwner, userController.getMemberById);
 /**
  * @swagger
  * /coachs/{id}:
@@ -1557,7 +1524,6 @@ router.get('/members/:id(\\d+)', authorizationMiddleware, validOwner, userContro
  *                          schema:
  *                              $ref: '#/components/schemas/error(400)'
  */
-router.get('/coachs/:id(\\d+)', authorizationMiddleware, validOwner, userController.getCoachById);
 /**
  * @swagger
  * /users/{id}:
@@ -1626,7 +1592,6 @@ router.get('/coachs/:id(\\d+)', authorizationMiddleware, validOwner, userControl
  *                          schema:
  *                              $ref: '#/components/schemas/error(400)'
  */
-router.patch('/users/:id(\\d+)', authorizationMiddleware, validOwner,userController.editUser);
 /**
  * @swagger
  * /users/{id}:
@@ -1665,7 +1630,6 @@ router.patch('/users/:id(\\d+)', authorizationMiddleware, validOwner,userControl
  *                          schema:
  *                              $ref: '#/components/schemas/error(400)'
  */
-router.delete('/users/:id(\\d+)', authorizationMiddleware, validOwner, userController.deleteUser);
 //      Coachings
 /**
  * @swagger
@@ -1726,7 +1690,6 @@ router.delete('/users/:id(\\d+)', authorizationMiddleware, validOwner, userContr
  *                          schema:
  *                              $ref: '#/components/schemas/error(400)'
  */
-router.post('/new-coachings', authorizationMiddleware, validOwner, validator(coachingTimePeriodSchema), coachingController.addCoachings);
 /**
  * @swagger
  * /coachings:
@@ -1751,7 +1714,6 @@ router.post('/new-coachings', authorizationMiddleware, validOwner, validator(coa
  *                          schema:
  *                              $ref: '#/components/schemas/error(400)'
  */
-router.get('/coachings', authorizationMiddleware, validOwner, coachingController.getAllCoachings);
 /**
  * @swagger
  * /coachings/{id}:
@@ -1781,7 +1743,6 @@ router.get('/coachings', authorizationMiddleware, validOwner, coachingController
  *                          schema:
  *                              $ref: '#/components/schemas/error(400)'
  */
-router.get('/coaching/:id(\\d+)', authorizationMiddleware, validOwner, coachingController.getCoachingById);
 /**
  * @swagger
  * /coachings/{id}:
@@ -1817,7 +1778,6 @@ router.get('/coaching/:id(\\d+)', authorizationMiddleware, validOwner, coachingC
  *                          schema:
  *                              $ref: '#/components/schemas/error(400)'
  */
-router.delete('/coaching/:id(\\d+)', authorizationMiddleware, validOwner, coachingController.deleteCoachingById);
 
 // ALL USERS ROUTES
 /**
@@ -1844,12 +1804,3 @@ router.delete('/coaching/:id(\\d+)', authorizationMiddleware, validOwner, coachi
  *                          schema:
  *                              $ref: '#/components/schemas/error(400)'
  */
-router.get('/coachs',authorizationMiddleware, userController.getAllCoachs);
-
-// INVALID TOKEN
-router.use(mainController.invalidToken);
-
-//404 NOT FOUND
-router.use(mainController.notFound);
-
-module.exports = router;
