@@ -31,6 +31,30 @@ const specialtyController = require('../controllers/specialtyController');
 const mainController = require('../controllers/mainController');
 const testDataController = require('../controllers/testDataController');
 
+/**
+ * @swagger
+ * tags:
+ *  - name: RESET APP
+ *    description: 
+ *  - name: LOGIN ROUTES
+ *    description: Routes for authentication
+ *  - name: MEMBERS ROUTES
+ *    description: Routes for users logged in as members
+ *  - name: Members - Workouts & Health Data
+ *  - name: Members - Coachings
+ *  - name: COACHS ROUTES
+ *    description: Routes for users logged in as coach
+ *  - name: Coachs - Workouts & Comments
+ *  - name: Coachs - Coachings
+ *  - name: Coachs - Members
+ *  - name: OWNER ROUTES
+ *    description: Routes for users logged in as owner
+ *  - name: Owner - Specialties
+ *  - name: Owner - Users
+ *  - name: Owner - Coachings
+ *  - name: ALL USERS ROUTES
+ *    description: Routes for all users
+ */
 
 
 
